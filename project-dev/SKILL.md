@@ -24,7 +24,7 @@ ren_project_save {
 
 `agents` replaces the full attachment list — omit to leave existing agents unchanged.
 
-Optional fields: `description`, `path` (working directory), `gitRepos` (`[{ url, mountPath }]`), `permission`.
+Optional fields: `description`, `gitRepos` (`[{ url, mountPath }]`), `permission`.
 
 ## Read / list
 
