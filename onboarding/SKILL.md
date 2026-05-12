@@ -30,6 +30,12 @@ tool_execute {
 
 If you already know the tool id (the steps below name them), call `tool_execute` directly. Use `tool_search` as a fallback when a name doesn't resolve.
 
+### The `question` tool is native, not in the `ren_*` catalog
+
+`question` is an opencode core tool, exposed directly on your tool surface. **Do NOT `tool_search` for it** — that catalog only indexes `ren_*` tools, so the search will return nothing and you will be tempted to free-text the question. That is wrong.
+
+Instead: call `question` the way you'd call any of your normal tools (the same way you call `read`, `write`, `bash`, etc.). Every user-facing question in this skill MUST go through the `question` tool. Never write a question as plain text in your response.
+
 Use the native `question` tool (not `tool_execute`) for every user-facing question.
 
 ## Step 1 — read the header
