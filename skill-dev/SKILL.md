@@ -12,35 +12,34 @@ One `ren_skill_save` call = one logical change = one new version.
 ## 1. Find before you write
 
 ```
-ren_search { type: "skill", sources: ["user"] }    // list all your skills
-ren_search { type: "skill", query: "<topic>" }     // find by topic across all sources
+ren_search { type: "skill", owners: ["user"] }      // list all your skills
+ren_search { type: "skill", query: "<topic>" }      // find by topic across all sources
 ```
 
-Read promising user/org results with `ren_skill_get { slug }` before writing a new skill. Registry skills are discoverable but not readable — use them as conceptual reference only.
+Read promising user/org results with `ren_skill_get { slug }` before writing a new skill. Registry skills are discoverable via search but their full content is not readable through `ren_skill_get`.
 
 ## 2. Write or edit a skill
 
+`ren_skill_save` uploads a skill folder from disk. Materialize the folder first (SKILL.md plus any bundled scripts / references / templates), then point the tool at the absolute path.
+
 ```
 ren_skill_save {
-  slug: "my-skill",
-  scope: "user",                    // or "org"
-  name: "Human-readable name",      // required on first create
-  description: "When this skill triggers and what it does",
-  content: "<entire SKILL.md — frontmatter + markdown>",
-  files: [
-    { path: "scripts/foo.py",      content: "..." },
-    { path: "references/bar.md",   content: "..." }
-  ],
-  versionBump: "patch"              // patch | minor | major
+  slug:         "my-skill",
+  owner:        "user",                                  // or "org"
+  path:         "/abs/path/to/my-skill",                 // folder containing SKILL.md
+  name:         "Human-readable name",                   // required on first create
+  description:  "When this skill triggers and what it does",
+  icon:         "https://...",                           // optional
+  versionBump:  "patch",                                 // patch | minor | major (updates only)
+  releaseNotes: "..."                                    // optional
 }
 ```
 
-Send the complete `content` every time — new version replaces the previous one entirely.
+The tool runs `skills-ref validate <path>` before uploading. The full folder contents replace the previous version — there is no patch flow.
 
 **versionBump:** `patch` = wording/clarifications · `minor` = new sections or scripts · `major` = renamed triggers or breaking changes
 
 ## 3. SKILL.md anatomy
-
 
 ```
 ---
@@ -78,10 +77,10 @@ See `references/output-patterns.md` and `references/progressive-disclosure-patte
 ## 6. Read before editing
 
 ```
-ren_skill_get { slug }
+ren_skill_get { slug, includeFiles: true }
 ```
 
-Returns `content` (SKILL.md body). Pass `includeFiles: true` for bundled files. Compose the full updated content, then `ren_skill_save`.
+Returns `version`, `content` (SKILL.md body), and bundled files when `includeFiles: true`. Materialize the returned files to disk, edit, then `ren_skill_save` pointing at the folder.
 
 ## 7. Iterate
 
