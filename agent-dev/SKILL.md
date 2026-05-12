@@ -34,7 +34,7 @@ Returns prompt, model, and current dep list.
 
 ## Dependencies
 
-Each dep: `{ slug, owner, permission? }`. `permission` is `[{ permission, pattern, action: "allow"|"deny"|"ask" }]`. See `references/dependency-patterns.md` for recipes.
+Each dep: `{ slug, owner }`. See `references/dependency-patterns.md` for anti-patterns.
 
 ## Prompt
 
