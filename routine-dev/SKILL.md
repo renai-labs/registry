@@ -11,12 +11,15 @@ A routine sends a prompt to an agent on a cron schedule. It lives inside a pod +
 
 ```
 ren_routine_save {
-  pod:     "my-pod",
-  project: "my-project",
-  name:    "daily-report",
-  owner:   "user",
-  agent:   "my-agent",          // required on create; must be attached to the project
-  prompt:  "Generate the report…",
+  pod:         "my-pod",
+  project:     "my-project",
+  name:        "daily-report",
+  owner:       "user",
+  agent:       "my-agent",            // required on create; must be attached to the project
+  agentOwner:  "user",                // "user" | "org" | "registry" (default "user")
+  prompt:      "Generate the report…",
+  description: "Sends a 9am weekday summary to #standup",   // optional
+  status:      "active",              // "active" | "paused" (default "active")
   triggers: [
     { kind: "cron", schedule: "0 9 * * 1-5", timezone: "America/New_York", isEnabled: true }
   ]
