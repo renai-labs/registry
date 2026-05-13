@@ -57,5 +57,4 @@ Pass the wrong scope on an existing `projectId` and the server returns not-found
 
 ## Notes
 
-- Attach agents to a project before creating routines that target them.
 - The `agents[].agentId` you pass is just the id — no per-agent owner field. Discover ids via `ren_search { type: "agent" }` or `ren_agent_get`.
