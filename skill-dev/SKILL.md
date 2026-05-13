@@ -37,13 +37,18 @@ ren_skill_upsert {
   description:  "When this skill triggers and what it does",
   icon:         "✨",                              // optional, emoji or URL
   versionBump:  "patch",                          // patch | minor | major (updates only)
-  releaseNotes: "…"                               // optional
+  releaseNotes: "…",                              // optional
+  requiredCredentials: [                          // optional; env vars the skill needs at runtime
+    { name: "SLACK_BOT_TOKEN", description: "Bot token for posting messages" }
+  ]
 }
 ```
 
 Identity is by `skillId`. To create, omit `skillId` and pass `name`. The tool runs `skills-ref validate <path>` before uploading. The full folder contents replace the previous version — there is no patch flow.
 
 **versionBump:** `patch` = wording/clarifications · `minor` = new sections or scripts · `major` = renamed triggers or breaking changes.
+
+**requiredCredentials:** declare any env-var secrets the skill expects at runtime. Each `name` must be UPPER_SNAKE_CASE. This list is per-version and full-replace — omit it to inherit the previous version's list (on update) or to declare none (on create). Only declare credentials the SKILL.md actually references.
 
 ## 3. SKILL.md anatomy
 
@@ -86,7 +91,7 @@ See `references/output-patterns.md` and `references/progressive-disclosure-patte
 ren_skill_get { skillId: "skl_…", includeFiles: true }
 ```
 
-Returns `version`, `content` (SKILL.md body), and bundled files when `includeFiles: true`. Note: `ren_skill_get` takes no `owner` — registry skills are discoverable via search but their bundled files are not returned through `get`. Materialize the returned files to disk, edit, then `ren_skill_upsert` pointing at the folder.
+Returns `version`, `content` (SKILL.md body), `requiredCredentials` (current declared env-var requirements), and bundled files when `includeFiles: true`. Note: `ren_skill_get` takes no `owner` — registry skills are discoverable via search but their bundled files are not returned through `get`. Materialize the returned files to disk, edit, then `ren_skill_upsert` pointing at the folder.
 
 ## 7. Iterate
 
