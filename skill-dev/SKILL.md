@@ -7,40 +7,50 @@ description: Author and edit custom skills (the prompt-shaped instructions agent
 
 Skills are prompt-based instructions that teach an agent how to do a specific thing. A skill is a folder with a `SKILL.md` (frontmatter + markdown body) and optional bundled `scripts/`, `references/`, `templates/`.
 
-One `ren_skill_save` call = one logical change = one new version.
+One `ren_skill_upsert` call = one logical change = one new version.
 
-## 1. Find before you write
+## 1. Reuse before authoring
+
+Before writing anything new, decide in this order:
+
+1. **Reuse** an existing registry / org / user skill if one already fits.
+2. **Tweak** — fetch a close-enough existing skill, edit the folder, upload it as a new user/org skill.
+3. **Author from scratch** only when neither of the above will do.
 
 ```
-ren_search { type: "skill", sources: ["user"] }    // list all your skills
-ren_search { type: "skill", query: "<topic>" }     // find by topic across all sources
+ren_search { type: "skill", query: "<topic>" }              // default: user + org + registry
+ren_search { type: "skill", owners: ["user"] }              // narrow to your own
 ```
 
-Read promising user/org results with `ren_skill_get { slug }` before writing a new skill. Registry skills are discoverable but not readable — use them as conceptual reference only.
+Read promising results with `ren_skill_get { skillId, includeFiles: true }` before deciding to author new.
 
 ## 2. Write or edit a skill
 
+`ren_skill_upsert` uploads a skill folder from disk. Materialize the folder first (SKILL.md plus any bundled scripts / references / templates), then point the tool at the absolute path.
+
 ```
-ren_skill_save {
-  slug: "my-skill",
-  scope: "user",                    // or "org"
-  name: "Human-readable name",      // required on first create
-  description: "When this skill triggers and what it does",
-  content: "<entire SKILL.md — frontmatter + markdown>",
-  files: [
-    { path: "scripts/foo.py",      content: "..." },
-    { path: "references/bar.md",   content: "..." }
-  ],
-  versionBump: "patch"              // patch | minor | major
+ren_skill_upsert {
+  skillId:      "skl_…",                          // omit to create; pass to update
+  owner:        "user",                           // "user" (default) or "org"
+  path:         "/abs/path/to/my-skill",          // folder containing SKILL.md
+  name:         "Human-readable name",            // required when creating
+  description:  "When this skill triggers and what it does",
+  icon:         "✨",                              // optional, emoji or URL
+  versionBump:  "patch",                          // patch | minor | major (updates only)
+  releaseNotes: "…",                              // optional
+  requiredCredentials: [                          // optional; env vars the skill needs at runtime
+    { name: "SLACK_BOT_TOKEN", description: "Bot token for posting messages" }
+  ]
 }
 ```
 
-Send the complete `content` every time — new version replaces the previous one entirely.
+Identity is by `skillId`. To create, omit `skillId` and pass `name`. The tool runs `skills-ref validate <path>` before uploading. The full folder contents replace the previous version — there is no patch flow.
 
-**versionBump:** `patch` = wording/clarifications · `minor` = new sections or scripts · `major` = renamed triggers or breaking changes
+**versionBump:** `patch` = wording/clarifications · `minor` = new sections or scripts · `major` = renamed triggers or breaking changes.
+
+**requiredCredentials:** declare any env-var secrets the skill expects at runtime. Each `name` must be UPPER_SNAKE_CASE. This list is per-version and full-replace — omit it to inherit the previous version's list (on update) or to declare none (on create). Only declare credentials the SKILL.md actually references.
 
 ## 3. SKILL.md anatomy
-
 
 ```
 ---
@@ -78,10 +88,10 @@ See `references/output-patterns.md` and `references/progressive-disclosure-patte
 ## 6. Read before editing
 
 ```
-ren_skill_get { slug }
+ren_skill_get { skillId: "skl_…", includeFiles: true }
 ```
 
-Returns `content` (SKILL.md body). Pass `includeFiles: true` for bundled files. Compose the full updated content, then `ren_skill_save`.
+Returns `version`, `content` (SKILL.md body), `requiredCredentials` (current declared env-var requirements), and bundled files when `includeFiles: true`. Note: `ren_skill_get` takes no `owner` — registry skills are discoverable via search but their bundled files are not returned through `get`. Materialize the returned files to disk, edit, then `ren_skill_upsert` pointing at the folder.
 
 ## 7. Iterate
 
