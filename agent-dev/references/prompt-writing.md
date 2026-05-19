@@ -39,4 +39,4 @@ If your prompt has a multi-line "how to do X" section, that's a skill. The promp
 
 ## Iterate
 
-Revise *after* you've seen a real failure, not before. Identify the wrong call, add one specific rule to prevent it, `ren_agent_save` with a patch bump.
+Revise *after* you've seen a real failure, not before. Identify the wrong call, add one specific rule to prevent it, `ren agents versions create <id> --prompt "…" --body '{"version":"patch"}'`.
