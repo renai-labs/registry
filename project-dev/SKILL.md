@@ -10,51 +10,54 @@ A project lives inside a pod and groups agents together. Agents are attached as 
 ## Find the pod first
 
 ```
-ren_pod_list {}    // returns { currentPodId, pods: [{ id, name, current }] }
+ren pods list
 ```
 
-`podId` defaults to the current pod on every project tool, so you only need to pass it when creating in or reading from a non-current pod.
+Returns the pod list with the current pod marked. You'll need a `podId` to create a project.
 
-## Create or update
+## Create a project
 
 ```
-ren_project_upsert {
-  podId:       "pod_…",                       // optional; defaults to current pod
-  projectId:   "prj_…",                       // omit to create; pass to update
-  owner:       "user",                        // "user" (default) or "org"
-  name:        "My Project",                  // required when creating
-  description: "What this project is for",    // optional
-  permission:  { … },                         // optional permission config
-  gitRepos:    [{ url: "…", mountPath: "/repo" }],  // full-replace; omit to leave unchanged
-  agents: [
-    { agentId: "agt_primary",  type: "primary"  },
-    { agentId: "agt_helper",   type: "subagent" }    // default type if omitted
-  ]
-}
+ren projects create --pod-id pod_… --name "My Project" --description "What this project is for"
 ```
 
-Identity is by `projectId`. To create, omit `projectId` and pass `name`. `agents` and `gitRepos` are full-replace lists — omit either to leave the existing attachments unchanged.
+For nested fields (e.g. `gitRepos`, `permission`) that aren't surfaced as scalar flags, pass them through `--body`:
 
-Default agent `type` is `subagent`. Every project should have at least one `primary` agent for the platform to route to.
+```
+ren projects create --pod-id pod_… --name "My Project" --body '{
+  "gitRepos":   [{"url":"…","mountPath":"/repo"}],
+  "permission": { … }
+}'
+```
+
+Returns the new `projectId`.
+
+## Update metadata
+
+```
+ren projects update prj_… --name "Renamed Project"
+```
+
+Use `--body` for nested fields the same way as on `create`.
+
+## Attach / detach agents
+
+Agents are managed per-attachment — there is no atomic "set the agent list" call.
+
+```
+ren projects agents list   prj_…
+ren projects agents add    prj_… --agent-id agt_primary  --type primary
+ren projects agents add    prj_… --agent-id agt_helper   --type subagent
+ren projects agents remove prj_… agt_helper
+```
+
+Default `--type` is `subagent`. Every project should have at least one `primary` agent for the platform to route to. Discover agent ids via `ren agents search` or `ren agents get`.
 
 ## Read / list
 
 ```
-ren_project_get  { podId?, projectId: "prj_…", owner: "user" }   // fetch project + attached agents
-ren_project_list { podId?, owner: "user", limit? }               // list projects in a pod
+ren projects get  prj_…
+ren projects list --pod-id pod_…
 ```
 
-`ren_project_get` returns the project plus `agents: [{ projectAgentId, agentId, agentVersionId, type, slug, name }]`.
-
-## Ownership
-
-`owner` controls the access scope of the call:
-
-- `user` (default) — your personal projects and any org-wide ones you can see.
-- `org` — org-wide only.
-
-Pass the wrong scope on an existing `projectId` and the server returns not-found.
-
-## Notes
-
-- The `agents[].agentId` you pass is just the id — no per-agent owner field. Discover ids via `ren_search { type: "agent" }` or `ren_agent_get`.
+`projects get` returns the project plus its attached agents.

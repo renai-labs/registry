@@ -5,34 +5,41 @@ description: Create, configure, and update agents — including their prompt, mo
 
 # Agent Dev
 
-An agent is a system prompt + model + dependencies (skills and MCPs). One `ren_agent_upsert` call = one logical change = one new version.
+An agent is a system prompt + model + dependencies (skills and MCPs). One new version = one logical change to that bundle.
 
-## Create or update
+## Create
 
 ```
-ren_agent_upsert {
-  agentId:     "agt_…",                  // omit to create; pass to update
-  owner:       "user",                   // "user" (default) or "org" — see Ownership
-  name:        "My Agent",               // required when creating
-  description: "What this agent does",   // optional
-  icon:        "🤖",                     // optional, emoji or URL
-  prompt:      "You are…",               // new version's system prompt
-  model:       "claude-sonnet-4-6",      // optional; pass null to inherit the pod default
-  skillIds:    ["skl_…", "skl_…"],       // full replace; omit to inherit previous list
-  mcpIds:      ["mcp_…"],                // full replace; omit to inherit previous list
-  versionBump: "patch",                  // patch | minor | major
-  releaseNotes:"…"                       // optional
-}
+ren agents create --name "My Agent" --icon "🤖" --tags assistant ops
 ```
 
-Identity is by `agentId`. To create, omit `agentId` and pass `name`. To update, pass `agentId` and only the fields you want to change.
+Creates the agent and an initial version in one call. Returns the new `agentId`. Use `ren agents update <id>` later to change metadata (`--name`, `--icon`, `--tags`).
 
-`skillIds` and `mcpIds` are full-replace lists. Omitting them inherits the previous version's deps. To change deps, `ren_agent_get` first, modify the array, then upsert.
+## New version (prompt / model / deps change)
+
+Scalar fields go on flags; nested fields (`skillIds`, `mcpIds`, version bump) go through `--body`:
+
+```
+ren agents versions create agt_… \
+  --prompt "You are…" \
+  --model "claude-sonnet-4-6" \
+  --description "What this agent does" \
+  --release-notes "…" \
+  --body '{
+    "skillIds": ["skl_…", "skl_…"],
+    "mcpIds":   ["mcp_…"],
+    "version":  "patch"
+  }'
+```
+
+`--body` accepts a JSON string, `@file.json`, or `@-` for stdin. Scalar flags merge over `--body`.
+
+`skillIds` and `mcpIds` are full-replace lists. Omit them to inherit the previous version's deps. To change deps, `ren agents get` first, modify the array, then ship a new version.
 
 ## Read
 
 ```
-ren_agent_get { agentId: "agt_…", owner: "user" }
+ren agents get agt_…
 ```
 
 Returns `id`, `slug`, `name`, `icon`, latest `version`, `description`, `prompt`, `model`, `skills`, `mcps`.
@@ -40,23 +47,14 @@ Returns `id`, `slug`, `name`, `icon`, latest `version`, `description`, `prompt`,
 ## Discover
 
 ```
-ren_search { type: "agent", query: "…", owners: ["user", "org", "registry"] }
+ren agents search --query "…" --sources user org registry
 ```
 
-There is no dedicated `agent_list` tool. Use `ren_search` (default scope: user + org + registry).
-
-## Ownership
-
-`owner` controls the access scope of the call:
-
-- `user` (default) — your personal agents and any org-wide ones you can see.
-- `org` — org-wide only.
-
-Pass the wrong scope on an existing `agentId` and the server returns not-found. There is no `registry` scope on writes — registry items are read-only catalog entries you reference by id, not author into.
+There is no separate `agents list` for cross-scope discovery — `agents search` is the listing primitive (default sources: user + org + registry).
 
 ## Dependencies
 
-Deps are plain id arrays (`skillIds: string[]`, `mcpIds: string[]`). The scope of each dep is irrelevant to the agent — the id is enough. Discover ids with `ren_search`.
+Deps are plain id arrays (`skillIds: string[]`, `mcpIds: string[]`). Discover ids with `ren skills search` / `ren mcps search`.
 
 See `references/dependency-patterns.md` for anti-patterns.
 
@@ -64,7 +62,7 @@ See `references/dependency-patterns.md` for anti-patterns.
 
 - **Light** (single tool call, short reply, deterministic): `claude-haiku-4-5`.
 - **Heavy** (multi-step reasoning, tool chaining, long-form drafting): `claude-sonnet-4-6`.
-- Default to `claude-sonnet-4-6` when unsure. Pass `model: null` to inherit the pod's default.
+- Default to `claude-sonnet-4-6` when unsure. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod's default.
 
 ## Prompt
 
@@ -72,6 +70,6 @@ Aim for < 200 words. Role → workflow → output format → rules. Push detail 
 
 ## Iterate
 
-1. `ren_agent_get` — verify current state.
+1. `ren agents get` — verify current state.
 2. Watch a real run — identify the wrong output.
-3. `ren_skill_upsert` to fix skill content, `ren_agent_upsert` to fix prompt or deps.
+3. `ren skills versions create` to fix skill content, `ren agents versions create` to fix prompt or deps.

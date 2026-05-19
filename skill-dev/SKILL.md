@@ -7,7 +7,7 @@ description: Author and edit custom skills (the prompt-shaped instructions agent
 
 Skills are prompt-based instructions that teach an agent how to do a specific thing. A skill is a folder with a `SKILL.md` (frontmatter + markdown body) and optional bundled `scripts/`, `references/`, `templates/`.
 
-One `ren_skill_upsert` call = one logical change = one new version.
+One new skill version = one logical change.
 
 ## 1. Reuse before authoring
 
@@ -18,39 +18,43 @@ Before writing anything new, decide in this order:
 3. **Author from scratch** only when neither of the above will do.
 
 ```
-ren_search { type: "skill", query: "<topic>" }              // default: user + org + registry
-ren_search { type: "skill", owners: ["user"] }              // narrow to your own
+ren skills search --query "<topic>" --sources user org registry
+ren skills search --query "<topic>" --sources user                  # narrow to your own
 ```
 
-Read promising results with `ren_skill_get { skillId, includeFiles: true }` before deciding to author new.
+Read promising results with `ren skills get <id>` (metadata) and `ren skills versions data <id> <version> --format presigned` to download the bundled files before deciding to author new.
 
-## 2. Write or edit a skill
+## 2. Create a skill
 
-`ren_skill_upsert` uploads a skill folder from disk. Materialize the folder first (SKILL.md plus any bundled scripts / references / templates), then point the tool at the absolute path.
+`ren skills create` uploads a local folder. Materialize the folder first (SKILL.md plus any bundled scripts / references / templates), then point the CLI at it.
 
 ```
-ren_skill_upsert {
-  skillId:      "skl_…",                          // omit to create; pass to update
-  owner:        "user",                           // "user" (default) or "org"
-  path:         "/abs/path/to/my-skill",          // folder containing SKILL.md
-  name:         "Human-readable name",            // required when creating
-  description:  "When this skill triggers and what it does",
-  icon:         "✨",                              // optional, emoji or URL
-  versionBump:  "patch",                          // patch | minor | major (updates only)
-  releaseNotes: "…",                              // optional
-  requiredCredentials: [                          // optional; env vars the skill needs at runtime
-    { name: "SLACK_BOT_TOKEN", description: "Bot token for posting messages" }
-  ]
-}
+ren skills create /abs/path/to/my-skill \
+  --name "Human-readable name" \
+  --description "When this skill triggers and what it does" \
+  --icon "✨" \
+  --required-credentials @creds.json \
+  --release-notes "Initial release"
 ```
 
-Identity is by `skillId`. To create, omit `skillId` and pass `name`. The tool runs `skills-ref validate <path>` before uploading. The full folder contents replace the previous version — there is no patch flow.
+The CLI runs `skills-ref validate <folder>` before uploading. Returns the new `skillId`.
 
-**versionBump:** `patch` = wording/clarifications · `minor` = new sections or scripts · `major` = renamed triggers or breaking changes.
+**requiredCredentials:** UPPER_SNAKE_CASE env-var secrets the skill needs at runtime. Pass JSON inline (`'[{"name":"SLACK_BOT_TOKEN","description":"…"}]'`) or via `@creds.json`. Per-version, full-replace — omit to inherit (on update) or declare none (on create). Only declare credentials the SKILL.md actually references.
 
-**requiredCredentials:** declare any env-var secrets the skill expects at runtime. Each `name` must be UPPER_SNAKE_CASE. This list is per-version and full-replace — omit it to inherit the previous version's list (on update) or to declare none (on create). Only declare credentials the SKILL.md actually references.
+## 3. New version
 
-## 3. SKILL.md anatomy
+```
+ren skills versions create skl_… /abs/path/to/my-skill \
+  --version patch \
+  --release-notes "…" \
+  --required-credentials @creds.json
+```
+
+`--version` accepts `patch` (wording / clarifications), `minor` (new sections or scripts), or `major` (renamed triggers or breaking changes). The full folder contents replace the previous version — there is no patch flow.
+
+For metadata-only edits (no file change), use `ren skills update <id> [--name …] [--description …] [--icon …]`.
+
+## 4. SKILL.md anatomy
 
 ```
 ---
@@ -68,7 +72,7 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 `name` and `description` determine when the skill triggers — be specific about both.
 
-## 4. Writing principles
+## 5. Writing principles
 
 1. **Stay under 500 lines.** Move depth into `references/`.
 2. **Match specificity to fragility.** Open tasks → guidance. Fragile sequences → exact scripts. See `references/workflows.md`.
@@ -77,7 +81,7 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 See `references/output-patterns.md` and `references/progressive-disclosure-patterns.md` for deeper guidance.
 
-## 5. Bundled resources
+## 6. Bundled resources
 
 | Resource      | Use for                              | Loaded into context? |
 | ------------- | ------------------------------------ | -------------------- |
@@ -85,14 +89,15 @@ See `references/output-patterns.md` and `references/progressive-disclosure-patte
 | `references/` | Domain depth, schemas, long docs     | Only when read       |
 | `templates/`  | Boilerplate output assets            | No                   |
 
-## 6. Read before editing
+## 7. Read before editing
 
 ```
-ren_skill_get { skillId: "skl_…", includeFiles: true }
+ren skills get skl_…
+ren skills versions data skl_… <version> --format presigned
 ```
 
-Returns `version`, `content` (SKILL.md body), `requiredCredentials` (current declared env-var requirements), and bundled files when `includeFiles: true`. Note: `ren_skill_get` takes no `owner` — registry skills are discoverable via search but their bundled files are not returned through `get`. Materialize the returned files to disk, edit, then `ren_skill_upsert` pointing at the folder.
+`get` returns `version`, `name`, `description`, `requiredCredentials`. `versions data` returns presigned URLs for the bundled files — download them, edit the folder on disk, then `ren skills versions create skl_… <folder>` to ship.
 
-## 7. Iterate
+## 8. Iterate
 
 Ship → use → tighten. Don't anticipate every edge case in v1 — edit from real failures.
