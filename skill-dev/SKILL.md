@@ -41,6 +41,10 @@ The CLI runs `skills-ref validate <folder>` before uploading. Returns the new `s
 
 **requiredCredentials:** UPPER_SNAKE_CASE env-var secrets the skill needs at runtime. Pass JSON inline (`'[{"name":"SLACK_BOT_TOKEN","description":"…"}]'`) or via `@creds.json`. Per-version, full-replace — omit to inherit (on update) or declare none (on create). Only declare credentials the SKILL.md actually references.
 
+The Ren platform handles provisioning: operators supply the values and the runtime injects them as env vars before the skill runs.
+
+Do **not** write credential-setup instructions into `SKILL.md`. The skill body should assume the env var is already present and just use it.
+
 ## 3. New version
 
 ```
