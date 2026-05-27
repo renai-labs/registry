@@ -1,59 +1,88 @@
 ---
 name: mcp-dev
-description: Discover, attach, and authorize MCP servers — the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool, or when wiring OAuth / API-key auth for one.
+description: Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.
 ---
 
 # MCP Dev
 
-An MCP is a third-party tool surface. Agents reference MCPs by id; the platform wires the connection and injects credentials at startup. Always search the registry before assuming you need a custom one.
+## What an MCP is - and what it means on Ren
 
-## Lifecycle in the manifested sandbox
+MCP (Model Context Protocol) is the open standard for exposing a tool surface to an agent: a server publishes tools, the agent calls them. Linear, Gmail, GitHub, Notion, and many SaaS APIs have MCP servers they officially host for consumers to connect to.
 
-How an attached MCP comes alive depends on where it runs:
+On Ren an MCP is a first-class entity (user / org / registry scope) that an agent references by id - `mcps: [{ mcpId }]` on the **agent version**. The agent calls its tools; the platform handles the connection and slots in credentials at runtime, so the agent never touches a secret. Ren offers many MCPs out of the box in its registry, and also offers the ability to setup custom remote-mcps for users and orgs. 
 
-- **Remote MCP** — runs out-of-band at a URL. The platform resolves its credentials from the pod's vault stack and passes them as **request headers** at agent startup.
-- **Local MCP** — spawns *inside* the pod sandbox via `command + args`. Credentials are resolved and injected as **environment variables** before the process starts.
 
-Auth modes: `none` / `oauth` / `api_key` / `basic`. At agent startup the manifest's `environment` map carries the resolved secrets; if the pod's vault stack can't satisfy an MCP's auth config, that MCP simply isn't available to the agent. Attaching an MCP to an agent version bumps the pod manifest and fans out — no restart.
+## Reach for Ren's registry MCPs first
 
-The agent never sees raw secrets in its prompt; it just calls the tool.
+Ren ships a public registry of MCPs that are **tested and production-ready** - the server URL, transport, and auth config are already correct. Always prefer a registry MCP over rolling your own: a custom MCP is unmaintained surface you now own. Search before you build.
 
-## Build via CLI
+**Not every product exposes an MCP server.** If the registry has no fit and a web search turns up no official MCP hosted by the third party, the fallback is an **API-key-backed skill** ([skill-dev]): a skill that calls the product's HTTP API directly, with the API key declared in its `requiredCredentials`.
 
-Discover first (default sources span all three scopes):
+### Search Via Ren CLI
 
 ```
 ren mcps search --query "<topic>" --sources user org registry --output json
-ren mcps get <mcp-id> --output json          # inspect auth mode + transport
+ren mcps get        <mcp-id> --output json
+ren mcps get-by-slug <slug>  --output json
 ```
 
-Authorize, if the MCP needs it. `oauths connect` resolves (or creates) the user's default vault server-side — **no separate vault step**:
+### Search Via Ren MCP
 
 ```
-ren mcps oauths connect <mcp-id> --output json
+mcp__ren__mcp_search    { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
+mcp__ren__mcp_get       { "path":  { "id": "mcp_…" } }
+mcp__ren__mcp_getBySlug { "path":  { "slug": "<slug>" } }
 ```
 
-Two response shapes:
+`--sources` (CLI) / `sources` (MCP) picks **which scope tiers** the search returns (default all three):
 
-- `{ "alreadyConnected": true, "credentialId": "…" }` → credential exists; **skip the URL dance**, move on.
-- `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → hand the URL to the user in one sentence, then poll silently (don't yield between polls):
-  ```
-  ren mcps oauths session <mcp-id> <session-id> --output json   # loop until complete | expired | denied
-  ```
+- **`registry`** — public, Ren-maintained. Usable anywhere: by any user's agents and any org's agents.
+- **`org`** — owned by your org, shared across its members. Usable by that org's agents.
+- **`user`** —  Usable by your own agents, including when you build at the org level.
 
-For API-key / basic MCPs, the credential goes into a vault instead — see [credentials-dev]. You attach the MCP to the agent by id in [agent-dev] (`mcpIds`).
+Scope flows one way — narrower into broader. A `user` MCP can back an `org` agent and a `registry` MCP can back anything, but not the reverse: an `org` MCP can't be pulled into another org, and nothing private can back a published registry entity.
 
-## Build via MCP
+## Nuances to know before building
+
+How an attached MCP actually runs - worth knowing before you define one:
+
+- **It's a remote HTTP server.** At sandbox compose time every attached MCP becomes `{ type: "remote", url: <mcpServerUrl> }` in the agent's opencode config, so a custom MCP needs a real, reachable `mcpServerUrl` - an MCP without one is dropped.
+- **The secret arrives as an env var, interpolated into the request.** The credential resolved from the pod's vault lands in the sandbox env as `MCP_<SLUG>_KEY` (api_key), `MCP_<SLUG>_BASIC` (basic), or `MCP_<SLUG>_ACCESS_TOKEN` (oauth) - `<SLUG>` is the slug upper-cased with non-alphanumerics → `_`. opencode interpolates it into the live request per the MCP's `authConfig`: an `Authorization`/custom header, a URL query param, or basic auth. So the `authConfig` you set at build time is exactly what decides where the secret goes.
+- **Defining an MCP ≠ authorizing it.** `authConfig` only declares *how* a secret is presented; it carries no secret. Wiring the actual credential is a separate step (see Next steps).
+
+## Build a custom MCP
+
+Only when the registry has nothing in the neighborhood. `--name` and `--mcp-server-url` (a URL) are required; `authConfig` is nested, so pass it via `--body`.
+
+### Via CLI
 
 ```
-mcp__ren__mcp_search        { "query": "<topic>", "sources": ["user","org","registry"] }
-mcp__ren__mcp_get           { "id": "mcp_…" }
-mcp__ren__mcp_oauth_connect { "id": "mcp_…" }
-mcp__ren__mcp_oauth_session { "id": "mcp_…", "sessionId": "…" }
+ren mcps create \
+  --name "Acme API" \
+  --mcp-server-url "https://mcp.acme.com" \
+  --auth api_key \
+  --scope user \
+  --body '{ "authConfig": { "type": "api_key", "headerName": "Authorization" } }'
 ```
 
-## Gotchas
+- `--auth` is one of `none | oauth | api_key | basic` (default `none`).
+- `--scope` sets the **namespace the new MCP lands in**: `user` (private to you) or `org` (team-shared). It **defaults to `org`** - pass `--scope user` for a private build. (This is the create-time namespace; `--sources` above is the read-time filter - different flags, different jobs.)
+- The slug is generated from the name; that slug drives the `MCP_<SLUG>_*` env var the credential must match.
 
-- **Native integrations (Slack, GitHub) are not MCPs you connect here.** They're installed in the web app at `/app/settings/admin/integrations` (org owner/admin) and drive **webhook triggers**, not MCP tool calls. See [trigger-dev].
-- Prefer a narrower hit (user/org) over a registry one when both match — it's usually an intentional override carrying domain knowledge.
-- Don't author a custom MCP when an OAuth registry one already covers the surface.
+### Via MCP
+
+```
+mcp__ren__mcp_create {
+  "query": { "scope": "user" },
+  "body":  { "name": "Acme API", "mcpServerUrl": "https://mcp.acme.com",
+             "auth": "api_key", "authConfig": { "type": "api_key", "headerName": "Authorization" } }
+}
+```
+
+Over MCP, `scope` lives under `query` and its only value is `"user"` - omit it for the `org` default. (The CLI's `--scope org` is just the absent case.)
+
+## Next steps
+
+- **Attach it to an agent** - add the id to the agent version's `mcps: [{ mcpId }]` list. See [agent-dev].
+- **Authorize it** - get the credential into the pod's vault (OAuth connect or API key) so the `MCP_<SLUG>_`* env var resolves at startup. See [credentials-dev].
+
