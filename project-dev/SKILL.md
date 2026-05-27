@@ -1,63 +1,58 @@
 ---
 name: project-dev
-description: Create, configure, and manage projects within a pod — including attaching and removing agents. Use when the user wants to set up a project, add or change agents in a project, or configure project settings.
+description: Create, configure, and manage projects within a pod — attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.
 ---
 
 # Project Dev
 
-A project lives inside a pod and groups agents together. Agents are attached as `primary` or `subagent`.
+A project lives inside a pod and groups the agents, file/memory stores, and triggers for one outcome. Agents attach as `primary` or `subagent`.
 
-## Find the pod first
+## Lifecycle in the manifested sandbox
 
-```
-ren pods list
-```
+The project mounts into the pod sandbox at `/home/user/projects/{projectId}`; sessions land under `…/sessions/*/{outputs,uploads}`. The composed `opencode.json` for the project carries its agents' prompts, models, skills, and the mounted volume paths. Only **project-attached** agents can be triggered or chatted with, and the **primary** agent is the one triggers and sessions route to. Attaching/detaching an agent or store bumps the pod manifest and fans out — no restart.
 
-Returns the pod list with the current pod marked. You'll need a `podId` to create a project.
+Members are **pod-scoped, not project-scoped**: use separate projects for different outcomes inside one team; separate pods for different member sets (see [pod-dev]).
 
-## Create a project
+## Build via CLI
 
 ```
-ren projects create --pod-id pod_… --name "My Project" --description "What this project is for"
+ren pods list --output json                                  # find the podId first
+ren projects create --pod-id pod_… --name "My Project" --description "…"   # → projectId
 ```
 
-For nested fields (e.g. `gitRepos`, `permission`) that aren't surfaced as scalar flags, pass them through `--body`:
+Nested fields (`gitRepo`, `permission`) go through `--body`:
 
 ```
-ren projects create --pod-id pod_… --name "My Project" --body '{
-  "gitRepos":   [{"url":"…","mountPath":"/repo"}],
-  "permission": { … }
-}'
+ren projects create --pod-id pod_… --name "My Project" \
+  --body '{ "gitRepo": { "url": "…", "mountPath": "/repo" }, "permission": { … } }'
 ```
 
-Returns the new `projectId`.
-
-## Update metadata
+Attach agents and stores (managed per-attachment — no atomic "set the list"):
 
 ```
-ren projects update prj_… --name "Renamed Project"
+ren projects agents        add    prj_… --agent-id agt_primary --type primary
+ren projects agents        add    prj_… --agent-id agt_helper  --type subagent
+ren projects agents        list   prj_…
+ren projects agents        remove prj_… agt_helper
+
+ren projects file-stores   add    prj_… --file-store-id   fst_…    # also: list / remove
+ren projects memory-stores add    prj_… --memory-store-id mst_…    # also: list / remove
 ```
 
-Use `--body` for nested fields the same way as on `create`.
+Default `--type` is `subagent`. Every project needs at least one `primary`. Read with `ren projects get prj_…` (returns the project plus attached agents); list with `ren projects list --pod-id pod_…`.
 
-## Attach / detach agents
-
-Agents are managed per-attachment — there is no atomic "set the agent list" call.
+## Build via MCP
 
 ```
-ren projects agents list   prj_…
-ren projects agents add    prj_… --agent-id agt_primary  --type primary
-ren projects agents add    prj_… --agent-id agt_helper   --type subagent
-ren projects agents remove prj_… agt_helper
+mcp__ren__project_create           { "podId": "pod_…", "name": "My Project" }
+mcp__ren__project_agent_add        { "id": "prj_…", "agentId": "agt_…", "type": "primary" }
+mcp__ren__project_fileStore_add    { "id": "prj_…", "fileStoreId": "fst_…" }
+mcp__ren__project_memoryStore_add  { "id": "prj_…", "memoryStoreId": "mst_…" }
+mcp__ren__project_get              { "id": "prj_…" }
 ```
 
-Default `--type` is `subagent`. Every project should have at least one `primary` agent for the platform to route to. Discover agent ids via `ren agents search` or `ren agents get`.
+## Gotchas
 
-## Read / list
-
-```
-ren projects get  prj_…
-ren projects list --pod-id pod_…
-```
-
-`projects get` returns the project plus its attached agents.
+- Stores are created in [store-dev], then attached here — file store mounts `ro`, memory store mounts `rw`, both under `/volumes/<mountSlug>`.
+- The attachment id returned by `agents add` (`projectAgentId`) is what a [trigger-dev] trigger pins to — not the agent id.
+- Don't reuse an existing project for a brand-new outcome; a fresh project keeps the agent isolated and trivial to throw away.
