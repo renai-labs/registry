@@ -53,7 +53,7 @@ Map the requirement to primitives, then build leaf-up so every step references s
 1. **Skills** → [skill-dev]: reuse → fork (`ren skills copy`) → author.
 2. **MCPs** → [mcp-dev]: search registry first; defer auth to step 5.
 3. **Agent** → [agent-dev]: write the prompt, attach `skills`/`mcps`, surface 3 model options with pricing.
-4. **Project** → [project-dev]: fresh project in the private pod, attach the agent `--type primary`, attach any stores ([store-dev]).
+4. **Project** → [project-dev]: fresh project in the private pod, attach the agent `--type primary`, attach any stores ([file-memory-store-dev]).
 5. **Trigger** → [trigger-dev]: only if the requirement has cadence; create **disabled**, enable after one clean manual run.
 
 **Narrate, but keep the boundary clear.** The depth in the dev skills is *for you*. The user hears one short line per action — *"wiring the github-pr skill from the registry," "creating a fresh project so this stays isolated," "attaching a memory store so it remembers across runs."* No schemas, no mount paths, no `requiredCredentials` lectures. The clarity of the composition is the demo.
@@ -63,7 +63,7 @@ Map the requirement to primitives, then build leaf-up so every step references s
 If a wired skill or MCP needs auth, ask once: *connect now, or start the chat with the agent explicitly incomplete and wire them from there?*
 
 - **OAuth** (Linear, Gmail, …) → [mcp-dev]: `ren mcps oauths connect` resolves the vault automatically; honor the `alreadyConnected` short-circuit.
-- **API key** → [credentials-dev]: `ren credentials create <vaultId> --body @cred.json`.
+- **API key** → [vaults-credentials-dev]: `ren credentials create <vaultId> --body @cred.json`.
 - **Skip** → create the agent anyway; the user learns the missing-auth shape by doing. Often the right call for an impatient user.
 
 Native integrations (Slack, GitHub) aren't connected here — they're installed in the web app (`/app/settings/admin/integrations`, org admin). Mention this if the requirement touches either, and create any dependent trigger disabled.

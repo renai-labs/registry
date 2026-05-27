@@ -13,7 +13,7 @@ Skills are version-controlled - every version is immutable; updating means publi
 
 When an agent that depends on a skill runs, the skill materializes under the specific project's `.opencode/skills/` inside the pod sandbox - git-sourced skills are cloned, uploaded skills are unpacked from a presigned S3 URL. The `SKILL.md` body lands in the agent's context; `scripts/` are executed (not loaded), `references/` are read only when the agent opens them, `templates/` are copied.
 
-`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. At startup the pod resolves them from its vault stack (see [credentials-dev]) and injects the hits as env vars; an unresolved one is simply absent — the skill still materializes and loads, then fails when it reaches for the missing variable. The declaration is advisory, not a gate: it's surfaced as a session auth-requirement so the user can wire the credential, not enforced at compose time. Publishing a new version, or attaching a skill to an agent, bumps the pod manifest and fans out.
+`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. At startup the pod resolves them from its vault stack (see [vaults-credentials-dev]) and injects the hits as env vars; an unresolved one is simply absent — the skill still materializes and loads, then fails when it reaches for the missing variable. The declaration is advisory, not a gate: it's surfaced as a session auth-requirement so the user can wire the credential, not enforced at compose time. Publishing a new version, or attaching a skill to an agent, bumps the pod manifest and fans out.
 
 ## 1. Reuse before authoring - three tiers, in order
 
@@ -119,4 +119,4 @@ Ship → use → tighten. Don't anticipate every edge case in v1 - edit from rea
 A skill does nothing until an agent depends on it.
 
 - **Attach it to an agent** - add the `skillId` to the agent version's `skills: [{ skillId }]` list (pin a specific `skillVersionId` to freeze the version, or omit it to track the latest). Deps are full-replace and per-version, so `ren agents get` first and pass the union. See [agent-dev].
-- **Authorize it** - if the skill declares `requiredCredentials`, get those secrets into the pod's vault so the env vars resolve at startup. See [credentials-dev].
+- **Authorize it** - if the skill declares `requiredCredentials`, get those secrets into the pod's vault so the env vars resolve at startup. See [vaults-credentials-dev].

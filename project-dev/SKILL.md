@@ -53,6 +53,6 @@ mcp__ren__project_get              { "id": "prj_…" }
 
 ## Gotchas
 
-- Stores are created in [store-dev], then attached here — file store mounts `ro`, memory store mounts `rw`, both under `/volumes/<mountSlug>`.
+- Stores are created in [file-memory-store-dev], then attached here — file store mounts `ro`, memory store mounts `rw`, both under `/volumes/<mountSlug>`.
 - The attachment id returned by `agents add` (`projectAgentId`) is what a [trigger-dev] trigger pins to — not the agent id.
 - Don't reuse an existing project for a brand-new outcome; a fresh project keeps the agent isolated and trivial to throw away.

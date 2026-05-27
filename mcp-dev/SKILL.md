@@ -84,5 +84,5 @@ Over MCP, `scope` lives under `query` and its only value is `"user"` - omit it f
 ## Next steps
 
 - **Attach it to an agent** - add the id to the agent version's `mcps: [{ mcpId }]` list. See [agent-dev].
-- **Authorize it** - get the credential into the pod's vault (OAuth connect or API key) so the `MCP_<SLUG>_`* env var resolves at startup. See [credentials-dev].
+- **Authorize it** - get the credential into the pod's vault (OAuth connect or API key) so the `MCP_<SLUG>_`* env var resolves at startup. See [vaults-credentials-dev].
 

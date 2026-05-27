@@ -12,7 +12,7 @@ A pod is one durable sandbox (a real VM/container) plus a member set of users an
 The pod owns the sandbox. The server compiles a **manifest snapshot** for the pod (`projects`, `environment`, `members`, `podVolume`) and the sandbox watches `manifestUpdatedAt` — **every create or attach anywhere in the pod bumps it, and the change fans out into the running sandbox.** You don't restart anything.
 
 - The sandbox home is `/home/user`. Projects mount under `/home/user/projects/{projectId}`; the pod-wide volume mounts at `/home/user/artifacts` (rw, S3-backed).
-- Attached vaults are walked in **priority order** to resolve credentials at agent startup (see [credentials-dev]).
+- Attached vaults are walked in **priority order** to resolve credentials at agent startup (see [vaults-credentials-dev]).
 - Members in the manifest gate who can open sessions against the pod.
 - Sandboxes **pause and resume** — they are not ephemeral. A paused pod is not a dead pod; `provision` resumes it.
 
