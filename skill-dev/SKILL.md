@@ -37,7 +37,7 @@ ren skills copy <id> --name "my-variant"
 
 ## 2. Build via CLI
 
-`ren skills create` uploads a local folder (it runs `skills-ref validate` first). Materialize the folder, then point at it:
+`ren skills create` uploads a local folder (it validates the SKILL.md frontmatter first). Materialize the folder, then point at it:
 
 ```
 ren skills create /abs/path/to/my-skill \
