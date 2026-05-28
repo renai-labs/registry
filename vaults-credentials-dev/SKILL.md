@@ -13,7 +13,9 @@ A credential becomes useful when its vault is attached to a pod. Once attached, 
 
 ## Scope — vaults are scoped, credentials inherit
 
-A vault is either **user** (private to you) or **org** (shared across the org). Scope is set at create time — `--scope user|org` (CLI) / `query.scope` (MCP) — and defaults to **`org`**; pass `--scope user` for a private vault. A credential has **no scope of its own**: it lives in a vault and inherits the vault's. A secret's reach is exactly its vault's reach.
+A vault is either **user** (private to you) or **org** (shared across the org); vaults have no registry tier. `--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. A credential has **no scope of its own**: it lives in a vault and inherits the vault's. A secret's reach is exactly its vault's reach.
+
+Scope applies to **every** vault command — list, get, create, update — and every credential or oauth sub-op on a user vault inherits the same lens (`credentials create`, `mcps oauths connect/session`, `credentials oauths start/session`). If the vault lives in your user namespace, every command needs `--scope user`. **The personal pod's default vault is `user`-scope, so `ren vaults list` to find `isDefault: true` needs `--scope user`. If a valid id 404s, missing `--scope user` is the first thing to check.**
 
 Scope narrows one way when you attach a vault to a pod (narrower into broader):
 
@@ -49,14 +51,14 @@ To target a **specific** (non-default) vault instead, swap the first call for `r
 
 ### API key / static token
 
-The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list` and look for `isDefault: true`.
+The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list --scope user` and look for `isDefault: true` (the personal default vault is user-scope).
 
 ## Build via Ren CLI
 
 ```
-ren vaults list --output json                                       # find isDefault: true
+ren vaults list --scope user --output json                                # find isDefault: true (drop --scope for org vaults)
 ren vaults create --name "team-secrets" --scope user --is-default false   # only for a separate boundary
-ren credentials create <vault-id> --body @cred.json --output json
+ren credentials create <vault-id> --scope user --body @cred.json --output json   # match the vault's scope
 ```
 
 `cred.json` (nested `auth` payload — must come via `--body @file`, not inline flags):
@@ -67,11 +69,11 @@ ren credentials create <vault-id> --body @cred.json --output json
 
 `name` is the env-var the skill/MCP resolves by. `mcpId` is optional (target-match for an MCP).
 
-OAuth over CLI:
+OAuth over CLI (add `--scope user` when the MCP is user-scope):
 
 ```
-ren mcps oauths connect <mcp-id> --output json                # → alreadyConnected, or authorizationUrl + sessionId
-ren mcps oauths session <mcp-id> <session-id> --output json   # poll until status: active
+ren mcps oauths connect <mcp-id> --scope user --output json                # → alreadyConnected, or authorizationUrl + sessionId
+ren mcps oauths session <mcp-id> <session-id> --scope user --output json   # poll until status: active
 ```
 
 ## Build via Ren MCP
@@ -79,17 +81,17 @@ ren mcps oauths session <mcp-id> <session-id> --output json   # poll until statu
 MCP tools take the `{ path, query, body }` envelope (params are the API field names):
 
 ```
-mcp__ren__vault_list        {}
+mcp__ren__vault_list        { "query": { "scope": "user" } }                                              # omit for org vaults
 mcp__ren__vault_create      { "query": { "scope": "user" }, "body": { "name": "team-secrets", "isDefault": false } }
-mcp__ren__credential_create { "path": { "vaultId": "vlt_…" },
+mcp__ren__credential_create { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…" },
                               "body": { "name": "GITHUB_TOKEN", "mcpId": "mcp_…",
                                         "auth": { "type": "api_key", "value": "ghp_…" } } }
 
-mcp__ren__mcp_oauth_connect { "path": { "id": "mcp_…" } }                          # → alreadyConnected | authorizationUrl + sessionId
-mcp__ren__mcp_oauth_session { "path": { "id": "mcp_…", "sessionId": "…" } }        # poll until active
+mcp__ren__mcp_oauth_connect { "query": { "scope": "user" }, "path": { "id": "mcp_…" } }                          # → alreadyConnected | authorizationUrl + sessionId
+mcp__ren__mcp_oauth_session { "query": { "scope": "user" }, "path": { "id": "mcp_…", "sessionId": "…" } }        # poll until active
 # target a specific vault instead of the default:
-mcp__ren__credential_oauth_start   { "path": { "vaultId": "vlt_…" }, "body": { "mcpId": "mcp_…" } }
-mcp__ren__credential_oauth_session { "path": { "vaultId": "vlt_…", "sessionId": "…" } }
+mcp__ren__credential_oauth_start   { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…" }, "body": { "mcpId": "mcp_…" } }
+mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…", "sessionId": "…" } }
 ```
 
 ## Gotchas

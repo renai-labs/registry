@@ -13,7 +13,7 @@ One **private pod per user** for personal work. **Team pods are shaped around sh
 
 ## Scope — your private pod lives in your user namespace
 
-Your **private pod** lives in your user namespace. The default `pods list` only returns **org** pods, so a private-pod build silently fails to find anything.
+Your **private pod** lives in your user namespace. Scope is the auth-resolution lens for **every** pod command (list, get, sandbox status/provision, members add, vaults add), not just list. **`--scope` is optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. If you're touching a user-private pod, every command needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP). **If a valid pod id 404s, missing `--scope user` is the first thing to check.**
 
 ```
 ren pods list --scope user --output json                              # CLI
@@ -38,7 +38,7 @@ A pod is durable: it pauses when idle and resumes on demand — not ephemeral. A
 Session creation fails with *"Pod has no live sandbox"* if the sandbox is paused or absent. Always check first.
 
 ```
-ren pods sandboxes status <pod-id> --output json
+ren pods sandboxes status <pod-id> --scope user --output json   # drop --scope for an org pod
 ```
 
 Response is a discriminated union on `status`:
@@ -47,7 +47,7 @@ Response is a discriminated union on `status`:
 - `provisioning` → in flight; poll again without yielding to the user.
 - `absent` → kick off provisioning, then poll to `ready`:
   ```
-  ren pods sandboxes provision <pod-id> --output json
+  ren pods sandboxes provision <pod-id> --scope user --output json
   ```
   `provision` is **idempotent** and **resumes a paused sandbox** rather than building a fresh one.
 - `failed` → the response carries `reason`. Surface it plainly and stop; don't retry on autopilot.
@@ -57,12 +57,13 @@ Response is a discriminated union on `status`:
 ```
 ren pods list --scope user --output json    # private pod
 ren pods list             --output json    # org pods
-ren pods get <pod-id> --output json
-ren pods sandboxes status    <pod-id> --output json
-ren pods sandboxes provision <pod-id> --output json
-ren pods members add <pod-id> --user-id usr_… --role member   # role: owner|member (default member)
-ren pods vaults  add <pod-id> --vault-id vlt_… --priority 0   # lower priority wins on name conflict
-# also: members list / remove, vaults list / remove
+ren pods get               <pod-id> --scope user --output json
+ren pods sandboxes status    <pod-id> --scope user --output json
+ren pods sandboxes provision <pod-id> --scope user --output json
+ren pods members add <pod-id> --scope user --user-id usr_… --role member   # role: owner|member (default member)
+ren pods vaults  add <pod-id> --scope user --vault-id vlt_… --priority 0   # lower priority wins on name conflict
+# also: members list / remove, vaults list / remove — all need --scope user for user-private pods
+# drop --scope (or pass --scope org) for org pods
 ```
 
 ## Build via Ren MCP
@@ -70,11 +71,11 @@ ren pods vaults  add <pod-id> --vault-id vlt_… --priority 0   # lower priority
 `{ path, query, body }` envelope:
 
 ```
-mcp__ren__pod_list             { "query": { "scope": "user" } }     # omit query for org pods
-mcp__ren__pod_sandbox_status   { "path": { "podId": "pod_…" } }
-mcp__ren__pod_sandbox_provision{ "path": { "podId": "pod_…" } }
-mcp__ren__pod_member_add       { "path": { "id": "pod_…" }, "body": { "userId": "usr_…", "role": "member" } }
-mcp__ren__pod_vault_add        { "path": { "id": "pod_…" }, "body": { "vaultId": "vlt_…", "priority": 0 } }
+mcp__ren__pod_list             { "query": { "scope": "user" } }                                              # omit query for org pods
+mcp__ren__pod_sandbox_status   { "query": { "scope": "user" }, "path": { "podId": "pod_…" } }
+mcp__ren__pod_sandbox_provision{ "query": { "scope": "user" }, "path": { "podId": "pod_…" } }
+mcp__ren__pod_member_add       { "query": { "scope": "user" }, "path": { "id": "pod_…" }, "body": { "userId": "usr_…", "role": "member" } }
+mcp__ren__pod_vault_add        { "query": { "scope": "user" }, "path": { "id": "pod_…" }, "body": { "vaultId": "vlt_…", "priority": 0 } }
 ```
 
 The `path` key is `id` for member/vault attach, **`podId`** for sandbox endpoints - mirrors the URL.

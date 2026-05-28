@@ -17,7 +17,9 @@ By default an agent attaches to a skill's **latest** version (`skillVersionId` o
 
 ## Scope
 
-`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (visible across the org). Pass `--scope user` to keep the skill in your **private namespace**. Scope narrows one way: a `user` skill can back a `user` or `org` agent, an `org` skill can back its own org, and a `registry` skill can back anything — but you can't pull a narrower-scope skill into a broader-scope publication.
+`--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default (visible across the org); never write `--scope org` or `--scope registry`. Scope narrows one way: a `user` skill can back a `user` or `org` agent, an `org` skill can back its own org, and a `registry` skill can back anything — but you can't pull a narrower-scope skill into a broader-scope publication.
+
+Scope applies to **every** skill command — create, get, update, `versions create`, `versions data`, `copy`. If the skill lives in your user namespace, every command needs `--scope user`. **If a valid skill id 404s, missing `--scope user` is the first thing to check.** `search` is the exception — it uses `--sources user org registry` (multi-pick across tiers), not `--scope`.
 
 ## 1. Reuse before authoring - three tiers, in order
 
@@ -29,14 +31,14 @@ Why search first: registry skills are battle-tested — they encode what already
 
 ```
 ren skills search --query "<topic>" --sources user org registry --output json
-ren skills get <id> --output json
-ren skills versions data <id> <version> --format presigned   # download bundled files before deciding
+ren skills get <id> --scope user --output json                                 # drop --scope for org / registry skills
+ren skills versions data <id> <version> --scope user --format presigned        # download bundled files before deciding
 ```
 
-Fork copies a skill into the user's scope as an editable copy, leaving the original untouched:
+Fork copies a skill into the user's scope as an editable copy, leaving the original untouched. Pass `--scope user` to read a user-scope source skill (registry/org sources don't need it):
 
 ```
-ren skills copy <id> --name "my-variant"
+ren skills copy <id> --scope user --name "my-variant"
 ```
 
 ## 2. Build via Ren CLI
@@ -56,10 +58,10 @@ ren skills create /abs/path/to/my-skill \
 New version replaces the full folder (no patch flow):
 
 ```
-ren skills versions create skl_… /abs/path/to/my-skill --version patch --release-notes "…"
+ren skills versions create skl_… /abs/path/to/my-skill --scope user --version patch --release-notes "…"
 ```
 
-`--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> [--name …] [--description …]`.
+`--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> --scope user [--name …] [--description …]` (drop `--scope` for org skills).
 
 ## 3. Build via Ren MCP
 
@@ -67,15 +69,16 @@ The MCP path takes files **inline** as JSON instead of a folder upload:
 
 ```
 mcp__ren__skill_search  { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
-mcp__ren__skill_copy    { "path":  { "id": "skl_…" }, "body": { "name": "my-variant" } }
+mcp__ren__skill_copy    { "query": { "scope": "user" }, "path": { "id": "skl_…" }, "body": { "name": "my-variant" } }
 mcp__ren__skill_create  { "query": { "scope": "user" },
                           "body":  { "name": "…", "description": "…", "icon": "✨",
                                      "requiredCredentials": [{ "name": "SLACK_BOT_TOKEN", "description": "…" }],
                                      "files": [{ "path": "SKILL.md", "content": "---\nname: …\n---\n# …" }] } }
-mcp__ren__skill_version_create { "path": { "id": "skl_…" },
-                                 "body": { "version": "patch",
-                                           "files": [{ "path": "SKILL.md", "content": "…" }] } }
-mcp__ren__skill_version_data   { "path": { "id": "skl_…", "version": "1" }, "query": { "format": "presigned" } }
+mcp__ren__skill_version_create { "query": { "scope": "user" },
+                                 "path":  { "id": "skl_…" },
+                                 "body":  { "version": "patch",
+                                            "files": [{ "path": "SKILL.md", "content": "…" }] } }
+mcp__ren__skill_version_data   { "query": { "scope": "user", "format": "presigned" }, "path": { "id": "skl_…", "version": "1" } }
 ```
 
 ## 4. SKILL.md anatomy

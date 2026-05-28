@@ -37,24 +37,24 @@ Ren ships a public registry of MCPs that are **tested and production-ready** - t
 
 ```
 ren mcps search --query "<topic>" --sources user org registry --output json
-ren mcps get        <mcp-id> --output json
-ren mcps get-by-slug <slug>  --output json
+ren mcps get        <mcp-id> --scope user --output json    # drop --scope for org / registry MCPs
+ren mcps get-by-slug <slug>  --scope user --output json
 ```
 
 ### Search via Ren MCP
 
 ```
 mcp__ren__mcp_search    { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
-mcp__ren__mcp_get       { "path":  { "id": "mcp_…" } }
-mcp__ren__mcp_getBySlug { "path":  { "slug": "<slug>" } }
+mcp__ren__mcp_get       { "query": { "scope": "user" }, "path": { "id":   "mcp_…" } }
+mcp__ren__mcp_getBySlug { "query": { "scope": "user" }, "path": { "slug": "<slug>" } }
 ```
 
 ## Scope
 
 Two related concepts — keep them straight:
 
-- **`--sources` / `sources`** is the **read-time filter** on search: which tiers come back. Defaults to all three.
-- **`--scope` / `query.scope`** is the **create-time namespace** the new MCP lands in. Defaults to **`org`** (team-shared). Pass `--scope user` for a private MCP.
+- **`--sources` / `sources`** is the **read-time filter** on `mcps search`: which tiers come back. Defaults to all three (`user org registry`).
+- **`--scope` / `query.scope`** is the **auth-resolution lens** every other command uses. **Optional; the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`.
 
 The scope tiers:
 
@@ -63,6 +63,8 @@ The scope tiers:
 - **`user`** — private to you. Usable by your own agents, including when you build at the org level.
 
 Scope flows one way — narrower into broader. A `user` MCP can back an `org` agent and a `registry` MCP can back anything, but not the reverse: an `org` MCP can't be pulled into another org, and nothing private can back a published registry entity.
+
+`--scope` applies to **every** command on a custom MCP — create, get, get-by-slug, update, oauth connect/session — not just create. If the MCP lives in your user namespace, every command needs `--scope user`. **If a valid MCP id 404s, missing `--scope user` is the first thing to check.** `search` uses `--sources` (read-time filter), not `--scope`, and registry MCPs never need `--scope`.
 
 ## Build a custom MCP
 

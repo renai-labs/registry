@@ -16,7 +16,9 @@ Once attached to a project, the store is available the next time the agent runs 
 
 ## Scope
 
-`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (shared across the org). Pass `--scope user` for a private store. Scope narrows one way: a `user` store can only attach to a project in a user-private pod; an `org` store can attach to projects in any pod you own.
+`--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default (shared across the org); never write `--scope org` or `--scope registry`. Scope narrows one way: a `user` store can only attach to a project in a user-private pod; an `org` store can attach to projects in any pod you own.
+
+Scope applies to **every** command on a user-scope store — list, get, create, update, and the file sub-ops (`start-upload`, `finalize-upload`, `list`, `presign-download`, `delete`). The project-side attach commands (`ren projects file-stores add`) take their own `--scope` matching the parent project. **If a valid store id 404s, missing `--scope user` is the first thing to check.**
 
 ## Build via Ren CLI
 
@@ -25,18 +27,18 @@ ren file-stores   create --name "uploads"      --scope user --output json   # �
 ren memory-stores create --name "agent-memory" --scope user --output json   # → mst_… (memory store id)
 ```
 
-Seed a file store with an artifact the agent should read (multi-step: start → PUT → finalize; per-file cap **50 MB**):
+Seed a file store with an artifact the agent should read (multi-step: start → PUT → finalize; per-file cap **50 MB**). Every sub-op takes the parent store's scope:
 
 ```
-ren file-stores files start-upload <fst_…> --path "report.pdf" --size 20480 --output json  # → presigned PUT target
+ren file-stores files start-upload <fst_…> --scope user --path "report.pdf" --size 20480 --output json  # → presigned PUT target
 # PUT the bytes to the returned target, then:
-ren file-stores files finalize-upload  <fst_…> --path "report.pdf" --output json
-ren file-stores files list             <fst_…> --output json
-ren file-stores files presign-download <fst_…> --path "report.pdf" --output json
-ren file-stores files delete           <fst_…> --path "report.pdf"
+ren file-stores files finalize-upload  <fst_…> --scope user --path "report.pdf" --output json
+ren file-stores files list             <fst_…> --scope user --output json
+ren file-stores files presign-download <fst_…> --scope user --path "report.pdf" --output json
+ren file-stores files delete           <fst_…> --scope user --path "report.pdf"
 ```
 
-Memory stores expose the same `files` subcommands (`start-upload` / `finalize-upload` / `list` / `presign-download` / `delete`) — useful to migrate prior memories in from another system. Day-to-day the agent writes to the memory store directly.
+Memory stores expose the same `files` subcommands (`start-upload` / `finalize-upload` / `list` / `presign-download` / `delete`) and the same scope rule — useful to migrate prior memories in from another system. Day-to-day the agent writes to the memory store directly. Drop `--scope` for org stores.
 
 ## Build via Ren MCP
 
@@ -45,9 +47,9 @@ Memory stores expose the same `files` subcommands (`start-upload` / `finalize-up
 ```
 mcp__ren__fileStore_create               { "query": { "scope": "user" }, "body": { "name": "uploads" } }
 mcp__ren__memoryStore_create             { "query": { "scope": "user" }, "body": { "name": "agent-memory" } }
-mcp__ren__fileStore_files_startUpload    { "path": { "id": "fst_…" }, "body": { "path": "report.pdf", "size": 20480 } }
-mcp__ren__fileStore_files_finalizeUpload { "path": { "id": "fst_…" }, "body": { "path": "report.pdf" } }
-mcp__ren__fileStore_files_list           { "path": { "id": "fst_…" } }
+mcp__ren__fileStore_files_startUpload    { "query": { "scope": "user" }, "path": { "id": "fst_…" }, "body": { "path": "report.pdf", "size": 20480 } }
+mcp__ren__fileStore_files_finalizeUpload { "query": { "scope": "user" }, "path": { "id": "fst_…" }, "body": { "path": "report.pdf" } }
+mcp__ren__fileStore_files_list           { "query": { "scope": "user" }, "path": { "id": "fst_…" } }
 ```
 
 ## Attaching to a project
@@ -55,13 +57,13 @@ mcp__ren__fileStore_files_list           { "path": { "id": "fst_…" } }
 A store does nothing until it's attached to a project. Attachment is managed per-store (no atomic "set the list"):
 
 ```
-ren projects file-stores   add <prj_…> --file-store-id   fst_…   # also: list / remove
-ren projects memory-stores add <prj_…> --memory-store-id mst_…   # also: list / remove
+ren projects file-stores   add <prj_…> --scope user --file-store-id   fst_…   # also: list / remove — match the project's scope
+ren projects memory-stores add <prj_…> --scope user --memory-store-id mst_…   # drop --scope for org-pod projects
 ```
 
 ```
-mcp__ren__project_fileStore_add   { "path": { "id": "prj_…" }, "body": { "fileStoreId": "fst_…" } }
-mcp__ren__project_memoryStore_add { "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
+mcp__ren__project_fileStore_add   { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "fileStoreId":   "fst_…" } }
+mcp__ren__project_memoryStore_add { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
 ```
 
 The project side (which agents see the store, how detaching propagates) lives in [[project-dev]].

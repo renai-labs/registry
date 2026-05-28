@@ -15,7 +15,7 @@ A trigger opens a fresh session against the project's primary agent on each fire
 
 ## Scope
 
-Triggers live inside a project and **inherit its scope** — no `--scope` on create. A private-pod project's triggers stay private; an org-pod project's triggers are visible org-wide.
+A trigger lives inside a project and **inherits its scope** as a placement — but the CLI/MCP still needs `--scope` to know **where to look**. **The flag is optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. If the parent project is in a user-private pod, every command (create, read, update, list, delete) needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP). **If a valid project/trigger id 404s, missing `--scope user` is the first thing to check.**
 
 ## Build via Ren CLI
 
@@ -27,13 +27,14 @@ ren triggers create \
   --input-message     "Triage any new PRs and post a summary." \
   --timezone          "America/New_York" \
   --is-enabled        false \
+  --scope             user \
   --output json
 ```
 
-`--project-id`, `--project-agent-id`, `--schedule`, and `--input-message` are required. Update needs `--project-id` too (it's the auth-scope key, not a change field):
+`--project-id`, `--project-agent-id`, `--schedule`, and `--input-message` are required. Add `--scope user` when the parent project is in a user-private pod (drop it for org). Update needs `--project-id` too (it's the auth-scope key, not a change field):
 
 ```
-ren triggers update <trigger-id> --project-id prj_… --is-enabled true
+ren triggers update <trigger-id> --project-id prj_… --scope user --is-enabled true
 ```
 
 ## Build via Ren MCP
@@ -41,11 +42,13 @@ ren triggers update <trigger-id> --project-id prj_… --is-enabled true
 `{ path, query, body }` envelope:
 
 ```
-mcp__ren__trigger_create { "body": { "projectId":"prj_…", "projectAgentId":"pra_…",
-                                     "schedule":"0 */2 * * *", "inputMessage":"…",
-                                     "timezone":"America/New_York", "isEnabled": false } }
-mcp__ren__trigger_update { "path": { "triggerId":"ctrg_…" },
-                           "body": { "projectId":"prj_…", "isEnabled": true } }
+mcp__ren__trigger_create { "query": { "scope": "user" },
+                           "body":  { "projectId":"prj_…", "projectAgentId":"pra_…",
+                                      "schedule":"0 */2 * * *", "inputMessage":"…",
+                                      "timezone":"America/New_York", "isEnabled": false } }
+mcp__ren__trigger_update { "query": { "scope": "user" },
+                           "path":  { "triggerId":"ctrg_…" },
+                           "body":  { "projectId":"prj_…", "isEnabled": true } }
 ```
 
 ## Gotchas

@@ -15,7 +15,9 @@ An agent version is an immutable snapshot — the prompt, model, and the skill/M
 
 ## Scope
 
-`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (visible to the whole org). Pass `--scope user` to keep the agent in your **private namespace**. Scope narrows one way: a `user` agent can attach to a user-private pod's project; an `org` agent works in both org and user-private pods.
+`--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default (visible to the whole org); never write `--scope org` or `--scope registry`. Scope narrows one way: a `user` agent can attach to a user-private pod's project; an `org` agent works in both org and user-private pods.
+
+Scope applies to **every** agent command — create, get, update, `versions create`. If the agent lives in your user namespace, every command needs `--scope user`. **If a valid agent id 404s, missing `--scope user` is the first thing to check.** `search` is the exception — it uses `--sources` (read-time filter across user/org/registry tiers) and ignores `--scope`.
 
 ## Build via Ren CLI
 
@@ -36,6 +38,7 @@ Subsequent revisions go through `agents versions create` (scalar fields on flags
 
 ```
 ren agents versions create agt_… \
+  --scope user \
   --prompt "You are…" \
   --model "claude-sonnet-4-6" \
   --release-notes "…" \
@@ -46,7 +49,7 @@ ren agents versions create agt_… \
   }'
 ```
 
-`--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_…`; discover across scopes with `ren agents search --query "…" --sources user org registry`.
+`--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_… --scope user` (drop `--scope` for org agents); discover across scopes with `ren agents search --query "…" --sources user org registry` (`--sources` is the read-time filter; the entity's actual scope still needs `--scope` on every follow-up call).
 
 ## Build via Ren MCP
 
@@ -59,16 +62,17 @@ mcp__ren__agent_create         { "query": { "scope": "user" },
                                             "skills": [{ "skillId": "skl_…" }],
                                             "mcps":   [{ "mcpId":   "mcp_…" }],
                                             "releaseNotes": "initial" } }
-mcp__ren__agent_version_create { "path": { "id": "agt_…" },
-                                 "body": { "prompt": "…", "model": "claude-sonnet-4-6",
+mcp__ren__agent_version_create { "query": { "scope": "user" },
+                                 "path":  { "id": "agt_…" },
+                                 "body":  { "prompt": "…", "model": "claude-sonnet-4-6",
                                             "skills": [{ "skillId": "skl_…" }],
                                             "mcps":   [{ "mcpId":   "mcp_…" }],
                                             "version": "patch" } }
-mcp__ren__agent_get            { "path": { "id": "agt_…" } }
+mcp__ren__agent_get            { "query": { "scope": "user" }, "path": { "id": "agt_…" } }
 mcp__ren__agent_search         { "body": { "query": "…", "sources": ["user","org","registry"] } }
 ```
 
-Over MCP, `scope` lives under `query` and its only value is `"user"` - omit it for the `org` default.
+Over MCP, `scope` lives under `query` and its only value is `"user"` — **set it on every call (create, get, update, `version_create`) when the agent is in your user namespace; omit it for the `org` default.** `agent_search` is the exception: it uses `sources` (read-time filter) and ignores `scope`.
 
 ## Choosing the model — surface options, don't pick silently
 

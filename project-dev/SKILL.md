@@ -23,19 +23,19 @@ An agent attachment **tracks the agent's latest version by default**: omit `agen
 
 ## Scope
 
-A project lives in a pod and **inherits the pod's scope** — you don't pass `--scope` on `projects create`. Projects under a user-private pod stay in your private namespace; projects under an org pod are visible to the org. To list private-pod projects, pass `--scope user` on `pods list` first (see [[pod-dev]]).
+A project lives in a pod and **inherits the pod's scope** as a placement — but the CLI/MCP still needs `--scope` to know **where to look**. **The flag is optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. If the parent pod is user-private, every command that touches the project (create, read, update, sub-ops, list) needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP). **If a valid id 404s, missing `--scope user` is the first thing to check.**
 
 ## Build via Ren CLI
 
 ```
 ren pods list --output json                                  # find the podId; add --scope user for private pods
-ren projects create --pod-id pod_… --name "My Project" --description "…"   # → projectId
+ren projects create --pod-id pod_… --name "My Project" --description "…"   # → projectId; pass --scope user when the pod is user-private
 ```
 
 Nested fields (`gitRepo`, `permission`) go through `--body`:
 
 ```
-ren projects create --pod-id pod_… --name "My Project" \
+ren projects create --pod-id pod_… --scope user --name "My Project" \
   --body '{ "gitRepo": { "url": "…", "mountPath": "/repo" }, "permission": { … } }'
 ```
 
@@ -52,19 +52,19 @@ ren projects file-stores   add    prj_… --file-store-id   fst_…    # also: l
 ren projects memory-stores add    prj_… --memory-store-id mst_…    # also: list / remove
 ```
 
-Default `--type` is `**all**` (primary + subagent), not `subagent`. Read with `ren projects get prj_…` (returns the project plus attached agents); list with `ren projects list --pod-id pod_…`.
+Default `--type` is `**all**` (primary + subagent), not `subagent`. Read with `ren projects get prj_…` (returns the project plus attached agents); list with `ren projects list --pod-id pod_…`. Add `--scope user` to every command above when the project is in a user-private pod.
 
 ## Build via Ren MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 
 ```
-mcp__ren__project_create           { "body": { "podId": "pod_…", "name": "My Project" } }
-mcp__ren__project_agent_add        { "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "type": "primary" } }                              # tracks latest
-mcp__ren__project_agent_add        { "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "agentVersionId": "agv_…", "type": "primary" } }   # pinned
-mcp__ren__project_fileStore_add    { "path": { "id": "prj_…" }, "body": { "fileStoreId": "fst_…" } }
-mcp__ren__project_memoryStore_add  { "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
-mcp__ren__project_get              { "path": { "id": "prj_…" } }
+mcp__ren__project_create           { "query": { "scope": "user" }, "body": { "podId": "pod_…", "name": "My Project" } }   # omit query for org pods
+mcp__ren__project_agent_add        { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "type": "primary" } }                              # tracks latest
+mcp__ren__project_agent_add        { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "agentVersionId": "agv_…", "type": "primary" } }   # pinned
+mcp__ren__project_fileStore_add    { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "fileStoreId": "fst_…" } }
+mcp__ren__project_memoryStore_add  { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
+mcp__ren__project_get              { "query": { "scope": "user" }, "path": { "id": "prj_…" } }
 ```
 
 ## Sessions
