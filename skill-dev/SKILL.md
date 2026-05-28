@@ -5,15 +5,19 @@ description: Author, edit, fork, and optimize skills — the modular capabilitie
 
 # Skill Dev
 
-A skill is a modular capability that can be used by agents - packaged instructions plus optional resources (`scripts/`, `references/`, `templates/`) that the agent reaches for on its own, only when a task makes it relevant. The package is a folder with a `SKILL.md` (frontmatter + markdown body) at its root. The frontmatter `name` + `description` are all the agent sees up front, listed in its skill catalog; it loads the full body and any bundled files on demand through the native skill tool. That's the point: an agent can carry many skills and pay for none of their content until one is actually needed - composable capability that stays context-cheap.
+A skill is a modular capability that can be used by agents - packaged instructions plus optional resources (`scripts/`, `references/`, `templates/`) that the agent reaches for on its own, only when a task makes it relevant. The package is a folder with a `SKILL.md` (frontmatter + markdown body) at its root. The frontmatter `name` + `description` are all the agent sees up front, listed in its skill catalog; it loads the full body and any bundled files on demand. That's the point: an agent can carry many skills and pay for none of their content until one is actually needed.
 
 Skills are version-controlled - every version is immutable; updating means publishing a new version. One new version = one logical change.
 
-## Lifecycle in the manifested sandbox
+## Runtime behavior
 
-When an agent that depends on a skill runs, the skill materializes under the specific project's `.opencode/skills/` inside the pod sandbox - git-sourced skills are cloned, uploaded skills are unpacked from a presigned S3 URL. The `SKILL.md` body lands in the agent's context; `scripts/` are executed (not loaded), `references/` are read only when the agent opens them, `templates/` are copied.
+By default an agent attaches to a skill's **latest** version (`skillVersionId` omitted on the agent's `skills: [{ skillId }]` entry) and **auto-rolls-forward**: a new published version reaches every unpinned agent without a restart. Pin a specific `skillVersionId` only when you need to freeze a snapshot for that agent. `scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files.
 
-`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. At startup the pod resolves them from its vault stack (see [vaults-credentials-dev]) and injects the hits as env vars; an unresolved one is simply absent — the skill still materializes and loads, then fails when it reaches for the missing variable. The declaration is advisory, not a gate: it's surfaced as a session auth-requirement so the user can wire the credential, not enforced at compose time. Publishing a new version, or attaching a skill to an agent, bumps the pod manifest and fans out.
+`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. The platform resolves them from the pod's vault stack and makes them available as env vars; an unresolved one is simply absent — the skill still loads, then fails when it reaches for the missing variable. The declaration is advisory: it surfaces a missing-auth prompt to the user, not a hard gate.
+
+## Scope
+
+`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (visible across the org). Pass `--scope user` to keep the skill in your **private namespace**. Scope narrows one way: a `user` skill can back a `user` or `org` agent, an `org` skill can back its own org, and a `registry` skill can back anything — but you can't pull a narrower-scope skill into a broader-scope publication.
 
 ## 1. Reuse before authoring - three tiers, in order
 
@@ -21,7 +25,7 @@ When an agent that depends on a skill runs, the skill materializes under the spe
 2. **Fork** a close-enough registry skill into your scope and edit it - the baked-in domain knowledge is worth keeping.
 3. **Author from scratch** only when neither fits.
 
-Why search first: registry skills are battle-tested — they encode what already works against the real tool surface, so you don't reason a workflow from scratch and you inherit current, correct details (commands, schemas, gotchas) instead of guessing them. Authoring is the last resort, not the default.
+Why search first: registry skills are battle-tested — they encode what already works against the real tool surface, so you don't reason a workflow from scratch and you inherit current, correct details (commands, schemas, gotchas) instead of guessing them. Authoring is the last resort.
 
 ```
 ren skills search --query "<topic>" --sources user org registry --output json
@@ -29,7 +33,7 @@ ren skills get <id> --output json
 ren skills versions data <id> <version> --format presigned   # download bundled files before deciding
 ```
 
-Fork is a first-class operation - it copies a skill into the user's scope as an editable copy, leaving the original untouched:
+Fork copies a skill into the user's scope as an editable copy, leaving the original untouched:
 
 ```
 ren skills copy <id> --name "my-variant"
@@ -37,13 +41,14 @@ ren skills copy <id> --name "my-variant"
 
 ## 2. Build via CLI
 
-`ren skills create` uploads a local folder (it validates the SKILL.md frontmatter first). Materialize the folder, then point at it:
+`ren skills create` uploads a local folder (it validates the SKILL.md frontmatter first):
 
 ```
 ren skills create /abs/path/to/my-skill \
   --name "Human-readable name" \
   --description "When this skill triggers and what it does" \
   --icon "✨" \
+  --scope user \
   --required-credentials @creds.json \
   --release-notes "Initial release"            # → skillId
 ```
@@ -61,13 +66,16 @@ ren skills versions create skl_… /abs/path/to/my-skill --version patch --relea
 The MCP path takes files **inline** as JSON instead of a folder upload:
 
 ```
-mcp__ren__skill_search  { "query": "<topic>", "sources": ["user","org","registry"] }
-mcp__ren__skill_copy    { "id": "skl_…", "name": "my-variant" }
-mcp__ren__skill_create  { "name": "…", "description": "…", "icon": "✨",
-                          "requiredCredentials": [{ "name": "SLACK_BOT_TOKEN", "description": "…" }],
-                          "files": [{ "path": "SKILL.md", "content": "---\nname: …\n---\n# …" }] }
-mcp__ren__skill_version_create { "id": "skl_…", "version": "patch", "files": [{ "path": "SKILL.md", "content": "…" }] }
-mcp__ren__skill_version_data   { "id": "skl_…", "version": "1", "format": "presigned" }
+mcp__ren__skill_search  { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
+mcp__ren__skill_copy    { "path":  { "id": "skl_…" }, "body": { "name": "my-variant" } }
+mcp__ren__skill_create  { "query": { "scope": "user" },
+                          "body":  { "name": "…", "description": "…", "icon": "✨",
+                                     "requiredCredentials": [{ "name": "SLACK_BOT_TOKEN", "description": "…" }],
+                                     "files": [{ "path": "SKILL.md", "content": "---\nname: …\n---\n# …" }] } }
+mcp__ren__skill_version_create { "path": { "id": "skl_…" },
+                                 "body": { "version": "patch",
+                                           "files": [{ "path": "SKILL.md", "content": "…" }] } }
+mcp__ren__skill_version_data   { "path": { "id": "skl_…", "version": "1" }, "query": { "format": "presigned" } }
 ```
 
 ## 4. SKILL.md anatomy
@@ -102,21 +110,20 @@ UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace -
 
 ## 7. Bundled resources
 
-
 | Resource      | Use for                            | Loaded into context? |
 | ------------- | ---------------------------------- | -------------------- |
 | `scripts/`    | Deterministic, repeated operations | No (executed)        |
 | `references/` | Domain depth, schemas, long docs   | Only when read       |
 | `templates/`  | Boilerplate output assets          | No                   |
 
-
 ## 8. Iterate
 
-Ship → use → tighten. Don't anticipate every edge case in v1 - edit from real failures.
+Ship → use → tighten. Debug loop: read a real session's messages, narrow to the failing step, fix the relevant skill or prompt, bump the version. Don't anticipate every edge case in v1 — edit from real failures.
 
 ## Next steps
 
-A skill does nothing until an agent depends on it.
+A skill does nothing until an agent uses it inside a project.
 
-- **Attach it to an agent** - add the `skillId` to the agent version's `skills: [{ skillId }]` list (pin a specific `skillVersionId` to freeze the version, or omit it to track the latest). Deps are full-replace and per-version, so `ren agents get` first and pass the union. See [agent-dev].
-- **Authorize it** - if the skill declares `requiredCredentials`, get those secrets into the pod's vault so the env vars resolve at startup. See [vaults-credentials-dev].
+- **Attach to an agent** — add the `skillId` to the agent version's `skills: [{ skillId }]` list. Omit `skillVersionId` to track the latest (auto-roll-forward); pin it only to freeze. Deps are full-replace per-version, so `ren agents get` first and pass the union. See [[agent-dev]].
+- **Wire its credentials** if the skill declares `requiredCredentials`. See [[vaults-credentials-dev]].
+- **Put the agent in a project** so a session can actually call the skill. See [[project-dev]].

@@ -1,36 +1,38 @@
 ---
-
-## name: agent-dev
-
+name: agent-dev
 description: Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.
+---
 
 # Agent Dev
 
-An agent is a system prompt + model + dependencies (skills and MCPs). Agents are version-controlled and **always have at least one version** - `agent.create` writes the agent row and an initial version (`0.0.1`, semver-bumped from a `0.0.0` base) in one transaction. Every version is immutable; you never edit a published version in place. Updating an agent means publishing a new version that replaces the previous one. One new version = one logical change to that bundle.
-
-## Lifecycle in the manifested sandbox
-
-An agent is a reusable blueprint (one slug per org); an **agent version** is the published snapshot with the baked-in prompt, model, and **pinned** skill/MCP versions. When the agent is attached to a project, that version is pinned too — newer versions don't auto-roll-forward.
-
-At sandbox compose time the version becomes the project's `opencode.json`: the prompt is injected (along with current time, timezone, and the mounted volume paths), and the model resolves to `proxy/<name>` so it runs through the pod's per-sandbox proxy key — that's how any model at any price tier works without a config change. Skills materialize under the project's `.opencode/skills/`; MCP credentials are injected from the vault. The project's **primary** agent is what triggers and chat sessions route to; **subagents** are called from within. Publishing a new version bumps the pod manifest and fans out.
+An agent is a system prompt + model + dependencies (skills and MCPs). Agents are version-controlled: every version is immutable, `agent.create` always lands an initial `0.0.1`, and updates publish a new version. One new version = one logical change.
 
 Favor many small specialists composing over one giant agent — easier to version, swap models for, and debug.
 
+## Runtime behavior
+
+An agent version is an immutable snapshot — the prompt, model, and the skill/MCP versions it depends on. By default a project attaches to the agent's **latest** version (`agentVersionId` omitted on attach) and **auto-rolls-forward**: publishing a new version propagates to every project using it without a restart. Pin a specific `agentVersionId` on attach (see [[project-dev]]) only when you need to freeze a snapshot for that project.
+
+## Scope
+
+`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (visible to the whole org). Pass `--scope user` to keep the agent in your **private namespace**. Scope narrows one way: a `user` agent can attach to a user-private pod's project; an `org` agent works in both org and user-private pods.
+
 ## Build via CLI
 
-`agents create` always returns an agent with its initial version (`0.0.1`) attached; the version fields you pass populate it - if you omit them, you still get a `0.0.1`, just empty (no prompt, no model, no deps):
+`agents create` always returns an agent with its initial version (`0.0.1`) attached; the version fields you pass populate it - if you omit them, you still get a `0.0.1`, just empty:
 
 ```
 ren agents create --name "My Agent" --icon "🤖" \
+  --scope user \
   --prompt "You are…" --model "claude-sonnet-4-6" \
   --release-notes "initial" \
   --body '{
     "skills": [{ "skillId": "skl_…" }],
     "mcps":   [{ "mcpId":   "mcp_…" }]
-  }'                                                # → agentId (with version 0.0.1 fully populated)
+  }'                                                # → agentId
 ```
 
-It accepts the same version fields as a bump (`--prompt`, `--model`, `--description`, `--release-notes`, plus `skills`/`mcps` via `--body`), so the first call can stand on its own without a follow-up `versions create`. Subsequent revisions go through `agents versions create` (scalar fields on flags; nested fields via `--body`):
+Subsequent revisions go through `agents versions create` (scalar fields on flags; nested fields via `--body`):
 
 ```
 ren agents versions create agt_… \
@@ -44,14 +46,15 @@ ren agents versions create agt_… \
   }'
 ```
 
-`--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_…`; discover across scopes with `ren agents search --query "…" --sources user org registry` (there is no separate `agents list`).
+`--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_…`; discover across scopes with `ren agents search --query "…" --sources user org registry`.
 
 ## Build via MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 
 ```
-mcp__ren__agent_create         { "body": { "name": "My Agent", "icon": "🤖",
+mcp__ren__agent_create         { "query": { "scope": "user" },
+                                 "body":  { "name": "My Agent", "icon": "🤖",
                                             "prompt": "…", "model": "claude-sonnet-4-6",
                                             "skills": [{ "skillId": "skl_…" }],
                                             "mcps":   [{ "mcpId":   "mcp_…" }],
@@ -65,6 +68,8 @@ mcp__ren__agent_get            { "path": { "id": "agt_…" } }
 mcp__ren__agent_search         { "body": { "query": "…", "sources": ["user","org","registry"] } }
 ```
 
+Over MCP, `scope` lives under `query` and its only value is `"user"` - omit it for the `org` default.
+
 ## Choosing the model — surface options, don't pick silently
 
 Pull the catalog, then offer **three options across the price/capability range** rather than choosing for the user:
@@ -77,25 +82,13 @@ ren models list --output json
 - a **balanced** default (recommend this one),
 - a **lighter/cheaper** option for summaries or routing.
 
-Pricing isn't on the endpoint — enrich from the provider's public pricing and show `$/M input` + `$/M output` alongside each. Match the spread to the task. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
-
-### Suggested picks
-
-Use as defaults when you don't have a stronger contextual reason. Prices = `$/M input / $/M output`. Re-check rankings periodically — the heavy tier in particular reshuffles within statistical noise.
-
-
-| Tier       | Frontier                                                                                                                                                                                                                                                                                       | Price-sensitive                                                                                          |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Heavy**  | **Claude Opus 4.7** — `$5 / $25`, Max-eligible. AA Intelligence Index 57 (tied #1), SWE-bench Verified 87.6%, top SWE-bench Pro. **GPT-5.5** — `$5 / $30`. Leads SWE-bench Verified at 88.7% (essentially tied with Opus 4.7 within noise); pick when the user wants a non-Anthropic frontier. | **DeepSeek V4 Pro** — `$0.44 / $0.87`. AA Index 52, GPQA 90.1, ~10× cheaper than Opus.                   |
-| **Medium** | **Claude Sonnet 4.6** — `$3 / $15`, Max-eligible. SWE-bench Verified 75-80%, leads pro-writing GDPval, 2-3× faster tokens/sec than GPT-5.4.                                                                                                                                                    | **GLM-4.7** — `$0.40 / $1.75`. Open-weight, same family as GLM-5.1 which tops open-source SWE-bench Pro. |
-| **Light**  | **Gemini 3.1 Flash Lite** — `$0.25 / $1.50`. Outperforms Haiku 4.5 on MMMLU (88.9 vs 83), GPQA, AIME, at ¼ the price + 1M context. **Claude Haiku 4.5** — `$1 / $5`, Max-eligible. Behind Gemini on most benchmarks.                                                                           | **GLM-4.7 Flash** — `$0.06 / $0.40`. Rock-bottom price for routing/summarisation.                        |
-
+Pricing isn't on the endpoint — enrich from the provider's public pricing and show `$/M input` + `$/M output` alongside each. For a tiered shortlist with current prices, see `references/model-picks.md`. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
 
 ## Easy to miss
 
 - Pass the prompt via `--body @file.json` for anything over a few lines — inline JSON breaks on quotes, backticks, and code fences.
-- `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }` objects (skills may pin `skillVersionId`). To add one, `ren agents get` first and pass the union; omit to inherit the previous version's deps.
-- Keep the prompt focused: role → workflow → output format → rules, with failure modes next to the decisions they govern. Push detail into skills, not the prompt. See `references/prompt-writing.md` and `references/dependency-patterns.md`.
+- `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }` objects. To add one, `ren agents get` first and pass the union; omit to inherit the previous version's deps. Omit `skillVersionId` to track the skill's latest version (auto-roll-forward); pin it only to freeze.
+- Keep the prompt focused: role → workflow → output format → rules, with failure modes next to the decisions they govern. Push detail into skills, not the prompt. See `references/prompt-writing.md` (read when drafting or refactoring a prompt) and `references/dependency-patterns.md` (read when deciding what belongs in the prompt vs a skill).
 
 ## Iterate
 
@@ -103,3 +96,11 @@ Use as defaults when you don't have a stronger contextual reason. Prices = `$/M 
 2. Watch a real run — find the wrong output.
 3. `ren skills versions create` to fix skill content, `ren agents versions create` to fix prompt or deps.
 
+## Next steps
+
+An agent does nothing until a project routes to it.
+
+- **Attach to a project** as `primary` so chat sessions and triggers route to it. See [[project-dev]].
+- **Wire its credentials** if any skill or MCP it depends on needs auth. See [[vaults-credentials-dev]] (and [[mcp-dev]] for OAuth).
+- **Give it persistent context** with a memory store, or feed it artifacts via a file store. See [[file-memory-store-dev]].
+- **Run it on a schedule** once a session works manually. See [[trigger-dev]].

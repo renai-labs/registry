@@ -5,22 +5,35 @@ description: Inspect and manage pods - the durable sandbox boundary that runs ag
 
 # Pod Dev
 
-A pod is one durable sandbox (a real VM/container) plus a member set of users and agents. Agents execute *inside* this sandbox - compute, files, memory, and resolved credentials all live here. A pod is the unit of isolation: different member sets or credential boundaries → different pods.
+A pod is one durable sandbox plus a member set of users and agents. Agents run inside this sandbox; everything attached to the pod (skills, MCPs, stores, vaults) is available to every project in it. A pod is the unit of isolation: different member sets or credential boundaries → different pods.
 
 ## How to arrange pods
 
 One **private pod per user** for personal work. **Team pods are shaped around shared work, not necessarily the org chart** - a sales team, an emergency warroom, a per-customer pod, a prod-vs-staging credential split. The axes are orthogonal; ask the user "who else needs to see this?" before creating.
 
-## Lifecycle in the manifested sandbox
+## Scope — your private pod lives in your user namespace
 
-The pod owns the sandbox. The server compiles a **manifest snapshot** for the pod (`projects`, `environment`, `members`, `podVolume`) and the sandbox watches `manifestUpdatedAt` - **every create or attach anywhere in the pod bumps it, and the change fans out into the running sandbox.** You don't restart anything.
+Your **private pod** lives in your user namespace. The default `pods list` only returns **org** pods, so a private-pod build silently fails to find anything.
 
-- The sandbox home is `/home/user`. Projects mount under `/home/user/projects/{projectId}`; the pod-wide volume mounts at `/home/user/artifacts` (rw, S3-backed).
-- Attached vaults are walked in **priority order** to resolve credentials at agent startup (see [vaults-credentials-dev]).
-- Members in the manifest gate who can open sessions against the pod.
-- Sandboxes **pause and resume** - they are not ephemeral. A paused pod is not a dead pod; `provision` resumes it.
+```
+ren pods list --scope user --output json                              # CLI
+mcp__ren__pod_list { "query": { "scope": "user" } }                   # MCP
+```
 
-## Sandbox readiness - check before handing off a session
+A new org automatically gets both a private pod (yours) **and** a general org pod; older accounts may have only the org pod. Always list with **both** scopes if you don't know where the user wants to build:
+
+```
+ren pods list             --output json   # org pods
+ren pods list --scope user --output json   # your private pod
+```
+
+Look for `isPrivate: true, isDefault: true` to spot the user's private pod.
+
+## Runtime behavior
+
+A pod is durable: it pauses when idle and resumes on demand — not ephemeral. Attaching anything to the pod (a project, a vault, a member) propagates to the running sandbox without a restart. Sessions can open against the pod once its sandbox is `ready`.
+
+## Sandbox readiness — check before handing off a session
 
 Session creation fails with *"Pod has no live sandbox"* if the sandbox is paused or absent. Always check first.
 
@@ -31,18 +44,19 @@ ren pods sandboxes status <pod-id> --output json
 Response is a discriminated union on `status`:
 
 - `ready` → live, proceed.
-- `provisioning` → in flight; poll again. Do **not** yield to the user between polls.
-- `absent` → none linked; kick off provisioning, then poll to `ready`:
+- `provisioning` → in flight; poll again without yielding to the user.
+- `absent` → kick off provisioning, then poll to `ready`:
   ```
   ren pods sandboxes provision <pod-id> --output json
   ```
-  Provision is **idempotent** (concurrent calls join the same workflow) and **resumes a paused sandbox** rather than building a fresh one.
+  `provision` is **idempotent** and **resumes a paused sandbox** rather than building a fresh one.
 - `failed` → the response carries `reason`. Surface it plainly and stop; don't retry on autopilot.
 
 ## Build via CLI
 
 ```
-ren pods list --output json                 # find the pod; isPrivate + isDefault flag the user's private pod
+ren pods list --scope user --output json    # private pod
+ren pods list             --output json    # org pods
 ren pods get <pod-id> --output json
 ren pods sandboxes status    <pod-id> --output json
 ren pods sandboxes provision <pod-id> --output json
@@ -53,10 +67,10 @@ ren pods vaults  add <pod-id> --vault-id vlt_… --priority 0   # lower priority
 
 ## Build via MCP
 
-Same surface, `{ path, query, body }` envelope:
+`{ path, query, body }` envelope:
 
 ```
-mcp__ren__pod_list             {}
+mcp__ren__pod_list             { "query": { "scope": "user" } }     # omit query for org pods
 mcp__ren__pod_sandbox_status   { "path": { "podId": "pod_…" } }
 mcp__ren__pod_sandbox_provision{ "path": { "podId": "pod_…" } }
 mcp__ren__pod_member_add       { "path": { "id": "pod_…" }, "body": { "userId": "usr_…", "role": "member" } }
@@ -67,7 +81,14 @@ The `path` key is `id` for member/vault attach, **`podId`** for sandbox endpoint
 
 ## Gotchas
 
-- Read the pod list shape - don't assume. A new org automatically gets a private pod **and** a general org pod; older accounts may have only the org pod. Build wherever the user actually has a project.
 - Members are **pod-scoped, not project-scoped**. Use separate projects for different outcomes inside one team; separate pods for different member sets.
-- A pod-scoped (`--scope user`) personal pod is queried with `--scope user` on `pods list` if it lives in the user namespace.
+- A paused pod is **not** a dead pod. Always try `provision` before declaring the pod down.
+- Vault attach priority matters: lower number wins on credential-name conflicts across attached vaults.
 
+## Next steps
+
+A pod by itself does nothing — you need a project inside it.
+
+- **Create a project** in the pod and attach a primary agent. See [[project-dev]].
+- **Share credentials across this pod's projects** by attaching a vault. See [[vaults-credentials-dev]].
+- **Add teammates** with `ren pods members add` if this is a shared pod.

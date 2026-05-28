@@ -5,34 +5,36 @@ description: Manage vaults and credentials - the encrypted secret store that bac
 
 # Vaults & Credentials Dev
 
-A **vault** is a credential safe. **Credentials** live inside it, encrypted at rest. Secrets never live in prompts - they live in a vault and are injected at runtime.
+A **vault** is a credential safe. **Credentials** live inside it, encrypted at rest. Secrets never live in prompts — they live in a vault and are injected at runtime.
 
-## Scope - vaults are scoped, credentials inherit
+## Runtime behavior
 
-A vault is either **user** (private to you) or **org** (shared across the org). Scope is set at create time - `--scope user|org` (CLI) / `query.scope` (MCP) - and **defaults to `org`** like every other entity; pass `--scope user` for a private vault. A credential has **no scope of its own**: it lives in a vault and inherits the vault's. A secret's reach is exactly its vault's reach.
+A credential becomes useful when its vault is attached to a pod. Once attached, every project in the pod can resolve the credential when it runs an agent that needs it — no restart. The same credential backs the same MCP across multiple pods without re-pasting. OAuth tokens refresh on their own server-side; you never paste a token.
 
-Scope narrows one way when you attach a vault to a pod (same rule as everywhere on Ren - narrower into broader):
+## Scope — vaults are scoped, credentials inherit
+
+A vault is either **user** (private to you) or **org** (shared across the org). Scope is set at create time — `--scope user|org` (CLI) / `query.scope` (MCP) — and defaults to **`org`**; pass `--scope user` for a private vault. A credential has **no scope of its own**: it lives in a vault and inherits the vault's. A secret's reach is exactly its vault's reach.
+
+Scope narrows one way when you attach a vault to a pod (narrower into broader):
 
 - A **user vault** attaches **only to a user-private pod**.
 - An **org vault** attaches to **a user-private pod or an org pod**.
 
-You cannot pull a user vault into an org pod - the pod can't reach down into a narrower scope. Match scopes before attaching (see [pod-dev]).
+You cannot pull a user vault into an org pod — the pod can't reach down into a narrower scope. Match scopes before attaching (see [[pod-dev]]).
 
-## Lifecycle in the manifested sandbox
+## How resolution works (the short version)
 
-Vaults attach to a pod via `podVault` with a **priority order**. At agent startup, when a skill or MCP needs a secret, the pod walks its attached vaults and returns the **first match** by name (e.g. `GITHUB_TOKEN`) or by target (`mcpId`) - on conflict, lower priority wins. The resolved value lands in the manifest's `environment` map and is injected as an env var (local MCP / skill) or request header (remote MCP).
+A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see `mcp-dev/references/auth-config.md`). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
 
-This decoupling is the point: the **same credential backs the same MCP across multiple pods** without re-pasting. Adding a vault to a pod bumps the manifest and fans out.
-
-**OAuth tokens refresh on their own, server-side.** An OAuth credential also holds `expiresAt` and a `refresh` block (refresh token + token endpoint). Refresh is **lazy, not scheduled**: every time Ren *resolves* the credential it checks `expiresAt`, and if the token is past it or within ~10 min of expiry, it runs a standard `refresh_token` grant and writes the rotated token back to the credential row (re-encrypted) before handing it out. The sandbox keeps requesting manifest builds every 2minutes, and this refresh check runs repeatedly, so running sandboxes always have valid tokens. Refresh only saves you while the **refresh token** is valid; if the provider revokes it, the grant fails and you fall back to a fresh OAuth connect.
-
-A skill declares the secrets it needs as `requiredCredentials` (UPPER_SNAKE_CASE env names). At startup the pod resolves them from this vault stack and injects the hits; an unresolved one is simply an **absent env var** - the skill still runs and fails when it reaches for the missing variable (it is **not** skipped). So the credential's *name* must match what the skill expects (see [skill-dev]).
+OAuth tokens refresh lazily and server-side. For the refresh details (timing, what to do when the refresh token itself expires), see `references/oauth-refresh.md`.
 
 ## Two paths to a credential
 
 ### OAuth (Linear, Gmail, Notion, …) - preferred
 
-Don't hand-build these - the token is minted by the provider through a browser consent flow, and Ren materializes the credential **server-side** from the callback. You never see or paste the token; you only drive **start → hand off the URL → poll**.
+Don't hand-build these — the token is minted by the provider through a browser consent flow, and Ren materializes the credential **server-side** from the callback. You never see or paste the token; you only drive **start → hand off the URL → poll**.
+
+OAuth requires an MCP already defined for the provider. If you don't have one, start in [[mcp-dev]] (the registry usually has it).
 
 1. **Connect.** `ren mcps oauths connect <mcp-id> --output json` resolves or creates the default vault, then returns a discriminated result:
    - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
@@ -41,13 +43,13 @@ Don't hand-build these - the token is minted by the provider through a browser c
    ```
    ren mcps oauths session <mcp-id> <session-id> --output json
    ```
-   `status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s (what the UI does); **don't yield to the user between polls** once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
+   `status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s; don't yield to the user between polls once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
 
 To target a **specific** (non-default) vault instead, swap the first call for `ren credentials oauths start <vault-id> --body '{"mcpId":"mcp_…"}'` (same return shape, plus `state`) and poll `ren credentials oauths session <vault-id> <session-id>`.
 
 ### API key / static token
 
-The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already - `ren vaults list` and look for `isDefault: true`.
+The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list` and look for `isDefault: true`.
 
 ## Build via CLI
 
@@ -57,7 +59,7 @@ ren vaults create --name "team-secrets" --scope user --is-default false   # only
 ren credentials create <vault-id> --body @cred.json --output json
 ```
 
-`cred.json` (nested `auth` payload - must come via `--body @file`, not inline flags):
+`cred.json` (nested `auth` payload — must come via `--body @file`, not inline flags):
 
 ```json
 { "name": "GITHUB_TOKEN", "mcpId": "mcp_…", "label": "GitHub PAT", "auth": { "type": "api_key", "value": "ghp_…" } }
@@ -92,7 +94,15 @@ mcp__ren__credential_oauth_session { "path": { "vaultId": "vlt_…", "sessionId"
 
 ## Gotchas
 
-- Never write credential-setup steps into a skill's SKILL.md - the skill assumes the env var is already present (see [skill-dev]).
-- The credential `name` must equal the skill's declared `requiredCredentials` entry, or resolution misses and the env var is simply absent at runtime.
-- Match scopes before attaching: a user vault won't attach to an org pod. Attaching a vault to a pod is a [pod-dev] op (`ren pods vaults add`); creating the credential is here.
-- OAuth tokens never pass through you - the provider callback stores them server-side. Your job is start + poll, not handling the secret.
+- Never write credential-setup steps into a skill's SKILL.md — the skill assumes the env var is already present (see [[skill-dev]]).
+- The credential `name` must equal the skill's declared `requiredCredentials` entry, or the MCP's derived env-var name, or resolution misses and the env var is simply absent at runtime.
+- Match scopes before attaching: a user vault won't attach to an org pod.
+- OAuth tokens never pass through you — the provider callback stores them server-side. Your job is start + poll, not handling the secret.
+
+## Next steps
+
+A credential does nothing until its vault is attached to a pod that runs the agent.
+
+- **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[pod-dev]].
+- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[project-dev]] for the deep link.
+- **Add more credentials** to the same vault as you wire more skills/MCPs — one vault can back many.

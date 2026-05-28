@@ -1,33 +1,28 @@
 ---
 name: file-memory-store-dev
-description: Create and attach file stores and memory stores - the S3-backed FUSE volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).
+description: Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).
 ---
 
 # File & Memory Store Dev
 
-Two volume types, both S3-backed, both attach to a **project**:
+Two volume types, both durable, both attach to a **project**:
 
-- **File store** - **read-only** for the agent. Users upload artifacts here (docs, datasets, reference material) so the agent has better context for its work. The agent reads them; it can't write back.
-- **Memory store** - **read-write** for the agent. Where the agent persists what it learns across sessions and runs: lessons from past conversations, user and team preferences and tastes, and reusable decision-making frameworks it can pull into future work.
+- **File store** — **read-only** for the agent. Users upload artifacts (docs, datasets, reference material) so the agent has better context. The agent reads them; it can't write back.
+- **Memory store** — **read-write** for the agent. Where the agent persists what it learns across sessions and runs: lessons from past conversations, user/team preferences and tastes, reusable decision-making frameworks.
 
-## Lifecycle in the manifested sandbox
+## Runtime behavior
 
-When a store is attached to a project, the manifest mounts it into the pod sandbox as a **FUSE volume** (AWS `mount-s3`) under `/volumes/`:
+Once attached to a project, the store is available the next time the agent runs — no restart. The agent's prompt is told where to find it. The same store attached to two projects is the same data: writes are immediately visible across every sandbox the store is mounted in.
 
-- **File store → `/volumes/<mountSlug>`, mounted read-only (`ro`).** Fallback path `/volumes/fs-<last6-of-id>` when no slug is set.
-- **Memory store → `/volumes/<mountSlug>`, mounted read-write (`rw`).** Fallback `/volumes/ms-<last6-of-id>`.
+## Scope
 
-Because the mount is FUSE-over-S3 (the bucket + prefix *is* the volume), the contents stay in sync across every sandbox the store is mounted in — a write in one sandbox lands in S3 and is visible wherever else that store is attached. There's no per-sandbox copy to reconcile. `mountSlug` is derived from the store name at create time and is unique per org.
-
-(The pod-wide volume is separate - it mounts at `/home/user/artifacts`. Stores live under `/volumes/`.)
-
-The agent's system prompt is told the mounted volume paths at compose time, so it knows where to read and write. Attaching or detaching a store bumps the pod manifest and fans out - no restart.
+`--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (shared across the org). Pass `--scope user` for a private store. Scope narrows one way: a `user` store can only attach to a project in a user-private pod; an `org` store can attach to projects in any pod you own.
 
 ## Build via CLI
 
 ```
-ren file-stores   create --name "uploads"      --output json   # → fst_… (file store id)
-ren memory-stores create --name "agent-memory" --output json   # → mst_… (memory store id)
+ren file-stores   create --name "uploads"      --scope user --output json   # → fst_… (file store id)
+ren memory-stores create --name "agent-memory" --scope user --output json   # → mst_… (memory store id)
 ```
 
 Seed a file store with an artifact the agent should read (multi-step: start → PUT → finalize; per-file cap **50 MB**):
@@ -41,15 +36,15 @@ ren file-stores files presign-download <fst_…> --path "report.pdf" --output js
 ren file-stores files delete           <fst_…> --path "report.pdf"
 ```
 
-Memory stores expose the same `files` subcommands (`start-upload` / `finalize-upload` / `list` / `presign-download` / `delete`) — useful to migrate prior memories in from another system. Day-to-day the agent just writes to the `rw` mount directly.
+Memory stores expose the same `files` subcommands (`start-upload` / `finalize-upload` / `list` / `presign-download` / `delete`) — useful to migrate prior memories in from another system. Day-to-day the agent writes to the memory store directly.
 
 ## Build via MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 
 ```
-mcp__ren__fileStore_create               { "body": { "name": "uploads" } }
-mcp__ren__memoryStore_create             { "body": { "name": "agent-memory" } }
+mcp__ren__fileStore_create               { "query": { "scope": "user" }, "body": { "name": "uploads" } }
+mcp__ren__memoryStore_create             { "query": { "scope": "user" }, "body": { "name": "agent-memory" } }
 mcp__ren__fileStore_files_startUpload    { "path": { "id": "fst_…" }, "body": { "path": "report.pdf", "size": 20480 } }
 mcp__ren__fileStore_files_finalizeUpload { "path": { "id": "fst_…" }, "body": { "path": "report.pdf" } }
 mcp__ren__fileStore_files_list           { "path": { "id": "fst_…" } }
@@ -57,7 +52,7 @@ mcp__ren__fileStore_files_list           { "path": { "id": "fst_…" } }
 
 ## Attaching to a project
 
-A store does nothing until it's attached to a project — that's what puts it in the pod manifest and mounts it into the sandbox. Attachment is managed per-store (no atomic "set the list"):
+A store does nothing until it's attached to a project. Attachment is managed per-store (no atomic "set the list"):
 
 ```
 ren projects file-stores   add <prj_…> --file-store-id   fst_…   # also: list / remove
@@ -69,10 +64,15 @@ mcp__ren__project_fileStore_add   { "path": { "id": "prj_…" }, "body": { "file
 mcp__ren__project_memoryStore_add { "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
 ```
 
-The project side (which agents get the mounts, how detaching fans out) lives in [project-dev].
+The project side (which agents see the store, how detaching propagates) lives in [[project-dev]].
 
 ## Gotchas
 
-- File store is **read-only** in the sandbox — the agent can't write back into it. Use a memory store (`rw`) for anything the agent must persist.
+- File stores are **read-only** in the sandbox — the agent can't write back. Use a memory store for anything the agent must persist.
 - Reach for a store when the user wants to **upload artifacts the agent needs** (file store) or have the agent **remember across runs** (memory store). Don't attach empty stores speculatively.
-- The FUSE mount means stores are shared, not copied: the same memory store attached to two projects/sandboxes is one S3 prefix — concurrent writers see each other's files.
+- The same memory store attached to two projects is one piece of state: concurrent writers see each other's files.
+
+## Next steps
+
+- **Attach to a project** so the agent in it can read/write the store. See [[project-dev]].
+- **Tell the agent the store exists** — update its prompt to mention what's in the file store or what the memory store is for. See [[agent-dev]].
