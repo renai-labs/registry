@@ -1,0 +1,20 @@
+{
+  "$schema": "https://www.skills.sh/schema/skills.sh.json",
+  "groupings": [
+    {
+      "title": "Ren",
+      "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
+      "skills": [
+        "pod-dev",
+        "project-dev",
+        "agent-dev",
+        "skill-dev",
+        "mcp-dev",
+        "trigger-dev",
+        "vaults-credentials-dev",
+        "file-memory-store-dev",
+        "onboarding"
+      ]
+    }
+  ]
+}

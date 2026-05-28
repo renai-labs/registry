@@ -6,7 +6,7 @@ A skill can ship `scripts/`, `references/`, and `templates/` alongside SKILL.md.
 
 | Type           | Loaded into context?         | Use for                                                     | Example                            |
 | -------------- | ---------------------------- | ----------------------------------------------------------- | ---------------------------------- |
-| `scripts/`     | No (executed)                | Deterministic operations the agent runs repeatedly          | `validate.py`, `deploy.sh`         |
+| `scripts/`     | No (executed)                | Deterministic operations the agent runs repeatedly          | `validate.ts`, `deploy.sh`         |
 | `references/`  | Only when explicitly read    | Schemas, long docs, domain depth                            | `bigquery-tables.md`, `api-spec.md`|
 | `templates/`   | No                           | Boilerplate output assets — logos, fonts, starter HTML/code | `letter.html`, `logo.svg`          |
 
@@ -14,13 +14,13 @@ A skill can ship `scripts/`, `references/`, and `templates/` alongside SKILL.md.
 
 For tasks where the *what* is fixed and the *how* shouldn't drift across runs.
 
-- Any language: Python, Bash, Node.js, etc. Pick one per script.
+- Limited to what the sandbox image ships: **Bash/shell, Node.js, or Bun (TypeScript/JS)**. There is **no Python** runtime (nor Ruby, Deno, Go) — a `.py` script won't execute. Pick one per script.
 - Tests live in `scripts/tests/`. Use red/green/refactor TDD for non-trivial scripts.
 - Handle errors explicitly. Prefer JSON output to plain text.
 - Document constants at the top.
 - Keep tests fast (< 1s each). Mock external dependencies.
 
-Reference scripts from SKILL.md by relative path, e.g. `scripts/validate.py <skill-name>`.
+Reference scripts from SKILL.md by relative path, e.g. `bun scripts/validate.ts <skill-name>` or `bash scripts/validate.sh <skill-name>`.
 
 ## references/
 
