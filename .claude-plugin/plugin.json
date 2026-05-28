@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "ren",
+  "displayName": "Ren",
+  "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
+  "repository": "https://github.com/renai-labs/skills",
+  "mcpServers": "./.claude-plugin/mcp.json"
+}
