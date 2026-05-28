@@ -30,7 +30,7 @@ ren file-stores   create --name "uploads"      --output json   # → fst_… (fi
 ren memory-stores create --name "agent-memory" --output json   # → mst_… (memory store id)
 ```
 
-Seed a file store with an artifact the agent should read (multi-step: start → PUT → finalize):
+Seed a file store with an artifact the agent should read (multi-step: start → PUT → finalize; per-file cap **50 MB**):
 
 ```
 ren file-stores files start-upload <fst_…> --path "report.pdf" --size 20480 --output json  # → presigned PUT target
@@ -45,12 +45,14 @@ Memory stores expose the same `files` subcommands (`start-upload` / `finalize-up
 
 ## Build via MCP
 
+`{ path, query, body }` envelope (params are the API field names):
+
 ```
-mcp__ren__fileStore_create   { "name": "uploads" }
-mcp__ren__memoryStore_create { "name": "agent-memory" }
-mcp__ren__fileStore_files_startUpload    { "id": "fst_…", "path": "report.pdf", "size": 20480 }
-mcp__ren__fileStore_files_finalizeUpload { "id": "fst_…", "path": "report.pdf" }
-mcp__ren__fileStore_files_list           { "id": "fst_…" }
+mcp__ren__fileStore_create               { "body": { "name": "uploads" } }
+mcp__ren__memoryStore_create             { "body": { "name": "agent-memory" } }
+mcp__ren__fileStore_files_startUpload    { "path": { "id": "fst_…" }, "body": { "path": "report.pdf", "size": 20480 } }
+mcp__ren__fileStore_files_finalizeUpload { "path": { "id": "fst_…" }, "body": { "path": "report.pdf" } }
+mcp__ren__fileStore_files_list           { "path": { "id": "fst_…" } }
 ```
 
 ## Attaching to a project
@@ -63,8 +65,8 @@ ren projects memory-stores add <prj_…> --memory-store-id mst_…   # also: lis
 ```
 
 ```
-mcp__ren__project_fileStore_add   { "id": "prj_…", "fileStoreId": "fst_…" }
-mcp__ren__project_memoryStore_add { "id": "prj_…", "memoryStoreId": "mst_…" }
+mcp__ren__project_fileStore_add   { "path": { "id": "prj_…" }, "body": { "fileStoreId": "fst_…" } }
+mcp__ren__project_memoryStore_add { "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
 ```
 
 The project side (which agents get the mounts, how detaching fans out) lives in [project-dev].
