@@ -72,17 +72,7 @@ Over MCP, `scope` lives under `query` and its only value is `"user"` - omit it f
 
 ## Choosing the model — surface options, don't pick silently
 
-Pull the catalog, then offer **three options across the price/capability range** rather than choosing for the user:
-
-```
-ren models list --output json
-```
-
-- a **heavier** model for involved work (long reasoning, code, multi-step research),
-- a **balanced** default (recommend this one),
-- a **lighter/cheaper** option for summaries or routing.
-
-Pricing isn't on the endpoint — enrich from the provider's public pricing and show `$/M input` + `$/M output` alongside each. For a tiered shortlist with current prices, see `references/model-picks.md`. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
+Pull the catalog with `ren models list --output json` and offer the user three picks across the price/capability range — heavy, balanced, light — instead of choosing silently. Suggested defaults: **Claude Opus 4.7** for heavy work, **Claude Sonnet 4.6** as the balanced recommendation, **Claude Haiku 4.5** for light/cheap. Enrich each with `$/M input` + `$/M output` from the provider's public pricing. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
 
 ## Easy to miss
 

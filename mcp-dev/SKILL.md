@@ -17,7 +17,15 @@ On Ren an MCP is a first-class entity (user / org / registry scope) that an agen
 - **Defining an MCP ≠ authorizing it.** `authConfig` only declares **how** a secret is presented (which header / query param / basic-auth slot). It carries no secret. Wiring the actual credential is a separate step (see Next steps).
 - **Attaching to an agent makes its tools available** the next time a session opens — no restart. Definition-level edits (URL, `authConfig`) propagate on the next manifest refresh.
 
-For the env-var name a paired credential must use, see `references/auth-config.md`.
+The credential a paired vault entry creates must use the env-var name Ren derives from the MCP's slug:
+
+| `auth`     | Env var                   |
+| ---------- | ------------------------- |
+| `api_key`  | `MCP_<SLUG>_KEY`          |
+| `basic`    | `MCP_<SLUG>_BASIC`        |
+| `oauth`    | `MCP_<SLUG>_ACCESS_TOKEN` |
+
+`<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[vaults-credentials-dev]]).
 
 ## Reach for Ren's registry MCPs first
 
@@ -73,7 +81,7 @@ ren mcps create \
 
 - `--auth` is one of `none | oauth | api_key | basic` (default `none`).
 - `--scope` defaults to `org` — pass `--scope user` for a private build.
-- The slug is generated from the name; the slug drives the env-var name the credential must match. For the exact derivation and `authConfig` shapes, read `references/auth-config.md`.
+- The slug is generated from the name; the slug drives the env-var name the credential must match (see Runtime behavior above).
 
 ### Via MCP
 
