@@ -52,7 +52,7 @@ Response is a discriminated union on `status`:
   `provision` is **idempotent** and **resumes a paused sandbox** rather than building a fresh one.
 - `failed` → the response carries `reason`. Surface it plainly and stop; don't retry on autopilot.
 
-## Build via CLI
+## Build via Ren CLI
 
 ```
 ren pods list --scope user --output json    # private pod
@@ -65,7 +65,7 @@ ren pods vaults  add <pod-id> --vault-id vlt_… --priority 0   # lower priority
 # also: members list / remove, vaults list / remove
 ```
 
-## Build via MCP
+## Build via Ren MCP
 
 `{ path, query, body }` envelope:
 

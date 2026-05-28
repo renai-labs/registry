@@ -17,7 +17,7 @@ A trigger opens a fresh session against the project's primary agent on each fire
 
 Triggers live inside a project and **inherit its scope** — no `--scope` on create. A private-pod project's triggers stay private; an org-pod project's triggers are visible org-wide.
 
-## Build via CLI
+## Build via Ren CLI
 
 ```
 ren triggers create \
@@ -36,7 +36,7 @@ ren triggers create \
 ren triggers update <trigger-id> --project-id prj_… --is-enabled true
 ```
 
-## Build via MCP
+## Build via Ren MCP
 
 `{ path, query, body }` envelope:
 

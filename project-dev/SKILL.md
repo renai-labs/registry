@@ -25,7 +25,7 @@ An agent attachment **tracks the agent's latest version by default**: omit `agen
 
 A project lives in a pod and **inherits the pod's scope** — you don't pass `--scope` on `projects create`. Projects under a user-private pod stay in your private namespace; projects under an org pod are visible to the org. To list private-pod projects, pass `--scope user` on `pods list` first (see [[pod-dev]]).
 
-## Build via CLI
+## Build via Ren CLI
 
 ```
 ren pods list --output json                                  # find the podId; add --scope user for private pods
@@ -54,7 +54,7 @@ ren projects memory-stores add    prj_… --memory-store-id mst_…    # also: l
 
 Default `--type` is `**all**` (primary + subagent), not `subagent`. Read with `ren projects get prj_…` (returns the project plus attached agents); list with `ren projects list --pod-id pod_…`.
 
-## Build via MCP
+## Build via Ren MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 

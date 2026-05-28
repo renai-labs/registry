@@ -40,7 +40,7 @@ Every entity on Ren lands in a namespace. Default is **`org`** (visible to the w
 Decide how you'll drive Ren before anything else:
 
 - **Coding-agent environment (has a shell)** → **install and use the CLI.** `npm install -g @renai-labs/cli`, then `ren <cmd>`. Hold the CLI reference once: fetch [https://renai.build/onboarding/refs/cli.md](https://renai.build/onboarding/refs/cli.md).
-- **Ren MCP already connected** (`mcp__ren__*` tools exposed) → **use it.** Same surface; each dev skill's "Build via MCP" section applies.
+- **Ren MCP already connected** (`mcp__ren__*` tools exposed) → **use it.** Same surface; each dev skill's "Build via Ren MCP" section applies.
 - **Neither** → ask the user to add the Ren MCP server to their host's MCP config (point them at [https://renai.build/docs/introduction/](https://renai.build/docs/introduction/)) and reload, then **stop** — don't fake progress until a transport exists.
 - **User denies access** (won't install the CLI or add the MCP) → **bail** politely. Nothing to build without a transport.
 

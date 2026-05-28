@@ -39,7 +39,7 @@ Fork copies a skill into the user's scope as an editable copy, leaving the origi
 ren skills copy <id> --name "my-variant"
 ```
 
-## 2. Build via CLI
+## 2. Build via Ren CLI
 
 `ren skills create` uploads a local folder (it validates the SKILL.md frontmatter first):
 
@@ -61,7 +61,7 @@ ren skills versions create skl_… /abs/path/to/my-skill --version patch --relea
 
 `--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> [--name …] [--description …]`.
 
-## 3. Build via MCP
+## 3. Build via Ren MCP
 
 The MCP path takes files **inline** as JSON instead of a folder upload:
 

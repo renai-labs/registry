@@ -18,7 +18,7 @@ Once attached to a project, the store is available the next time the agent runs 
 
 `--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (shared across the org). Pass `--scope user` for a private store. Scope narrows one way: a `user` store can only attach to a project in a user-private pod; an `org` store can attach to projects in any pod you own.
 
-## Build via CLI
+## Build via Ren CLI
 
 ```
 ren file-stores   create --name "uploads"      --scope user --output json   # → fst_… (file store id)
@@ -38,7 +38,7 @@ ren file-stores files delete           <fst_…> --path "report.pdf"
 
 Memory stores expose the same `files` subcommands (`start-upload` / `finalize-upload` / `list` / `presign-download` / `delete`) — useful to migrate prior memories in from another system. Day-to-day the agent writes to the memory store directly.
 
-## Build via MCP
+## Build via Ren MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 

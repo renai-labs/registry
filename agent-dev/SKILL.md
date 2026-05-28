@@ -17,7 +17,7 @@ An agent version is an immutable snapshot — the prompt, model, and the skill/M
 
 `--scope` (CLI) / `query.scope` (MCP) defaults to **`org`** (visible to the whole org). Pass `--scope user` to keep the agent in your **private namespace**. Scope narrows one way: a `user` agent can attach to a user-private pod's project; an `org` agent works in both org and user-private pods.
 
-## Build via CLI
+## Build via Ren CLI
 
 `agents create` always returns an agent with its initial version (`0.0.1`) attached; the version fields you pass populate it - if you omit them, you still get a `0.0.1`, just empty:
 
@@ -48,7 +48,7 @@ ren agents versions create agt_… \
 
 `--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_…`; discover across scopes with `ren agents search --query "…" --sources user org registry`.
 
-## Build via MCP
+## Build via Ren MCP
 
 `{ path, query, body }` envelope (params are the API field names):
 

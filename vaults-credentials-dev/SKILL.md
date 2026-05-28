@@ -24,7 +24,7 @@ You cannot pull a user vault into an org pod — the pod can't reach down into a
 
 ## How resolution works (the short version)
 
-A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see `mcp-dev/references/auth-config.md`). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
+A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see [[mcp-dev]] Runtime behavior). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
 
 OAuth tokens refresh lazily and server-side. For the refresh details (timing, what to do when the refresh token itself expires), see `references/oauth-refresh.md`.
 
@@ -51,7 +51,7 @@ To target a **specific** (non-default) vault instead, swap the first call for `r
 
 The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list` and look for `isDefault: true`.
 
-## Build via CLI
+## Build via Ren CLI
 
 ```
 ren vaults list --output json                                       # find isDefault: true
@@ -74,7 +74,7 @@ ren mcps oauths connect <mcp-id> --output json                # → alreadyConne
 ren mcps oauths session <mcp-id> <session-id> --output json   # poll until status: active
 ```
 
-## Build via MCP
+## Build via Ren MCP
 
 MCP tools take the `{ path, query, body }` envelope (params are the API field names):
 

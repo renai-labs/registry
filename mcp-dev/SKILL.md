@@ -68,7 +68,7 @@ Scope flows one way — narrower into broader. A `user` MCP can back an `org` ag
 
 Only when the registry has nothing in the neighborhood. `--name` and `--mcp-server-url` (a URL) are required; `authConfig` is nested, so pass it via `--body`.
 
-### Via CLI
+### Via Ren CLI
 
 ```
 ren mcps create \
@@ -83,7 +83,7 @@ ren mcps create \
 - `--scope` defaults to `org` — pass `--scope user` for a private build.
 - The slug is generated from the name; the slug drives the env-var name the credential must match (see Runtime behavior above).
 
-### Via MCP
+### Via Ren MCP
 
 ```
 mcp__ren__mcp_create {
