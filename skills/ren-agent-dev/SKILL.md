@@ -72,7 +72,8 @@ mcp__ren__agent_search         { "body": { "query": "…", "sources": ["user","o
 
 ## Choosing the model
 
-Pull the catalog with `ren models list --output json` and offer the user three picks across the price/capability range — heavy, balanced, light — instead of choosing silently. Suggested defaults: **Claude Opus 4.7** for heavy work, **Claude Sonnet 4.6** balanced, **Claude Haiku 4.5** for light/cheap. Enrich each with `$/M input` + `$/M output` from the provider's public pricing. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
+**Do not pick a model silently. Stop and ask the user before creating the agent.**
+Run `ren models list --output json` to get the live catalog — Ren supports models from many providers; the full list is always in the catalog. From that list, surface three options across the price/capability range (heavy / balanced / light) with a one-line trade-off each. Suggested defaults: **Claude Opus 4.7** for heavy work, **Claude Sonnet 4.6** balanced, **Claude Haiku 4.5** for light/cheap. Enrich each with `$/M input` + `$/M output` from the provider's public pricing. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
 
 ## Easy to miss
 

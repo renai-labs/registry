@@ -60,11 +60,16 @@ Decide how you'll drive the Ren onboarding:
 Authenticate (non-blocking device flow):
 
 ```
-ren init --device-start --output json    # → verificationUrl + userCode
+ren init --device-start --output json    # → { verificationUrl, userCode }
+```
+
+Parse the JSON. **Before doing anything else**, show the user: `"Open this link and enter the code: <verificationUrl> — code: <userCode>"`. Wait for acknowledgment, then start polling:
+
+```
 ren init --device-poll  --wait 25 --output json
 ```
 
-`already-signed-in` → skip ahead. Otherwise hand the URL+code in one sentence, then loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart). Once signed in, list both pod scopes:
+`already-signed-in` → skip ahead. Otherwise loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL). Once signed in, list both pod scopes:
 
 ```
 ren pods list --scope user --output json   # private pod - where you'll build
@@ -81,16 +86,20 @@ Pull the user's memory before any proposal: host's memory (Claude Code auto-memo
 
 Speak their language first. Identify the pattern of problems they solve and the recurring pains. The translation comes after you understand the shape of the work.
 
-## 3. Intake - read intent, pick a mode
+## 3. Intake
 
-Read the user from §2 and infer which mode fits. If it's unclear, surface the spectrum as a choice — but don't make it a rigid script. Default is **Personalised agent** when you have enough signal.
+Two questions, in order. Don't skip either.
+
+### Q1 - Intent (always ask)
+
+Ask what brought them here — don't assume from memory alone - they are just for reference. Use memory from §2 to frame the question aligned their way. Their answer buckets into one of three modes:
 
 
-| Mode                   | When                                                                              | What you do                                                                                                                                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tour**               | User is exploring, no clear pain yet, or explicitly wants to understand Ren first | No build. Walk through the build chain (§4), the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off into the default Ren session if they want something live. |
-| **Quick demo**         | User wants to see the flow before committing, or time is short                    | One agent, one skill, one model — universal starter (inbox summary, calendar digest, meeting-notes → actions). Skip cron and stores.                                                                       |
-| **Personalised agent** | Clear recurring pain, enough context from memory read — **default**               | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                                                             |
+| Mode                   | Signal from their answer                                        | What you do                                                                                                                                                                   |
+| ---------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tour**               | Exploring, no clear pain, wants to understand Ren first         | No build. Walk through the build chain (§4), the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off if they want something live. |
+| **Quick demo**         | Wants to see the flow before committing, or time is short       | One agent, one skill, one model — universal starter (inbox summary, calendar digest, meeting-notes → actions). Skip cron and stores.                                          |
+| **Personalised agent** | Has a recurring pain or concrete thing to offload — **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                                |
 
 
 **One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one — surface the rest in the closing nudges.
@@ -143,10 +152,10 @@ ren projects     list --pod-id <pod-id> --output json
 
 Primitives in order: skills → MCPs → credentials → agent → stores → project → trigger → session. Load each dev skill as you reach its step.
 
-1. **Skills** → [[ren-skill-dev]] - reusable capabilities the agent loads on demand. Reuse from registry → fork → author.
-2. **MCPs** → [[ren-mcp-dev]] - third-party tool surfaces. Search registry first; defer auth to step 3.
+1. **Skills** → [[ren-skill-dev]] - reusable capabilities the agent loads on demand. Load the skill and run `ren skills search` before concluding nothing exists — `ren skills list` shows only your own items, not the registry.
+2. **MCPs** → [[ren-mcp-dev]] - third-party tool surfaces. Load the skill and run `ren mcps search` before concluding nothing exists — `ren mcps list` shows only your own items, not the registry.
 3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP from 1–2 needs auth. Add into the **existing default vault** (`isDefault: true`). Can be wired before *or* after the chat opens - skip for speed if the agent can still demonstrate something useful.
-4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Surface three model picks across heavy/balanced/light.
+4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Follow the "Choosing the model" section in that skill — model selection is a required user decision before creation.
 5. **Stores** → [[ren-file-memory-store-dev]] - **default: attach the existing default file/memory stores to the fresh project.** Create new only if the agent's learnings should stay isolated (memory) or its docs are agent-specific (file).
 6. **Project** → [[ren-project-dev]] - **always a fresh project** in the private pod. Attach the agent as `primary`, attach the stores from step 5. (Inherits scope from the pod.)
 7. **Trigger** (optional) → [[ren-trigger-dev]] - cron schedule.
