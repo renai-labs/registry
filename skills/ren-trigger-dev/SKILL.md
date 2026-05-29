@@ -1,11 +1,11 @@
 ---
-name: trigger-dev
+name: ren-trigger-dev
 description: Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.
 ---
 
 # Trigger Dev
 
-A trigger runs a project's **primary** agent without anyone manually starting a session. It's pinned to a `projectAgent` (the agent's attachment to a project, id prefix `pra_`), so the project must already have a primary agent attached (see [[project-dev]]).
+A trigger runs a project's **primary** agent without anyone manually starting a session. It's pinned to a `projectAgent` (the agent's attachment to a project, id prefix `pra_`), so the project must already have a primary agent attached (see [[ren-project-dev]]).
 
 Today only **cron** triggers are in scope (trigger id prefix `ctrg_`) — fire on a schedule with a fixed input message.
 
@@ -15,7 +15,7 @@ A trigger opens a fresh session against the project's primary agent on each fire
 
 ## Scope
 
-A trigger lives inside a project and **inherits its scope** as a placement — but the CLI/MCP still needs `--scope` to know **where to look**. **The flag is optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. If the parent project is in a user-private pod, every command (create, read, update, list, delete) needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP). **If a valid project/trigger id 404s, missing `--scope user` is the first thing to check.**
+See [[ren-scope]]. A trigger inherits its project's scope — if the project is in a user-private pod, every command needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP).
 
 ## Build via Ren CLI
 
@@ -31,7 +31,7 @@ ren triggers create \
   --output json
 ```
 
-`--project-id`, `--project-agent-id`, `--schedule`, and `--input-message` are required. Add `--scope user` when the parent project is in a user-private pod (drop it for org). Update needs `--project-id` too (it's the auth-scope key, not a change field):
+`--project-id`, `--project-agent-id`, `--schedule`, and `--input-message` are required. Update needs `--project-id` too (it's the auth-scope key, not a change field):
 
 ```
 ren triggers update <trigger-id> --project-id prj_… --scope user --is-enabled true
@@ -60,4 +60,4 @@ mcp__ren__trigger_update { "query": { "scope": "user" },
 ## Next steps
 
 - **Verify a fire** via `ren sessions list --project-id prj_…` after the first scheduled run — the trigger spawns a real session you can inspect.
-- **Make the agent better at the recurring task** based on what the dry-run surfaced — update its prompt or skills ([[agent-dev]]) before enabling.
+- **Make the agent better at the recurring task** based on what the dry-run surfaced — update its prompt or skills ([[ren-agent-dev]]) before enabling.

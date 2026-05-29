@@ -1,5 +1,5 @@
 ---
-name: vaults-credentials-dev
+name: ren-vaults-credentials-dev
 description: Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.
 ---
 
@@ -13,20 +13,18 @@ A credential becomes useful when its vault is attached to a pod. Once attached, 
 
 ## Scope — vaults are scoped, credentials inherit
 
-A vault is either **user** (private to you) or **org** (shared across the org); vaults have no registry tier. `--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default; never write `--scope org` or `--scope registry`. A credential has **no scope of its own**: it lives in a vault and inherits the vault's. A secret's reach is exactly its vault's reach.
+See [[ren-scope]]. Vaults have no registry tier — only **user** (private to you) or **org** (shared across the org). A credential has no scope of its own: it lives in a vault and inherits the vault's scope. The personal pod's default vault is user-scope — `ren vaults list --scope user` and look for `isDefault: true`.
 
-Scope applies to **every** vault command — list, get, create, update — and every credential or oauth sub-op on a user vault inherits the same lens (`credentials create`, `mcps oauths connect/session`, `credentials oauths start/session`). If the vault lives in your user namespace, every command needs `--scope user`. **The personal pod's default vault is `user`-scope, so `ren vaults list` to find `isDefault: true` needs `--scope user`. If a valid id 404s, missing `--scope user` is the first thing to check.**
-
-Scope narrows one way when you attach a vault to a pod (narrower into broader):
+Vault attachment also follows scope direction (narrower into broader):
 
 - A **user vault** attaches **only to a user-private pod**.
 - An **org vault** attaches to **a user-private pod or an org pod**.
 
-You cannot pull a user vault into an org pod — the pod can't reach down into a narrower scope. Match scopes before attaching (see [[pod-dev]]).
+You cannot pull a user vault into an org pod. Match scopes before attaching (see [[ren-pod-dev]]).
 
 ## How resolution works (the short version)
 
-A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see [[mcp-dev]] Runtime behavior). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
+A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see [[ren-mcp-dev]] Runtime behavior). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
 
 OAuth tokens refresh lazily and server-side. For the refresh details (timing, what to do when the refresh token itself expires), see `references/oauth-refresh.md`.
 
@@ -36,7 +34,7 @@ OAuth tokens refresh lazily and server-side. For the refresh details (timing, wh
 
 Don't hand-build these — the token is minted by the provider through a browser consent flow, and Ren materializes the credential **server-side** from the callback. You never see or paste the token; you only drive **start → hand off the URL → poll**.
 
-OAuth requires an MCP already defined for the provider. If you don't have one, start in [[mcp-dev]] (the registry usually has it).
+OAuth requires an MCP already defined for the provider. If you don't have one, start in [[ren-mcp-dev]] (the registry usually has it).
 
 1. **Connect.** `ren mcps oauths connect <mcp-id> --output json` resolves or creates the default vault, then returns a discriminated result:
    - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
@@ -51,14 +49,14 @@ To target a **specific** (non-default) vault instead, swap the first call for `r
 
 ### API key / static token
 
-The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list --scope user` and look for `isDefault: true` (the personal default vault is user-scope).
+The credential lives inside a vault, so create needs `<vault-id>`. The personal pod has a default vault provisioned and attached already — `ren vaults list --scope user` and look for `isDefault: true`.
 
 ## Build via Ren CLI
 
 ```
-ren vaults list --scope user --output json                                # find isDefault: true (drop --scope for org vaults)
-ren vaults create --name "team-secrets" --scope user --is-default false   # only for a separate boundary
-ren credentials create <vault-id> --scope user --body @cred.json --output json   # match the vault's scope
+ren vaults list --scope user --output json
+ren vaults create --name "team-secrets" --scope user --is-default false
+ren credentials create <vault-id> --scope user --body @cred.json --output json
 ```
 
 `cred.json` (nested `auth` payload — must come via `--body @file`, not inline flags):
@@ -69,26 +67,24 @@ ren credentials create <vault-id> --scope user --body @cred.json --output json  
 
 `name` is the env-var the skill/MCP resolves by. `mcpId` is optional (target-match for an MCP).
 
-OAuth over CLI (add `--scope user` when the MCP is user-scope):
+OAuth over CLI:
 
 ```
-ren mcps oauths connect <mcp-id> --scope user --output json                # → alreadyConnected, or authorizationUrl + sessionId
-ren mcps oauths session <mcp-id> <session-id> --scope user --output json   # poll until status: active
+ren mcps oauths connect <mcp-id> --scope user --output json
+ren mcps oauths session <mcp-id> <session-id> --scope user --output json
 ```
 
 ## Build via Ren MCP
 
-MCP tools take the `{ path, query, body }` envelope (params are the API field names):
-
 ```
-mcp__ren__vault_list        { "query": { "scope": "user" } }                                              # omit for org vaults
+mcp__ren__vault_list        { "query": { "scope": "user" } }
 mcp__ren__vault_create      { "query": { "scope": "user" }, "body": { "name": "team-secrets", "isDefault": false } }
 mcp__ren__credential_create { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…" },
                               "body": { "name": "GITHUB_TOKEN", "mcpId": "mcp_…",
                                         "auth": { "type": "api_key", "value": "ghp_…" } } }
 
-mcp__ren__mcp_oauth_connect { "query": { "scope": "user" }, "path": { "id": "mcp_…" } }                          # → alreadyConnected | authorizationUrl + sessionId
-mcp__ren__mcp_oauth_session { "query": { "scope": "user" }, "path": { "id": "mcp_…", "sessionId": "…" } }        # poll until active
+mcp__ren__mcp_oauth_connect { "query": { "scope": "user" }, "path": { "id": "mcp_…" } }
+mcp__ren__mcp_oauth_session { "query": { "scope": "user" }, "path": { "id": "mcp_…", "sessionId": "…" } }
 # target a specific vault instead of the default:
 mcp__ren__credential_oauth_start   { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…" }, "body": { "mcpId": "mcp_…" } }
 mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "vaultId": "vlt_…", "sessionId": "…" } }
@@ -96,7 +92,7 @@ mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "va
 
 ## Gotchas
 
-- Never write credential-setup steps into a skill's SKILL.md — the skill assumes the env var is already present (see [[skill-dev]]).
+- Never write credential-setup steps into a skill's SKILL.md — the skill assumes the env var is already present (see [[ren-skill-dev]]).
 - The credential `name` must equal the skill's declared `requiredCredentials` entry, or the MCP's derived env-var name, or resolution misses and the env var is simply absent at runtime.
 - Match scopes before attaching: a user vault won't attach to an org pod.
 - OAuth tokens never pass through you — the provider callback stores them server-side. Your job is start + poll, not handling the secret.
@@ -105,6 +101,6 @@ mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "va
 
 A credential does nothing until its vault is attached to a pod that runs the agent.
 
-- **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[pod-dev]].
-- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[project-dev]] for the deep link.
+- **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[ren-pod-dev]].
+- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[ren-project-dev]] for the deep link.
 - **Add more credentials** to the same vault as you wire more skills/MCPs — one vault can back many.
