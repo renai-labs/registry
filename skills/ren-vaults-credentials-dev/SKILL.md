@@ -24,27 +24,29 @@ You cannot pull a user vault into an org pod. Match scopes before attaching (see
 
 ## How resolution works (the short version)
 
-A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_*` derived from the slug for an MCP — see [[ren-mcp-dev]] Runtime behavior). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
+A skill or MCP declares the env-var name it needs (`requiredCredentials` on a skill, `MCP_<SLUG>_`* derived from the slug for an MCP — see [[ren-mcp-dev]] Runtime behavior). At agent startup the pod walks its attached vaults in priority order and returns the **first match by name**, lower priority wins on conflict. The resolved value lands as an env var (skills, local MCPs) or as a request header (remote MCPs).
 
 OAuth tokens refresh lazily and server-side. For the refresh details (timing, what to do when the refresh token itself expires), see `references/oauth-refresh.md`.
 
 ## Two paths to a credential
 
-### OAuth (Linear, Gmail, Notion, …) - preferred
+### OAuth (Linear, Gmail, Notion, …)
 
-The entire flow runs server-side on Ren — you never see or paste the token. Here's what happens under the hood: Ren's server uses the MCP SDK to discover the provider's OAuth server and perform **dynamic client registration (DCR)**, which generates the `authorizationUrl`. After the user consents in their browser, the provider redirects to Ren's callback URL, where Ren exchanges the auth code for tokens and stores the credential in the vault. The token never passes through your agent.
+The whole flow runs server-side — you never see or paste the token. Ren uses the MCP SDK to discover the provider's OAuth server and do **dynamic client registration (DCR)**, which produces the `authorizationUrl`; after the user consents, the provider redirects to Ren's callback, which exchanges the code for tokens and stores the credential. Your job is start + poll, never the secret.
 
-**Prerequisite:** The MCP must already be defined. If the provider's OAuth server doesn't support DCR, the connect step fails with "Incompatible auth server" — use the Ren web app instead.
+**Prerequisite:** The MCP must already be defined. If the provider's OAuth server doesn't support DCR, the connect step fails with "Incompatible auth server" — stop immediately and route the user to the Ren web app. Do not retry over CLI; the result won't change.
+
+**Run connects one at a time.** Never start two OAuth connects concurrently — not even for different MCPs — and never fire a connect while another is still polling. Each connect mints its own authorization URL; running them in parallel (or letting a tool call get cancelled and retrying) leaves multiple live URLs, and the user can open a stale one whose provider-side proxy state is incomplete (the symptom is a provider callback erroring with "Missing redirect_uri"). Finish one connect through to `active` before starting the next.
 
 Pass `--scope user` so the owner context resolves the user-scope default vault. Without it, the org-scope vault is used.
 
 1. **Connect.** `ren mcps oauths connect <mcp-id> --scope user --output json` auto-resolves or creates the default vault for that scope, then returns a discriminated result:
-   - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
-   - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser. Some providers show a redirect confirmation page ("You will be redirected to…") before sending the callback — tell the user to click through it. Then poll immediately without waiting.
+  - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
+  - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser. Surface **exactly one** URL: if a prior connect call was cancelled or errored, its URL is dead — discard it and only ever hand out the URL from the latest successful connect. Some providers show a redirect confirmation page ("You will be redirected to…") before sending the callback — tell the user to click through it. Then poll immediately without waiting.
 2. **Poll the session** until it leaves `pending`:
-   ```
+  ```
    ren mcps oauths session <mcp-id> <session-id> --scope user --output json
-   ```
+  ```
    `status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s; don't yield to the user between polls once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
 
 To target a **specific** (non-default) vault instead, swap the first call for `ren credentials oauths start <vault-id> --body '{"mcpId":"mcp_…"}'` (same return shape, plus `state`) and poll `ren credentials oauths session <vault-id> <session-id>`.
@@ -67,14 +69,7 @@ ren credentials create <vault-id> --scope user --body @cred.json --output json
 { "name": "GITHUB_TOKEN", "mcpId": "mcp_…", "label": "GitHub PAT", "auth": { "type": "api_key", "value": "ghp_…" } }
 ```
 
-`name` is the env-var the skill/MCP resolves by. `mcpId` is optional (target-match for an MCP).
-
-OAuth over CLI:
-
-```
-ren mcps oauths connect <mcp-id> --scope user --output json
-ren mcps oauths session <mcp-id> <session-id> --scope user --output json
-```
+`name` is the env-var the skill/MCP resolves by. `mcpId` is optional (target-match for an MCP). For OAuth over CLI, use the connect/session commands in the OAuth section above.
 
 ## Build via Ren MCP
 
@@ -97,7 +92,6 @@ mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "va
 - Never write credential-setup steps into a skill's SKILL.md — the skill assumes the env var is already present (see [[ren-skill-dev]]).
 - The credential `name` must equal the skill's declared `requiredCredentials` entry, or the MCP's derived env-var name, or resolution misses and the env var is simply absent at runtime.
 - Match scopes before attaching: a user vault won't attach to an org pod.
-- OAuth tokens never pass through you — the provider callback stores them server-side. Your job is start + poll, not handling the secret.
 
 ## Next steps
 
