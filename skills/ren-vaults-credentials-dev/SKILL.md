@@ -34,15 +34,13 @@ OAuth tokens refresh lazily and server-side. For the refresh details (timing, wh
 
 The entire flow runs server-side on Ren — you never see or paste the token. Here's what happens under the hood: Ren's server uses the MCP SDK to discover the provider's OAuth server and perform **dynamic client registration (DCR)**, which generates the `authorizationUrl`. After the user consents in their browser, the provider redirects to Ren's callback URL, where Ren exchanges the auth code for tokens and stores the credential in the vault. The token never passes through your agent.
 
-**Prerequisite:** The MCP must already be defined. Two failure modes to know:
-- **"Incompatible auth server"** — the provider's OAuth server doesn't support dynamic client registration (DCR). Use the Ren web app instead.
-- **Redirect/callback error** — the provider's MCP OAuth proxy doesn't forward to localhost redirect URIs (common in local dev). In production (`api.renai.build`) this works. Locally, use the Ren web app at `https://renai.build` to connect the credential.
+**Prerequisite:** The MCP must already be defined. If the provider's OAuth server doesn't support DCR, the connect step fails with "Incompatible auth server" — use the Ren web app instead.
 
 Pass `--scope user` so the owner context resolves the user-scope default vault. Without it, the org-scope vault is used.
 
 1. **Connect.** `ren mcps oauths connect <mcp-id> --scope user --output json` auto-resolves or creates the default vault for that scope, then returns a discriminated result:
    - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
-   - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser, then poll immediately without waiting.
+   - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser. Some providers show a redirect confirmation page ("You will be redirected to…") before sending the callback — tell the user to click through it. Then poll immediately without waiting.
 2. **Poll the session** until it leaves `pending`:
    ```
    ren mcps oauths session <mcp-id> <session-id> --scope user --output json
