@@ -32,16 +32,18 @@ OAuth tokens refresh lazily and server-side. For the refresh details (timing, wh
 
 ### OAuth (Linear, Gmail, Notion, …) - preferred
 
-Don't hand-build these — the token is minted by the provider through a browser consent flow, and Ren materializes the credential **server-side** from the callback. You never see or paste the token; you only drive **start → hand off the URL → poll**.
+The entire flow runs server-side on Ren — you never see or paste the token. Here's what happens under the hood: Ren's server uses the MCP SDK to discover the provider's OAuth server and perform **dynamic client registration (DCR)**, which generates the `authorizationUrl`. After the user consents in their browser, the provider redirects to Ren's callback URL, where Ren exchanges the auth code for tokens and stores the credential in the vault. The token never passes through your agent.
 
-OAuth requires an MCP already defined for the provider. If you don't have one, start in [[ren-mcp-dev]] (the registry usually has it).
+**Prerequisite:** The MCP must already be defined. If the provider's OAuth server doesn't support DCR, the connect step fails with "Incompatible auth server" — in that case the user must connect via the Ren web app instead.
 
-1. **Connect.** `ren mcps oauths connect <mcp-id> --output json` resolves or creates the default vault, then returns a discriminated result:
+Pass `--scope user` so the owner context resolves the user-scope default vault. Without it, the org-scope vault is used.
+
+1. **Connect.** `ren mcps oauths connect <mcp-id> --scope user --output json` auto-resolves or creates the default vault for that scope, then returns a discriminated result:
    - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
-   - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser, then poll.
+   - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser, then poll immediately without waiting.
 2. **Poll the session** until it leaves `pending`:
    ```
-   ren mcps oauths session <mcp-id> <session-id> --output json
+   ren mcps oauths session <mcp-id> <session-id> --scope user --output json
    ```
    `status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s; don't yield to the user between polls once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
 

@@ -69,7 +69,7 @@ Parse the JSON. **Before doing anything else**, show the user: `"Open this link 
 ren init --device-poll  --wait 25 --output json
 ```
 
-`already-signed-in` → skip ahead. Otherwise loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL). Once signed in, list both pod scopes:
+`already-signed-in` → skip ahead. Otherwise **start polling immediately — do not wait for the user to confirm they opened the URL**. Loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL). Once signed in, list both pod scopes:
 
 ```
 ren pods list --scope user --output json   # private pod - where you'll build
@@ -92,7 +92,7 @@ Two questions, in order. Don't skip either.
 
 ### Q1 - Intent (always ask)
 
-Ask what brought them here — don't assume from memory alone - they are just for reference. Use memory from §2 to frame the question aligned their way. Their answer buckets into one of three modes:
+**Use the native question tool** — only fallback to plain text if theres no tool. Ask what they would like to do today; use memory from §2 to frame the question in their language. Their answer buckets into one of three modes:
 
 
 | Mode                   | Signal from their answer                                        | What you do                                                                                                                                                                   |
@@ -106,7 +106,7 @@ Ask what brought them here — don't assume from memory alone - they are just fo
 
 ### Q2 - Shape the requirement (skip if Tour; light if Quick demo)
 
-Ask the diagnostic, phrased for the camp:
+**Use the native question tool.** Ask the diagnostic, phrased for the camp:
 
 - **Builder** → *"What does your local agent fail at today?"*
 - **Consumer** → *"What work would you offload to the cloud if the agent actually knew your business?"*
@@ -152,10 +152,10 @@ ren projects     list --pod-id <pod-id> --output json
 
 Primitives in order: skills → MCPs → credentials → agent → stores → project → trigger → session. Load each dev skill as you reach its step.
 
-1. **Skills** → [[ren-skill-dev]] - reusable capabilities the agent loads on demand. Load the skill and run `ren skills search` before concluding nothing exists — `ren skills list` shows only your own items, not the registry.
-2. **MCPs** → [[ren-mcp-dev]] - third-party tool surfaces. Load the skill and run `ren mcps search` before concluding nothing exists — `ren mcps list` shows only your own items, not the registry.
+1. **Skills** → load [[ren-skill-dev]] first, then follow its search instructions. `ren skills list` shows only your own items — only `ren skills search --sources user org registry` reaches the registry.
+2. **MCPs** → load [[ren-mcp-dev]] first, then follow its search instructions. `ren mcps list` shows only your own items — only `ren mcps search --sources user org registry` reaches the registry.
 3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP from 1–2 needs auth. Add into the **existing default vault** (`isDefault: true`). Can be wired before *or* after the chat opens - skip for speed if the agent can still demonstrate something useful.
-4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Follow the "Choosing the model" section in that skill — model selection is a required user decision before creation.
+4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Follow the "Choosing the model" section in that skill — model selection is a required user decision before creation. Clean up any temporary build files (e.g. `/tmp/<build-dir>`) after the agent is created.
 5. **Stores** → [[ren-file-memory-store-dev]] - **default: attach the existing default file/memory stores to the fresh project.** Create new only if the agent's learnings should stay isolated (memory) or its docs are agent-specific (file).
 6. **Project** → [[ren-project-dev]] - **always a fresh project** in the private pod. Attach the agent as `primary`, attach the stores from step 5. (Inherits scope from the pod.)
 7. **Trigger** (optional) → [[ren-trigger-dev]] - cron schedule.
@@ -175,9 +175,9 @@ The user's camp tells you which register. A builder gets value from "forking skl
 
 ## 5. Credentials - the decision (when you hit step 3 of the chain)
 
-Ask once: *connect now, or start incomplete and wire from inside the chat?* Default is **connect now**. See [[ren-vaults-credentials-dev]] for the full OAuth and API key flows.
+**Do not skip this step.** If any skill or MCP needs auth, stop and ask using the **native question tool**: *connect now, or start incomplete and wire from inside the chat?* Default is **connect now**. See [[ren-vaults-credentials-dev]] for the full OAuth and API key flows — including the DCR requirement and web-app fallback when a provider's OAuth server doesn't support it.
 
-**Skip** → create the agent anyway; the user learns the missing-auth shape by doing. Sometimes right for an impatient user.
+**Skip** → only if the user explicitly wants speed and accepts the agent will fail on the auth step. Make the gap visible before proceeding.
 
 Native integrations (Slack, GitHub) and team-level installs are org-admin, live in the web app — surface as a "next session" item.
 
@@ -189,8 +189,8 @@ Land them in a chat that loads.
 2. **Session** - `session.create` is SDK/web-app only, not in CLI/MCP. If your transport wraps the SDK, create the session and deep-link it. Otherwise hand the project page and tell them to click "New session" honestly.
 3. **URL** -
   ```
-   ${REN_APP_URL}/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
-   ${REN_APP_URL}/pods/<podId>/projects/<projectId>                        # project page
+   ${REN_APP_URL}/app/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
+   ${REN_APP_URL}/app/pods/<podId>/projects/<projectId>                        # project page
   ```
 
 Pick 1–2 nudges contextual to what they just built. The point is concrete reasons to come back. One closing sentence in their register — don't congratulate.
