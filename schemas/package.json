@@ -1,28 +1,22 @@
 {
-  "name": "@renai-labs/registry-cli",
+  "name": "@renai-labs/registry-schemas",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "bin": {
-    "ren-registry": "./src/index.ts"
+  "exports": {
+    ".": "./src/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "bun test"
   },
   "dependencies": {
-    "@renai-labs/registry-schemas": "workspace:*",
     "@renai-labs/sdk": "catalog:",
-    "commander": "catalog:",
-    "gray-matter": "catalog:",
-    "picocolors": "catalog:",
-    "semver": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@tsconfig/bun": "catalog:",
     "@types/bun": "catalog:",
-    "@types/semver": "catalog:",
     "typescript": "catalog:"
   }
 }
