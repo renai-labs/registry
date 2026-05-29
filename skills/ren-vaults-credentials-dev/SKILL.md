@@ -34,7 +34,9 @@ OAuth tokens refresh lazily and server-side. For the refresh details (timing, wh
 
 The entire flow runs server-side on Ren — you never see or paste the token. Here's what happens under the hood: Ren's server uses the MCP SDK to discover the provider's OAuth server and perform **dynamic client registration (DCR)**, which generates the `authorizationUrl`. After the user consents in their browser, the provider redirects to Ren's callback URL, where Ren exchanges the auth code for tokens and stores the credential in the vault. The token never passes through your agent.
 
-**Prerequisite:** The MCP must already be defined. If the provider's OAuth server doesn't support DCR, the connect step fails with "Incompatible auth server" — in that case the user must connect via the Ren web app instead.
+**Prerequisite:** The MCP must already be defined. Two failure modes to know:
+- **"Incompatible auth server"** — the provider's OAuth server doesn't support dynamic client registration (DCR). Use the Ren web app instead.
+- **Redirect/callback error** — the provider's MCP OAuth proxy doesn't forward to localhost redirect URIs (common in local dev). In production (`api.renai.build`) this works. Locally, use the Ren web app at `https://renai.build` to connect the credential.
 
 Pass `--scope user` so the owner context resolves the user-scope default vault. Without it, the org-scope vault is used.
 
