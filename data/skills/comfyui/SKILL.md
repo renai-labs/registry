@@ -1,10 +1,12 @@
 ---
 name: comfyui
-description: "Generate images, video, and audio with ComfyUI on Comfy Cloud — submit workflows, inject parameters, monitor jobs, and download outputs via the hosted REST/WebSocket API."
-version: 5.0.0
+description: >-
+  Generate images, video, and audio with ComfyUI on Comfy Cloud — submit
+  workflows, inject parameters, monitor jobs, and download outputs via the
+  hosted REST/WebSocket API.
 license: MIT
-author: kshitijk4poor, alt-glitch
-source: https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui
+author: 'kshitijk4poor, alt-glitch'
+source: 'https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui'
 ---
 
 # ComfyUI (Comfy Cloud)

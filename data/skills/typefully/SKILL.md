@@ -1,10 +1,12 @@
 ---
 name: typefully
-description: "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon."
-version: "0.0.1"
+description: >-
+  Create, schedule, and manage social media posts via Typefully. Use when asked
+  to draft, schedule, post, or check tweets, posts, threads, or social media
+  content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.
 license: MIT
-author: "Ren Labs"
-source: "https://typefully.com/docs/api"
+author: Ren Labs
+source: 'https://typefully.com/docs/api'
 ---
 
 # Typefully

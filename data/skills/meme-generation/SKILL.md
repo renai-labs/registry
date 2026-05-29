@@ -1,10 +1,12 @@
 ---
 name: meme-generation
-description: Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.
-version: 1.0.0
+description: >-
+  Generate real meme images by picking a template and overlaying text with
+  Pillow. Produces actual .png meme files.
 license: MIT
 author: adanaleycio
-source: https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation
+source: >-
+  https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation
 ---
 
 # Meme Generation

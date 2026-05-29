@@ -3,13 +3,13 @@ name: fitness-nutrition
 description: >
   Gym workout planner and nutrition tracker. Search 690+ exercises by muscle,
   equipment, or category via wger. Look up macros and calories for 380,000+
-  foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro
-  splits, and body fat — pure Python, no pip installs. Built for anyone
-  chasing gains, cutting weight, or just trying to eat better.
-version: 1.0.0
+  foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro splits,
+  and body fat — pure Python, no pip installs. Built for anyone chasing gains,
+  cutting weight, or just trying to eat better.
 license: MIT
 author: haileymarshall
-source: https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition
+source: >-
+  https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition
 ---
 
 # Fitness & Nutrition

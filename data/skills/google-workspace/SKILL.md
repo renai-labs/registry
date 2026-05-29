@@ -1,7 +1,8 @@
 ---
 name: google-workspace
-description: "Gmail, Calendar, Drive, Docs, Sheets via the Google Python client. Reads a vault-issued OAuth access token from the environment."
-version: 1.0.0
+description: >-
+  Gmail, Calendar, Drive, Docs, Sheets via the Google Python client. Reads a
+  vault-issued OAuth access token from the environment.
 license: MIT
 author: Ren Labs
 ---

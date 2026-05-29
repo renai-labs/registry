@@ -1,10 +1,13 @@
 ---
 name: shopify
-description: "Shopify Admin & Storefront GraphQL APIs via curl. Manage products, orders, customers, inventory, metafields, bulk operations, and webhooks. Use when working with a Shopify store programmatically — listing products, updating inventory, pulling orders, managing customers, or setting metafields."
-version: "1.0.0"
+description: >-
+  Shopify Admin & Storefront GraphQL APIs via curl. Manage products, orders,
+  customers, inventory, metafields, bulk operations, and webhooks. Use when
+  working with a Shopify store programmatically — listing products, updating
+  inventory, pulling orders, managing customers, or setting metafields.
 license: MIT
-author: "Ren Labs"
-source: "https://shopify.dev/docs/api/admin-graphql"
+author: Ren Labs
+source: 'https://shopify.dev/docs/api/admin-graphql'
 ---
 
 # Shopify — Admin & Storefront GraphQL APIs

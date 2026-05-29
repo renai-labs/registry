@@ -1,10 +1,13 @@
 ---
 name: popular-web-designs
-description: 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS reference templates. Use when generating HTML/CSS in the visual style of a known brand — landing pages, marketing sites, dashboards, documentation.
-version: 1.0.0
+description: >-
+  54 real design systems (Stripe, Linear, Vercel) as HTML/CSS reference
+  templates. Use when generating HTML/CSS in the visual style of a known brand —
+  landing pages, marketing sites, dashboards, documentation.
 license: MIT
 author: Teknium
-source: https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs
+source: >-
+  https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs
 ---
 
 # Popular Web Designs

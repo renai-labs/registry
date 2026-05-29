@@ -1,7 +1,6 @@
 ---
 name: xurl
-description: "X/Twitter via xurl CLI: post, search, DM, media, v2 API."
-version: 1.0.0
+description: 'X/Twitter via xurl CLI: post, search, DM, media, v2 API.'
 license: MIT
 author: Ren Labs
 ---
