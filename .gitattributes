@@ -1,0 +1,5 @@
+skills/** linguist-generated=true
+plugins/ren/skills/** linguist-generated=true
+data/skills.json linguist-generated=true
+data/agents.json linguist-generated=true
+data/mcp_servers.json linguist-generated=true
