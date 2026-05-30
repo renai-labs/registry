@@ -1,5 +1,5 @@
 ---
-name: skill-dev
+name: ren-skill-dev
 description: Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.
 ---
 
@@ -11,15 +11,13 @@ Skills are version-controlled - every version is immutable; updating means publi
 
 ## Runtime behavior
 
-By default an agent attaches to a skill's **latest** version (`skillVersionId` omitted on the agent's `skills: [{ skillId }]` entry) and **auto-rolls-forward**: a new published version reaches every unpinned agent without a restart. Pin a specific `skillVersionId` only when you need to freeze a snapshot for that agent. `scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files.
+By default an agent attaches to a skill's **latest** version (`skillVersionId` omitted on the agent's `skills: [{ skillId }]` entry) and **auto-rolls-forward**: a new published version reaches every unpinned agent without a restart. `scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files.
 
 `requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. The platform resolves them from the pod's vault stack and makes them available as env vars; an unresolved one is simply absent — the skill still loads, then fails when it reaches for the missing variable. The declaration is advisory: it surfaces a missing-auth prompt to the user, not a hard gate.
 
 ## Scope
 
-`--scope` (CLI) / `query.scope` (MCP) is **optional and the only value you ever pass is `user`** (private namespace) — omit it entirely for the `org` default (visible across the org); never write `--scope org` or `--scope registry`. Scope narrows one way: a `user` skill can back a `user` or `org` agent, an `org` skill can back its own org, and a `registry` skill can back anything — but you can't pull a narrower-scope skill into a broader-scope publication.
-
-Scope applies to **every** skill command — create, get, update, `versions create`, `versions data`, `copy`. If the skill lives in your user namespace, every command needs `--scope user`. **If a valid skill id 404s, missing `--scope user` is the first thing to check.** `search` is the exception — it uses `--sources user org registry` (multi-pick across tiers), not `--scope`.
+Scoping follows the Ren standard — see [[ren-scope]]. Key constraint: a `user` skill can back a `user` or `org` agent, but you can't pull a narrower-scope skill into a broader-scope publication.
 
 ## 1. Reuse before authoring - three tiers, in order
 
@@ -27,11 +25,11 @@ Scope applies to **every** skill command — create, get, update, `versions crea
 2. **Fork** a close-enough registry skill into your scope and edit it - the baked-in domain knowledge is worth keeping.
 3. **Author from scratch** only when neither fits.
 
-Why search first: registry skills are battle-tested — they encode what already works against the real tool surface, so you don't reason a workflow from scratch and you inherit current, correct details (commands, schemas, gotchas) instead of guessing them. Authoring is the last resort.
+Registry skills encode battle-tested commands, schemas, and gotchas — inherit them rather than reasoning from scratch.
 
 ```
 ren skills search --query "<topic>" --sources user org registry --output json
-ren skills get <id> --scope user --output json                                 # drop --scope for org / registry skills
+ren skills get <id> --scope user --output json
 ren skills versions data <id> <version> --scope user --format presigned        # download bundled files before deciding
 ```
 
@@ -61,7 +59,7 @@ New version replaces the full folder (no patch flow):
 ren skills versions create skl_… /abs/path/to/my-skill --scope user --version patch --release-notes "…"
 ```
 
-`--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> --scope user [--name …] [--description …]` (drop `--scope` for org skills).
+`--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> --scope user [--name …] [--description …]`.
 
 ## 3. Build via Ren MCP
 
@@ -127,6 +125,6 @@ Ship → use → tighten. Debug loop: read a real session's messages, narrow to 
 
 A skill does nothing until an agent uses it inside a project.
 
-- **Attach to an agent** — add the `skillId` to the agent version's `skills: [{ skillId }]` list. Omit `skillVersionId` to track the latest (auto-roll-forward); pin it only to freeze. Deps are full-replace per-version, so `ren agents get` first and pass the union. See [[agent-dev]].
-- **Wire its credentials** if the skill declares `requiredCredentials`. See [[vaults-credentials-dev]].
-- **Put the agent in a project** so a session can actually call the skill. See [[project-dev]].
+- **Attach to an agent** — add the `skillId` to the agent version's `skills: [{ skillId }]` list. See [[ren-agent-dev]] for attach details and the full-replace dep pattern.
+- **Wire its credentials** if the skill declares `requiredCredentials`. See [[ren-vaults-credentials-dev]].
+- **Put the agent in a project** so a session can actually call the skill. See [[ren-project-dev]].
