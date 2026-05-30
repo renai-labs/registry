@@ -462,14 +462,37 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.1",
-    "contentHash": "c61bd18dc076e7fdcee10d3b24870a781f050cb4246c7dc2546f265f677c8719",
+    "currentVersion": "1.1.2",
+    "contentHash": "942bfb88203cc0e827cb600fb581a5af8f6b338fcd07c26a9647664de01c684d",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "c61bd18dc076e7fdcee10d3b24870a781f050cb4246c7dc2546f265f677c8719"
+      },
+      {
+        "version": "1.1.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "942bfb88203cc0e827cb600fb581a5af8f6b338fcd07c26a9647664de01c684d"
+      }
+    ]
+  },
+  {
+    "slug": "ren-skill-migrator",
+    "name": "ren-skill-migrator",
+    "description": "Copy an existing community skill (local folder or git URL) into a new destination folder and apply only the edits needed to pass the ren registry spec — rewrites SKILL.md frontmatter to the agentskills.io shape, strips credential / MCP / file / memory setup steps, and generalizes assistant-specific identity references. A dumb copy plus compatibility fixes; it does not author, optimize, or publish. Use when the user wants to adopt a third-party SKILL.md as a ren skill without rewriting it.",
+    "license": null,
+    "metadata": null,
+    "currentVersion": "0.0.1",
+    "contentHash": "1a034a3a39a6b4ef24ce072e0da5ae3e445c54c197a6f3c0b01c774ec756e56e",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "1a034a3a39a6b4ef24ce072e0da5ae3e445c54c197a6f3c0b01c774ec756e56e"
       }
     ]
   },

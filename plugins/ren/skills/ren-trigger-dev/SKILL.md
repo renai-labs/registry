@@ -1,6 +1,9 @@
 ---
 name: ren-trigger-dev
-description: Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.
+description: >-
+  Make a project run on its own via a cron trigger - schedule the project's
+  primary agent on a fixed cadence with a fixed input message. Use when the user
+  wants an agent to fire on a schedule.
 ---
 
 # Trigger Dev

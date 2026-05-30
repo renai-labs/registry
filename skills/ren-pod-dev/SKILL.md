@@ -1,6 +1,9 @@
 ---
 name: ren-pod-dev
-description: Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.
+description: >-
+  Inspect and manage pods - the durable sandbox boundary that runs agents. Use
+  when the user wants to find a pod, check or wake its sandbox, add members, or
+  attach vaults. Read this before any build, to know where the work will live.
 ---
 
 # Pod Dev

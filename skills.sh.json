@@ -9,6 +9,7 @@
         "ren-project-dev",
         "ren-agent-dev",
         "ren-skill-dev",
+        "ren-skill-migrator",
         "ren-mcp-dev",
         "ren-trigger-dev",
         "ren-vaults-credentials-dev",

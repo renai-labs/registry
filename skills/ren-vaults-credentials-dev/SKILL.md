@@ -1,6 +1,10 @@
 ---
 name: ren-vaults-credentials-dev
-description: Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.
+description: >-
+  Manage vaults and credentials - the encrypted secret store that backs skills
+  and MCPs. Use when a skill or MCP needs an API key, token, or OAuth
+  credential, when running an OAuth connect flow, or when attaching a vault to a
+  pod.
 ---
 
 # Vaults & Credentials Dev

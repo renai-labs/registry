@@ -1,6 +1,10 @@
 ---
 name: ren-mcp-dev
-description: "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits."
+description: >-
+  Discover and define MCP servers - the third-party tool surfaces an agent can
+  call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool:
+  reach for Ren's registry MCPs first, and register a custom remote MCP only
+  when nothing fits.
 ---
 
 # MCP Dev
