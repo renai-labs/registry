@@ -14,13 +14,24 @@ A skill can ship `scripts/`, `references/`, and `templates/` alongside SKILL.md.
 
 For tasks where the *what* is fixed and the *how* shouldn't drift across runs.
 
-- Limited to what the sandbox image ships: **Bash/shell, Node.js, or Bun (TypeScript/JS)**. There is **no Python** runtime (nor Ruby, Deno, Go) — a `.py` script won't execute. Pick one per script.
-- Tests live in `scripts/tests/`. Use red/green/refactor TDD for non-trivial scripts.
-- Handle errors explicitly. Prefer JSON output to plain text.
-- Document constants at the top.
-- Keep tests fast (< 1s each). Mock external dependencies.
+**Runtime:** limited to what the sandbox image ships — **Bash/shell, Node.js, or Bun (TypeScript/JS)**. There is **no Python** runtime (nor Ruby, Deno, Go) — a `.py` script won't execute. Pick one per script.
 
-Reference scripts from SKILL.md by relative path, e.g. `bun scripts/validate.ts <skill-name>` or `bash scripts/validate.sh <skill-name>`.
+**Don't bundle when a tool already does the job.** Reference it from SKILL.md and pin the version: `bunx prettier@3.3.3 --write .` (`npx pkg@ver` also works). Promote to a tested `scripts/` file once a command is hard to get right or the agent keeps reinventing the same logic.
+
+### Designing scripts for agentic use
+
+The agent reads stdout/stderr and exit codes to decide what to do next:
+
+- **No interactive prompts** — the shell is non-interactive, so a script that blocks on input hangs. Take input via flags/env/stdin; on a missing flag, error with usage instead of prompting.
+- **`--help`** documents the interface — brief, since it enters context.
+- **Helpful errors** — what went wrong, what was expected, what to try: `--format must be one of json|csv|table; got "xml"`.
+- **Structured output to stdout, diagnostics to stderr** — JSON/TSV the agent and `jq` can parse; progress/warnings to stderr.
+- **Idempotent, safe defaults** — agents retry; gate destructive ops behind `--dry-run`/`--confirm`.
+- **Meaningful exit codes** (documented in `--help`) and **predictable output size** — harnesses truncate past ~10–30K chars, so summarize or support `--output FILE`.
+
+### Tests
+
+Tests live in `scripts/tests/` — red/green/refactor TDD for non-trivial scripts, fast (<1s), mock external deps. Document constants at the top. Reference scripts from SKILL.md by relative path: `bun scripts/validate.ts <arg>`.
 
 ## references/
 

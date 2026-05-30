@@ -101,16 +101,22 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 ## Primary workflow
 [Steps, commands, or templates]
+
+## Gotchas
+[Environment-specific facts that defy assumptions — the agent reads these before it errs]
 ```
 
-`name` and `description` determine when the skill triggers - be specific about both.
+`name` and `description` determine when the skill triggers, and the `description` carries the entire burden: only `name` + `description` load up front; the body loads on demand. Be specific about *what it does* AND *when to reach for it*. See `references/descriptions.md`.
 
 ## 5. Writing principles
 
-1. **Stay under 500 lines.** Move depth into `references/`.
-2. **Match specificity to fragility.** Open tasks → guidance; fragile sequences → exact scripts. See `references/workflows.md`.
-3. **Provide defaults, not menus.** One recommended approach.
-4. **Avoid duplication.** A fact lives in one place.
+1. **Stay lean — ≤500 lines / ~5,000 tokens.** Move depth into `references/`.
+2. **Add what the agent lacks, omit what it knows.** Skip generic background; spend tokens on project conventions, non-obvious edge cases, and which tool/API to use.
+3. **Match specificity to fragility.** Open tasks → guidance (explain *why*); fragile sequences → exact scripts. See `references/workflows.md`.
+4. **Favor procedures over declarations.** Teach how to approach a class of problems, not the answer to one instance.
+5. **Provide defaults, not menus.** One recommended approach; alternatives brief.
+6. **Capture gotchas** in SKILL.md — concrete corrections to mistakes the agent will otherwise make. See `references/workflows.md`.
+7. **Avoid duplication.** A fact lives in one place.
 
 See `references/output-patterns.md` and `references/progressive-disclosure-patterns.md`.
 
@@ -126,9 +132,13 @@ UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace -
 | `references/` | Domain depth, schemas, long docs   | Only when read       |
 | `templates/`  | Boilerplate output assets          | No                   |
 
+See `references/bundled-resources.md` for the full decision matrix and — before writing any `scripts/` file — how to design scripts for agentic use (no Python: Bash/Node/Bun only).
+
 ## 8. Iterate
 
-Ship → use → tighten. Debug loop: read a real session's messages, narrow to the failing step, fix the relevant skill or prompt, bump the version. Don't anticipate every edge case in v1 — edit from real failures.
+**Start from real expertise.** Generic LLM knowledge yields vague procedures ("handle errors appropriately"). Ground the skill in specifics: extract the pattern from a real task you completed with an agent (steps that worked, corrections you made, project facts you supplied), or synthesize from your own runbooks, schemas, and the patches that actually fixed things.
+
+**Then refine with real execution.** Ship → use → tighten. Read a session's *execution trace*, not just the output — wasted steps usually mean instructions too vague, inapplicable, or lacking a default. Fix the failing step, bump the version; every hand correction is a gotcha to add. Don't anticipate every edge case in v1 — edit from real runs.
 
 ## Next steps
 

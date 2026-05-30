@@ -1,6 +1,6 @@
 # Progressive Disclosure Patterns
 
-Keep SKILL.md body to the essentials and under 500 lines to minimize context bloat. Split content into separate files when approaching this limit. When splitting out content into other files, it is very important to reference them from SKILL.md and describe clearly when to read them, to ensure the reader of the skill knows they exist and when to use them.
+Keep SKILL.md body to the essentials — under 500 lines and ~5,000 tokens — to minimize context bloat. Split content into separate files when approaching this limit. When splitting out content into other files, it is very important to reference them from SKILL.md and describe clearly *when* to read each one ("read `references/api-errors.md` if the API returns a non-200" beats a generic "see references/"), so the agent both knows they exist and loads them on demand rather than up front.
 
 **Key principle:** When a skill supports multiple variations, frameworks, or options, keep only the core workflow and selection guidance in SKILL.md. Move variant-specific details (patterns, examples, configuration) into separate reference files.
 
@@ -11,7 +11,7 @@ Keep SKILL.md body to the essentials and under 500 lines to minimize context blo
 
 ## Quick start
 
-Extract text with pdfplumber:
+Extract text with unpdf:
 [code example]
 
 ## Advanced features
