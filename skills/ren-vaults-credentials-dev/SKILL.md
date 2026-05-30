@@ -98,5 +98,5 @@ mcp__ren__credential_oauth_session { "query": { "scope": "user" }, "path": { "va
 A credential does nothing until its vault is attached to a pod that runs the agent.
 
 - **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[ren-pod-dev]].
-- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[ren-project-dev]] for the deep link.
+- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[ren-project-dev]] to `sessions create` and hand off its URLs.
 - **Add more credentials** to the same vault as you wire more skills/MCPs — one vault can back many.

@@ -69,19 +69,30 @@ mcp__ren__project_get              { "query": { "scope": "user" }, "path": { "id
 
 ## Sessions
 
-A **session** is one chat with the project's primary agent - the conversation a user (or a fired trigger) has inside the project. Creating a session is SDK/web-app only; the CLI is read-side, useful for inspecting what happened in a past run:
+A **session** is one chat with the project's primary agent - the conversation a user (or a fired trigger) has inside the project. Create one, inspect past runs, and fetch its live OpenCode URL — all from the CLI or MCP. **Creating a session needs the pod's sandbox `ready`** (see [[ren-pod-dev]]); `sessions url` returns 400 until a sandbox is live.
+
+CLI:
 
 ```
-ren sessions list --project-id prj_… --output json
-ren sessions get <session-id> --output json
+ren sessions create --scope user --pod-id pod_… --project-id prj_… --title "…" --output json
+ren sessions url    <session-id> --scope user --output json   # → { "url": "https://<sandbox>/<dir>/session/<id>" }
+ren sessions list   --project-id prj_… --output json
+ren sessions get    <session-id> --output json
 ren sessions messages list <session-id> --output json
 ```
 
-Deep-link a live session for the user:
+MCP:
 
 ```
-${REN_APP_URL}/pods/<podId>/projects/<projectId>/sessions/<sessionId>
-${REN_APP_URL}/pods/<podId>/projects/<projectId>
+mcp__ren__session_create { "query": { "scope": "user" }, "body": { "podId": "pod_…", "projectId": "prj_…", "title": "…" } }
+mcp__ren__session_url    { "query": { "scope": "user" }, "path": { "id": "ses_…" } }
+```
+
+Hand off **both** links — the Ren web app (full session UI, replays, settings) and the OpenCode URL (drops straight into the agent TUI):
+
+```
+${REN_APP_URL}/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # Ren web app
+<url from `ren sessions url`>                                           # direct OpenCode TUI
 ```
 
 ## Gotchas
@@ -92,7 +103,7 @@ ${REN_APP_URL}/pods/<podId>/projects/<projectId>
 
 ## Next steps
 
-- **Start a session** — confirm the agent loads cleanly via the project page or deep link above. The pod's sandbox must be `ready`; see [[ren-pod-dev]].
+- **Start a session** — `ren sessions create …` (or `mcp__ren__session_create`), then confirm the agent loads cleanly via the Ren deep link or the OpenCode URL above. The pod's sandbox must be `ready`; see [[ren-pod-dev]].
 - **Run it unattended** with a cron trigger — only after one clean manual session. See [[ren-trigger-dev]].
 - **Give the agent more context** by attaching a file store (uploads / reference docs, read-only) or a memory store (persistent learnings, read-write). See [[ren-file-memory-store-dev]].
 - **Wire missing credentials** if a session surfaces a missing API key or OAuth. See [[ren-vaults-credentials-dev]].
