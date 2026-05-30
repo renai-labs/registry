@@ -336,8 +336,8 @@
     "slug": "ren-agent-dev",
     "name": "ren-agent-dev",
     "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
-    "license": "MIT",
-    "author": "Ren Labs",
+    "license": null,
+    "author": null,
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
@@ -348,13 +348,13 @@
       "ren"
     ],
     "currentVersion": "1.1.1",
-    "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117",
+    "contentHash": "5a67e627d93c30cbeb41989f45bdc4a70520944881d41e375f4bcd8ff86986ba",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117"
+        "contentHash": "5a67e627d93c30cbeb41989f45bdc4a70520944881d41e375f4bcd8ff86986ba"
       }
     ]
   },
@@ -371,13 +371,13 @@
     "websiteMetadata": null,
     "tags": [],
     "currentVersion": "1.0.0",
-    "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01",
+    "contentHash": "db2f9a95b0e10dea1be989fa7a18694edb32dcbf4086bd5a89301b271fd2e840",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01"
+        "contentHash": "db2f9a95b0e10dea1be989fa7a18694edb32dcbf4086bd5a89301b271fd2e840"
       }
     ]
   },
@@ -394,13 +394,13 @@
     "websiteMetadata": null,
     "tags": [],
     "currentVersion": "1.0.0",
-    "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f",
+    "contentHash": "196be2908cbbf0de91b8bfca86deb369e72a4fb4963a1ffdbb92d58ea9157399",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f"
+        "contentHash": "196be2908cbbf0de91b8bfca86deb369e72a4fb4963a1ffdbb92d58ea9157399"
       }
     ]
   },
@@ -408,8 +408,8 @@
     "slug": "ren-onboarding",
     "name": "ren-onboarding",
     "description": "First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.",
-    "license": "MIT",
-    "author": "Ren Labs",
+    "license": null,
+    "author": null,
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
@@ -419,13 +419,13 @@
       "ren"
     ],
     "currentVersion": "1.0.1",
-    "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2",
+    "contentHash": "3538135ce1b39f7e23b20f16d162fcd631e67599c259537c4eafe08bd7d6038f",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2"
+        "contentHash": "3538135ce1b39f7e23b20f16d162fcd631e67599c259537c4eafe08bd7d6038f"
       }
     ]
   },
@@ -442,13 +442,13 @@
     "websiteMetadata": null,
     "tags": [],
     "currentVersion": "1.0.0",
-    "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec",
+    "contentHash": "84c5c9166ba53ce4c4f0bb4e86cf3e50a9c77fec1906aed2ee659bf203a1d498",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec"
+        "contentHash": "84c5c9166ba53ce4c4f0bb4e86cf3e50a9c77fec1906aed2ee659bf203a1d498"
       }
     ]
   },
@@ -456,8 +456,8 @@
     "slug": "ren-project-dev",
     "name": "ren-project-dev",
     "description": "Create, configure, and manage projects within a pod - attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.",
-    "license": "MIT",
-    "author": "Ren Labs",
+    "license": null,
+    "author": null,
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/project-dev.svg",
@@ -469,13 +469,36 @@
       "ren"
     ],
     "currentVersion": "1.1.1",
-    "contentHash": "a57e9d5f11c3b3b33452323913f85db87138ed01fe6a3815d83d372b1c778f2e",
+    "contentHash": "c2642065af7ea20b54c8a232196b1447dbaf12ad4a5640e53a7f2f03ff354e0d",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "a57e9d5f11c3b3b33452323913f85db87138ed01fe6a3815d83d372b1c778f2e"
+        "contentHash": "c2642065af7ea20b54c8a232196b1447dbaf12ad4a5640e53a7f2f03ff354e0d"
+      }
+    ]
+  },
+  {
+    "slug": "ren-scope",
+    "name": "ren-scope",
+    "description": "Explains the three scope tiers (user, org, registry) for all Ren entities, their visibility rules, and how to use --scope / query.scope correctly. Load this whenever scope behavior is relevant.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "4d35eb66438092f37ea56bf12ee2fdd139ce0c5c7154ec7040bdbf42da3b3993",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "4d35eb66438092f37ea56bf12ee2fdd139ce0c5c7154ec7040bdbf42da3b3993"
       }
     ]
   },
@@ -483,8 +506,8 @@
     "slug": "ren-skill-dev",
     "name": "ren-skill-dev",
     "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
-    "license": "MIT",
-    "author": "Ren Labs",
+    "license": null,
+    "author": null,
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
@@ -495,13 +518,13 @@
       "ren"
     ],
     "currentVersion": "1.1.1",
-    "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4",
+    "contentHash": "533f8d1e3ed364bfb3f962c30fa7eacd3c0f0475c25a5416031cbc58f15b2dcd",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4"
+        "contentHash": "533f8d1e3ed364bfb3f962c30fa7eacd3c0f0475c25a5416031cbc58f15b2dcd"
       }
     ]
   },
@@ -518,13 +541,13 @@
     "websiteMetadata": null,
     "tags": [],
     "currentVersion": "1.0.0",
-    "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893",
+    "contentHash": "cb464a9d23a32d2dae27361feafb65db021762eb37ab1a3ee5d617eb0b5b6294",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893"
+        "contentHash": "cb464a9d23a32d2dae27361feafb65db021762eb37ab1a3ee5d617eb0b5b6294"
       }
     ]
   },
@@ -541,13 +564,13 @@
     "websiteMetadata": null,
     "tags": [],
     "currentVersion": "1.0.0",
-    "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a",
+    "contentHash": "d2cc2f45b6b9d568ace01eb95e3670145acb4668c86bb1c5289ba8e9e8470a32",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a"
+        "contentHash": "d2cc2f45b6b9d568ace01eb95e3670145acb4668c86bb1c5289ba8e9e8470a32"
       }
     ]
   },
