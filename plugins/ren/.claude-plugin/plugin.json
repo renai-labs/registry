@@ -3,6 +3,7 @@
   "name": "ren",
   "displayName": "Ren",
   "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
+  "version": "0.1.0",
   "repository": "https://github.com/renai-labs/skills",
   "mcpServers": {
     "ren": {

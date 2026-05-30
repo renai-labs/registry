@@ -1,2343 +1,683 @@
 [
   {
-    "skill": {
-      "slug": "agent-dev",
-      "name": "agent-dev",
-      "description": "Create, configure, and update agents — including their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/agent-dev/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "agent-dev@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg"
-    },
+    "slug": "agent-dev",
+    "name": "agent-dev",
+    "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/agent-dev/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "code",
+      "ren"
+    ],
+    "currentVersion": "1.1.1",
+    "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117",
     "versions": [
       {
         "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "agent-dev"
-        }
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "agent-dev"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "platform",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["code", "ren"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "airtable",
-      "name": "airtable",
-      "description": "Read and write Airtable bases via the REST API — list and filter records, create/update/delete rows, run upsert operations, and query views. Use when an agent needs to query, mutate, or sync data stored in an Airtable base.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/productivity/airtable/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/productivity/airtable@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/airtable.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/airtable"
-        },
-        "requiredCredentials": [
-          {
-            "name": "AIRTABLE_API_KEY",
-            "description": "Airtable personal access token from https://airtable.com/create/tokens"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/airtable"
-        },
-        "requiredCredentials": [
-          {
-            "name": "AIRTABLE_API_KEY",
-            "description": "Airtable personal access token from https://airtable.com/create/tokens"
-          }
-        ]
-      }
+    "slug": "audio-generation",
+    "name": "audio-generation",
+    "description": "Convert text to speech and transcribe audio using AI models (OpenAI TTS, ElevenLabs, Whisper). Use when users want to generate audio from text or transcribe speech to text.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/audio-generation.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/audio-generation/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "audio",
+      "creative"
     ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "architecture-diagram",
-      "name": "architecture-diagram",
-      "description": "Create professional, dark-themed architecture diagrams as standalone HTML files with SVG graphics. Use when the user asks for system architecture diagrams, infrastructure diagrams, cloud architecture visualizations, security diagrams, network topology diagrams, or any technical diagram showing system components and their relationships.",
-      "docUrl": "https://github.com/Cocoon-AI/architecture-diagram-generator/blob/main/architecture-diagram/SKILL.md",
-      "repository": {
-        "url": "https://github.com/Cocoon-AI/architecture-diagram-generator",
-        "source": "architecture-diagram@aff12bcf0f861995362e90273060acd0b68a1702"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/architecture-diagram.svg"
-    },
+    "currentVersion": "1.0.1",
+    "contentHash": "21f7155c4949c51175e0ee6fa9b1b89caa6c185a5135b83693cb289c8651f3b7",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/Cocoon-AI/architecture-diagram-generator.git",
-          "ref": "aff12bcf0f861995362e90273060acd0b68a1702",
-          "path": "architecture-diagram"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/Cocoon-AI/architecture-diagram-generator.git",
-          "ref": "aff12bcf0f861995362e90273060acd0b68a1702",
-          "path": "architecture-diagram"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "21f7155c4949c51175e0ee6fa9b1b89caa6c185a5135b83693cb289c8651f3b7"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Cocoon AI <hello@cocoon-ai.com>",
-        "upstreamVersion": "1.0",
-        "tags": ["design", "code"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "ascii-art",
-      "name": "ascii-art",
-      "description": "Generate ASCII art — text banners (pyfiglet), styled boxes and quotes (cowsay, boxes), and image-to-ASCII conversion. Use for terminal-friendly logos, README headers, chat decorations, or anywhere monospaced visual output is needed.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/ascii-art/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/ascii-art@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/ascii-art.svg"
-    },
-    "versions": [
-      {
-        "version": "4.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/ascii-art"
-        }
-      },
-      {
-        "version": "4.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/ascii-art"
-        }
-      }
+    "slug": "baoyu-comic",
+    "name": "baoyu-comic",
+    "description": "Knowledge comic creator supporting multiple art styles and tones. Creates original educational comics with detailed panel layouts and sequential image generation. Use when user asks to create \"知识漫画\", \"教育漫画\", \"biography comic\", \"tutorial comic\", or \"Logicomix-style comic\".",
+    "license": "MIT",
+    "author": "宝玉 (JimLiu)",
+    "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/baoyu-comic.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-comic/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative",
+      "design"
     ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "0xbyt4",
-        "upstreamVersion": "4.0.0",
-        "tags": ["creative"],
-        "relatedSkills": ["excalidraw"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "ascii-video",
-      "name": "ascii-video",
-      "description": "Convert video and audio files into colored ASCII MP4s or GIFs using ffmpeg + Python. Optional ElevenLabs TTS integration for voiced narration over the rendered output.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/ascii-video/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/ascii-video@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/ascii-video.svg"
-    },
+    "currentVersion": "1.0.1",
+    "contentHash": "ed59e1b61e3f3930ce667d340b3f0af0eced32ecba2991c51452fa34f29d8d77",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/ascii-video"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/ascii-video"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "ed59e1b61e3f3930ce667d340b3f0af0eced32ecba2991c51452fa34f29d8d77"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["creative", "video"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "audio-generation",
-      "name": "audio-generation",
-      "description": "Convert text to speech and transcribe audio using AI models (OpenAI TTS, ElevenLabs, Whisper). Use when users want to generate audio from text or transcribe speech to text.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/audio-generation/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "audio-generation@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/audio-generation.svg"
-    },
+    "slug": "baoyu-infographic",
+    "name": "baoyu-infographic",
+    "description": "Generate professional infographics with 21 layout types and 21 visual styles. Analyzes content, recommends layout×style combinations, and generates publication-ready infographics. Use when user asks to create \"infographic\", \"信息图\", \"visual summary\", \"可视化\", or \"高密度信息大图\".",
+    "license": "MIT",
+    "author": "宝玉 (JimLiu)",
+    "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/baoyu-infographic.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-infographic/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative",
+      "design"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "632767539c2d32d7ff0d37ca7007546552bb9f672cc9d25be31d0bccd1ab36ae",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "audio-generation"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "audio-generation"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "632767539c2d32d7ff0d37ca7007546552bb9f672cc9d25be31d0bccd1ab36ae"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["audio", "creative"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "baoyu-comic",
-      "name": "baoyu-comic",
-      "description": "Generate knowledge comics — multi-panel illustrated explainers for educational topics, biographies, or step-by-step tutorials. Produces image prompts, generates panels, and assembles the final comic.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-comic/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "baoyu-comic@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/baoyu-comic.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "baoyu-comic"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "baoyu-comic"
-        }
-      }
+    "slug": "comfyui",
+    "name": "comfyui",
+    "description": "Generate images, video, and audio with ComfyUI on Comfy Cloud — submit workflows, inject parameters, monitor jobs, and download outputs via the hosted REST/WebSocket API.",
+    "license": "MIT",
+    "author": "kshitijk4poor, alt-glitch",
+    "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/comfyui.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/comfyui/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative",
+      "video",
+      "audio"
     ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "宝玉 (JimLiu)",
-        "upstreamVersion": "1.56.1",
-        "tags": ["creative", "design"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "baoyu-infographic",
-      "name": "baoyu-infographic",
-      "description": "Design infographics by combining one of 21 layouts with one of 21 visual styles. Useful for visualizing data, processes, comparisons, or summaries as a single high-quality image.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-infographic/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "baoyu-infographic@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/baoyu-infographic.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "baoyu-infographic"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "baoyu-infographic"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "宝玉 (JimLiu)",
-        "upstreamVersion": "1.57.1",
-        "tags": ["creative", "design"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "caveman",
-      "name": "caveman",
-      "description": "Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says caveman mode, talk like caveman, use caveman, less tokens, be brief, or invokes /caveman. Also auto-triggers when token efficiency is requested.",
-      "docUrl": "https://github.com/JuliusBrussee/caveman/blob/main/skills/caveman/SKILL.md",
-      "repository": {
-        "url": "https://github.com/JuliusBrussee/caveman",
-        "source": "skills/caveman@ef6050c5e1848b6880ff47c32ade1a608a64f85e"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/caveman.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/JuliusBrussee/caveman.git",
-          "ref": "ef6050c5e1848b6880ff47c32ade1a608a64f85e",
-          "path": "skills/caveman"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/JuliusBrussee/caveman.git",
-          "ref": "ef6050c5e1848b6880ff47c32ade1a608a64f85e",
-          "path": "skills/caveman"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "JuliusBrussee",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "codebase-inspection",
-      "name": "codebase-inspection",
-      "description": "Inspect a codebase to report total lines of code, language breakdown, and code/comment/blank ratios using pygount. Use when sizing a repository, comparing language distribution, or producing engineering metrics for a report.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/codebase-inspection/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/codebase-inspection@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/codebase-inspection.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/codebase-inspection"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/codebase-inspection"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "devops"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "comfyui",
-      "name": "comfyui",
-      "description": "Generate images, video, and audio with ComfyUI on Comfy Cloud — submit workflows, inject parameters, monitor jobs, and download outputs via the hosted REST/WebSocket API.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/comfyui/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "comfyui@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/comfyui.svg"
-    },
+    "currentVersion": "5.0.1",
+    "contentHash": "e0d5e33070a5f413502285cb6bba589e68837d36619949d882bc6dc9065972cd",
     "versions": [
       {
         "version": "5.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "comfyui"
-        },
-        "requiredCredentials": [
-          {
-            "name": "COMFY_CLOUD_API_KEY",
-            "description": "Comfy Cloud API key from https://platform.comfy.org/login (used as X-API-Key header for hosted ComfyUI)"
-          }
-        ]
-      },
-      {
-        "version": "5.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "comfyui"
-        },
-        "requiredCredentials": [
-          {
-            "name": "COMFY_CLOUD_API_KEY",
-            "description": "Comfy Cloud API key from https://platform.comfy.org/login (used as X-API-Key header for hosted ComfyUI)"
-          }
-        ]
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "e0d5e33070a5f413502285cb6bba589e68837d36619949d882bc6dc9065972cd"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "kshitijk4poor, alt-glitch",
-        "upstreamVersion": "5.0.0",
-        "tags": ["creative", "video", "audio"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "concept-diagrams",
-      "name": "concept-diagrams",
-      "description": "Produce flat, minimal SVG diagrams in light and dark modes for explaining ideas. Ideal for educational content, slide visuals, or documentation. Output is a single self-contained HTML file.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/concept-diagrams/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "concept-diagrams@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/concept-diagrams.svg"
-    },
+    "slug": "concept-diagrams",
+    "name": "concept-diagrams",
+    "description": "Generate flat, minimal light/dark-aware SVG diagrams as standalone HTML files, using a unified educational visual language with 9 semantic color ramps, sentence-case typography, and automatic dark mode. Best suited for educational and non-software visuals — physics setups, chemistry mechanisms, math curves, physical objects (aircraft, turbines, smartphones, mechanical watches), anatomy, floor plans, cross-sections, narrative journeys (lifecycle of X, process of Y), hub-spoke system integrations (smart city, IoT), and exploded layer views. If a more specialized skill exists for the subject (dedicated software/cloud architecture, hand-drawn sketches, animated explainers, etc.), prefer that — otherwise this skill can also serve as a general-purpose SVG diagram fallback with a clean educational look. Ships with 15 example diagrams.",
+    "license": "MIT",
+    "author": "v1k22",
+    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/concept-diagrams.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/concept-diagrams/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative",
+      "design"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "1f6aa81338ad13ae192dc3c0998b201e7e99d3855eed445aa74142b719729e05",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "concept-diagrams"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "concept-diagrams"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "1f6aa81338ad13ae192dc3c0998b201e7e99d3855eed445aa74142b719729e05"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "v1k22",
-        "upstreamVersion": "0.1.0",
-        "tags": ["creative", "design"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "design-md",
-      "name": "design-md",
-      "description": "Author, validate, and export DESIGN.md token spec files in Google's design.md format. Use when defining design tokens (colors, typography, spacing) for a product, or when checking a token spec against the built-in lint rules including WCAG contrast.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/design-md/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/design-md@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/design-md.svg"
-    },
+    "slug": "docx",
+    "name": "docx",
+    "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+    "license": "Proprietary. LICENSE.txt has complete terms",
+    "author": "Anthropic",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/docx.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/docx/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "18ee6e11d750d5ff311ae96d0afa907277d2ca55c9427f0ba22f15ecfaef989f",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/design-md"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/design-md"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "18ee6e11d750d5ff311ae96d0afa907277d2ca55c9427f0ba22f15ecfaef989f"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "design",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["design", "code"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "docx",
-      "name": "docx",
-      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/docx/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "docx@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/docx.svg"
-    },
+    "slug": "file-memory-store-dev",
+    "name": "file-memory-store-dev",
+    "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01"
+      }
+    ]
+  },
+  {
+    "slug": "fitness-nutrition",
+    "name": "fitness-nutrition",
+    "description": "Gym workout planner and nutrition tracker. Search 690+ exercises by muscle, equipment, or category via wger. Look up macros and calories for 380,000+ foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro splits, and body fat — pure Python, no pip installs. Built for anyone chasing gains, cutting weight, or just trying to eat better.\n",
+    "license": "MIT",
+    "author": "haileymarshall",
+    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/fitness-nutrition.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/fitness-nutrition/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "health"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "109341b6d11d4d73a5d25af3a7501346ae1309368c91606475e2d339f6f377ae",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "docx"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "docx"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "109341b6d11d4d73a5d25af3a7501346ae1309368c91606475e2d339f6f377ae"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "Proprietary",
-        "author": "Anthropic",
-        "tags": ["productivity"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "duckduckgo-search",
-      "name": "duckduckgo-search",
-      "description": "Search the web for free via DuckDuckGo — supports text, news, image, and video search with no API key required. Useful as a fallback when a managed web-search primitive is not available.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/research/duckduckgo-search/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "optional-skills/research/duckduckgo-search@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/duckduckgo-search.svg"
-    },
-    "versions": [
-      {
-        "version": "1.3.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/duckduckgo-search"
-        }
-      },
-      {
-        "version": "1.3.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/duckduckgo-search"
-        }
-      }
+    "slug": "google-workspace",
+    "name": "google-workspace",
+    "description": "Gmail, Calendar, Drive, Docs, Sheets via the Google Python client. Reads a vault-issued OAuth access token from the environment.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/google-workspace.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/google-workspace/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity"
     ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "gamedevCloudy",
-        "upstreamVersion": "1.3.0",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "excalidraw",
-      "name": "excalidraw",
-      "description": "Generate hand-drawn-style Excalidraw diagrams as JSON files — architecture, flow, sequence, and freeform sketches. Output can be opened directly in Excalidraw or exported to images.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/excalidraw/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/excalidraw@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/excalidraw.svg"
-    },
+    "currentVersion": "1.0.1",
+    "contentHash": "682d2cfaae7433d4350a10ff9f6e1a63b88f41b7a1e776da2890369adc730a3a",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/excalidraw"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/excalidraw"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "682d2cfaae7433d4350a10ff9f6e1a63b88f41b7a1e776da2890369adc730a3a"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "design",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["design", "creative"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "fitness-nutrition",
-      "name": "fitness-nutrition",
-      "description": "Plan gym workouts and track nutrition. Pulls 690+ exercises with form cues from the wger database and 380,000+ foods with macros/micros from the USDA FoodData Central API. Use when designing training programs, looking up exercise technique, or logging meals.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/fitness-nutrition/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "fitness-nutrition@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/fitness-nutrition.svg"
-    },
+    "slug": "image-generation",
+    "name": "image-generation",
+    "description": "Generate, edit, and create variations of images using AI models (GPT-Image, DALL-E, Gemini). Use when users want to create new images from descriptions, edit existing images, or create variations.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/image-generation.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/image-generation/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "bf61d2f311588eff8e71da05b3033ed0bc2549766f90a4da87f8a3c27a227cfe",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "fitness-nutrition"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "fitness-nutrition"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "bf61d2f311588eff8e71da05b3033ed0bc2549766f90a4da87f8a3c27a227cfe"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "health",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "haileymarshall",
-        "upstreamVersion": "1.0.0",
-        "tags": ["health"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "gif-search",
-      "name": "gif-search",
-      "description": "Search Tenor for GIFs by keyword and download the best match. Use when an agent needs to fetch a relevant animated GIF for a chat reply, social post, or document.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/media/gif-search/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/media/gif-search@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/gif-search.svg"
-    },
+    "slug": "mcp-dev",
+    "name": "mcp-dev",
+    "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f"
+      }
+    ]
+  },
+  {
+    "slug": "meme-generation",
+    "name": "meme-generation",
+    "description": "Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.",
+    "license": "MIT",
+    "author": "adanaleycio",
+    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/meme-generation.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/meme-generation/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "creative",
+      "social-media"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "d1252985f19104b70e5ff5e161c319d7f69a2b008412abbdd963bcbe5d34a6d3",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "d1252985f19104b70e5ff5e161c319d7f69a2b008412abbdd963bcbe5d34a6d3"
+      }
+    ]
+  },
+  {
+    "slug": "onboarding",
+    "name": "onboarding",
+    "description": "First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/onboarding/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "ren"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2"
+      }
+    ]
+  },
+  {
+    "slug": "pdf",
+    "name": "pdf",
+    "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+    "license": "Proprietary. LICENSE.txt has complete terms",
+    "author": "Anthropic",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/pdf.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pdf/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "0653823bc11150a8568388470e81e9324c8d55c52ebba91648b2f505483664e0",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "0653823bc11150a8568388470e81e9324c8d55c52ebba91648b2f505483664e0"
+      }
+    ]
+  },
+  {
+    "slug": "pod-dev",
+    "name": "pod-dev",
+    "description": "Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec"
+      }
+    ]
+  },
+  {
+    "slug": "popular-web-designs",
+    "name": "popular-web-designs",
+    "description": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS reference templates. Use when generating HTML/CSS in the visual style of a known brand — landing pages, marketing sites, dashboards, documentation.",
+    "license": "MIT",
+    "author": "Teknium",
+    "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/popular-web-designs.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/popular-web-designs/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "design",
+      "creative"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "292547e41330eac46e212dabfb4eb89eb1ef6a4d31c8cee425c6b2878e3d91b9",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "292547e41330eac46e212dabfb4eb89eb1ef6a4d31c8cee425c6b2878e3d91b9"
+      }
+    ]
+  },
+  {
+    "slug": "pptx",
+    "name": "pptx",
+    "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
+    "license": "Proprietary. LICENSE.txt has complete terms",
+    "author": "Anthropic",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/pptx.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pptx/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "45748978aab71480e87e2e3cabe62f8744271394d5fc587fa365357474e2ee24",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "45748978aab71480e87e2e3cabe62f8744271394d5fc587fa365357474e2ee24"
+      }
+    ]
+  },
+  {
+    "slug": "project-dev",
+    "name": "project-dev",
+    "description": "Create, configure, and manage projects within a pod - attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/project-dev.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/project-dev/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity",
+      "code",
+      "ren"
+    ],
+    "currentVersion": "1.1.1",
+    "contentHash": "a57e9d5f11c3b3b33452323913f85db87138ed01fe6a3815d83d372b1c778f2e",
     "versions": [
       {
         "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/media/gif-search"
-        },
-        "requiredCredentials": [
-          {
-            "name": "TENOR_API_KEY",
-            "description": "Tenor API key from https://developers.google.com/tenor/guides/quickstart"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/media/gif-search"
-        },
-        "requiredCredentials": [
-          {
-            "name": "TENOR_API_KEY",
-            "description": "Tenor API key from https://developers.google.com/tenor/guides/quickstart"
-          }
-        ]
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "a57e9d5f11c3b3b33452323913f85db87138ed01fe6a3815d83d372b1c778f2e"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["creative", "social-media"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "github-auth",
-      "name": "github-auth",
-      "description": "Set up GitHub authentication: HTTPS personal access tokens, SSH keys, and `gh` CLI login. Use as a prerequisite for any other GitHub workflow when the user is not yet authenticated on the host.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/github-auth/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/github-auth@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/github-auth.svg"
-    },
+    "slug": "shopify",
+    "name": "shopify",
+    "description": "Shopify Admin & Storefront GraphQL APIs via curl. Manage products, orders, customers, inventory, metafields, bulk operations, and webhooks. Use when working with a Shopify store programmatically — listing products, updating inventory, pulling orders, managing customers, or setting metafields.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": "https://shopify.dev/docs/api/admin-graphql",
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/shopify.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/shopify/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity",
+      "e-commerce"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "b1974ea5ab1b1df1b0a2df5d0718573e37d9a59af42cc22fd326fd5db84d94b8",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "b1974ea5ab1b1df1b0a2df5d0718573e37d9a59af42cc22fd326fd5db84d94b8"
+      }
+    ]
+  },
+  {
+    "slug": "skill-dev",
+    "name": "skill-dev",
+    "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/skill-dev/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "code",
+      "ren"
+    ],
+    "currentVersion": "1.1.1",
+    "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4",
     "versions": [
       {
         "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-auth"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token (classic or fine-grained) used by the gh CLI and git over HTTPS"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-auth"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token (classic or fine-grained) used by the gh CLI and git over HTTPS"
-          }
-        ]
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "devops"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "github-code-review",
-      "name": "github-code-review",
-      "description": "Review GitHub pull requests — read diffs, leave inline comments, approve or request changes. Works via the `gh` CLI or the REST API.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/github-code-review/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/github-code-review@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/github-code-review.svg"
-    },
+    "slug": "trigger-dev",
+    "name": "trigger-dev",
+    "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893",
     "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-code-review"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and pull-request scopes"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-code-review"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and pull-request scopes"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "devops"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "github-issues",
-      "name": "github-issues",
-      "description": "Create, triage, label, assign, and close GitHub issues via the `gh` CLI or the REST API. Use for bug intake, backlog grooming, or automating issue workflows.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/github-issues/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/github-issues@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/github-issues.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-issues"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with issues:write scope"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-issues"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with issues:write scope"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "github-pr-workflow",
-      "name": "github-pr-workflow",
-      "description": "Manage the GitHub pull request lifecycle — create branches, commit (Conventional Commits enforced), open PRs, monitor CI status, and merge.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/github-pr-workflow/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/github-pr-workflow@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/github-pr-workflow.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-pr-workflow"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and workflow scopes"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-pr-workflow"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and workflow scopes"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "devops"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "github-repo-management",
-      "name": "github-repo-management",
-      "description": "Clone, create, fork, and configure GitHub repositories; manage remotes and cut releases.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/github/github-repo-management/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/github/github-repo-management@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/github-repo-management.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-repo-management"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and admin:org scopes"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/github/github-repo-management"
-        },
-        "requiredCredentials": [
-          {
-            "name": "GITHUB_TOKEN",
-            "description": "GitHub personal access token with repo and admin:org scopes"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "code",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["code", "devops"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "google-workspace",
-      "name": "google-workspace",
-      "description": "Read and write across Gmail, Calendar, Drive, Docs, and Sheets via the Google Python client. Auth is delegated to the platform vault — the skill reads a vault-issued OAuth access token from $MCP_GOOGLE_WORKSPACE_ACCESS_TOKEN.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/google-workspace/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "google-workspace@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/google-workspace.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "google-workspace"
-        }
-      },
       {
         "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "google-workspace"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["productivity"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "humanizer",
-      "name": "humanizer",
-      "description": "Rewrite AI-generated text to sound human — strips 29 common AI tells (em-dashes, 'in conclusion', tricolons, hedging) and adds natural cadence while preserving meaning.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/humanizer/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/humanizer@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/humanizer.svg"
-    },
-    "versions": [
-      {
-        "version": "2.5.2",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/humanizer"
-        }
-      },
-      {
-        "version": "2.5.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/humanizer"
-        }
-      }
+    "slug": "typefully",
+    "name": "typefully",
+    "description": "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": "https://typefully.com/docs/api",
+    "homepage": null,
+    "icon": "https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/typefully/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity",
+      "social-media"
     ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Siqi Chen (@blader)",
-        "upstreamVersion": "2.5.1",
-        "tags": ["creative", "marketing"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "image-generation",
-      "name": "image-generation",
-      "description": "Generate, edit, and create variations of images using AI models (GPT-Image, DALL-E, Gemini). Use when users want to create new images from descriptions, edit existing images, or create variations.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/image-generation/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "image-generation@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/image-generation.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "image-generation"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "image-generation"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["creative"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "manim-video",
-      "name": "manim-video",
-      "description": "Produce 3Blue1Brown-style animated math and algorithm explainer videos using Manim Community Edition. Heavy dependencies (manim, full LaTeX, ffmpeg).",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/manim-video/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/manim-video@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/manim-video.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/manim-video"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/manim-video"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["creative", "video"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "maps",
-      "name": "maps",
-      "description": "Geocode addresses, find points of interest by category, compute driving/walking/cycling routes, and look up timezones using OpenStreetMap and OSRM. No API key required.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/productivity/maps/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/productivity/maps@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/maps.svg"
-    },
-    "versions": [
-      {
-        "version": "1.2.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/maps"
-        }
-      },
-      {
-        "version": "1.2.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/maps"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Mibayy",
-        "upstreamVersion": "1.2.0",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "meme-generation",
-      "name": "meme-generation",
-      "description": "Generate real meme images by selecting a template from imgflip and overlaying caption text with Pillow.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/meme-generation/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "meme-generation@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/meme-generation.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "meme-generation"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "meme-generation"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "adanaleycio",
-        "upstreamVersion": "2.0.0",
-        "tags": ["creative", "social-media"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "nano-pdf",
-      "name": "nano-pdf",
-      "description": "Edit PDF text in place using the nano-pdf CLI with natural-language prompts — fix typos, change titles, update small sections without re-typesetting the document.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/productivity/nano-pdf/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/productivity/nano-pdf@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/nano-pdf.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/nano-pdf"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/nano-pdf"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "ocr-and-documents",
-      "name": "ocr-and-documents",
-      "description": "Extract text from PDFs and scanned documents using pymupdf for native PDFs and marker-pdf for high-quality OCR on scans. Marker-pdf is heavy (~5GB models, optional GPU acceleration).",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/productivity/ocr-and-documents/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/productivity/ocr-and-documents@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/ocr-and-documents.svg"
-    },
-    "versions": [
-      {
-        "version": "2.3.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/ocr-and-documents"
-        }
-      },
-      {
-        "version": "2.3.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/productivity/ocr-and-documents"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "upstreamVersion": "2.3.0",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "p5js",
-      "name": "p5js",
-      "description": "Generate p5.js sketches as single self-contained HTML files — generative art, shaders, interactive scenes, and 3D. Optional Puppeteer + ffmpeg pipeline to capture sketches as MP4 or GIF.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/p5js/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/p5js@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/p5js.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/p5js"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/p5js"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["creative"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "parallel-cli",
-      "name": "parallel-cli",
-      "description": "Run web search, structured extraction, deep research, and dataset enrichment via the Parallel API. Paid third-party service.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/research/parallel-cli/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "optional-skills/research/parallel-cli@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/parallel-cli.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/parallel-cli"
-        },
-        "requiredCredentials": [
-          {
-            "name": "PARALLEL_API_KEY",
-            "description": "Parallel.ai API key from https://parallel.ai (or run `parallel-cli login`)"
-          }
-        ]
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/parallel-cli"
-        },
-        "requiredCredentials": [
-          {
-            "name": "PARALLEL_API_KEY",
-            "description": "Parallel.ai API key from https://parallel.ai (or run `parallel-cli login`)"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "pdf",
-      "name": "pdf",
-      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pdf/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "pdf@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/pdf.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "pdf"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "pdf"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "Proprietary",
-        "author": "Anthropic",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "pixel-art",
-      "name": "pixel-art",
-      "description": "Generate pixel art with era-appropriate palettes — NES, Game Boy, PICO-8, and other retro consoles. Supports stills and short animated sequences.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/pixel-art/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/creative/pixel-art@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/pixel-art.svg"
-    },
-    "versions": [
-      {
-        "version": "2.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/pixel-art"
-        }
-      },
-      {
-        "version": "2.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/creative/pixel-art"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Synero",
-        "upstreamVersion": "2.0.0",
-        "tags": ["creative", "design"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "polymarket",
-      "name": "polymarket",
-      "description": "Query Polymarket prediction markets — list markets, fetch prices, read orderbooks, and pull historical data. Read-only; no trade execution.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/research/polymarket/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/research/polymarket@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/polymarket.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/research/polymarket"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/research/polymarket"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "finance",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Teknium",
-        "tags": ["finance"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "popular-web-designs",
-      "name": "popular-web-designs",
-      "description": "Reference HTML/CSS templates of 54 real design systems (Stripe, Linear, Vercel, etc.). Use when designing a marketing page or component in the visual style of a known brand.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/popular-web-designs/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "popular-web-designs@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/popular-web-designs.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "popular-web-designs"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "popular-web-designs"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "design",
-        "attribution": "derivative",
-        "license": "MIT",
-        "author": "Teknium",
-        "upstreamVersion": "1.0.0",
-        "tags": ["design", "creative"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "pptx",
-      "name": "pptx",
-      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pptx/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "pptx@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/pptx.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "pptx"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "pptx"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "Proprietary",
-        "author": "Anthropic",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "project-dev",
-      "name": "project-dev",
-      "description": "Create, configure, and manage projects within a pod — including attaching and removing agents. Use when the user wants to set up a project, add or change agents in a project, or configure project settings.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/project-dev/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "project-dev@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/project-dev.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "project-dev"
-        }
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "project-dev"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "platform",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["productivity", "code", "ren"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "onboarding",
-      "name": "onboarding",
-      "description": "First-session setup flow for a new Ren user. Triggered when the user's first message starts with \"Onboard me to Ren\". Isolates one concrete workflow, decides MCPs and skills with the user, then scaffolds one agent inside a NEW project in the user's current pod. Do not invoke for any other purpose.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/onboarding/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "onboarding@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/onboarding.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "onboarding"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "onboarding"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "platform",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["ren"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "remotion-best-practices",
-      "name": "remotion-best-practices",
-      "description": "Best practices for building videos with Remotion (React-based video framework). Covers new project setup, compositions, sequencing, audio/video, text animations, GIFs, transitions, timing, Google Fonts, local fonts, Lottie, 3D, subtitles, and FFmpeg usage. Use whenever working on Remotion code or scaffolding a new video project.",
-      "docUrl": "https://github.com/remotion-dev/skills/blob/main/skills/remotion/SKILL.md",
-      "repository": {
-        "url": "https://github.com/remotion-dev/skills",
-        "source": "skills/remotion@f34abef3e80ca73b3a5337f17e9c7a7ddcf418ea"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/remotion-best-practices.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/remotion-dev/skills.git",
-          "ref": "f34abef3e80ca73b3a5337f17e9c7a7ddcf418ea",
-          "path": "skills/remotion"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/remotion-dev/skills.git",
-          "ref": "f34abef3e80ca73b3a5337f17e9c7a7ddcf418ea",
-          "path": "skills/remotion"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Remotion",
-        "tags": ["creative", "video", "code"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "scrapling",
-      "name": "scrapling",
-      "description": "Scrape the web — HTTP fetching, stealth browser automation, Cloudflare bypass, and full-site spidering. Requires post-install browser-binary setup.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/research/scrapling/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "optional-skills/research/scrapling@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/scrapling.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/scrapling"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/research/scrapling"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "FEUAZUR",
-        "upstreamVersion": "1.0.0",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "sherlock",
-      "name": "sherlock",
-      "description": "Hunt for accounts of a given username across 400+ social media and online platforms (OSINT). Verify the user has authorization before running.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/security/sherlock/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "optional-skills/security/sherlock@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/sherlock.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/security/sherlock"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "optional-skills/security/sherlock"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "security",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "unmodeled-tyler",
-        "upstreamVersion": "1.0.0",
-        "tags": ["security"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "shopify",
-      "name": "shopify",
-      "description": "Shopify Admin & Storefront GraphQL APIs via curl. Manage products, orders, customers, inventory, metafields, bulk operations, and webhooks. Use when working with a Shopify store programmatically — listing products, updating inventory, pulling orders, managing customers, or setting metafields.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/shopify/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "shopify@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/shopify.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "shopify"
-        },
-        "requiredCredentials": [
-          {
-            "name": "SHOPIFY_ACCESS_TOKEN",
-            "description": "Shopify Admin API access token (starts with shpat_) from your custom app in Settings -> Apps and sales channels -> Develop apps"
-          },
-          {
-            "name": "SHOPIFY_STORE_DOMAIN",
-            "description": "Permanent myshopify.com subdomain, e.g. my-store.myshopify.com (not the custom domain)"
-          }
-        ]
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "shopify"
-        },
-        "requiredCredentials": [
-          {
-            "name": "SHOPIFY_ACCESS_TOKEN",
-            "description": "Shopify Admin API access token (starts with shpat_) from your custom app in Settings -> Apps and sales channels -> Develop apps"
-          },
-          {
-            "name": "SHOPIFY_STORE_DOMAIN",
-            "description": "Permanent myshopify.com subdomain, e.g. my-store.myshopify.com (not the custom domain)"
-          }
-        ]
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["productivity", "e-commerce"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "skill-dev",
-      "name": "skill-dev",
-      "description": "Author and edit custom skills (the prompt-shaped instructions agents follow). Use when the user asks to create, update, modify, or optimize a skill, or wants to add a custom capability to an agent.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/skill-dev/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "skill-dev@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg"
-    },
-    "versions": [
-      {
-        "version": "1.1.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "skill-dev"
-        }
-      },
-      {
-        "version": "1.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "skill-dev"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "platform",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["code", "ren"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "soultrace",
-      "name": "soultrace",
-      "description": "Take a personality assessment via the SoulTrace API. Use when the user wants to take a personality test, discover their psychological archetype, understand their personality traits, or get a color-based personality profile. The API uses a 5-color psychological model (White=structure, Blue=understanding, Black=agency, Red=intensity, Green=connection) with Bayesian adaptive question selection to classify users into one of 25 archetypes. Triggers on: personality test, personality assessment, what's my personality, take a quiz, archetype test, color personality, soultrace.",
-      "docUrl": "https://github.com/soultrace-ai/soultrace-skill/blob/main/skills/soultrace/SKILL.md",
-      "repository": {
-        "url": "https://github.com/soultrace-ai/soultrace-skill",
-        "source": "skills/soultrace@7c4e52ea6c7145c79d5904b2603a39ba4c4d5638"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/soultrace.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/soultrace-ai/soultrace-skill.git",
-          "ref": "7c4e52ea6c7145c79d5904b2603a39ba4c4d5638",
-          "path": "skills/soultrace"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/soultrace-ai/soultrace-skill.git",
-          "ref": "7c4e52ea6c7145c79d5904b2603a39ba4c4d5638",
-          "path": "skills/soultrace"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "soultrace-ai",
-        "tags": ["productivity"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "typefully",
-      "name": "typefully",
-      "description": "Create, schedule, and manage social media posts via Typefully — X, LinkedIn, Threads, Bluesky, Mastodon. Drafts, scheduling, queue, comments, analytics, and media upload. Use when asked to draft, schedule, post, or check social posts.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/typefully/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "typefully@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ"
-    },
+    "currentVersion": "0.0.2",
+    "contentHash": "a6519c2edd25bf6fd624ba1920e009164634d97895500a0a13734a6e28ec1023",
     "versions": [
       {
         "version": "0.0.2",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "typefully"
-        },
-        "requiredCredentials": [
-          {
-            "name": "TYPEFULLY_API_KEY",
-            "description": "Typefully API key from https://typefully.com/?settings=api"
-          }
-        ]
-      },
-      {
-        "version": "0.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "typefully"
-        },
-        "requiredCredentials": [
-          {
-            "name": "TYPEFULLY_API_KEY",
-            "description": "Typefully API key from https://typefully.com/?settings=api"
-          }
-        ]
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "a6519c2edd25bf6fd624ba1920e009164634d97895500a0a13734a6e28ec1023"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["productivity", "social-media"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "video-generation",
-      "name": "video-generation",
-      "description": "Generate videos from text prompts using AI models (Sora, Veo). Use when users want to create videos from descriptions, check generation status, download completed videos, or list generated videos.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/video-generation/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "video-generation@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/video-generation.svg"
-    },
+    "slug": "vaults-credentials-dev",
+    "name": "vaults-credentials-dev",
+    "description": "Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a"
+      }
+    ]
+  },
+  {
+    "slug": "video-generation",
+    "name": "video-generation",
+    "description": "Generate videos from text prompts using AI models (Sora, Veo). Use when users want to create videos from descriptions, check generation status, download completed videos, or list generated videos.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/video-generation.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/video-generation/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "video",
+      "creative"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "d6e4cc055693a8694ec5b2c94b746b85ce40c7ae1210170fcae52eb7847441cd",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "video-generation"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "video-generation"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "d6e4cc055693a8694ec5b2c94b746b85ce40c7ae1210170fcae52eb7847441cd"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["video", "creative"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "xlsx",
-      "name": "xlsx",
-      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xlsx/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "xlsx@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/xlsx.svg"
-    },
+    "slug": "xlsx",
+    "name": "xlsx",
+    "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+    "license": "Proprietary. LICENSE.txt has complete terms",
+    "author": "Anthropic",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/xlsx.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xlsx/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "productivity",
+      "analytics"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "3004304a3e79d85391c981ff974e9837840f7d61288566b8d2c6717a2f099653",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "xlsx"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "xlsx"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "3004304a3e79d85391c981ff974e9837840f7d61288566b8d2c6717a2f099653"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "productivity",
-        "attribution": "transitive",
-        "license": "Proprietary",
-        "author": "Anthropic",
-        "tags": ["productivity", "analytics"]
-      }
-    }
+    ]
   },
   {
-    "skill": {
-      "slug": "xurl",
-      "name": "xurl",
-      "description": "Interact with X (Twitter) via the xurl CLI — post tweets, search, send DMs, upload media, and call any v2 API endpoint. The xurl tool manages OAuth credentials automatically in ~/.xurl after one-time login.",
-      "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xurl/SKILL.md",
-      "repository": {
-        "url": "https://github.com/renai-labs/skills",
-        "source": "xurl@2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/xurl.svg"
-    },
+    "slug": "xurl",
+    "name": "xurl",
+    "description": "X/Twitter via xurl CLI: post, search, DM, media, v2 API.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/xurl.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xurl/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "social-media"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "105c0fe2ad8b5283eec6d9de0d6e14470b51fc33e8208fc30da810c5292758e3",
     "versions": [
       {
         "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "xurl"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/renai-labs/skills.git",
-          "ref": "2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0",
-          "path": "xurl"
-        }
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "105c0fe2ad8b5283eec6d9de0d6e14470b51fc33e8208fc30da810c5292758e3"
       }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "social-media",
-        "attribution": "first-party",
-        "license": "MIT",
-        "author": "Ren Labs",
-        "tags": ["social-media"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "youtube-content",
-      "name": "youtube-content",
-      "description": "Pull a YouTube transcript and turn it into summaries, Twitter/X threads, or blog posts. Use when an agent needs to extract or repurpose spoken content from a YouTube video.",
-      "docUrl": "https://github.com/NousResearch/hermes-agent/blob/main/skills/media/youtube-content/SKILL.md",
-      "repository": {
-        "url": "https://github.com/NousResearch/hermes-agent",
-        "source": "skills/media/youtube-content@54e78cadb2e6d16a4f82185b2dc81c9dc176a813"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/youtube-content.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/media/youtube-content"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/NousResearch/hermes-agent.git",
-          "ref": "54e78cadb2e6d16a4f82185b2dc81c9dc176a813",
-          "path": "skills/media/youtube-content"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Nous Research",
-        "tags": ["creative", "marketing"]
-      }
-    }
-  },
-  {
-    "skill": {
-      "slug": "web-design-guidelines",
-      "name": "web-design-guidelines",
-      "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to review my UI, check accessibility, audit design, review UX, or check my site against best practices.",
-      "docUrl": "https://github.com/vercel-labs/agent-skills/blob/main/skills/web-design-guidelines/SKILL.md",
-      "repository": {
-        "url": "https://github.com/vercel-labs/agent-skills",
-        "source": "skills/web-design-guidelines@ce3e64e468f8fa09a2d075d102771838061fdac0"
-      },
-      "icon": "https://cdn.renai.build/skill-icons/web-design-guidelines.svg"
-    },
-    "versions": [
-      {
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/vercel-labs/agent-skills.git",
-          "ref": "ce3e64e468f8fa09a2d075d102771838061fdac0",
-          "path": "skills/web-design-guidelines"
-        }
-      },
-      {
-        "version": "1.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/vercel-labs/agent-skills.git",
-          "ref": "ce3e64e468f8fa09a2d075d102771838061fdac0",
-          "path": "skills/web-design-guidelines"
-        }
-      }
-    ],
-    "_meta": {
-      "com.renai/skill-registry": {
-        "category": "creative",
-        "attribution": "transitive",
-        "license": "MIT",
-        "author": "Vercel Labs",
-        "tags": ["design", "code"]
-      }
-    }
+    ]
   }
 ]
