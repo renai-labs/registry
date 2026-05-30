@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "renai-skills",
+  "name": "renai-registry",
   "description": "Ren skills, plugins, and registry data",
   "private": true,
   "type": "module",

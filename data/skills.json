@@ -8,7 +8,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/audio-generation.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/audio-generation/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "audio",
@@ -34,7 +34,7 @@
     "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/baoyu-comic.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-comic/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative",
@@ -60,7 +60,7 @@
     "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/baoyu-infographic.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/baoyu-infographic/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative",
@@ -86,7 +86,7 @@
     "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/comfyui.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/comfyui/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative",
@@ -113,7 +113,7 @@
     "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/concept-diagrams.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/concept-diagrams/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative",
@@ -139,7 +139,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/docx.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/docx/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity"
@@ -164,7 +164,7 @@
     "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/fitness-nutrition.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/fitness-nutrition/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "health"
@@ -189,7 +189,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/google-workspace.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/google-workspace/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity"
@@ -214,7 +214,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/image-generation.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/image-generation/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative"
@@ -239,7 +239,7 @@
     "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/meme-generation.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/meme-generation/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "creative",
@@ -265,7 +265,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/pdf.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pdf/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity"
@@ -290,7 +290,7 @@
     "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/popular-web-designs.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/popular-web-designs/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "design",
@@ -316,7 +316,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/pptx.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/pptx/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity"
@@ -341,7 +341,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/agent-dev/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "code",
@@ -413,7 +413,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/onboarding/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "ren"
@@ -461,7 +461,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/project-dev.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/project-dev/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity",
@@ -511,7 +511,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/skill-dev/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "code",
@@ -583,7 +583,7 @@
     "source": "https://shopify.dev/docs/api/admin-graphql",
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/shopify.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/shopify/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity",
@@ -609,7 +609,7 @@
     "source": "https://typefully.com/docs/api",
     "homepage": null,
     "icon": "https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/typefully/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity",
@@ -635,7 +635,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/video-generation.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/video-generation/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "video",
@@ -661,7 +661,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/xlsx.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xlsx/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "productivity",
@@ -687,7 +687,7 @@
     "source": null,
     "homepage": null,
     "icon": "https://cdn.renai.build/skill-icons/xurl.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/xurl/SKILL.md",
+    "docUrl": null,
     "websiteMetadata": null,
     "tags": [
       "social-media"

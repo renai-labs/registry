@@ -8,7 +8,7 @@ import { log } from "@/lib/log"
 import type { AgentEntry, AgentVersionEntry, DepRef, McpEntry, SkillEntry, SkillVersionEntry } from "@renai-labs/registry-schemas"
 
 const REGISTRY_URL = process.env.REN_REGISTRY_URL ?? "https://api.renai.build"
-const REPO_URL = process.env.REN_REGISTRY_REPO_URL ?? "https://github.com/renai-labs/skills"
+const REPO_URL = process.env.REN_REGISTRY_REPO_URL ?? "https://github.com/renai-labs/registry"
 
 // Only registry artifacts get staged into the publish commit whose SHA becomes
 // every frozen gitRef — never the maintainer's unrelated working-tree edits.
@@ -19,6 +19,10 @@ type PublishOptions = { dryRun: boolean }
 export const jsonArray = (xs: unknown[] | undefined) => (xs?.length ? JSON.stringify(xs) : undefined)
 export const publishedVersions = <T extends { gitRef: string | null; version: string }>(versions: T[]) =>
   versions.filter((v) => v.gitRef !== null).sort((a, b) => semver.compare(a.version, b.version))
+
+// docUrl is derived from the repo + published gitRef + canonical path, never stored —
+// so repo renames and layout moves can't leave it stale. Mirrors how `source` is built.
+export const docUrlFor = (slug: string, gitRef: string) => `${REPO_URL}/blob/${gitRef}/data/skills/${slug}/SKILL.md`
 
 export async function runPublishCommand(opts: PublishOptions): Promise<void> {
   log.header("publish")
@@ -89,6 +93,8 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
     const versions = publishedVersions(entry.versions)
     if (!versions.length) continue
 
+    const docUrl = entry.docUrl ?? docUrlFor(entry.slug, versions[versions.length - 1]!.gitRef!)
+
     const sourceFields = (v: SkillVersionEntry) => ({
       source: JSON.stringify({ type: "git", url: REPO_URL, ref: v.gitRef, path: `data/skills/${entry.slug}` }),
       releaseNotes: v.releaseNotes ?? undefined,
@@ -124,7 +130,7 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
           name: entry.name,
           description: entry.description,
           icon: entry.icon ?? null,
-          docUrl: entry.docUrl ?? null,
+          docUrl,
           websiteMetadata: entry.websiteMetadata ?? null,
           tags: entry.tags ?? [],
         },
