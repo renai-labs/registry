@@ -1,31 +1,5 @@
 [
   {
-    "slug": "agent-dev",
-    "name": "agent-dev",
-    "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
-    "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/agent-dev/SKILL.md",
-    "websiteMetadata": null,
-    "tags": [
-      "code",
-      "ren"
-    ],
-    "currentVersion": "1.1.1",
-    "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117",
-    "versions": [
-      {
-        "version": "1.1.1",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117"
-      }
-    ]
-  },
-  {
     "slug": "audio-generation",
     "name": "audio-generation",
     "description": "Convert text to speech and transcribe audio using AI models (OpenAI TTS, ElevenLabs, Whisper). Use when users want to generate audio from text or transcribe speech to text.",
@@ -182,29 +156,6 @@
     ]
   },
   {
-    "slug": "file-memory-store-dev",
-    "name": "file-memory-store-dev",
-    "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
-    "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
-    "currentVersion": "1.0.0",
-    "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01",
-    "versions": [
-      {
-        "version": "1.0.0",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01"
-      }
-    ]
-  },
-  {
     "slug": "fitness-nutrition",
     "name": "fitness-nutrition",
     "description": "Gym workout planner and nutrition tracker. Search 690+ exercises by muscle, equipment, or category via wger. Look up macros and calories for 380,000+ foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro splits, and body fat — pure Python, no pip installs. Built for anyone chasing gains, cutting weight, or just trying to eat better.\n",
@@ -280,29 +231,6 @@
     ]
   },
   {
-    "slug": "mcp-dev",
-    "name": "mcp-dev",
-    "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
-    "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
-    "currentVersion": "1.0.0",
-    "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f",
-    "versions": [
-      {
-        "version": "1.0.0",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f"
-      }
-    ]
-  },
-  {
     "slug": "meme-generation",
     "name": "meme-generation",
     "description": "Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.",
@@ -329,31 +257,6 @@
     ]
   },
   {
-    "slug": "onboarding",
-    "name": "onboarding",
-    "description": "First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.",
-    "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/onboarding/SKILL.md",
-    "websiteMetadata": null,
-    "tags": [
-      "ren"
-    ],
-    "currentVersion": "1.0.1",
-    "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2",
-    "versions": [
-      {
-        "version": "1.0.1",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2"
-      }
-    ]
-  },
-  {
     "slug": "pdf",
     "name": "pdf",
     "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
@@ -375,29 +278,6 @@
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "0653823bc11150a8568388470e81e9324c8d55c52ebba91648b2f505483664e0"
-      }
-    ]
-  },
-  {
-    "slug": "pod-dev",
-    "name": "pod-dev",
-    "description": "Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.",
-    "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
-    "currentVersion": "1.0.0",
-    "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec",
-    "versions": [
-      {
-        "version": "1.0.0",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec"
       }
     ]
   },
@@ -453,8 +333,128 @@
     ]
   },
   {
-    "slug": "project-dev",
-    "name": "project-dev",
+    "slug": "ren-agent-dev",
+    "name": "ren-agent-dev",
+    "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/agent-dev/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "code",
+      "ren"
+    ],
+    "currentVersion": "1.1.1",
+    "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117",
+    "versions": [
+      {
+        "version": "1.1.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "302d424a09a382896b699676d447d619f0ee6f72b07c4fe184793bdd97b57117"
+      }
+    ]
+  },
+  {
+    "slug": "ren-file-memory-store-dev",
+    "name": "ren-file-memory-store-dev",
+    "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "ee950631218f4c5d9013069cb92231ed088d64b1d80681fe23a2a45aad244a01"
+      }
+    ]
+  },
+  {
+    "slug": "ren-mcp-dev",
+    "name": "ren-mcp-dev",
+    "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "9a0fd196f334c164d61d12c8784105ac6d91b823872d85eff7bbe02dba1d2d3f"
+      }
+    ]
+  },
+  {
+    "slug": "ren-onboarding",
+    "name": "ren-onboarding",
+    "description": "First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/onboarding/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "ren"
+    ],
+    "currentVersion": "1.0.1",
+    "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2",
+    "versions": [
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "51987b2a1afb259de4405f41d2abc74c70f39989f55e8ceb7597ee8a827a4da2"
+      }
+    ]
+  },
+  {
+    "slug": "ren-pod-dev",
+    "name": "ren-pod-dev",
+    "description": "Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "53aeb253b9db0236324d9ec4da915cca6ecf9195afd882415857439123c5c9ec"
+      }
+    ]
+  },
+  {
+    "slug": "ren-project-dev",
+    "name": "ren-project-dev",
     "description": "Create, configure, and manage projects within a pod - attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.",
     "license": "MIT",
     "author": "Ren Labs",
@@ -476,6 +476,78 @@
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "a57e9d5f11c3b3b33452323913f85db87138ed01fe6a3815d83d372b1c778f2e"
+      }
+    ]
+  },
+  {
+    "slug": "ren-skill-dev",
+    "name": "ren-skill-dev",
+    "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
+    "license": "MIT",
+    "author": "Ren Labs",
+    "source": null,
+    "homepage": null,
+    "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
+    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/skill-dev/SKILL.md",
+    "websiteMetadata": null,
+    "tags": [
+      "code",
+      "ren"
+    ],
+    "currentVersion": "1.1.1",
+    "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4",
+    "versions": [
+      {
+        "version": "1.1.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4"
+      }
+    ]
+  },
+  {
+    "slug": "ren-trigger-dev",
+    "name": "ren-trigger-dev",
+    "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893"
+      }
+    ]
+  },
+  {
+    "slug": "ren-vaults-credentials-dev",
+    "name": "ren-vaults-credentials-dev",
+    "description": "Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.",
+    "license": null,
+    "author": null,
+    "source": null,
+    "homepage": null,
+    "icon": null,
+    "docUrl": null,
+    "websiteMetadata": null,
+    "tags": [],
+    "currentVersion": "1.0.0",
+    "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a"
       }
     ]
   },
@@ -506,55 +578,6 @@
     ]
   },
   {
-    "slug": "skill-dev",
-    "name": "skill-dev",
-    "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
-    "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
-    "docUrl": "https://github.com/renai-labs/skills/blob/2fe32a7de43b3a088af4cb7c313cf94d52e9b1f0/skill-dev/SKILL.md",
-    "websiteMetadata": null,
-    "tags": [
-      "code",
-      "ren"
-    ],
-    "currentVersion": "1.1.1",
-    "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4",
-    "versions": [
-      {
-        "version": "1.1.1",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "f032b0aa2d0a4b99ed64e4be775e8e9c79909caf3eb8d2f17ca92b002ba7bca4"
-      }
-    ]
-  },
-  {
-    "slug": "trigger-dev",
-    "name": "trigger-dev",
-    "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",
-    "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
-    "currentVersion": "1.0.0",
-    "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893",
-    "versions": [
-      {
-        "version": "1.0.0",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "c7b8fda251ef75e23b5bfc6e0f51aa4ca6c7f87f4bbe54a26a3d47a2d4f19893"
-      }
-    ]
-  },
-  {
     "slug": "typefully",
     "name": "typefully",
     "description": "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.",
@@ -577,29 +600,6 @@
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "a6519c2edd25bf6fd624ba1920e009164634d97895500a0a13734a6e28ec1023"
-      }
-    ]
-  },
-  {
-    "slug": "vaults-credentials-dev",
-    "name": "vaults-credentials-dev",
-    "description": "Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.",
-    "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
-    "currentVersion": "1.0.0",
-    "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a",
-    "versions": [
-      {
-        "version": "1.0.0",
-        "gitRef": null,
-        "publishedAt": null,
-        "contentHash": "c0a23c4508d838b82c151c4e686cba0fef2527d4bdc5ae5ca5d0b0ec87de582a"
       }
     ]
   },
