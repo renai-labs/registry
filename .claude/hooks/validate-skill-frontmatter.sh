@@ -10,7 +10,7 @@ file="$(printf '%s' "$input" | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"
 case "$file" in
   */data/skills/*/SKILL.md)
     repo_root="${file%%/data/skills/*}"
-    if ! out="$(cd "$repo_root" && bun cli/src/index.ts validate 2>&1)"; then
+    if ! out="$(cd "$repo_root" && bun run validate 2>&1)"; then
       echo "SKILL.md frontmatter validation failed:" >&2
       echo "$out" >&2
       exit 2

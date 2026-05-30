@@ -5,9 +5,14 @@ description: >-
   templates. Use when generating HTML/CSS in the visual style of a known brand —
   landing pages, marketing sites, dashboards, documentation.
 license: MIT
-author: Teknium
-source: >-
-  https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs
+metadata:
+  author: Teknium
+  source: >-
+    https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs
+  icon: 'https://cdn.renai.build/skill-icons/popular-web-designs.svg'
+  tags:
+    - design
+    - creative
 ---
 
 # Popular Web Designs

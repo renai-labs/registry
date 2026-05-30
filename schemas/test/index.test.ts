@@ -87,16 +87,40 @@ describe("SkillFrontmatter", () => {
     expect(result.success).toBe(true)
   })
 
-  test("accepts optional metadata fields", () => {
+  test("accepts the agentskills spec fields (license, compatibility, allowed-tools, metadata)", () => {
     const result = SkillFrontmatter.safeParse({
       name: "typefully",
       description: "Social posts",
       license: "MIT",
-      author: "Ren Labs",
-      source: "https://typefully.com/docs/api",
-      homepage: "https://typefully.com",
+      compatibility: "Requires curl and network access",
+      "allowed-tools": "Bash(curl:*) Read",
+      metadata: {
+        author: "Ren Labs",
+        source: "https://typefully.com/docs/api",
+        homepage: "https://typefully.com",
+        icon: "https://cdn.renai.build/skill-icons/typefully.svg",
+        tags: ["social"],
+        requiredCredentials: [{ name: "TYPEFULLY_API_KEY", description: "API key" }],
+      },
     })
     expect(result.success).toBe(true)
+  })
+
+  test("metadata passthrough keeps unknown keys", () => {
+    const result = SkillFrontmatter.safeParse({
+      name: "x",
+      description: "...",
+      metadata: { author: "Ren Labs", "com.example/custom": "value" },
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect((result.data.metadata as Record<string, unknown>)["com.example/custom"]).toBe("value")
+    }
+  })
+
+  test("rejects compatibility over 500 chars", () => {
+    const result = SkillFrontmatter.safeParse({ name: "x", description: "...", compatibility: "a".repeat(501) })
+    expect(result.success).toBe(false)
   })
 
   test("rejects version field — the canonical drift bug we want stopped at the source", () => {
@@ -110,6 +134,12 @@ describe("SkillFrontmatter", () => {
       const keys = result.error.issues.flatMap((i) => (i as { keys?: string[] }).keys ?? [])
       expect(keys).toContain("version")
     }
+  })
+
+  test("rejects legacy top-level author/source/homepage (now under metadata)", () => {
+    expect(SkillFrontmatter.safeParse({ name: "x", description: "...", author: "Ren Labs" }).success).toBe(false)
+    expect(SkillFrontmatter.safeParse({ name: "x", description: "...", source: "https://x.com" }).success).toBe(false)
+    expect(SkillFrontmatter.safeParse({ name: "x", description: "...", homepage: "https://x.com" }).success).toBe(false)
   })
 
   test("rejects unknown keys (strict mode)", () => {
@@ -161,28 +191,6 @@ describe("SkillVersionEntry", () => {
     })
     expect(result.success).toBe(false)
   })
-
-  test("accepts requiredCredentials", () => {
-    const result = SkillVersionEntry.safeParse({
-      version: "0.0.1",
-      gitRef: null,
-      publishedAt: null,
-      contentHash: "h",
-      requiredCredentials: [{ name: "API_KEY", description: "key" }, { name: "TOKEN" }],
-    })
-    expect(result.success).toBe(true)
-  })
-
-  test("rejects requiredCredentials entries without a name", () => {
-    const result = SkillVersionEntry.safeParse({
-      version: "0.0.1",
-      gitRef: null,
-      publishedAt: null,
-      contentHash: "h",
-      requiredCredentials: [{ description: "no name" }],
-    })
-    expect(result.success).toBe(false)
-  })
 })
 
 describe("SkillEntry", () => {
@@ -203,40 +211,39 @@ describe("SkillEntry", () => {
     expect(SkillEntry.safeParse({ ...minimal, versions: [] }).success).toBe(false)
   })
 
-  test("accepts nullable optional metadata", () => {
+  test("accepts nullable optional fields", () => {
+    const result = SkillEntry.safeParse({ ...minimal, license: null, metadata: null })
+    expect(result.success).toBe(true)
+  })
+
+  test("accepts nested metadata (author, source, icon, tags, requiredCredentials)", () => {
     const result = SkillEntry.safeParse({
       ...minimal,
-      license: null,
-      author: null,
-      source: null,
-      homepage: null,
+      license: "MIT",
+      metadata: {
+        author: "Ren Labs",
+        source: "https://example.com/docs",
+        icon: "https://example.com/icon.png",
+        tags: ["productivity", "web"],
+        requiredCredentials: [{ name: "API_KEY" }],
+      },
     })
     expect(result.success).toBe(true)
   })
 
-  test("accepts registry display metadata (icon, docUrl, websiteMetadata, tags)", () => {
-    const result = SkillEntry.safeParse({
-      ...minimal,
-      icon: "https://example.com/icon.png",
-      docUrl: "https://example.com/docs",
-      websiteMetadata: { supportUrl: "https://example.com/support" },
-      tags: ["productivity", "web"],
-    })
+  test("accepts a manually-curated websiteMetadata", () => {
+    const result = SkillEntry.safeParse({ ...minimal, websiteMetadata: { supportUrl: "https://example.com/help" } })
     expect(result.success).toBe(true)
   })
 
-  test("accepts null display metadata", () => {
-    const result = SkillEntry.safeParse({
-      ...minimal,
-      icon: null,
-      docUrl: null,
-      websiteMetadata: null,
-    })
-    expect(result.success).toBe(true)
+  test("rejects non-kebab tags in metadata", () => {
+    expect(SkillEntry.safeParse({ ...minimal, metadata: { tags: ["Not Kebab"] } }).success).toBe(false)
   })
 
-  test("rejects non-kebab tags", () => {
-    expect(SkillEntry.safeParse({ ...minimal, tags: ["Not Kebab"] }).success).toBe(false)
+  test("rejects requiredCredentials entries without a name", () => {
+    expect(
+      SkillEntry.safeParse({ ...minimal, metadata: { requiredCredentials: [{ description: "no name" }] } }).success,
+    ).toBe(false)
   })
 })
 

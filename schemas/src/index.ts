@@ -1,11 +1,5 @@
 import { z } from "zod"
-import {
-  zMcp,
-  zMcpAuthConfig,
-  zPermissionConfig,
-  zRepository,
-  zWebsiteMetadata,
-} from "@renai-labs/sdk/zod"
+import { zMcp, zMcpAuthConfig, zPermissionConfig, zRepository, zWebsiteMetadata } from "@renai-labs/sdk/zod"
 
 export const Repository = zRepository
 export type Repository = z.infer<typeof Repository>
@@ -38,16 +32,34 @@ export const GitRef = z.string().regex(/^[0-9a-f]{40}$/, "gitRef must be a 40-ch
 export const Bump = z.enum(["patch", "minor", "major"])
 export type Bump = z.infer<typeof Bump>
 
-// version is owned by data/skills.json, not SKILL.md; .strict() rejects unknown keys (e.g. a pasted `version:`)
+export const Compatibility = z.string().min(1).max(500)
 
+export const RequiredCredential = z.object({ name: z.string().min(1), description: z.string().optional() })
+export type RequiredCredential = z.infer<typeof RequiredCredential>
+
+// .passthrough() keeps client-defined metadata keys the agentskills spec permits beyond these.
+export const SkillMetadata = z
+  .object({
+    author: z.string().optional(),
+    source: z.string().optional(),
+    homepage: z.string().optional(),
+    icon: z.string().optional(),
+    docUrl: z.string().optional(),
+    tags: z.array(Slug).optional(),
+    requiredCredentials: z.array(RequiredCredential).optional(),
+  })
+  .passthrough()
+export type SkillMetadata = z.infer<typeof SkillMetadata>
+
+// agentskills.io spec shape; .strict() rejects a pasted `version:` (owned by data/skills.json).
 export const SkillFrontmatter = z
   .object({
     name: Slug,
     description: z.string().min(1).max(1024),
     license: z.string().optional(),
-    author: z.string().optional(),
-    source: z.string().optional(),
-    homepage: z.url().optional(),
+    compatibility: Compatibility.optional(),
+    "allowed-tools": z.string().optional(),
+    metadata: SkillMetadata.optional(),
   })
   .strict()
 export type SkillFrontmatter = z.infer<typeof SkillFrontmatter>
@@ -61,24 +73,19 @@ export const SkillVersionEntry = z.object({
   publishedAt: z.iso.datetime().nullable(),
   contentHash: z.string().min(1),
   releaseNotes: z.string().nullable().optional(),
-  requiredCredentials: z
-    .array(z.object({ name: z.string().min(1), description: z.string().optional() }))
-    .optional(),
 })
 export type SkillVersionEntry = z.infer<typeof SkillVersionEntry>
 
+// Holds only what the registry API publishes. Descriptive fields are derived from frontmatter on
+// each release; currentVersion/contentHash/versions[] are CLI-owned. Spec fields the API doesn't
+// consume (compatibility, allowed-tools) stay in SKILL.md, not here.
 export const SkillEntry = z.object({
   slug: Slug,
   name: z.string().min(1),
   description: z.string().min(1),
   license: z.string().nullable().optional(),
-  author: z.string().nullable().optional(),
-  source: z.string().nullable().optional(),
-  homepage: z.string().nullable().optional(),
-  icon: z.string().nullable().optional(),
-  docUrl: z.string().nullable().optional(),
+  metadata: SkillMetadata.nullable().optional(),
   websiteMetadata: WebsiteMetadata.nullable().optional(),
-  tags: z.array(Slug).optional(),
   currentVersion: Semver,
   contentHash: z.string().min(1),
   versions: z.array(SkillVersionEntry).min(1),

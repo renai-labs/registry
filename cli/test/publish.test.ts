@@ -190,10 +190,10 @@ describe("publishSkills", () => {
     expect(ids.get("my-skill")).toBe("sid")
   })
 
-  test("forwards tags and requiredCredentials as JSON", async () => {
+  test("forwards tags and requiredCredentials from metadata as JSON", async () => {
     const { client, calls } = makeClient()
     await publishSkills(client, [
-      skill("s", [sv("0.0.1", "rA", { requiredCredentials: [{ name: "API_KEY" }] })], { tags: ["a", "b"] }),
+      skill("s", [sv("0.0.1", "rA")], { metadata: { tags: ["a", "b"], requiredCredentials: [{ name: "API_KEY" }] } }),
     ])
     const body = argOf(calls, "skill.create")[0]
     expect(body.tags).toBe('["a","b"]')
@@ -217,9 +217,19 @@ describe("publishSkills", () => {
 
   test("existing skill: update re-sends tags", async () => {
     const { client, calls } = makeClient({ skills: { s: { id: "sid", versions: ["0.0.1"] } } })
-    await publishSkills(client, [skill("s", [sv("0.0.1", "rA")], { tags: ["alpha", "beta"] })])
+    await publishSkills(client, [skill("s", [sv("0.0.1", "rA")], { metadata: { tags: ["alpha", "beta"] } })])
     const { body } = argOf(calls, "skill.update")[0]
     expect(body.tags).toEqual(["alpha", "beta"])
+  })
+
+  test("update sends websiteMetadata when curated, omits it otherwise", async () => {
+    const { client, calls } = makeClient({ skills: { s: { id: "sid", versions: ["0.0.1"] } } })
+    await publishSkills(client, [skill("s", [sv("0.0.1", "rA")], { websiteMetadata: { supportUrl: "https://x.com/help" } })])
+    expect(argOf(calls, "skill.update")[0].body.websiteMetadata).toEqual({ supportUrl: "https://x.com/help" })
+
+    const { client: c2, calls: calls2 } = makeClient({ skills: { s: { id: "sid", versions: ["0.0.1"] } } })
+    await publishSkills(c2, [skill("s", [sv("0.0.1", "rA")])])
+    expect("websiteMetadata" in argOf(calls2, "skill.update")[0].body).toBe(false)
   })
 
   test("existing skill with every version already on server: update only, no version.create", async () => {

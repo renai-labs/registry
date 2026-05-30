@@ -1,6 +1,10 @@
 ---
 name: ren-file-memory-store-dev
-description: Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).
+description: >-
+  Create and attach file stores and memory stores - the durable volumes an agent
+  reads from and writes to. Use when the user wants the agent to consume
+  uploaded artifacts (file store, read-only) or keep long-term memory across
+  runs (memory store, read-write).
 ---
 
 # File & Memory Store Dev

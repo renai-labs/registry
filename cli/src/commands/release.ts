@@ -64,43 +64,25 @@ export async function release(opts: ReleaseOptions): Promise<ReleaseResult> {
       throw new Error(`release ${slug}: target version ${nextVersion} already in versions[] — pick a different bump`)
     }
 
-    const priorCredentials = existing
-      ? findVersion(existing, existing.currentVersion)?.requiredCredentials
-      : undefined
-
     const newVersionEntry: SkillVersionEntry = {
       version: nextVersion,
       gitRef: null,
       publishedAt: null,
       contentHash: sourceHash,
-      ...(priorCredentials?.length ? { requiredCredentials: priorCredentials } : {}),
     }
 
-    const next: SkillEntry = existing
-      ? {
-          ...existing,
-          name: parsed.frontmatter.name,
-          description: parsed.frontmatter.description,
-          license: parsed.frontmatter.license ?? existing.license ?? null,
-          author: parsed.frontmatter.author ?? existing.author ?? null,
-          source: parsed.frontmatter.source ?? existing.source ?? null,
-          homepage: parsed.frontmatter.homepage ?? existing.homepage ?? null,
-          currentVersion: nextVersion,
-          contentHash: sourceHash,
-          versions: [...existing.versions, newVersionEntry],
-        }
-      : {
-          slug,
-          name: parsed.frontmatter.name,
-          description: parsed.frontmatter.description,
-          license: parsed.frontmatter.license ?? null,
-          author: parsed.frontmatter.author ?? null,
-          source: parsed.frontmatter.source ?? null,
-          homepage: parsed.frontmatter.homepage ?? null,
-          currentVersion: nextVersion,
-          contentHash: sourceHash,
-          versions: [newVersionEntry],
-        }
+    // Descriptive fields are re-derived from frontmatter; websiteMetadata is hand-curated, so it carries forward.
+    const next: SkillEntry = {
+      slug,
+      name: parsed.frontmatter.name,
+      description: parsed.frontmatter.description,
+      license: parsed.frontmatter.license ?? null,
+      metadata: parsed.frontmatter.metadata ?? null,
+      ...(existing?.websiteMetadata != null ? { websiteMetadata: existing.websiteMetadata } : {}),
+      currentVersion: nextVersion,
+      contentHash: sourceHash,
+      versions: existing ? [...existing.versions, newVersionEntry] : [newVersionEntry],
+    }
 
     bySlug.set(slug, next)
     released.push({ slug, from: existing?.currentVersion ?? null, to: nextVersion })

@@ -3,6 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import {
   build,
+  detectDerivationIssues,
   detectDrift,
   detectFrozenIntegrityIssues,
   detectPrBaseDiffIssues,
@@ -25,6 +26,7 @@ export async function check(): Promise<CheckResult> {
 
   const snapshot = await loadSkillsRegistry()
   problems.push(...detectSelfConsistencyIssues(snapshot))
+  problems.push(...(await detectDerivationIssues(snapshot)))
 
   const frozen = await detectFrozenIntegrityIssues(snapshot)
   for (const issue of frozen) {

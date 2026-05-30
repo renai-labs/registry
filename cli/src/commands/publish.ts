@@ -93,12 +93,15 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
     const versions = publishedVersions(entry.versions)
     if (!versions.length) continue
 
-    const docUrl = entry.docUrl ?? docUrlFor(entry.slug, versions[versions.length - 1]!.gitRef!)
+    // Flatten the nested metadata back to the registry API body so the server contract is unchanged.
+    const meta = entry.metadata ?? {}
+    const docUrl = meta.docUrl ?? docUrlFor(entry.slug, versions[versions.length - 1]!.gitRef!)
+    const requiredCredentials = jsonArray(meta.requiredCredentials)
 
     const sourceFields = (v: SkillVersionEntry) => ({
       source: JSON.stringify({ type: "git", url: REPO_URL, ref: v.gitRef, path: `data/skills/${entry.slug}` }),
       releaseNotes: v.releaseNotes ?? undefined,
-      requiredCredentials: jsonArray(v.requiredCredentials),
+      requiredCredentials,
     })
 
     const { data: existing } = await client.skill.getBySlug({ path: { slug: entry.slug } })
@@ -109,8 +112,8 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
         body: {
           name: entry.name,
           description: entry.description,
-          icon: entry.icon ?? undefined,
-          tags: jsonArray(entry.tags),
+          icon: meta.icon ?? undefined,
+          tags: jsonArray(meta.tags),
           files: [],
           ...sourceFields(versions[0]!),
         },
@@ -129,10 +132,10 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
         body: {
           name: entry.name,
           description: entry.description,
-          icon: entry.icon ?? null,
+          icon: meta.icon ?? null,
           docUrl,
-          websiteMetadata: entry.websiteMetadata ?? null,
-          tags: entry.tags ?? [],
+          tags: meta.tags ?? [],
+          ...(entry.websiteMetadata ? { websiteMetadata: entry.websiteMetadata } : {}),
         },
       })
       log.step(`skill: updated ${entry.slug}`)

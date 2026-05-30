@@ -89,6 +89,47 @@ export function formatDriftProblems(drift: DriftReport): string[] {
   return problems
 }
 
+function stableStringify(value: unknown): string {
+  if (value === null || typeof value !== "object") return JSON.stringify(value)
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`
+  const keys = Object.keys(value as Record<string, unknown>).sort()
+  return `{${keys.map((k) => `${JSON.stringify(k)}:${stableStringify((value as Record<string, unknown>)[k])}`).join(",")}}`
+}
+
+// The contentHash drift check can't see a hand-edit to skills.json metadata (skills.json isn't in
+// the hash tree), so re-derive the published fields from frontmatter and flag any divergence.
+export async function detectDerivationIssues(entries: SkillEntry[]): Promise<string[]> {
+  const problems: string[] = []
+  const sourceSlugs = new Set(await discoverSkillSlugs())
+  for (const entry of entries) {
+    if (!sourceSlugs.has(entry.slug)) continue
+    const sourceHash = await hashTree(join(PATHS.dataSkills, entry.slug))
+    // Out-of-sync entries are already reported by the drift check with a release hint; skip them here.
+    if (entry.contentHash !== sourceHash) continue
+
+    const { frontmatter: fm } = await parseSkill(entry.slug)
+    const expected = {
+      name: fm.name,
+      description: fm.description,
+      license: fm.license ?? null,
+      metadata: fm.metadata ?? null,
+    }
+    const actual = {
+      name: entry.name,
+      description: entry.description,
+      license: entry.license ?? null,
+      metadata: entry.metadata ?? null,
+    }
+    if (stableStringify(expected) !== stableStringify(actual)) {
+      problems.push(
+        `derivation: ${entry.slug} — skills.json fields don't match SKILL.md frontmatter; ` +
+          `skills.json is generated from frontmatter, run \`ren-registry release ${entry.slug}\``,
+      )
+    }
+  }
+  return problems
+}
+
 // An entry with `gitRef != null` is "frozen" — published and immutable.
 // The snapshot may grow (new entries appended) but a frozen entry MUST NOT
 // disappear or have its identity fields (gitRef, contentHash) mutate.

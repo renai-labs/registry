@@ -6,9 +6,14 @@ description: >-
   publication-ready infographics. Use when user asks to create "infographic",
   "信息图", "visual summary", "可视化", or "高密度信息大图".
 license: MIT
-author: 宝玉 (JimLiu)
-source: >-
-  https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic
+metadata:
+  author: 宝玉 (JimLiu)
+  source: >-
+    https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic
+  icon: 'https://cdn.renai.build/skill-icons/baoyu-infographic.svg'
+  tags:
+    - creative
+    - design
 ---
 
 # Infographic Generator

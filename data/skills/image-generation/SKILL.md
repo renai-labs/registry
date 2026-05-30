@@ -1,6 +1,15 @@
 ---
 name: image-generation
-description: Generate, edit, and create variations of images using AI models (GPT-Image, DALL-E, Gemini). Use when users want to create new images from descriptions, edit existing images, or create variations.
+description: >-
+  Generate, edit, and create variations of images using AI models (GPT-Image,
+  DALL-E, Gemini). Use when users want to create new images from descriptions,
+  edit existing images, or create variations.
+license: MIT
+metadata:
+  author: Ren Labs
+  icon: 'https://cdn.renai.build/skill-icons/image-generation.svg'
+  tags:
+    - creative
 ---
 
 # Image Generation

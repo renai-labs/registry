@@ -1,6 +1,16 @@
 ---
 name: audio-generation
-description: Convert text to speech and transcribe audio using AI models (OpenAI TTS, ElevenLabs, Whisper). Use when users want to generate audio from text or transcribe speech to text.
+description: >-
+  Convert text to speech and transcribe audio using AI models (OpenAI TTS,
+  ElevenLabs, Whisper). Use when users want to generate audio from text or
+  transcribe speech to text.
+license: MIT
+metadata:
+  author: Ren Labs
+  icon: 'https://cdn.renai.build/skill-icons/audio-generation.svg'
+  tags:
+    - audio
+    - creative
 ---
 
 # Audio Generation

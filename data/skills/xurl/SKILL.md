@@ -2,7 +2,11 @@
 name: xurl
 description: 'X/Twitter via xurl CLI: post, search, DM, media, v2 API.'
 license: MIT
-author: Ren Labs
+metadata:
+  author: Ren Labs
+  icon: 'https://cdn.renai.build/skill-icons/xurl.svg'
+  tags:
+    - social-media
 ---
 
 # xurl — X (Twitter) API via the Official CLI

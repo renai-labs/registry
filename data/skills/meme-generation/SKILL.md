@@ -4,9 +4,14 @@ description: >-
   Generate real meme images by picking a template and overlaying text with
   Pillow. Produces actual .png meme files.
 license: MIT
-author: adanaleycio
-source: >-
-  https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation
+metadata:
+  author: adanaleycio
+  source: >-
+    https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation
+  icon: 'https://cdn.renai.build/skill-icons/meme-generation.svg'
+  tags:
+    - creative
+    - social-media
 ---
 
 # Meme Generation

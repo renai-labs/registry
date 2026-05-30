@@ -13,16 +13,19 @@ Registry monorepo for Ren skills, built with **Bun** (`bun@1.3.11`).
 ## Dos & Don'ts
 
 - **DO** edit skills only under `data/skills/<slug>/`. **DON'T** hand-edit `skills/`, `plugins/ren/skills/`, or any generated manifest — `ren-registry build` overwrites them and `check` fails on drift.
-- **DON'T** hand-edit `currentVersion`, `contentHash`, or `versions[]` in `data/skills.json` — these are owned by `release`/`publish`. **DON'T** put `version:` in SKILL.md frontmatter (frontmatter is `.strict()`); bump versions via `ren-registry release`.
+- **DON'T** hand-edit `data/skills.json` except `websiteMetadata` — everything else is generated from SKILL.md frontmatter plus CLI-owned version bookkeeping (`release`/`publish`). **DON'T** put `version:` in SKILL.md frontmatter (frontmatter is `.strict()`); bump versions via `ren-registry release`.
 - **DON'T** mutate or delete a frozen version (one whose `gitRef !== null`) — it's published and immutable; `check` rejects PRs that do.
 - **DO** run `ren-registry build && git add -A` after a release so generated files stay in sync.
 - **DO** add a new skill's slug to a `skills.sh.json` grouping only if it should ship in the bundled plugin (build prunes dead bundle entries but never auto-adds).
 
 ## Where each field is edited
 
-- **In SKILL.md frontmatter** (pulled into `skills.json` on `release`): `name`, `description`, `license`, `author`, `source`, `homepage`. Only `name` + `description` are required.
-- **Directly in `data/skills.json`** (no frontmatter equivalent, preserved across releases): `icon`, `docUrl`, `websiteMetadata`, `tags`, and per-version `releaseNotes`, `requiredCredentials`.
-- **Never by hand** (CLI-owned): `currentVersion`, `contentHash`, `versions[].{version,gitRef,publishedAt,contentHash}`.
+SKILL.md frontmatter follows the [agentskills.io spec](https://agentskills.io/specification); `data/skills.json` is generated from it on `release` — only `websiteMetadata` is hand-edited.
+
+- **In SKILL.md frontmatter**: `name`, `description` (required), plus optional `license`, `compatibility` (≤500 chars), `allowed-tools`, and `metadata` (open map). Ren extras live under `metadata`: `author`, `source`, `homepage`, `icon`, `docUrl`, `tags`, `requiredCredentials`. `name` must match the parent directory.
+- **Generated into `data/skills.json`** (don't touch): `slug`, `name`, `description`, `license`, `metadata` are derived from frontmatter; `compatibility`/`allowed-tools` stay in SKILL.md (the registry API doesn't consume them).
+- **Hand-curated in `data/skills.json`**: `websiteMetadata` — not in SKILL.md; edit it directly on the entry and `release` preserves it across versions.
+- **CLI-owned bookkeeping** in `data/skills.json`: `currentVersion`, `contentHash`, `versions[].{version,gitRef,publishedAt,contentHash,releaseNotes}`.
 
 ## Skill dev lifecycle
 

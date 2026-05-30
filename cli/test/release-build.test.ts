@@ -99,20 +99,34 @@ describe("release", () => {
     expect((await loadSkillsJson(fx))[0]!.description).toBe("new desc")
   })
 
-  test("re-release carries requiredCredentials forward to the new version", async () => {
+  test("derives metadata from frontmatter on release", async () => {
     fx = await makeFixture({ skills: [{ slug: "shopify" }] })
+    await fx.write(
+      "data/skills/shopify/SKILL.md",
+      `---\nname: shopify\ndescription: "desc"\nmetadata:\n  author: Ren Labs\n  requiredCredentials:\n    - name: SHOPIFY_ACCESS_TOKEN\n---\n\n# shopify\n`,
+    )
     fx.run(["release", "shopify", "--bump", "patch", "--yes"])
-    const snap = await loadSkillsJson(fx)
-    snap[0]!.versions[0]!.requiredCredentials = [{ name: "SHOPIFY_ACCESS_TOKEN" }]
-    await fx.write("data/skills.json", JSON.stringify(snap, null, 2) + "\n")
 
-    const original = await fx.read("data/skills/shopify/SKILL.md")
-    await fx.write("data/skills/shopify/SKILL.md", original + "more\n")
+    const after = await loadSkillsJson(fx)
+    expect(after[0]!.metadata).toEqual({ author: "Ren Labs", requiredCredentials: [{ name: "SHOPIFY_ACCESS_TOKEN" }] })
+  })
+
+  test("re-release regenerates metadata from edited frontmatter, dropping removed keys", async () => {
+    fx = await makeFixture({ skills: [{ slug: "shopify" }] })
+    await fx.write(
+      "data/skills/shopify/SKILL.md",
+      `---\nname: shopify\ndescription: "desc"\nmetadata:\n  author: Ren Labs\n  tags:\n    - commerce\n---\n\n# shopify\n`,
+    )
+    fx.run(["release", "shopify", "--bump", "patch", "--yes"])
+    await fx.write(
+      "data/skills/shopify/SKILL.md",
+      `---\nname: shopify\ndescription: "desc"\nmetadata:\n  author: Ren Labs\n---\n\n# shopify\n`,
+    )
     fx.run(["release", "shopify", "--bump", "patch", "--yes"])
 
     const after = await loadSkillsJson(fx)
     expect(after[0]!.versions).toHaveLength(2)
-    expect(after[0]!.versions[1]!.requiredCredentials).toEqual([{ name: "SHOPIFY_ACCESS_TOKEN" }])
+    expect(after[0]!.metadata).toEqual({ author: "Ren Labs" })
   })
 })
 

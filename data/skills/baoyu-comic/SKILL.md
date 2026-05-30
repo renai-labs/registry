@@ -6,9 +6,14 @@ description: >-
   generation. Use when user asks to create "知识漫画", "教育漫画", "biography comic",
   "tutorial comic", or "Logicomix-style comic".
 license: MIT
-author: 宝玉 (JimLiu)
-source: >-
-  https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic
+metadata:
+  author: 宝玉 (JimLiu)
+  source: >-
+    https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic
+  icon: 'https://cdn.renai.build/skill-icons/baoyu-comic.svg'
+  tags:
+    - creative
+    - design
 ---
 
 # Knowledge Comic Creator

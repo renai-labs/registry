@@ -5,8 +5,14 @@ description: >-
   to draft, schedule, post, or check tweets, posts, threads, or social media
   content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.
 license: MIT
-author: Ren Labs
-source: 'https://typefully.com/docs/api'
+metadata:
+  author: Ren Labs
+  source: 'https://typefully.com/docs/api'
+  icon: >-
+    https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ
+  tags:
+    - productivity
+    - social-media
 ---
 
 # Typefully

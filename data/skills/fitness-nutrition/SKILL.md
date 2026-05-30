@@ -7,9 +7,13 @@ description: >
   and body fat — pure Python, no pip installs. Built for anyone chasing gains,
   cutting weight, or just trying to eat better.
 license: MIT
-author: haileymarshall
-source: >-
-  https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition
+metadata:
+  author: haileymarshall
+  source: >-
+    https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition
+  icon: 'https://cdn.renai.build/skill-icons/fitness-nutrition.svg'
+  tags:
+    - health
 ---
 
 # Fitness & Nutrition

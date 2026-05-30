@@ -5,8 +5,15 @@ description: >-
   workflows, inject parameters, monitor jobs, and download outputs via the
   hosted REST/WebSocket API.
 license: MIT
-author: 'kshitijk4poor, alt-glitch'
-source: 'https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui'
+metadata:
+  author: 'kshitijk4poor, alt-glitch'
+  source: >-
+    https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui
+  icon: 'https://cdn.renai.build/skill-icons/comfyui.svg'
+  tags:
+    - creative
+    - video
+    - audio
 ---
 
 # ComfyUI (Comfy Cloud)

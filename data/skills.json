@@ -4,24 +4,22 @@
     "name": "audio-generation",
     "description": "Convert text to speech and transcribe audio using AI models (OpenAI TTS, ElevenLabs, Whisper). Use when users want to generate audio from text or transcribe speech to text.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/audio-generation.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "audio",
-      "creative"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "icon": "https://cdn.renai.build/skill-icons/audio-generation.svg",
+      "tags": [
+        "audio",
+        "creative"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "21f7155c4949c51175e0ee6fa9b1b89caa6c185a5135b83693cb289c8651f3b7",
+    "contentHash": "5dce9a275219de2c5669d0e05898e64d6b337d6520d6a7e796967fcf30ff07ba",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "21f7155c4949c51175e0ee6fa9b1b89caa6c185a5135b83693cb289c8651f3b7"
+        "contentHash": "5dce9a275219de2c5669d0e05898e64d6b337d6520d6a7e796967fcf30ff07ba"
       }
     ]
   },
@@ -30,24 +28,23 @@
     "name": "baoyu-comic",
     "description": "Knowledge comic creator supporting multiple art styles and tones. Creates original educational comics with detailed panel layouts and sequential image generation. Use when user asks to create \"知识漫画\", \"教育漫画\", \"biography comic\", \"tutorial comic\", or \"Logicomix-style comic\".",
     "license": "MIT",
-    "author": "宝玉 (JimLiu)",
-    "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/baoyu-comic.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative",
-      "design"
-    ],
+    "metadata": {
+      "author": "宝玉 (JimLiu)",
+      "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-comic",
+      "icon": "https://cdn.renai.build/skill-icons/baoyu-comic.svg",
+      "tags": [
+        "creative",
+        "design"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "ed59e1b61e3f3930ce667d340b3f0af0eced32ecba2991c51452fa34f29d8d77",
+    "contentHash": "4d601af8ec517e1b2261e05e3015085f8f030142b12bf1f0aa0d57972057e024",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "ed59e1b61e3f3930ce667d340b3f0af0eced32ecba2991c51452fa34f29d8d77"
+        "contentHash": "4d601af8ec517e1b2261e05e3015085f8f030142b12bf1f0aa0d57972057e024"
       }
     ]
   },
@@ -56,24 +53,23 @@
     "name": "baoyu-infographic",
     "description": "Generate professional infographics with 21 layout types and 21 visual styles. Analyzes content, recommends layout×style combinations, and generates publication-ready infographics. Use when user asks to create \"infographic\", \"信息图\", \"visual summary\", \"可视化\", or \"高密度信息大图\".",
     "license": "MIT",
-    "author": "宝玉 (JimLiu)",
-    "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/baoyu-infographic.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative",
-      "design"
-    ],
+    "metadata": {
+      "author": "宝玉 (JimLiu)",
+      "source": "https://github.com/JimLiu/baoyu-skills/tree/505a7e10cea80f5da291114db19a4be0e40b9d7e/skills/baoyu-infographic",
+      "icon": "https://cdn.renai.build/skill-icons/baoyu-infographic.svg",
+      "tags": [
+        "creative",
+        "design"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "632767539c2d32d7ff0d37ca7007546552bb9f672cc9d25be31d0bccd1ab36ae",
+    "contentHash": "a947cf90c4ba8df2a100428275fee8e0eb727159d38ee2e797b71e9879d20b12",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "632767539c2d32d7ff0d37ca7007546552bb9f672cc9d25be31d0bccd1ab36ae"
+        "contentHash": "a947cf90c4ba8df2a100428275fee8e0eb727159d38ee2e797b71e9879d20b12"
       }
     ]
   },
@@ -82,25 +78,24 @@
     "name": "comfyui",
     "description": "Generate images, video, and audio with ComfyUI on Comfy Cloud — submit workflows, inject parameters, monitor jobs, and download outputs via the hosted REST/WebSocket API.",
     "license": "MIT",
-    "author": "kshitijk4poor, alt-glitch",
-    "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/comfyui.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative",
-      "video",
-      "audio"
-    ],
+    "metadata": {
+      "author": "kshitijk4poor, alt-glitch",
+      "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/comfyui",
+      "icon": "https://cdn.renai.build/skill-icons/comfyui.svg",
+      "tags": [
+        "creative",
+        "video",
+        "audio"
+      ]
+    },
     "currentVersion": "5.0.1",
-    "contentHash": "e0d5e33070a5f413502285cb6bba589e68837d36619949d882bc6dc9065972cd",
+    "contentHash": "6e1fa9139373212e3e3d2b3d62d46a0a2778e20f039aea0f3a55b172c9050afb",
     "versions": [
       {
         "version": "5.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "e0d5e33070a5f413502285cb6bba589e68837d36619949d882bc6dc9065972cd"
+        "contentHash": "6e1fa9139373212e3e3d2b3d62d46a0a2778e20f039aea0f3a55b172c9050afb"
       }
     ]
   },
@@ -109,24 +104,23 @@
     "name": "concept-diagrams",
     "description": "Generate flat, minimal light/dark-aware SVG diagrams as standalone HTML files, using a unified educational visual language with 9 semantic color ramps, sentence-case typography, and automatic dark mode. Best suited for educational and non-software visuals — physics setups, chemistry mechanisms, math curves, physical objects (aircraft, turbines, smartphones, mechanical watches), anatomy, floor plans, cross-sections, narrative journeys (lifecycle of X, process of Y), hub-spoke system integrations (smart city, IoT), and exploded layer views. If a more specialized skill exists for the subject (dedicated software/cloud architecture, hand-drawn sketches, animated explainers, etc.), prefer that — otherwise this skill can also serve as a general-purpose SVG diagram fallback with a clean educational look. Ships with 15 example diagrams.",
     "license": "MIT",
-    "author": "v1k22",
-    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/concept-diagrams.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative",
-      "design"
-    ],
+    "metadata": {
+      "author": "v1k22",
+      "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams",
+      "icon": "https://cdn.renai.build/skill-icons/concept-diagrams.svg",
+      "tags": [
+        "creative",
+        "design"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "1f6aa81338ad13ae192dc3c0998b201e7e99d3855eed445aa74142b719729e05",
+    "contentHash": "e0997927c1fa905a7b5972ed80c5b6ed74e61f123f6a0a675187342eebd7de90",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "1f6aa81338ad13ae192dc3c0998b201e7e99d3855eed445aa74142b719729e05"
+        "contentHash": "e0997927c1fa905a7b5972ed80c5b6ed74e61f123f6a0a675187342eebd7de90"
       }
     ]
   },
@@ -135,23 +129,21 @@
     "name": "docx",
     "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
     "license": "Proprietary. LICENSE.txt has complete terms",
-    "author": "Anthropic",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/docx.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity"
-    ],
+    "metadata": {
+      "author": "Anthropic",
+      "icon": "https://cdn.renai.build/skill-icons/docx.svg",
+      "tags": [
+        "productivity"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "18ee6e11d750d5ff311ae96d0afa907277d2ca55c9427f0ba22f15ecfaef989f",
+    "contentHash": "25f898b39d4aebeeed3939617f2f7295082484b744d891f7afad86a49eeed7b8",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "18ee6e11d750d5ff311ae96d0afa907277d2ca55c9427f0ba22f15ecfaef989f"
+        "contentHash": "25f898b39d4aebeeed3939617f2f7295082484b744d891f7afad86a49eeed7b8"
       }
     ]
   },
@@ -160,23 +152,22 @@
     "name": "fitness-nutrition",
     "description": "Gym workout planner and nutrition tracker. Search 690+ exercises by muscle, equipment, or category via wger. Look up macros and calories for 380,000+ foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro splits, and body fat — pure Python, no pip installs. Built for anyone chasing gains, cutting weight, or just trying to eat better.\n",
     "license": "MIT",
-    "author": "haileymarshall",
-    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/fitness-nutrition.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "health"
-    ],
+    "metadata": {
+      "author": "haileymarshall",
+      "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/health/fitness-nutrition",
+      "icon": "https://cdn.renai.build/skill-icons/fitness-nutrition.svg",
+      "tags": [
+        "health"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "109341b6d11d4d73a5d25af3a7501346ae1309368c91606475e2d339f6f377ae",
+    "contentHash": "03f4271e725a5dbf09da40b0f8cb6a0dd091a2ebd02b7bf94b39eafaa6cb1673",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "109341b6d11d4d73a5d25af3a7501346ae1309368c91606475e2d339f6f377ae"
+        "contentHash": "03f4271e725a5dbf09da40b0f8cb6a0dd091a2ebd02b7bf94b39eafaa6cb1673"
       }
     ]
   },
@@ -185,23 +176,21 @@
     "name": "google-workspace",
     "description": "Gmail, Calendar, Drive, Docs, Sheets via the Google Python client. Reads a vault-issued OAuth access token from the environment.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/google-workspace.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "icon": "https://cdn.renai.build/skill-icons/google-workspace.svg",
+      "tags": [
+        "productivity"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "682d2cfaae7433d4350a10ff9f6e1a63b88f41b7a1e776da2890369adc730a3a",
+    "contentHash": "5867fc6f7dcad8a42800a4d4fa7c264551430be38105a845af1775fc881c1800",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "682d2cfaae7433d4350a10ff9f6e1a63b88f41b7a1e776da2890369adc730a3a"
+        "contentHash": "5867fc6f7dcad8a42800a4d4fa7c264551430be38105a845af1775fc881c1800"
       }
     ]
   },
@@ -210,23 +199,21 @@
     "name": "image-generation",
     "description": "Generate, edit, and create variations of images using AI models (GPT-Image, DALL-E, Gemini). Use when users want to create new images from descriptions, edit existing images, or create variations.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/image-generation.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "icon": "https://cdn.renai.build/skill-icons/image-generation.svg",
+      "tags": [
+        "creative"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "bf61d2f311588eff8e71da05b3033ed0bc2549766f90a4da87f8a3c27a227cfe",
+    "contentHash": "2458ebdb3b220ec231ba3d3082c5dbc3ec05dd17833991a30db5d8ced1372094",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "bf61d2f311588eff8e71da05b3033ed0bc2549766f90a4da87f8a3c27a227cfe"
+        "contentHash": "2458ebdb3b220ec231ba3d3082c5dbc3ec05dd17833991a30db5d8ced1372094"
       }
     ]
   },
@@ -235,24 +222,23 @@
     "name": "meme-generation",
     "description": "Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.",
     "license": "MIT",
-    "author": "adanaleycio",
-    "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/meme-generation.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "creative",
-      "social-media"
-    ],
+    "metadata": {
+      "author": "adanaleycio",
+      "source": "https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/meme-generation",
+      "icon": "https://cdn.renai.build/skill-icons/meme-generation.svg",
+      "tags": [
+        "creative",
+        "social-media"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "d1252985f19104b70e5ff5e161c319d7f69a2b008412abbdd963bcbe5d34a6d3",
+    "contentHash": "ea5162168ea21d4c2a690ee69d35a5058b82da81ca661239afc23a8591061fc5",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "d1252985f19104b70e5ff5e161c319d7f69a2b008412abbdd963bcbe5d34a6d3"
+        "contentHash": "ea5162168ea21d4c2a690ee69d35a5058b82da81ca661239afc23a8591061fc5"
       }
     ]
   },
@@ -261,23 +247,21 @@
     "name": "pdf",
     "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
     "license": "Proprietary. LICENSE.txt has complete terms",
-    "author": "Anthropic",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/pdf.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity"
-    ],
+    "metadata": {
+      "author": "Anthropic",
+      "icon": "https://cdn.renai.build/skill-icons/pdf.svg",
+      "tags": [
+        "productivity"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "0653823bc11150a8568388470e81e9324c8d55c52ebba91648b2f505483664e0",
+    "contentHash": "6b37ec5ac8bd8fe0d7993858dbdea42ac927222db39b4cabb912ca162e27f7bb",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "0653823bc11150a8568388470e81e9324c8d55c52ebba91648b2f505483664e0"
+        "contentHash": "6b37ec5ac8bd8fe0d7993858dbdea42ac927222db39b4cabb912ca162e27f7bb"
       }
     ]
   },
@@ -286,24 +270,23 @@
     "name": "popular-web-designs",
     "description": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS reference templates. Use when generating HTML/CSS in the visual style of a known brand — landing pages, marketing sites, dashboards, documentation.",
     "license": "MIT",
-    "author": "Teknium",
-    "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/popular-web-designs.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "design",
-      "creative"
-    ],
+    "metadata": {
+      "author": "Teknium",
+      "source": "https://github.com/NousResearch/hermes-agent/tree/main/skills/creative/popular-web-designs",
+      "icon": "https://cdn.renai.build/skill-icons/popular-web-designs.svg",
+      "tags": [
+        "design",
+        "creative"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "292547e41330eac46e212dabfb4eb89eb1ef6a4d31c8cee425c6b2878e3d91b9",
+    "contentHash": "38c550b34a5021e9a04ddc78e79520ac3f7e41b31fe755615d6776959ab5ae18",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "292547e41330eac46e212dabfb4eb89eb1ef6a4d31c8cee425c6b2878e3d91b9"
+        "contentHash": "38c550b34a5021e9a04ddc78e79520ac3f7e41b31fe755615d6776959ab5ae18"
       }
     ]
   },
@@ -312,23 +295,21 @@
     "name": "pptx",
     "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
     "license": "Proprietary. LICENSE.txt has complete terms",
-    "author": "Anthropic",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/pptx.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity"
-    ],
+    "metadata": {
+      "author": "Anthropic",
+      "icon": "https://cdn.renai.build/skill-icons/pptx.svg",
+      "tags": [
+        "productivity"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "45748978aab71480e87e2e3cabe62f8744271394d5fc587fa365357474e2ee24",
+    "contentHash": "97ebad08813bbc37d8fa6ddc7e4c0c6f341f244e3954a9fbe953a5ac7144b042",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "45748978aab71480e87e2e3cabe62f8744271394d5fc587fa365357474e2ee24"
+        "contentHash": "97ebad08813bbc37d8fa6ddc7e4c0c6f341f244e3954a9fbe953a5ac7144b042"
       }
     ]
   },
@@ -337,24 +318,21 @@
     "name": "ren-agent-dev",
     "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "code",
-      "ren"
-    ],
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
+      "tags": [
+        "code",
+        "ren"
+      ]
+    },
     "currentVersion": "1.1.1",
-    "contentHash": "5a67e627d93c30cbeb41989f45bdc4a70520944881d41e375f4bcd8ff86986ba",
+    "contentHash": "29a3c5a25f4d851b99035b6216b0a7133f8390ff6fc63d59eafa5472be571a6d",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "5a67e627d93c30cbeb41989f45bdc4a70520944881d41e375f4bcd8ff86986ba"
+        "contentHash": "29a3c5a25f4d851b99035b6216b0a7133f8390ff6fc63d59eafa5472be571a6d"
       }
     ]
   },
@@ -363,21 +341,15 @@
     "name": "ren-file-memory-store-dev",
     "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "db2f9a95b0e10dea1be989fa7a18694edb32dcbf4086bd5a89301b271fd2e840",
+    "contentHash": "b02a9b05a4c9770153b0ad7faaf2be6e90ed3d06c412d798367db18736d9c4dc",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "db2f9a95b0e10dea1be989fa7a18694edb32dcbf4086bd5a89301b271fd2e840"
+        "contentHash": "b02a9b05a4c9770153b0ad7faaf2be6e90ed3d06c412d798367db18736d9c4dc"
       }
     ]
   },
@@ -386,21 +358,15 @@
     "name": "ren-mcp-dev",
     "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "196be2908cbbf0de91b8bfca86deb369e72a4fb4963a1ffdbb92d58ea9157399",
+    "contentHash": "9f4b4a4c53e969ad2eba4a96b61da4d2d9ad7012fb222691ac60a1de643ed2ce",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "196be2908cbbf0de91b8bfca86deb369e72a4fb4963a1ffdbb92d58ea9157399"
+        "contentHash": "9f4b4a4c53e969ad2eba4a96b61da4d2d9ad7012fb222691ac60a1de643ed2ce"
       }
     ]
   },
@@ -409,23 +375,20 @@
     "name": "ren-onboarding",
     "description": "First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "ren"
-    ],
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/onboarding.svg",
+      "tags": [
+        "ren"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "3538135ce1b39f7e23b20f16d162fcd631e67599c259537c4eafe08bd7d6038f",
+    "contentHash": "81165153d314499ddc0510e66015ffc9785fabaf1dc3cccf9905e2615d014aa1",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "3538135ce1b39f7e23b20f16d162fcd631e67599c259537c4eafe08bd7d6038f"
+        "contentHash": "81165153d314499ddc0510e66015ffc9785fabaf1dc3cccf9905e2615d014aa1"
       }
     ]
   },
@@ -434,21 +397,15 @@
     "name": "ren-pod-dev",
     "description": "Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "84c5c9166ba53ce4c4f0bb4e86cf3e50a9c77fec1906aed2ee659bf203a1d498",
+    "contentHash": "c2d5f0fea4d34156a47b23bc9f2fc68267490752ca47ea2b54462f677e4d8059",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "84c5c9166ba53ce4c4f0bb4e86cf3e50a9c77fec1906aed2ee659bf203a1d498"
+        "contentHash": "c2d5f0fea4d34156a47b23bc9f2fc68267490752ca47ea2b54462f677e4d8059"
       }
     ]
   },
@@ -457,25 +414,22 @@
     "name": "ren-project-dev",
     "description": "Create, configure, and manage projects within a pod - attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/project-dev.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity",
-      "code",
-      "ren"
-    ],
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/project-dev.svg",
+      "tags": [
+        "productivity",
+        "code",
+        "ren"
+      ]
+    },
     "currentVersion": "1.1.1",
-    "contentHash": "c2642065af7ea20b54c8a232196b1447dbaf12ad4a5640e53a7f2f03ff354e0d",
+    "contentHash": "2efbebc3e3e795ed6e0c48800b2335b3e72baa8c8ee16e6e149bcd55457e5c08",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "c2642065af7ea20b54c8a232196b1447dbaf12ad4a5640e53a7f2f03ff354e0d"
+        "contentHash": "2efbebc3e3e795ed6e0c48800b2335b3e72baa8c8ee16e6e149bcd55457e5c08"
       }
     ]
   },
@@ -484,21 +438,15 @@
     "name": "ren-scope",
     "description": "Explains the three scope tiers (user, org, registry) for all Ren entities, their visibility rules, and how to use --scope / query.scope correctly. Load this whenever scope behavior is relevant.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "4d35eb66438092f37ea56bf12ee2fdd139ce0c5c7154ec7040bdbf42da3b3993",
+    "contentHash": "9d04ec447f97b66640c5de22a3f5ce9f2776423d0dfaacf13fc976f78574ca0e",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "4d35eb66438092f37ea56bf12ee2fdd139ce0c5c7154ec7040bdbf42da3b3993"
+        "contentHash": "9d04ec447f97b66640c5de22a3f5ce9f2776423d0dfaacf13fc976f78574ca0e"
       }
     ]
   },
@@ -507,24 +455,21 @@
     "name": "ren-skill-dev",
     "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "code",
-      "ren"
-    ],
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
+      "tags": [
+        "code",
+        "ren"
+      ]
+    },
     "currentVersion": "1.1.1",
-    "contentHash": "533f8d1e3ed364bfb3f962c30fa7eacd3c0f0475c25a5416031cbc58f15b2dcd",
+    "contentHash": "c61bd18dc076e7fdcee10d3b24870a781f050cb4246c7dc2546f265f677c8719",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "533f8d1e3ed364bfb3f962c30fa7eacd3c0f0475c25a5416031cbc58f15b2dcd"
+        "contentHash": "c61bd18dc076e7fdcee10d3b24870a781f050cb4246c7dc2546f265f677c8719"
       }
     ]
   },
@@ -533,21 +478,15 @@
     "name": "ren-trigger-dev",
     "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "cb464a9d23a32d2dae27361feafb65db021762eb37ab1a3ee5d617eb0b5b6294",
+    "contentHash": "b0c2ae336f33fcf4516d8b7349c70941f062f44426c31c6b91b43ef486346833",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "cb464a9d23a32d2dae27361feafb65db021762eb37ab1a3ee5d617eb0b5b6294"
+        "contentHash": "b0c2ae336f33fcf4516d8b7349c70941f062f44426c31c6b91b43ef486346833"
       }
     ]
   },
@@ -556,21 +495,15 @@
     "name": "ren-vaults-credentials-dev",
     "description": "Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.",
     "license": null,
-    "author": null,
-    "source": null,
-    "homepage": null,
-    "icon": null,
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [],
+    "metadata": null,
     "currentVersion": "1.0.0",
-    "contentHash": "d2cc2f45b6b9d568ace01eb95e3670145acb4668c86bb1c5289ba8e9e8470a32",
+    "contentHash": "db541343e623b3c07afe70e8a29512c75a6ebbe899ca2a14ac84b84905246f4b",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "d2cc2f45b6b9d568ace01eb95e3670145acb4668c86bb1c5289ba8e9e8470a32"
+        "contentHash": "db541343e623b3c07afe70e8a29512c75a6ebbe899ca2a14ac84b84905246f4b"
       }
     ]
   },
@@ -579,24 +512,23 @@
     "name": "shopify",
     "description": "Shopify Admin & Storefront GraphQL APIs via curl. Manage products, orders, customers, inventory, metafields, bulk operations, and webhooks. Use when working with a Shopify store programmatically — listing products, updating inventory, pulling orders, managing customers, or setting metafields.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": "https://shopify.dev/docs/api/admin-graphql",
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/shopify.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity",
-      "e-commerce"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "source": "https://shopify.dev/docs/api/admin-graphql",
+      "icon": "https://cdn.renai.build/skill-icons/shopify.svg",
+      "tags": [
+        "productivity",
+        "e-commerce"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "b1974ea5ab1b1df1b0a2df5d0718573e37d9a59af42cc22fd326fd5db84d94b8",
+    "contentHash": "93098e647c4b8c242af94595940bbe0518542042f52ae103f82a4a82cd8dbf64",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "b1974ea5ab1b1df1b0a2df5d0718573e37d9a59af42cc22fd326fd5db84d94b8"
+        "contentHash": "93098e647c4b8c242af94595940bbe0518542042f52ae103f82a4a82cd8dbf64"
       }
     ]
   },
@@ -605,24 +537,23 @@
     "name": "typefully",
     "description": "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": "https://typefully.com/docs/api",
-    "homepage": null,
-    "icon": "https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity",
-      "social-media"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "source": "https://typefully.com/docs/api",
+      "icon": "https://media.licdn.com/dms/image/v2/C4D0BAQGTnmTdWJ8-3w/company-logo_200_200/company-logo_200_200/0/1678269178446/typefullycom_logo?e=1780531200&v=beta&t=wCPyrMxWBeZh6I29GIHWbwd7HTQ-TTkftAvn_GL2YQQ",
+      "tags": [
+        "productivity",
+        "social-media"
+      ]
+    },
     "currentVersion": "0.0.2",
-    "contentHash": "a6519c2edd25bf6fd624ba1920e009164634d97895500a0a13734a6e28ec1023",
+    "contentHash": "365b81ce52c56e989e9234d6beab8f964996972d34b9b2f71ab164469ff97a96",
     "versions": [
       {
         "version": "0.0.2",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "a6519c2edd25bf6fd624ba1920e009164634d97895500a0a13734a6e28ec1023"
+        "contentHash": "365b81ce52c56e989e9234d6beab8f964996972d34b9b2f71ab164469ff97a96"
       }
     ]
   },
@@ -631,24 +562,22 @@
     "name": "video-generation",
     "description": "Generate videos from text prompts using AI models (Sora, Veo). Use when users want to create videos from descriptions, check generation status, download completed videos, or list generated videos.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/video-generation.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "video",
-      "creative"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "icon": "https://cdn.renai.build/skill-icons/video-generation.svg",
+      "tags": [
+        "video",
+        "creative"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "d6e4cc055693a8694ec5b2c94b746b85ce40c7ae1210170fcae52eb7847441cd",
+    "contentHash": "98123d6e594cbb19d2db76fe046794a68cc40e0b0c05772cd5e2103ae9a312f8",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "d6e4cc055693a8694ec5b2c94b746b85ce40c7ae1210170fcae52eb7847441cd"
+        "contentHash": "98123d6e594cbb19d2db76fe046794a68cc40e0b0c05772cd5e2103ae9a312f8"
       }
     ]
   },
@@ -657,24 +586,22 @@
     "name": "xlsx",
     "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
     "license": "Proprietary. LICENSE.txt has complete terms",
-    "author": "Anthropic",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/xlsx.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "productivity",
-      "analytics"
-    ],
+    "metadata": {
+      "author": "Anthropic",
+      "icon": "https://cdn.renai.build/skill-icons/xlsx.svg",
+      "tags": [
+        "productivity",
+        "analytics"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "3004304a3e79d85391c981ff974e9837840f7d61288566b8d2c6717a2f099653",
+    "contentHash": "989338c70e271d3ef0dd621af4b07432a31242edbadd90e9d666fc482c12aa0c",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "3004304a3e79d85391c981ff974e9837840f7d61288566b8d2c6717a2f099653"
+        "contentHash": "989338c70e271d3ef0dd621af4b07432a31242edbadd90e9d666fc482c12aa0c"
       }
     ]
   },
@@ -683,23 +610,21 @@
     "name": "xurl",
     "description": "X/Twitter via xurl CLI: post, search, DM, media, v2 API.",
     "license": "MIT",
-    "author": "Ren Labs",
-    "source": null,
-    "homepage": null,
-    "icon": "https://cdn.renai.build/skill-icons/xurl.svg",
-    "docUrl": null,
-    "websiteMetadata": null,
-    "tags": [
-      "social-media"
-    ],
+    "metadata": {
+      "author": "Ren Labs",
+      "icon": "https://cdn.renai.build/skill-icons/xurl.svg",
+      "tags": [
+        "social-media"
+      ]
+    },
     "currentVersion": "1.0.1",
-    "contentHash": "105c0fe2ad8b5283eec6d9de0d6e14470b51fc33e8208fc30da810c5292758e3",
+    "contentHash": "86b5c307135ba3f009959df371d2fd8a61a6ad952bc3d16fb670d7404f78eae4",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "105c0fe2ad8b5283eec6d9de0d6e14470b51fc33e8208fc30da810c5292758e3"
+        "contentHash": "86b5c307135ba3f009959df371d2fd8a61a6ad952bc3d16fb670d7404f78eae4"
       }
     ]
   }

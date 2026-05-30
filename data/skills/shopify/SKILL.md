@@ -6,8 +6,13 @@ description: >-
   working with a Shopify store programmatically — listing products, updating
   inventory, pulling orders, managing customers, or setting metafields.
 license: MIT
-author: Ren Labs
-source: 'https://shopify.dev/docs/api/admin-graphql'
+metadata:
+  author: Ren Labs
+  source: 'https://shopify.dev/docs/api/admin-graphql'
+  icon: 'https://cdn.renai.build/skill-icons/shopify.svg'
+  tags:
+    - productivity
+    - e-commerce
 ---
 
 # Shopify — Admin & Storefront GraphQL APIs

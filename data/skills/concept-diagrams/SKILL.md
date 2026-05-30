@@ -14,9 +14,14 @@ description: >-
   diagram fallback with a clean educational look. Ships with 15 example
   diagrams.
 license: MIT
-author: v1k22
-source: >-
-  https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams
+metadata:
+  author: v1k22
+  source: >-
+    https://github.com/NousResearch/hermes-agent/tree/main/optional-skills/creative/concept-diagrams
+  icon: 'https://cdn.renai.build/skill-icons/concept-diagrams.svg'
+  tags:
+    - creative
+    - design
 ---
 
 # Concept Diagrams

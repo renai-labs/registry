@@ -1,6 +1,16 @@
 ---
 name: video-generation
-description: Generate videos from text prompts using AI models (Sora, Veo). Use when users want to create videos from descriptions, check generation status, download completed videos, or list generated videos.
+description: >-
+  Generate videos from text prompts using AI models (Sora, Veo). Use when users
+  want to create videos from descriptions, check generation status, download
+  completed videos, or list generated videos.
+license: MIT
+metadata:
+  author: Ren Labs
+  icon: 'https://cdn.renai.build/skill-icons/video-generation.svg'
+  tags:
+    - video
+    - creative
 ---
 
 # Video Generation

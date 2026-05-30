@@ -42,6 +42,14 @@ export async function parseSkill(slug: string): Promise<ParsedSkill> {
     })
     throw new FrontmatterError(skillMdPath, issues)
   }
+
+  // agentskills validator parity: name is NFKC-normalized and must match the parent directory.
+  if (result.data.name.normalize("NFKC") !== slug) {
+    throw new FrontmatterError(skillMdPath, [
+      `name: "${result.data.name}" must match the parent directory name "${slug}"`,
+    ])
+  }
+
   return { slug, dir, skillMdPath, frontmatter: result.data, body: parsed.content, raw }
 }
 

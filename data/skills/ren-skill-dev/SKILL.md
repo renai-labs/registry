@@ -1,6 +1,15 @@
 ---
 name: ren-skill-dev
-description: Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.
+description: >-
+  Author, edit, fork, and optimize skills — the modular capabilities
+  (instructions plus optional scripts, references, and templates) an agent loads
+  on demand when a task makes them relevant. Use when the user wants to create,
+  update, improve, or debug a skill, or add a custom capability to an agent.
+metadata:
+  icon: 'https://cdn.renai.build/skill-icons/skill-dev.svg'
+  tags:
+    - code
+    - ren
 ---
 
 # Skill Dev

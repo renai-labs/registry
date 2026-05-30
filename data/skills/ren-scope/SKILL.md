@@ -1,6 +1,9 @@
 ---
 name: ren-scope
-description: Explains the three scope tiers (user, org, registry) for all Ren entities, their visibility rules, and how to use --scope / query.scope correctly. Load this whenever scope behavior is relevant.
+description: >-
+  Explains the three scope tiers (user, org, registry) for all Ren entities,
+  their visibility rules, and how to use --scope / query.scope correctly. Load
+  this whenever scope behavior is relevant.
 ---
 
 # Ren Scope
