@@ -392,8 +392,8 @@
       },
       {
         "version": "1.0.2",
-        "gitRef": null,
-        "publishedAt": null,
+        "gitRef": "5f7881703eb910e37beb975909da8e3522c81a9e",
+        "publishedAt": "2026-05-31T13:46:16.778Z",
         "contentHash": "07d055152629bdebd9d70f8eb1f032b37001369cb4e71b36cdfe774502dd8a94"
       }
     ]
@@ -439,8 +439,8 @@
       },
       {
         "version": "1.1.2",
-        "gitRef": null,
-        "publishedAt": null,
+        "gitRef": "5f7881703eb910e37beb975909da8e3522c81a9e",
+        "publishedAt": "2026-05-31T13:46:16.778Z",
         "contentHash": "ad087255cf6ed3077fd352011654bd7502c03c56deb00942152f947aed33b2fc"
       }
     ]
