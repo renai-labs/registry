@@ -27,3 +27,23 @@ jobs:
         env:
           RENREGISTRY_BASE_REF: ${{ github.event.pull_request.base.sha }}
         run: bun cli/src/index.ts check
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Registry check failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Registry Check Failed* :x:\n*Workflow:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }}>\n*PR:* <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}>\n*Branch:* `${{ github.head_ref }}`"
+                  }
+                }
+              ]
+            }
