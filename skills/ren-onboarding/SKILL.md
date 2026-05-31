@@ -194,10 +194,10 @@ Land them in a chat that loads.
 
 1. **Sandbox ready** ([[ren-pod-dev]]) - `ren pods sandboxes status <pod-id>`; if `absent`, `provision` and poll to `ready`. Narrate one line up front, one when ready.
 2. **Session** - `session.create` is SDK/web-app only, not in CLI/MCP. If your transport wraps the SDK, create the session and deep-link it. Otherwise hand the project page and tell them to click "New session" honestly.
-3. **URL** -
+3. **URL** - base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
   ```
-   ${REN_APP_URL}/app/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
-   ${REN_APP_URL}/app/pods/<podId>/projects/<projectId>                        # project page
+   <base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
+   <base>/pods/<podId>/projects/<projectId>                        # project page
   ```
 
 Pick 1–2 nudges contextual to what they just built. The point is concrete reasons to come back. One closing sentence in their register — don't congratulate.

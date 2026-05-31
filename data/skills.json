@@ -381,14 +381,20 @@
         "ren"
       ]
     },
-    "currentVersion": "1.0.1",
-    "contentHash": "81165153d314499ddc0510e66015ffc9785fabaf1dc3cccf9905e2615d014aa1",
+    "currentVersion": "1.0.2",
+    "contentHash": "07d055152629bdebd9d70f8eb1f032b37001369cb4e71b36cdfe774502dd8a94",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "81165153d314499ddc0510e66015ffc9785fabaf1dc3cccf9905e2615d014aa1"
+      },
+      {
+        "version": "1.0.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "07d055152629bdebd9d70f8eb1f032b37001369cb4e71b36cdfe774502dd8a94"
       }
     ]
   },
@@ -422,14 +428,20 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.1",
-    "contentHash": "2efbebc3e3e795ed6e0c48800b2335b3e72baa8c8ee16e6e149bcd55457e5c08",
+    "currentVersion": "1.1.2",
+    "contentHash": "ad087255cf6ed3077fd352011654bd7502c03c56deb00942152f947aed33b2fc",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "2efbebc3e3e795ed6e0c48800b2335b3e72baa8c8ee16e6e149bcd55457e5c08"
+      },
+      {
+        "version": "1.1.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "ad087255cf6ed3077fd352011654bd7502c03c56deb00942152f947aed33b2fc"
       }
     ]
   },
