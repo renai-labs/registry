@@ -86,11 +86,11 @@ ren sessions get <session-id> --output json
 ren sessions messages list <session-id> --output json
 ```
 
-Deep-link a live session for the user:
+Deep-link a live session for the user. Base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
 
 ```
-${REN_APP_URL}/pods/<podId>/projects/<projectId>/sessions/<sessionId>
-${REN_APP_URL}/pods/<podId>/projects/<projectId>
+<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>
+<base>/pods/<podId>/projects/<projectId>
 ```
 
 ## Gotchas
