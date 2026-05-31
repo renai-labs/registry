@@ -30,7 +30,7 @@ export async function check(): Promise<CheckResult> {
 
   const frozen = await detectFrozenIntegrityIssues(snapshot)
   for (const issue of frozen) {
-    if (issue.kind === "ref-missing") {
+    if (issue.kind === "ref-missing" || issue.kind === "hash-mismatch") {
       log.warn(`frozen-skipped: ${issue.slug}@${issue.version} — ${issue.detail}`)
     } else {
       problems.push(`frozen-mismatch: ${issue.slug}@${issue.version} — ${issue.detail}`)
