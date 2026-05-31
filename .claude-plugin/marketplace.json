@@ -5,13 +5,10 @@
     "name": "Ren Labs",
     "url": "https://renai.build"
   },
-  "metadata": {
-    "pluginRoot": "./plugins"
-  },
   "plugins": [
     {
       "name": "ren",
-      "source": "ren",
+      "source": "./plugins/ren",
       "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding."
     }
   ]
