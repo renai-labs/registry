@@ -99,7 +99,7 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
     const requiredCredentials = jsonArray(meta.requiredCredentials)
 
     const sourceFields = (v: SkillVersionEntry) => ({
-      source: { type: "git", url: REPO_URL, ref: v.gitRef, path: `data/skills/${entry.slug}` },
+      source: JSON.stringify({ type: "git", url: REPO_URL, ref: v.gitRef, path: `data/skills/${entry.slug}` }),
       releaseNotes: v.releaseNotes ?? undefined,
       requiredCredentials,
     })
