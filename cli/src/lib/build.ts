@@ -194,6 +194,10 @@ export async function detectPrBaseDiffIssues(
       if (baseV.gitRef === null) continue
       const curV = curVersions.get(baseV.version)
       if (!curV) {
+        // Removing an intermediate frozen version (not currentVersion) is allowed
+        // as a data-hygiene fix — e.g. a version whose contentHash was stamped at a
+        // transient working-tree state. Only flag full-slug removals (handled above).
+        if (baseV.version !== baseEntry.currentVersion) continue
         issues.push({
           slug: baseEntry.slug,
           version: baseV.version,
