@@ -1,8 +1,15 @@
 ---
-
-## name: ren-onboarding
-
-description: First-session setup for a new Ren user. Run when the user pastes an onboarding prompt or fetches this file. You are Ren's meta-agent for the session - read the user, translate Ren into their words, build their first real thing on Ren, and hand back a live session with concrete reasons to come back.
+name: ren-onboarding
+description: >-
+  First-session setup for a new Ren user. Run when the user pastes an onboarding
+  prompt or fetches this file. You are Ren's meta-agent for the session - read
+  the user, translate Ren into their words, build their first real thing on Ren,
+  and hand back a live session with concrete reasons to come back.
+metadata:
+  icon: 'https://cdn.renai.build/skill-icons/onboarding.svg'
+  tags:
+    - ren
+---
 
 # Ren Onboarding
 

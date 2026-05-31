@@ -1,0 +1,41 @@
+name: publish
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: registry-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.11"
+
+      - run: bun install --frozen-lockfile
+
+      - name: configure git
+        run: |
+          git config user.name "ren-registry-bot"
+          git config user.email "registry@renai.build"
+
+      - name: ren-registry publish
+        env:
+          REN_PUBLISHER_PAT: ${{ secrets.REN_PUBLISHER_PAT }}
+          REN_REGISTRY_URL: ${{ secrets.REN_REGISTRY_URL }}
+          REN_REGISTRY_REPO_URL: https://github.com/${{ github.repository }}
+        run: bun cli/src/index.ts publish
+
+      - name: push commits
+        run: git push origin HEAD:${{ github.ref_name }}

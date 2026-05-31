@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+
+# One-shot marker — consumed and deleted by the next `build`.
+data/.plugin-major-bump
+
+# Per-package TS build info.
+**/tsconfig.tsbuildinfo
+**/.cache/

@@ -1,6 +1,15 @@
 ---
 name: ren-project-dev
-description: Create, configure, and manage projects within a pod - attaching agents, file stores, and memory stores. Use when the user wants to set up a project, change its agents, or attach stores.
+description: >-
+  Create, configure, and manage projects within a pod - attaching agents, file
+  stores, and memory stores. Use when the user wants to set up a project, change
+  its agents, or attach stores.
+metadata:
+  icon: 'https://cdn.renai.build/skill-icons/project-dev.svg'
+  tags:
+    - productivity
+    - code
+    - ren
 ---
 
 # Project Dev

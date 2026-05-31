@@ -1,0 +1,14 @@
+{
+  "name": "renai-labs",
+  "owner": {
+    "name": "Ren Labs",
+    "url": "https://renai.build"
+  },
+  "plugins": [
+    {
+      "name": "ren",
+      "source": "./plugins/ren",
+      "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding."
+    }
+  ]
+}
