@@ -14,6 +14,8 @@
         "ren-trigger-dev",
         "ren-vaults-credentials-dev",
         "ren-file-memory-store-dev",
+        "ren-github",
+        "ren-slack",
         "ren-onboarding",
         "ren-scope"
       ]
