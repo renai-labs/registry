@@ -186,7 +186,7 @@ The user's camp tells you which register. A builder gets value from "forking skl
 
 **Skip** → only if the user explicitly wants speed and accepts the agent will fail on the auth step. Make the gap visible before proceeding.
 
-Native integrations (Slack, GitHub) and team-level installs are org-admin, live in the web app — surface as a "next session" item.
+Native integrations are org-level: load [[ren-github]] to install the org's GitHub App and mount a repo on a project, or [[ren-slack]] to install the workspace and route a slack channel to a project.
 
 ## 6. Hand off - link + capability nudges that preview the depth
 
