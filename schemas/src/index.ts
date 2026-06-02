@@ -203,7 +203,7 @@ export const CodexPluginManifest = z
     version: Semver,
     description: z.string(),
     skills: z.string(),
-    mcpServers: z.record(z.string(), PluginMcpServer).optional(),
+    mcpServers: z.string().optional(),
     interface: z
       .object({
         displayName: z.string(),
@@ -225,7 +225,10 @@ export const MarketplaceManifest = z
     plugins: z.array(
       z.object({
         name: Slug,
-        source: z.string(),
+        source: z.union([
+          z.string(),
+          z.object({ source: z.literal("local"), path: z.string() }),
+        ]),
         description: z.string(),
       }),
     ),
