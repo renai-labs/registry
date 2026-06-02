@@ -3,11 +3,7 @@
   "version": "0.2.0",
   "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
   "skills": "./skills/",
-  "mcpServers": {
-    "ren": {
-      "url": "https://api.renai.build/mcp"
-    }
-  },
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Ren",
     "shortDescription": "Build on Ren from Codex.",
