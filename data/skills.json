@@ -342,14 +342,20 @@
     "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
     "license": null,
     "metadata": null,
-    "currentVersion": "1.0.0",
-    "contentHash": "b02a9b05a4c9770153b0ad7faaf2be6e90ed3d06c412d798367db18736d9c4dc",
+    "currentVersion": "1.0.1",
+    "contentHash": "c16d4b718c4f61380a304f8558a7110322d5375b8a267d5ec5e204fc40493aea",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "b02a9b05a4c9770153b0ad7faaf2be6e90ed3d06c412d798367db18736d9c4dc"
+      },
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "c16d4b718c4f61380a304f8558a7110322d5375b8a267d5ec5e204fc40493aea"
       }
     ]
   },
@@ -404,8 +410,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.0.3",
-    "contentHash": "0b3f53de557a16269ce356e2f258eb6644b8c9f526278985bac30a96da97cd8e",
+    "currentVersion": "1.0.6",
+    "contentHash": "e5e8ecbcc2e3753e1f32cc7ee04e6c193fcabe2785a32a55149e1d3cfaa0ebc6",
     "versions": [
       {
         "version": "1.0.1",
@@ -424,6 +430,24 @@
         "gitRef": "8c937bbf918af6963b32d71ae244090c732cbeee",
         "publishedAt": "2026-06-01T18:12:48.415Z",
         "contentHash": "0b3f53de557a16269ce356e2f258eb6644b8c9f526278985bac30a96da97cd8e"
+      },
+      {
+        "version": "1.0.4",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "cb1b736c55d55a8d0874599cdabaf9b7e41f01e429d9f460b7e2f1b1ae620280"
+      },
+      {
+        "version": "1.0.5",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "1b0ccad74059788242c947d273aac4fbef7fa71d8cd4b50bcb53a465b972f0bf"
+      },
+      {
+        "version": "1.0.6",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "e5e8ecbcc2e3753e1f32cc7ee04e6c193fcabe2785a32a55149e1d3cfaa0ebc6"
       }
     ]
   },
@@ -457,8 +481,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.2",
-    "contentHash": "ad087255cf6ed3077fd352011654bd7502c03c56deb00942152f947aed33b2fc",
+    "currentVersion": "1.1.3",
+    "contentHash": "63a20dddd13920069562157e35fc2bcac2bdf494cac28a207974d51f730cb386",
     "versions": [
       {
         "version": "1.1.1",
@@ -471,6 +495,12 @@
         "gitRef": "5f7881703eb910e37beb975909da8e3522c81a9e",
         "publishedAt": "2026-05-31T13:46:16.778Z",
         "contentHash": "ad087255cf6ed3077fd352011654bd7502c03c56deb00942152f947aed33b2fc"
+      },
+      {
+        "version": "1.1.3",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "63a20dddd13920069562157e35fc2bcac2bdf494cac28a207974d51f730cb386"
       }
     ]
   },
@@ -488,6 +518,23 @@
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "9d04ec447f97b66640c5de22a3f5ce9f2776423d0dfaacf13fc976f78574ca0e"
+      }
+    ]
+  },
+  {
+    "slug": "ren-sessions-dev",
+    "name": "ren-sessions-dev",
+    "description": "Create, inspect, and deep-link sessions - the individual chats a user or a fired trigger has with a project's primary agent. Use when the user wants to start a session, read what happened in a past run, or get a link to one.",
+    "license": null,
+    "metadata": null,
+    "currentVersion": "0.0.1",
+    "contentHash": "2cac70d7aa14794ca45d8ac7eb45dad54c855cf1f32f2bf43116bfa5377664eb",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "2cac70d7aa14794ca45d8ac7eb45dad54c855cf1f32f2bf43116bfa5377664eb"
       }
     ]
   },

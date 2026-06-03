@@ -78,20 +78,7 @@ mcp__ren__project_get              { "query": { "scope": "user" }, "path": { "id
 
 ## Sessions
 
-A **session** is one chat with the project's primary agent - the conversation a user (or a fired trigger) has inside the project. Creating a session is SDK/web-app only; the CLI is read-side, useful for inspecting what happened in a past run:
-
-```
-ren sessions list --project-id prj_… --output json
-ren sessions get <session-id> --output json
-ren sessions messages list <session-id> --output json
-```
-
-Deep-link a live session for the user. Base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
-
-```
-<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>
-<base>/pods/<podId>/projects/<projectId>
-```
+A **session** is one chat with the project's primary agent. Creating, inspecting, and deep-linking sessions lives in [[ren-sessions-dev]].
 
 ## Gotchas
 
@@ -101,7 +88,7 @@ Deep-link a live session for the user. Base is `${REN_APP_URL}` when a shell res
 
 ## Next steps
 
-- **Start a session** — confirm the agent loads cleanly via the project page or deep link above. The pod's sandbox must be `ready`; see [[ren-pod-dev]].
+- **Start a session** — confirm the agent loads cleanly. The pod's sandbox must be `ready` ([[ren-pod-dev]]); create and inspect sessions via [[ren-sessions-dev]].
 - **Run it unattended** with a cron trigger — only after one clean manual session. See [[ren-trigger-dev]].
 - **Give the agent more context** by attaching a file store (uploads / reference docs, read-only) or a memory store (persistent learnings, read-write). See [[ren-file-memory-store-dev]].
 - **Wire missing credentials** if a session surfaces a missing API key or OAuth. See [[ren-vaults-credentials-dev]].
