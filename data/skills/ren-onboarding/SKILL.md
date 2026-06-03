@@ -137,7 +137,7 @@ Team-shaped pains ("my teammate needs this too") get filed for the close, not wi
 
 ## 4. Build leaf-up, narrate in their words
 
-See [[ren-scope]]. **Onboarding stays strictly in user scope.** Always pass `--scope user` on every create - agents, skills, MCPs, stores, vaults all default to `org` otherwise. Children inherit from their parent: projects (from pod), triggers (from project). You also need `--scope user` on `ren pods list` to see the user's private pod at all.
+**Critical: The entire onboarding stays strictly in user scope.** Always pass `--scope user` on every create - agents, skills, MCPs, stores, vaults all default to `org` otherwise. Children inherit from their parent: projects (from pod), triggers (from project) and credentials (from vaults). You also need `--scope user` on `ren pods list` to see the user's private pod at all. See [[ren-scope]]. Always stay in user scope, unless the user explictly wants something shared across the org.
 
 Build inside the user's **private pod** (already provisioned) and a **fresh project**.
 
@@ -165,7 +165,7 @@ Primitives in order: skills → MCPs → credentials → agent → stores → pr
 
 1. **Skills** → load [[ren-skill-dev]] first, then follow its search instructions. `ren skills list` shows only your own items — only `ren skills search --sources user org registry` reaches the registry.
 2. **MCPs** → load [[ren-mcp-dev]] first, then follow its search instructions. `ren mcps list` shows only your own items — only `ren mcps search --sources user org registry` reaches the registry.
-3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP from 1–2 needs auth. Add into the **existing default vault** (`isDefault: true`). Can be wired before *or* after the chat opens - skip for speed if the agent can still demonstrate something useful.
+3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP from 1–2 needs auth. Add into user's **existing default private vault** (`isDefault: true`). Can be wired before *or* after the chat opens - skip for speed if the agent can still demonstrate something useful.
 4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Follow the "Choosing the model" section in that skill — model selection is a required user decision before creation. Clean up any temporary build files (e.g. `/tmp/<build-dir>`) after the agent is created.
 5. **Stores** → [[ren-file-memory-store-dev]] - **default: attach the existing default file/memory stores to the fresh project.** Create new only if the agent's learnings should stay isolated (memory) or its docs are agent-specific (file).
 6. **Project** → [[ren-project-dev]] - **always a fresh project** in the private pod. Attach the agent as `primary`, attach the stores from step 5. (Inherits scope from the pod.)
