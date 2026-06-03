@@ -354,6 +354,29 @@
     ]
   },
   {
+    "slug": "ren-github",
+    "name": "ren-github",
+    "description": "Connect GitHub to Ren - install the org's GitHub App, list accessible repos, and bind a repo to a project so the agent gets it mounted. Use when the user wants their Ren agent to work against a GitHub repository.",
+    "license": null,
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/github.svg",
+      "tags": [
+        "ren",
+        "code"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "612935705123038830b3eb6553c31ed2179e9f59eb0c959db7e45b69e837a3e8",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "612935705123038830b3eb6553c31ed2179e9f59eb0c959db7e45b69e837a3e8"
+      }
+    ]
+  },
+  {
     "slug": "ren-mcp-dev",
     "name": "ren-mcp-dev",
     "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
@@ -381,8 +404,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.1",
-    "contentHash": "e45de2c16b6543e61da71bf868e0292776aaa8818c301bed6ba584c16d3d695f",
+    "currentVersion": "1.1.2",
+    "contentHash": "cb1b736c55d55a8d0874599cdabaf9b7e41f01e429d9f460b7e2f1b1ae620280",
     "versions": [
       {
         "version": "1.0.1",
@@ -407,6 +430,12 @@
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "e45de2c16b6543e61da71bf868e0292776aaa8818c301bed6ba584c16d3d695f"
+      },
+      {
+        "version": "1.1.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "cb1b736c55d55a8d0874599cdabaf9b7e41f01e429d9f460b7e2f1b1ae620280"
       }
     ]
   },
@@ -511,6 +540,29 @@
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "1a034a3a39a6b4ef24ce072e0da5ae3e445c54c197a6f3c0b01c774ec756e56e"
+      }
+    ]
+  },
+  {
+    "slug": "ren-slack",
+    "name": "ren-slack",
+    "description": "Connect Slack to Ren - install the workspace, list channels, and map a channel to a project so messages route to its agent. Use when the user wants to drive a Ren agent from Slack.",
+    "license": null,
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/slack.svg",
+      "tags": [
+        "ren",
+        "productivity"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "be4a7478bd91858c0b8673792f735b2297fa0d05b954366f7c829e48ab761944",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "be4a7478bd91858c0b8673792f735b2297fa0d05b954366f7c829e48ab761944"
       }
     ]
   },
