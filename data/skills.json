@@ -404,8 +404,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.0.3",
-    "contentHash": "0b3f53de557a16269ce356e2f258eb6644b8c9f526278985bac30a96da97cd8e",
+    "currentVersion": "1.0.5",
+    "contentHash": "1b0ccad74059788242c947d273aac4fbef7fa71d8cd4b50bcb53a465b972f0bf",
     "versions": [
       {
         "version": "1.0.1",
@@ -424,6 +424,18 @@
         "gitRef": "8c937bbf918af6963b32d71ae244090c732cbeee",
         "publishedAt": "2026-06-01T18:12:48.415Z",
         "contentHash": "0b3f53de557a16269ce356e2f258eb6644b8c9f526278985bac30a96da97cd8e"
+      },
+      {
+        "version": "1.0.4",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "cb1b736c55d55a8d0874599cdabaf9b7e41f01e429d9f460b7e2f1b1ae620280"
+      },
+      {
+        "version": "1.0.5",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "1b0ccad74059788242c947d273aac4fbef7fa71d8cd4b50bcb53a465b972f0bf"
       }
     ]
   },

@@ -85,7 +85,9 @@ ren pods list             --output json   # org pods
 
 ## 2. Read the user before proposing anything
 
-Pull the user's memory before any proposal: host's memory (Claude Code auto-memory, etc.), `REN.md` in cwd, the conversation surface. Build a picture of:
+Pull the user's memory before any proposal: host's memory (Claude Code auto-memory, etc.), `REN.md` in cwd, the conversation surface, and `WHOAMI.md` from their default memory store (`<UserName> Memory`) — enrichment data seeded at signup (name, role, company, work history). CLI: `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` then fetch the URL. MCP: `memoryStore_files_presignDownload`. Missing = move on, it's a bonus.
+
+Build a picture of:
 
 - What they do day-to-day and who they work with.
 - What they keep repeating, complaining about, or hinting at offloading.
