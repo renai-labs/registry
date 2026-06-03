@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "ren": {
+      "type": "http",
       "url": "https://api.renai.build/mcp"
     }
   }

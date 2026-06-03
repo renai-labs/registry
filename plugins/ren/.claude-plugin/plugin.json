@@ -4,11 +4,5 @@
   "displayName": "Ren",
   "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
   "version": "0.2.0",
-  "repository": "https://github.com/renai-labs/registry",
-  "mcpServers": {
-    "ren": {
-      "type": "http",
-      "url": "https://api.renai.build/mcp"
-    }
-  }
+  "repository": "https://github.com/renai-labs/registry"
 }
