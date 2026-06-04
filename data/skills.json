@@ -432,18 +432,6 @@
         "contentHash": "0b3f53de557a16269ce356e2f258eb6644b8c9f526278985bac30a96da97cd8e"
       },
       {
-        "version": "1.0.4",
-        "gitRef": "99cba648cec4a937ddace897296429f92a2efc82",
-        "publishedAt": "2026-06-03T14:01:56.464Z",
-        "contentHash": "cb1b736c55d55a8d0874599cdabaf9b7e41f01e429d9f460b7e2f1b1ae620280"
-      },
-      {
-        "version": "1.0.5",
-        "gitRef": "99cba648cec4a937ddace897296429f92a2efc82",
-        "publishedAt": "2026-06-03T14:01:56.464Z",
-        "contentHash": "1b0ccad74059788242c947d273aac4fbef7fa71d8cd4b50bcb53a465b972f0bf"
-      },
-      {
         "version": "1.0.6",
         "gitRef": "99cba648cec4a937ddace897296429f92a2efc82",
         "publishedAt": "2026-06-03T14:01:56.464Z",
