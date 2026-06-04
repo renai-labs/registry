@@ -4184,6 +4184,41 @@
     }
   },
   {
+    "slug": "groww",
+    "name": "Groww",
+    "description": "Access your Groww investments—stocks, mutual funds, holdings, and market data",
+    "mcpServerUrl": "https://mcp.groww.in/mcp",
+    "urlOptions": null,
+    "docUrl": "https://groww.in",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Groww_app_logo.png",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Groww",
+      "url": "https://groww.in"
+    },
+    "useCases": [
+      "finance"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect Ren to Groww to explore your investments through natural conversation—check stock and mutual fund holdings, look up quotes and market data, and manage your portfolio. Authorize with your own Groww account via OAuth.",
+      "supportUrl": "https://groww.in/contact-us",
+      "privacyPolicyUrl": "https://groww.in/privacy-policy"
+    }
+  },
+  {
     "slug": "guru",
     "name": "Guru",
     "description": "Search and interact with your company knowledge",
@@ -5208,6 +5243,97 @@
       "longDescription": "Connect your meeting history to AI tools so past decisions, action items, and conversation context are easy to find and use.",
       "supportUrl": "mailto:support@krisp.ai",
       "privacyPolicyUrl": "https://krisp.ai/privacy-policy/"
+    }
+  },
+  {
+    "slug": "langfuse",
+    "name": "Langfuse",
+    "description": "Manage Langfuse prompts, traces, observations, datasets, scores, and metrics for LLM observability",
+    "mcpServerUrl": "https://us.cloud.langfuse.com/api/public/mcp",
+    "urlOptions": null,
+    "docUrl": "https://langfuse.com/docs/api-and-data-platform/features/mcp-server",
+    "icon": "https://avatars.githubusercontent.com/u/134601687?v=4",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": {
+      "url": "https://github.com/langfuse/langfuse"
+    },
+    "tools": [
+      "getPrompt",
+      "getPromptUnresolved",
+      "listPrompts",
+      "createTextPrompt",
+      "createChatPrompt",
+      "updatePromptLabels",
+      "listObservations",
+      "getObservation",
+      "getObservationFieldSchema",
+      "getObservationFilterSchema",
+      "getObservationFilterValues",
+      "listAnnotationQueues",
+      "createAnnotationQueue",
+      "getAnnotationQueue",
+      "listAnnotationQueueItems",
+      "getAnnotationQueueItem",
+      "createAnnotationQueueItem",
+      "updateAnnotationQueueItem",
+      "deleteAnnotationQueueItem",
+      "createAnnotationQueueAssignment",
+      "deleteAnnotationQueueAssignment",
+      "createComment",
+      "listComments",
+      "getComment",
+      "upsertDataset",
+      "listDatasets",
+      "getDataset",
+      "upsertDatasetItem",
+      "listDatasetItems",
+      "getDatasetItem",
+      "deleteDatasetItem",
+      "createDatasetRunItem",
+      "listDatasetRunItems",
+      "listDatasetRuns",
+      "getDatasetRun",
+      "deleteDatasetRun",
+      "getHealth",
+      "listScores",
+      "getScore",
+      "createScore",
+      "listScoreConfigs",
+      "getScoreConfig",
+      "createScoreConfig",
+      "updateScoreConfig",
+      "deleteScoreConfig",
+      "queryMetrics",
+      "getMetricsSchema",
+      "listModels",
+      "createModel",
+      "getModel",
+      "deleteModel",
+      "getMedia"
+    ],
+    "prompts": [],
+    "auth": "basic",
+    "authConfig": {
+      "type": "basic"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Langfuse",
+      "url": "https://langfuse.com"
+    },
+    "useCases": [
+      "analytics",
+      "code"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect Ren to Langfuse for LLM observability and prompt management. Read and write prompts, inspect traces and observations, manage datasets and dataset runs, create and query scores and score configs, run analytics with queryMetrics, and manage annotation queues. Authenticate with a Langfuse public/secret API key pair (pk-lf-…:sk-lf-…); an optional allowlist can restrict the server to read-only tools.",
+      "supportUrl": "https://langfuse.com/support",
+      "privacyPolicyUrl": "https://langfuse.com/security/privacy"
     }
   },
   {
@@ -8504,38 +8630,52 @@
     "version": "1.0.0",
     "repository": null,
     "tools": [
+      "capture_payment",
       "fetch_payment",
-      "fetch_all_payments",
       "fetch_payment_card_details",
-      "fetch_order",
-      "fetch_all_orders",
-      "fetch_order_payments",
+      "fetch_all_payments",
+      "update_payment",
+      "create_payment_link",
+      "create_payment_link_upi",
       "fetch_payment_link",
       "fetch_all_payment_links",
+      "send_payment_link",
+      "update_payment_link",
+      "create_order",
+      "fetch_order",
+      "fetch_all_orders",
+      "update_order",
+      "fetch_order_payments",
+      "create_refund",
+      "fetch_refund",
+      "fetch_all_refunds",
+      "update_refund",
+      "fetch_multiple_refunds_for_payment",
+      "fetch_specific_refund_for_payment",
+      "create_qr_code",
       "fetch_qr_code",
       "fetch_all_qr_codes",
       "fetch_qr_codes_by_customer_id",
       "fetch_qr_codes_by_payment_id",
       "fetch_payments_for_qr_code",
-      "fetch_refund",
-      "fetch_all_refunds",
-      "fetch_multiple_refunds_for_payment",
-      "fetch_specific_refund_for_payment",
+      "close_qr_code",
       "fetch_settlement_with_id",
       "fetch_all_settlements",
+      "fetch_settlement_recon_details",
+      "create_instant_settlement",
       "fetch_instant_settlement_with_id",
       "fetch_all_instant_settlements",
-      "fetch_settlement_recon_details",
-      "fetch_payout_with_id",
+      "fetch_payout_by_id",
       "fetch_all_payouts",
-      "fetch_tokens"
+      "fetch_tokens",
+      "revoke_token"
     ],
     "prompts": [],
     "auth": "basic",
     "authConfig": {
       "type": "basic"
     },
-    "permissions": "read",
+    "permissions": "read-write",
     "author": {
       "name": "Razorpay Software Private Limited",
       "url": "https://razorpay.com/about/"
@@ -8548,7 +8688,7 @@
     "trendingScore": 42153,
     "rank": 229,
     "websiteMetadata": {
-      "longDescription": "Access your Razorpay merchant data directly from Ren. Query payments, orders, refunds, and settlements instantly through natural conversation. Track QR code transactions, monitor payment links, review payout history, and generate settlement reconciliation reports—all without leaving your AI workflow. Transform Ren into your intelligent merchant dashboard that retrieves real-time business insights, helping you understand payment trends and reconcile transactions faster, with less friction.",
+      "longDescription": "Manage your Razorpay merchant account directly from Ren. Query payments, orders, refunds, and settlements through natural conversation, and act on them too—create and update payment links (including UPI), create orders, capture and update payments, issue and update refunds, generate and close QR codes, and trigger instant settlements. Track QR code transactions, review payout and settlement reconciliation history, and manage tokens—all without leaving your AI workflow. Authenticate with your Razorpay API key/secret via Basic auth.",
       "supportUrl": "https://github.com/razorpay/razorpay-mcp-server",
       "privacyPolicyUrl": "https://razorpay.com/privacy/"
     }
@@ -9810,6 +9950,117 @@
       "longDescription": "Build surveys, analyze responses, and uncover trends in SurveyMonkey—right from Ren. Turn feedback into clear next steps without leaving your workflow.",
       "supportUrl": "https://help.surveymonkey.com/contact?form=API",
       "privacyPolicyUrl": "https://www.surveymonkey.com/mp/legal/privacy/"
+    }
+  },
+  {
+    "slug": "swiggy-dineout",
+    "name": "Swiggy Dineout",
+    "description": "Discover restaurants, check table availability, and book dining reservations on Swiggy Dineout",
+    "mcpServerUrl": "https://mcp.swiggy.com/dineout",
+    "urlOptions": null,
+    "docUrl": "https://github.com/Swiggy/swiggy-mcp-server-manifest",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": {
+      "url": "https://github.com/Swiggy/swiggy-mcp-server-manifest"
+    },
+    "tools": [],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Swiggy",
+      "url": "https://www.swiggy.com"
+    },
+    "useCases": [
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Book restaurant tables through Swiggy Dineout inside Ren—discover restaurants, check table availability, and reserve for free. Note: do not use the Swiggy app while an MCP session is active, as concurrent sessions can cause conflicts.",
+      "supportUrl": "https://www.swiggy.com/support",
+      "privacyPolicyUrl": "https://www.swiggy.com/privacy-policy"
+    }
+  },
+  {
+    "slug": "swiggy-food",
+    "name": "Swiggy Food",
+    "description": "Search restaurants, browse menus, manage a cart, and place food orders on Swiggy",
+    "mcpServerUrl": "https://mcp.swiggy.com/food",
+    "urlOptions": null,
+    "docUrl": "https://github.com/Swiggy/swiggy-mcp-server-manifest",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": {
+      "url": "https://github.com/Swiggy/swiggy-mcp-server-manifest"
+    },
+    "tools": [],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Swiggy",
+      "url": "https://www.swiggy.com"
+    },
+    "useCases": [
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Order food from Swiggy without leaving Ren—search restaurants, browse menus, build a cart, and place orders (cash on delivery). Note: do not use the Swiggy app while an MCP session is active, as concurrent sessions can cause order conflicts.",
+      "supportUrl": "https://www.swiggy.com/support",
+      "privacyPolicyUrl": "https://www.swiggy.com/privacy-policy"
+    }
+  },
+  {
+    "slug": "swiggy-instamart",
+    "name": "Swiggy Instamart",
+    "description": "Search grocery products, manage a cart, and check out groceries on Swiggy Instamart",
+    "mcpServerUrl": "https://mcp.swiggy.com/im",
+    "urlOptions": null,
+    "docUrl": "https://github.com/Swiggy/swiggy-mcp-server-manifest",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": {
+      "url": "https://github.com/Swiggy/swiggy-mcp-server-manifest"
+    },
+    "tools": [],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Swiggy",
+      "url": "https://www.swiggy.com"
+    },
+    "useCases": [
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Order groceries from Swiggy Instamart inside Ren—search products, build a cart, and check out. Note: do not use the Swiggy app while an MCP session is active, as concurrent sessions can cause order conflicts.",
+      "supportUrl": "https://www.swiggy.com/support",
+      "privacyPolicyUrl": "https://www.swiggy.com/privacy-policy"
     }
   },
   {
@@ -11277,6 +11528,61 @@
     }
   },
   {
+    "slug": "zerodha-kite",
+    "name": "Kite by Zerodha",
+    "description": "Trade, track your portfolio, and query live Indian market data on Zerodha",
+    "mcpServerUrl": "https://mcp.kite.trade/mcp",
+    "urlOptions": null,
+    "docUrl": "https://github.com/zerodha/kite-mcp-server",
+    "icon": "https://kite.zerodha.com/static/images/kite-logo.svg",
+    "transport": "streamable-http",
+    "version": null,
+    "repository": null,
+    "tools": [
+      "login",
+      "get_quotes",
+      "get_ltp",
+      "get_ohlc",
+      "get_historical_data",
+      "search_instruments",
+      "get_profile",
+      "get_margins",
+      "get_holdings",
+      "get_positions",
+      "get_mf_holdings",
+      "place_order",
+      "modify_order",
+      "cancel_order",
+      "get_orders",
+      "get_trades",
+      "get_order_history",
+      "get_order_trades",
+      "get_gtts",
+      "place_gtt_order",
+      "modify_gtt_order",
+      "delete_gtt_order"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Zerodha",
+      "url": "https://zerodha.com"
+    },
+    "useCases": [
+      "finance"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect your Zerodha account to Ren via Kite's official hosted MCP server. Query live and historical market data for Indian equities, derivatives, and mutual funds; search instruments; and pull quotes, LTP, and OHLC. View your portfolio — holdings, positions, margins, mutual fund holdings, and profile. Place, modify, and cancel orders, manage GTT (Good Till Triggered) orders, and review order and trade history. Authentication runs through Kite's secure 2FA login flow — your Zerodha credentials never pass through the AI assistant; only a temporary authorisation token is used. No API keys required on your end.",
+      "supportUrl": "https://support.zerodha.com/category/trading-and-markets/general-kite/others-kite/articles/connect-zerodha-ai-assistant"
+    }
+  },
+  {
     "slug": "ziprecruiter",
     "name": "ZipRecruiter",
     "description": "Job search made easy",
@@ -11369,7 +11675,7 @@
     "mcpServerUrl": "https://claude-zohocrm.zohomcp.in/mcp/message",
     "urlOptions": null,
     "docUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
-    "icon": "https://www.zoho.com/crm",
+    "icon": "https://www.zohowebstatic.com/sites/zweb/images/productlogos/crm.png",
     "transport": "streamable-http",
     "version": null,
     "repository": null,
@@ -11560,7 +11866,7 @@
     "mcpServerUrl": "https://claude-zohocrm.zohomcp.com/mcp/message",
     "urlOptions": null,
     "docUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
-    "icon": "https://www.zoho.com/crm",
+    "icon": "https://www.zohowebstatic.com/sites/zweb/images/productlogos/crm.png",
     "transport": "streamable-http",
     "version": null,
     "repository": null,
