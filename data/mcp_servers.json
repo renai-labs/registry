@@ -36,7 +36,7 @@
       "url": "https://www.springernature.com"
     },
     "useCases": [
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 13253,
@@ -96,7 +96,7 @@
       "url": "https://business.adobe.com/products/experience-manager"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 15215,
@@ -144,7 +144,6 @@
       "url": "https://adobe.com/"
     },
     "useCases": [
-      "sales",
       "marketing"
     ],
     "sortOrder": null,
@@ -191,7 +190,6 @@
       "url": "https://business.adobe.com/"
     },
     "useCases": [
-      "sales",
       "marketing"
     ],
     "sortOrder": null,
@@ -294,10 +292,7 @@
       "url": "https://ahrefs.com/"
     },
     "useCases": [
-      "sales",
-      "marketing",
-      "analytics",
-      "customer-support"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 17858,
@@ -351,8 +346,7 @@
       "url": "https://www.airops.com/"
     },
     "useCases": [
-      "productivity",
-      "analytics"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 15035,
@@ -461,7 +455,7 @@
       "url": "https://www.airwallex.com/"
     },
     "useCases": [
-      "finance"
+      "payments"
     ],
     "sortOrder": null,
     "popularityScore": 12392,
@@ -545,7 +539,7 @@
       "url": "https://www.alltrails.com"
     },
     "useCases": [
-      "health"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 14322,
@@ -614,8 +608,7 @@
       "url": "https://amplitude.com/"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "analytics"
     ],
     "sortOrder": 1,
     "popularityScore": null,
@@ -659,7 +652,7 @@
       "url": "https://apify.com"
     },
     "useCases": [
-      "code"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -742,8 +735,7 @@
       "url": "https://www.apollo.io"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 17778,
@@ -784,7 +776,8 @@
       "url": "https://www.appsflyer.com"
     },
     "useCases": [
-      "marketing"
+      "marketing",
+      "analytics"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -847,7 +840,7 @@
       "url": "https://atlassian.com"
     },
     "useCases": [
-      "productivity"
+      "project-management"
     ],
     "sortOrder": 0,
     "popularityScore": 21618,
@@ -895,8 +888,8 @@
       "url": "https://attention.com"
     },
     "useCases": [
-      "sales",
-      "productivity"
+      "meetings",
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -963,7 +956,7 @@
       "url": "https://attio.com"
     },
     "useCases": [
-      "productivity"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 15519,
@@ -1005,7 +998,7 @@
       "url": "https://www.getaura.ai/"
     },
     "useCases": [
-      "analytics"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 12329,
@@ -1041,8 +1034,7 @@
       "url": "https://www.autodesk.com"
     },
     "useCases": [
-      "productivity",
-      "creative"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 14444,
@@ -1083,7 +1075,7 @@
       "url": "https://base44.com/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 15280,
@@ -1125,7 +1117,7 @@
       "url": "https://www.ravenpack.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 14524,
@@ -1163,7 +1155,8 @@
       "url": "https://biorender.com"
     },
     "useCases": [
-      "life-sciences"
+      "research",
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 15508,
@@ -1229,7 +1222,7 @@
       "url": "https://bitly.com"
     },
     "useCases": [
-      "analytics"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 14836,
@@ -1281,7 +1274,7 @@
       "url": "https://www.blockscout.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13845,
@@ -1430,7 +1423,7 @@
       "url": "https://calendly.com"
     },
     "useCases": [
-      "productivity"
+      "calendar"
     ],
     "sortOrder": null,
     "popularityScore": 16744,
@@ -1580,7 +1573,7 @@
       "url": "https://block.xyz/"
     },
     "useCases": [
-      "finance"
+      "payments"
     ],
     "sortOrder": null,
     "popularityScore": 12404,
@@ -1639,7 +1632,7 @@
       "url": "https://www.cbinsights.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 12887,
@@ -1790,8 +1783,7 @@
       "url": "https://circleback.ai"
     },
     "useCases": [
-      "customer-support",
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 14734,
@@ -1845,7 +1837,7 @@
       "url": "https://www.clarify.ai"
     },
     "useCases": [
-      "productivity"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 12701,
@@ -1883,7 +1875,7 @@
       "url": "https://clarity.ai/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 11622,
@@ -1919,7 +1911,7 @@
       "url": "https://clerk.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 13142,
@@ -1997,8 +1989,7 @@
       "url": "https://clickup.com"
     },
     "useCases": [
-      "productivity",
-      "customer-support"
+      "project-management"
     ],
     "sortOrder": 1,
     "popularityScore": 18160,
@@ -2098,8 +2089,7 @@
       "url": "https://www.close.com/"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 13972,
@@ -2165,7 +2155,7 @@
       "url": "https://cloudflare.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 17383,
@@ -2223,8 +2213,8 @@
       "url": "https://cloudinary.com/"
     },
     "useCases": [
-      "analytics",
-      "code"
+      "design",
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 14077,
@@ -2284,7 +2274,7 @@
       "url": "https://www.coindesk.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13396,
@@ -2332,8 +2322,7 @@
       "url": "https://commonroom.io"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 14912,
@@ -2377,7 +2366,7 @@
       "url": "https://consensus.app/"
     },
     "useCases": [
-      "analytics"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 16409,
@@ -2485,7 +2474,7 @@
       "url": "https://context7.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 17930,
@@ -2531,8 +2520,7 @@
       "url": "https://coupler.io"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "analytics"
     ],
     "sortOrder": null,
     "popularityScore": 14303,
@@ -2600,7 +2588,7 @@
       "url": "https://www.craft.do/"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 14266,
@@ -2657,8 +2645,7 @@
       "url": "https://crossbeam.com"
     },
     "useCases": [
-      "productivity",
-      "customer-support"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 15407,
@@ -2701,7 +2688,7 @@
       "url": "https://crypto.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 15143,
@@ -2745,7 +2732,7 @@
       "url": "https://www.cypress.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -2783,7 +2770,7 @@
       "url": "https://daloopa.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 15852,
@@ -2967,7 +2954,7 @@
       "url": "https://www.datadoghq.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -3036,10 +3023,7 @@
       "url": "https://day.ai"
     },
     "useCases": [
-      "productivity",
-      "sales",
-      "marketing",
-      "customer-support"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 12982,
@@ -3074,7 +3058,7 @@
       "url": "https://www.dice.com/"
     },
     "useCases": [
-      "productivity"
+      "hr"
     ],
     "sortOrder": null,
     "popularityScore": 14683,
@@ -3351,7 +3335,7 @@
       "url": "https://eraser.io"
     },
     "useCases": [
-      "code"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 11442,
@@ -3395,7 +3379,7 @@
       "url": "https://exa.ai/"
     },
     "useCases": [
-      "code"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 15604,
@@ -3434,7 +3418,7 @@
       "url": "https://github.com/excalidraw"
     },
     "useCases": [
-      "productivity"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 18494,
@@ -3490,7 +3474,7 @@
       "url": "https://www.factset.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 16773,
@@ -3539,7 +3523,7 @@
       "url": "https://fathom.ai"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 16446,
@@ -3580,7 +3564,7 @@
       "url": "https://fellow.ai/"
     },
     "useCases": [
-      "customer-support"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 15179,
@@ -3623,7 +3607,9 @@
       "name": "Fever",
       "url": "https://feverup.com/"
     },
-    "useCases": [],
+    "useCases": [
+      "lifestyle"
+    ],
     "sortOrder": null,
     "popularityScore": 11286,
     "trendingScore": 50364,
@@ -3668,7 +3654,7 @@
       "url": "https://fireflies.ai/"
     },
     "useCases": [
-      "customer-support"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 17628,
@@ -3721,7 +3707,7 @@
       "url": "https://fiscal.ai/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 14099,
@@ -3759,7 +3745,8 @@
       "url": "https://www.gainsight.com"
     },
     "useCases": [
-      "productivity"
+      "crm",
+      "support"
     ],
     "sortOrder": null,
     "popularityScore": 14924,
@@ -3804,9 +3791,8 @@
       "url": "https://gamma.app/about"
     },
     "useCases": [
-      "productivity",
-      "sales",
-      "marketing"
+      "marketing",
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 19391,
@@ -3851,7 +3837,7 @@
       "url": "https://gitlab.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -3885,7 +3871,7 @@
       "url": "https://gocardless.com/"
     },
     "useCases": [
-      "finance"
+      "payments"
     ],
     "sortOrder": null,
     "popularityScore": 11614,
@@ -3921,7 +3907,7 @@
       "url": "https://www.godaddy.com"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 16352,
@@ -3986,7 +3972,7 @@
       "url": "https://govtribe.com"
     },
     "useCases": [
-      "productivity"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 12323,
@@ -4046,7 +4032,7 @@
       "url": "https://grain.com"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 14098,
@@ -4095,7 +4081,7 @@
       "url": "https://www.granola.ai"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": 1,
     "popularityScore": 19061,
@@ -4134,7 +4120,7 @@
       "url": "https://grantedai.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 12712,
@@ -4171,7 +4157,7 @@
       "url": "https://www.apollographql.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 11760,
@@ -4206,7 +4192,7 @@
       "url": "https://groww.in"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -4251,7 +4237,7 @@
       "url": "https://www.getguru.com"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 15924,
@@ -4348,7 +4334,7 @@
       "url": "https://gusto.com"
     },
     "useCases": [
-      "finance"
+      "hr"
     ],
     "sortOrder": 1,
     "popularityScore": 14512,
@@ -4414,7 +4400,7 @@
       "url": "https://harmonic.ai"
     },
     "useCases": [
-      "productivity"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 14012,
@@ -4470,7 +4456,7 @@
       "url": "https://www.honeycomb.io"
     },
     "useCases": [
-      "analytics"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 14487,
@@ -4531,7 +4517,7 @@
       "url": "https://huggingface.co/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 17504,
@@ -4585,7 +4571,7 @@
       "url": "https://www.ibisworld.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13018,
@@ -4643,7 +4629,7 @@
       "url": "https://ifttt.com"
     },
     "useCases": [
-      "productivity"
+      "automation"
     ],
     "sortOrder": null,
     "popularityScore": 13679,
@@ -4717,7 +4703,7 @@
       "url": "https://incident.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 15982,
@@ -4760,7 +4746,7 @@
       "url": "https://www.infobip.com"
     },
     "useCases": [
-      "communication"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -4798,7 +4784,7 @@
       "url": "https://intercom.com"
     },
     "useCases": [
-      "customer-support"
+      "support"
     ],
     "sortOrder": 1,
     "popularityScore": 20737,
@@ -4847,7 +4833,7 @@
       "url": "https://jam.dev/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 14703,
@@ -4893,7 +4879,9 @@
       "name": "Jentic",
       "url": "https://jentic.com/"
     },
-    "useCases": [],
+    "useCases": [
+      "automation"
+    ],
     "sortOrder": null,
     "popularityScore": 10165,
     "trendingScore": 43435,
@@ -4944,7 +4932,7 @@
       "url": "https://www.jotform.com/"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 15491,
@@ -5036,7 +5024,7 @@
       "url": "https://www.ketryx.com/"
     },
     "useCases": [
-      "productivity"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 10566,
@@ -5078,7 +5066,7 @@
       "url": "https://www.kindora.co"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 11944,
@@ -5113,7 +5101,7 @@
       "url": "https://kiwi.com/"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 16141,
@@ -5176,10 +5164,7 @@
       "url": "https://klaviyo.com"
     },
     "useCases": [
-      "sales",
-      "marketing",
-      "analytics",
-      "customer-support"
+      "marketing"
     ],
     "sortOrder": 1,
     "popularityScore": 16375,
@@ -5233,7 +5218,7 @@
       "url": "https://krisp.ai/"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 14410,
@@ -5323,8 +5308,7 @@
       "url": "https://langfuse.com"
     },
     "useCases": [
-      "analytics",
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -5365,7 +5349,7 @@
       "url": "https://lilt.com/"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 11632,
@@ -5426,7 +5410,7 @@
       "url": "https://linear.app"
     },
     "useCases": [
-      "productivity"
+      "project-management"
     ],
     "sortOrder": 0,
     "popularityScore": 20988,
@@ -5506,7 +5490,6 @@
       "url": "https://www.localfalcon.com/"
     },
     "useCases": [
-      "sales",
       "marketing"
     ],
     "sortOrder": null,
@@ -5552,8 +5535,8 @@
       "url": "https://logrocket.com"
     },
     "useCases": [
-      "analytics",
-      "productivity"
+      "engineering",
+      "analytics"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -5609,7 +5592,7 @@
       "url": "https://www.lseg.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 14900,
@@ -5768,7 +5751,7 @@
       "url": "https://www.lorikeetcx.ai"
     },
     "useCases": [
-      "productivity"
+      "support"
     ],
     "sortOrder": null,
     "popularityScore": 4858,
@@ -5821,7 +5804,7 @@
       "url": "https://lucid.co/"
     },
     "useCases": [
-      "productivity"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 18337,
@@ -5864,7 +5847,7 @@
       "url": "https://www.luminpdf.com"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 11991,
@@ -5911,8 +5894,7 @@
       "url": "https://lunarcrush.com"
     },
     "useCases": [
-      "finance",
-      "analytics"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13949,
@@ -5960,7 +5942,7 @@
       "url": "https://www.magicpatterns.com"
     },
     "useCases": [
-      "productivity"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 14091,
@@ -6044,7 +6026,7 @@
       "url": "https://www.mailerlite.com"
     },
     "useCases": [
-      "customer-support"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 14058,
@@ -6150,7 +6132,7 @@
       "url": "https://www.make.com"
     },
     "useCases": [
-      "productivity"
+      "automation"
     ],
     "sortOrder": 1,
     "popularityScore": 16996,
@@ -6197,9 +6179,7 @@
       "url": "https://medidata.com"
     },
     "useCases": [
-      "productivity",
-      "analytics",
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 13356,
@@ -6264,7 +6244,7 @@
       "url": "https://newsroom.kakaoent.com/"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 11985,
@@ -6322,7 +6302,7 @@
       "url": "https://get.mem.ai/"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 14345,
@@ -6401,8 +6381,7 @@
       "url": "https://www.mermaidchart.com"
     },
     "useCases": [
-      "design",
-      "productivity"
+      "design"
     ],
     "sortOrder": 1,
     "popularityScore": 18070,
@@ -6453,7 +6432,7 @@
       "url": "https://metaview.ai"
     },
     "useCases": [
-      "productivity"
+      "hr"
     ],
     "sortOrder": null,
     "popularityScore": 15407,
@@ -6490,7 +6469,7 @@
       "url": "https://learn.microsoft.com/en-us/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 18723,
@@ -6536,7 +6515,7 @@
       "url": "https://www.midpage.ai/"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 14503,
@@ -6590,7 +6569,7 @@
       "url": "https://miro.com"
     },
     "useCases": [
-      "productivity"
+      "design"
     ],
     "sortOrder": 1,
     "popularityScore": 19512,
@@ -6764,9 +6743,7 @@
       "url": "https://monday.com/"
     },
     "useCases": [
-      "sales",
-      "marketing",
-      "productivity"
+      "project-management"
     ],
     "sortOrder": 1,
     "popularityScore": 20948,
@@ -6808,7 +6785,7 @@
       "url": "https://www.morningstar.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 15984,
@@ -6956,6 +6933,7 @@
       "url": "https://motionapp.com"
     },
     "useCases": [
+      "marketing",
       "analytics"
     ],
     "sortOrder": null,
@@ -7002,7 +6980,7 @@
       "url": "https://msci.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13851,
@@ -7050,7 +7028,7 @@
       "url": "https://www.mtnewswires.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 14240,
@@ -7092,7 +7070,7 @@
       "url": "https://www.netlify.com/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 16629,
@@ -7172,8 +7150,7 @@
       "url": "https://newrelic.com"
     },
     "useCases": [
-      "analytics",
-      "productivity"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -7225,7 +7202,7 @@
       "url": "https://notion.com"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": 0,
     "popularityScore": 21835,
@@ -7308,8 +7285,7 @@
       "url": "https://www.opentargets.org"
     },
     "useCases": [
-      "analytics",
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 15665,
@@ -7418,7 +7394,7 @@
       "url": "https://otter.ai"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 14966,
@@ -7475,8 +7451,7 @@
       "url": "https://outreach.io"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 16385,
@@ -7543,7 +7518,7 @@
       "url": "https://paypal.com"
     },
     "useCases": [
-      "finance"
+      "payments"
     ],
     "sortOrder": 1,
     "popularityScore": 15816,
@@ -7583,7 +7558,7 @@
       "url": "https://modelcontextprotocol.io"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 16049,
@@ -7627,7 +7602,7 @@
       "url": "https://peec.ai/"
     },
     "useCases": [
-      "analytics"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 14368,
@@ -7671,7 +7646,7 @@
       "url": "https://tigerdata.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 11906,
@@ -7723,7 +7698,7 @@
       "url": "https://www.pitchbook.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 17582,
@@ -7774,7 +7749,7 @@
       "url": "https://planetscale.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 12492,
@@ -7812,7 +7787,7 @@
       "url": "https://modelcontextprotocol.io"
     },
     "useCases": [
-      "productivity"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 14900,
@@ -8122,7 +8097,7 @@
       "url": "https://posthog.com"
     },
     "useCases": [
-      "code"
+      "analytics"
     ],
     "sortOrder": 1,
     "popularityScore": 16772,
@@ -8203,7 +8178,7 @@
       "url": "https://www.postman.com/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 17522,
@@ -8241,7 +8216,7 @@
       "url": "https://www.prisma.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -8292,7 +8267,7 @@
       "url": "https://www.usepylon.com/"
     },
     "useCases": [
-      "customer-support"
+      "support"
     ],
     "sortOrder": null,
     "popularityScore": 14729,
@@ -8372,7 +8347,7 @@
       "url": "https://quartr.com/"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 14052,
@@ -8426,7 +8401,7 @@
       "url": "https://quo.com/"
     },
     "useCases": [
-      "communication"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 13276,
@@ -8474,7 +8449,7 @@
       "url": "https://railway.com"
     },
     "useCases": [
-      "devops"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -8681,7 +8656,7 @@
       "url": "https://razorpay.com/about/"
     },
     "useCases": [
-      "productivity"
+      "payments"
     ],
     "sortOrder": 1,
     "popularityScore": 12697,
@@ -8716,7 +8691,7 @@
       "url": "https://resy.com/"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 14571,
@@ -8932,7 +8907,7 @@
       "url": "https://rootly.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -8993,7 +8968,7 @@
       "url": "https://www.spglobal.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 17611,
@@ -9089,7 +9064,7 @@
       "url": "https://www.sanity.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 14780,
@@ -9129,7 +9104,7 @@
       "url": "https://www.wiley.com/"
     },
     "useCases": [
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 16216,
@@ -9173,7 +9148,7 @@
       "url": "https://scite.ai/"
     },
     "useCases": [
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 13714,
@@ -9229,7 +9204,7 @@
       "url": "https://sentry.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 18523,
@@ -9305,7 +9280,7 @@
       "url": "https://shapes.co"
     },
     "useCases": [
-      "productivity"
+      "analytics"
     ],
     "sortOrder": null,
     "popularityScore": 10554,
@@ -9364,7 +9339,7 @@
       "url": "https://www.airslate.com/"
     },
     "useCases": [
-      "productivity"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 12563,
@@ -9405,8 +9380,7 @@
       "url": "https://splice.com"
     },
     "useCases": [
-      "design",
-      "creative"
+      "design"
     ],
     "sortOrder": null,
     "popularityScore": 12643,
@@ -9456,8 +9430,7 @@
       "url": "https://sprouts.ai"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 12418,
@@ -9496,7 +9469,8 @@
       "url": "https://squareup.com"
     },
     "useCases": [
-      "finance"
+      "ecommerce",
+      "payments"
     ],
     "sortOrder": 1,
     "popularityScore": 14284,
@@ -9534,7 +9508,7 @@
       "url": "https://statsig.com"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -9592,7 +9566,7 @@
       "url": "https://stripe.com"
     },
     "useCases": [
-      "finance"
+      "payments"
     ],
     "sortOrder": 0,
     "popularityScore": 17824,
@@ -9662,7 +9636,7 @@
       "url": "https://stytch.com/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 11992,
@@ -9750,8 +9724,7 @@
       "url": "https://supabase.com/"
     },
     "useCases": [
-      "code",
-      "analytics"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 18507,
@@ -9815,7 +9788,7 @@
       "url": "https://superhuman.com/products/mail"
     },
     "useCases": [
-      "productivity"
+      "email"
     ],
     "sortOrder": null,
     "popularityScore": 16435,
@@ -9873,8 +9846,8 @@
       "url": "https://supermetrics.com/"
     },
     "useCases": [
-      "sales",
-      "marketing"
+      "marketing",
+      "analytics"
     ],
     "sortOrder": null,
     "popularityScore": 16049,
@@ -9940,7 +9913,7 @@
       "url": "https://www.surveymonkey.com/"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": null,
     "popularityScore": 14063,
@@ -9977,7 +9950,7 @@
       "url": "https://www.swiggy.com"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -10014,7 +9987,7 @@
       "url": "https://www.swiggy.com"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -10051,7 +10024,7 @@
       "url": "https://www.swiggy.com"
     },
     "useCases": [
-      "productivity"
+      "ecommerce"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -10101,7 +10074,7 @@
       "url": "https://www.sybill.ai"
     },
     "useCases": [
-      "productivity"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 12513,
@@ -10149,7 +10122,7 @@
       "url": "https://sagebionetworks.org/"
     },
     "useCases": [
-      "life-sciences"
+      "research"
     ],
     "sortOrder": null,
     "popularityScore": 14123,
@@ -10193,7 +10166,9 @@
       "name": "MakeGov Inc",
       "url": "https://makegov.com/"
     },
-    "useCases": [],
+    "useCases": [
+      "market-data"
+    ],
     "sortOrder": null,
     "popularityScore": 11244,
     "trendingScore": 45683,
@@ -10229,7 +10204,7 @@
       "url": "https://www.taskrabbit.com/"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 12586,
@@ -10269,7 +10244,9 @@
       "name": "Tavily",
       "url": "https://www.tavily.com"
     },
-    "useCases": [],
+    "useCases": [
+      "research"
+    ],
     "sortOrder": null,
     "popularityScore": 14875,
     "trendingScore": 58211,
@@ -10317,7 +10294,7 @@
       "url": "https://www.thirdbridge.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 12593,
@@ -10355,7 +10332,7 @@
       "url": "https://modelcontextprotocol.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 15068,
@@ -10456,7 +10433,7 @@
       "url": "https://www.tickettailor.com/"
     },
     "useCases": [
-      "finance"
+      "ecommerce"
     ],
     "sortOrder": null,
     "popularityScore": 14271,
@@ -10496,7 +10473,6 @@
       "url": "https://www.tldraw.dev"
     },
     "useCases": [
-      "productivity",
       "design"
     ],
     "sortOrder": null,
@@ -10566,7 +10542,7 @@
       "url": "https://todoist.com"
     },
     "useCases": [
-      "productivity"
+      "project-management"
     ],
     "sortOrder": null,
     "popularityScore": 15879,
@@ -10603,7 +10579,7 @@
       "url": "https://www.tripadvisor.com"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 15522,
@@ -10640,7 +10616,7 @@
       "url": "https://www.trivago.com"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 15179,
@@ -10694,7 +10670,7 @@
       "url": "https://www.tropicapp.io"
     },
     "useCases": [
-      "productivity"
+      "finance"
     ],
     "sortOrder": null,
     "popularityScore": 13869,
@@ -10741,7 +10717,7 @@
       "url": "https://trunk.io"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -10773,7 +10749,7 @@
       "url": "https://twilio.com"
     },
     "useCases": [
-      "communication"
+      "engineering"
     ],
     "sortOrder": null,
     "popularityScore": 12442,
@@ -10814,7 +10790,7 @@
       "url": "https://www.udemy.com"
     },
     "useCases": [
-      "productivity"
+      "hr"
     ],
     "sortOrder": null,
     "popularityScore": 15847,
@@ -10862,7 +10838,7 @@
       "url": "https://unthread.io/"
     },
     "useCases": [
-      "productivity"
+      "support"
     ],
     "sortOrder": null,
     "popularityScore": 11556,
@@ -10955,7 +10931,7 @@
       "url": "https://vercel.com/"
     },
     "useCases": [
-      "code"
+      "engineering"
     ],
     "sortOrder": 1,
     "popularityScore": 18699,
@@ -10995,7 +10971,7 @@
       "url": "https://verisk.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 10510,
@@ -11031,7 +11007,7 @@
       "url": "https://www.viator.com"
     },
     "useCases": [
-      "productivity"
+      "lifestyle"
     ],
     "sortOrder": null,
     "popularityScore": 13722,
@@ -11079,9 +11055,7 @@
       "url": "https://www.vibeprospecting.ai"
     },
     "useCases": [
-      "sales",
-      "marketing",
-      "analytics"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": 16407,
@@ -11136,8 +11110,8 @@
       "url": "https://webflow.com/"
     },
     "useCases": [
-      "code",
-      "productivity"
+      "engineering",
+      "marketing"
     ],
     "sortOrder": 1,
     "popularityScore": 17451,
@@ -11185,7 +11159,6 @@
       "url": "https://windsor.ai"
     },
     "useCases": [
-      "sales",
       "marketing",
       "analytics"
     ],
@@ -11238,7 +11211,7 @@
       "url": "https://www.wix.com"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": 1,
     "popularityScore": 16375,
@@ -11316,7 +11289,7 @@
       "url": "https://wordpress.com"
     },
     "useCases": [
-      "productivity"
+      "marketing"
     ],
     "sortOrder": 1,
     "popularityScore": 17503,
@@ -11421,7 +11394,7 @@
       "url": "https://www.workable.com"
     },
     "useCases": [
-      "productivity"
+      "hr"
     ],
     "sortOrder": null,
     "popularityScore": 12947,
@@ -11471,7 +11444,7 @@
       "url": "https://yardi.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": 13382,
@@ -11514,8 +11487,7 @@
       "url": "https://zapier.com"
     },
     "useCases": [
-      "productivity",
-      "customer-support"
+      "automation"
     ],
     "sortOrder": 1,
     "popularityScore": 18249,
@@ -11571,7 +11543,7 @@
       "url": "https://zerodha.com"
     },
     "useCases": [
-      "finance"
+      "market-data"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -11605,7 +11577,7 @@
       "url": "https://www.ziprecruiter.com/"
     },
     "useCases": [
-      "productivity"
+      "hr"
     ],
     "sortOrder": null,
     "popularityScore": 13755,
@@ -11656,7 +11628,7 @@
       "url": "https://www.zocks.io"
     },
     "useCases": [
-      "finance"
+      "meetings"
     ],
     "sortOrder": null,
     "popularityScore": 11649,
@@ -11846,8 +11818,7 @@
       "url": "https://www.zoho.com"
     },
     "useCases": [
-      "sales",
-      "productivity"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -12037,8 +12008,7 @@
       "url": "https://www.zoho.com"
     },
     "useCases": [
-      "sales",
-      "productivity"
+      "crm"
     ],
     "sortOrder": null,
     "popularityScore": null,
