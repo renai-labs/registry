@@ -9237,6 +9237,85 @@
     }
   },
   {
+    "slug": "slack",
+    "name": "Slack",
+    "description": "Send messages, create canvases, and fetch Slack data",
+    "mcpServerUrl": "https://mcp.slack.com/mcp",
+    "urlOptions": null,
+    "docUrl": "https://docs.slack.dev/ai/mcp-server",
+    "icon": "https://cdn.renai.build/mcp-icons/slack.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "slack_send_message",
+      "slack_search_public_and_private",
+      "slack_search_users",
+      "slack_search_channels",
+      "slack_search_public",
+      "slack_read_channel",
+      "slack_read_thread",
+      "slack_create_canvas",
+      "slack_update_canvas",
+      "slack_read_canvas",
+      "slack_read_user_profile"
+    ],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth",
+      "scopes": [
+        "search:read.public",
+        "search:read.private",
+        "search:read.mpim",
+        "search:read.im",
+        "search:read.files",
+        "search:read.users",
+        "chat:write",
+        "channels:history",
+        "groups:history",
+        "mpim:history",
+        "im:history",
+        "canvases:read",
+        "canvases:write",
+        "users:read",
+        "users:read.email",
+        "reactions:write",
+        "reactions:read",
+        "emoji:read",
+        "files:read",
+        "channels:write",
+        "groups:write",
+        "im:write",
+        "mpim:write",
+        "channels:read",
+        "groups:read",
+        "mpim:read"
+      ],
+      "tokenEndpoint": "https://slack.com/api/oauth.v2.user.access",
+      "authorizationEndpoint": "https://slack.com/oauth/v2_user/authorize",
+      "tokenEndpointAuth": "client_secret_post"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Slack",
+      "url": "https://slack.com"
+    },
+    "useCases": [
+      "productivity",
+      "communication"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect to Slack to share messages and create canvases directly to simplify collaboration and boost productivity. Search and retrieve messages, channels, threads, files, and users, giving Claude the context to streamline your work.",
+      "supportUrl": "mailto:feedback@slack.com",
+      "privacyPolicyUrl": "https://slack.com/trust/privacy/privacy-policy"
+    }
+  },
+  {
     "slug": "splice",
     "name": "Splice",
     "description": "Search Splice's sounds catalog, build stacks & more!",
