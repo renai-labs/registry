@@ -218,6 +218,40 @@
     ]
   },
   {
+    "slug": "langfuse",
+    "name": "langfuse",
+    "description": "Interact with Langfuse and access its documentation. Use when needing to (1) query or modify Langfuse data programmatically via the CLI — traces, prompts, datasets, scores, sessions, and any other API resource, (2) look up Langfuse documentation, concepts, integration guides, or SDK usage, or (3) understand how any Langfuse feature works. This skill covers CLI-based API access (via npx) and multiple documentation retrieval methods.",
+    "license": "MIT",
+    "metadata": {
+      "author": "Langfuse GmbH",
+      "source": "https://github.com/langfuse/skills",
+      "requiredCredentials": [
+        {
+          "name": "LANGFUSE_PUBLIC_KEY",
+          "description": "Langfuse project public key (pk-lf-…)."
+        },
+        {
+          "name": "LANGFUSE_SECRET_KEY",
+          "description": "Langfuse project secret key (sk-lf-…)."
+        },
+        {
+          "name": "LANGFUSE_BASE_URL",
+          "description": "Langfuse API base URL — region cloud (e.g. https://cloud.langfuse.com) or self-hosted."
+        }
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "a1aed0b586371a5dbc8b870e447ef8f9c8c3c40191465298c2e673ee35d8d223",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "a1aed0b586371a5dbc8b870e447ef8f9c8c3c40191465298c2e673ee35d8d223"
+      }
+    ]
+  },
+  {
     "slug": "meme-generation",
     "name": "meme-generation",
     "description": "Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.",
