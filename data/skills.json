@@ -245,8 +245,8 @@
     "versions": [
       {
         "version": "0.0.1",
-        "gitRef": null,
-        "publishedAt": null,
+        "gitRef": "ef60e85d2d184c6b3738309ab2842ee310d2b147",
+        "publishedAt": "2026-06-05T09:59:48.178Z",
         "contentHash": "a1aed0b586371a5dbc8b870e447ef8f9c8c3c40191465298c2e673ee35d8d223"
       }
     ]
