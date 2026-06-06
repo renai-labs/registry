@@ -3,7 +3,7 @@
     "agent": {
       "slug": "ren",
       "name": "Ren",
-      "icon": null
+      "icon": "https://renai.build/ren_logo_dark.svg"
     },
     "versions": [
       {
