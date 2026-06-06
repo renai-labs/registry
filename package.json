@@ -16,7 +16,7 @@
   },
   "workspaces": ["cli", "schemas"],
   "catalog": {
-    "@renai-labs/sdk": "0.1.3",
+    "@renai-labs/sdk": "0.1.9",
     "@tsconfig/bun": "1.0.9",
     "@types/bun": "1.3.11",
     "@types/semver": "7.5.8",

@@ -47,7 +47,7 @@
     },
   },
   "catalog": {
-    "@renai-labs/sdk": "0.1.3",
+    "@renai-labs/sdk": "0.1.9",
     "@tsconfig/bun": "1.0.9",
     "@types/bun": "1.3.11",
     "@types/semver": "7.5.8",
@@ -83,7 +83,7 @@
 
     "@renai-labs/registry-schemas": ["@renai-labs/registry-schemas@workspace:schemas"],
 
-    "@renai-labs/sdk": ["@renai-labs/sdk@0.1.3", "", { "dependencies": { "@hey-api/client-fetch": "0.13.1", "@opencode-ai/sdk": "1.14.31" }, "peerDependencies": { "@tanstack/react-query": "^5", "zod": "^4" }, "optionalPeers": ["@tanstack/react-query", "zod"] }, "sha512-3834BshSvr6RtfD0xWdbHyv2n3GRapIur3OjrVyIXKnIXxhEcs6PxtqvI3iEpj3o1Pqtdi/ZWFlt3iDeH6BE8Q=="],
+    "@renai-labs/sdk": ["@renai-labs/sdk@0.1.9", "", { "dependencies": { "@hey-api/client-fetch": "0.13.1", "@opencode-ai/sdk": "1.14.31" }, "peerDependencies": { "@tanstack/react-query": "^5", "zod": "^4" }, "optionalPeers": ["@tanstack/react-query", "zod"] }, "sha512-i9xCDXCddTR3LWcUyGHTlPbv+ffMhBJ4Ofrmn+EHpQWAF4v+kvCztGyc4e8blZ6sOTR9IUxTu4kGBrqaD+pPbQ=="],
 
     "@tsconfig/bun": ["@tsconfig/bun@1.0.9", "", {}, "sha512-4M0/Ivfwcpz325z6CwSifOBZYji3DFOEpY6zEUt0+Xi2qRhzwvmqQN9XAHJh3OVvRJuAqVTLU2abdCplvp6mwQ=="],
 
