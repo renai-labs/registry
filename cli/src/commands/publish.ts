@@ -110,6 +110,7 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
     if (!existing) {
       const { data: created, error } = await client.skill.create({
         body: {
+          slug: entry.slug,
           name: entry.name,
           description: entry.description,
           icon: meta.icon ?? undefined,
@@ -172,6 +173,7 @@ export async function publishMcps(client: RenClient, entries: McpEntry[]): Promi
       }
       const { data: created, error } = await client.mcp.create({
         body: {
+          slug: entry.slug,
           name: entry.name,
           description: entry.description,
           icon: entry.icon ?? undefined,
