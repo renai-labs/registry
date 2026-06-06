@@ -9352,6 +9352,53 @@
     }
   },
   {
+    "slug": "slack",
+    "name": "Slack",
+    "description": "Post messages, reply in threads, react, and read Slack channels, threads, and users",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://cdn.renai.build/mcp-icons/slack.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "slack_post_new_message",
+      "slack_reply_in_thread",
+      "slack_list_channels",
+      "slack_read_thread",
+      "slack_upload_file",
+      "slack_react",
+      "slack_lookup_user",
+      "slack_edit_message",
+      "slack_delete_message",
+      "slack_get_reactions",
+      "slack_read_channel_history",
+      "slack_list_users"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Slack",
+      "url": "https://slack.com"
+    },
+    "useCases": [
+      "productivity",
+      "communication"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect Slack to Ren so agents can post and reply in channels and threads, react to messages, upload files, and read channels, threads, and users. Served through Ren's native Slack integration — connect your workspace once and agents act as the Ren bot.",
+      "supportUrl": "mailto:feedback@slack.com",
+      "privacyPolicyUrl": "https://slack.com/trust/privacy/privacy-policy"
+    }
+  },
+  {
     "slug": "splice",
     "name": "Splice",
     "description": "Search Splice's sounds catalog, build stacks & more!",
