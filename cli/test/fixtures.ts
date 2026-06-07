@@ -60,8 +60,6 @@ export async function makeFixture(opts: FixtureOptions = {}): Promise<Fixture> {
     "data/skills",
     "plugins/ren/.claude-plugin",
     "plugins/ren/.codex-plugin",
-    "plugins/ren/skills",
-    "skills",
     ".claude-plugin",
     ".agents/plugins",
   ]) {

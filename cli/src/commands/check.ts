@@ -13,7 +13,8 @@ import {
 import { loadSkillsRegistry } from "@/lib/snapshot"
 import { validateChangedMcps } from "@/lib/mcp-validate"
 import { validate } from "@/commands/validate"
-import { diffDirs, diffFiles } from "@/lib/diff"
+import { diffFiles } from "@/lib/diff"
+import { validateMirrorSymlinks } from "@/lib/mirror"
 import { PATHS } from "@/lib/paths"
 import { log } from "@/lib/log"
 
@@ -71,20 +72,10 @@ export async function check(): Promise<CheckResult> {
     }
     await build({ scratch, skipDriftCheck: true })
 
-    const pluginDiff = await diffDirs(PATHS.pluginSkillsMirror, scratch.pluginSkillsMirror)
-    if (pluginDiff.added.length || pluginDiff.removed.length || pluginDiff.modified.length) {
+    const mirrorProblems = await validateMirrorSymlinks()
+    if (mirrorProblems.length) {
       problems.push(
-        `mirror drift: plugins/ren/skills/ differs from build output ` +
-          `(+${pluginDiff.added.length} -${pluginDiff.removed.length} ~${pluginDiff.modified.length}); ` +
-          `run \`ren-registry build && git add -A\``,
-      )
-    }
-    const rootDiff = await diffDirs(PATHS.rootSkillsMirror, scratch.rootSkillsMirror)
-    if (rootDiff.added.length || rootDiff.removed.length || rootDiff.modified.length) {
-      problems.push(
-        `mirror drift: skills/ differs from build output ` +
-          `(+${rootDiff.added.length} -${rootDiff.removed.length} ~${rootDiff.modified.length}); ` +
-          `run \`ren-registry build && git add -A\``,
+        ...mirrorProblems.map((p) => `${p}; run \`ren-registry build && git add -A\``),
       )
     }
 

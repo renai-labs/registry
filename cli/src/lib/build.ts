@@ -36,7 +36,7 @@ import {
   writeCodexManifest,
   writeSkillsShManifest,
 } from "./manifests"
-import { mirrorSkill, mirrorSkillToDir, pruneMirrors } from "./mirror"
+import { createMirrorSymlinks, pruneMirrors } from "./mirror"
 import { writeJson } from "./json"
 import { log } from "./log"
 
@@ -459,14 +459,15 @@ export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
   const rootTarget = opts.scratch?.rootSkillsMirror ?? PATHS.rootSkillsMirror
 
   if (opts.scratch) {
-    await mkdir(pluginTarget, { recursive: true })
-    await mkdir(rootTarget, { recursive: true })
-    for (const entry of bundledEntries) {
-      await mirrorSkillToDir(entry, pluginTarget)
-      await mirrorSkillToDir(entry, rootTarget)
-    }
+    // Scratch build: create symlinks in the scratch dir so check can compare targets
+    const { symlink } = await import("node:fs/promises")
+    const { relative, dirname } = await import("node:path")
+    await mkdir(dirname(rootTarget), { recursive: true })
+    await mkdir(dirname(pluginTarget), { recursive: true })
+    await symlink(relative(dirname(rootTarget), PATHS.dataSkills), rootTarget)
+    await symlink(relative(dirname(pluginTarget), PATHS.dataSkills), pluginTarget)
   } else {
-    for (const entry of bundledEntries) await mirrorSkill(entry)
+    await createMirrorSymlinks()
   }
 
   const prunedMirrorPaths = opts.scratch ? [] : await pruneMirrors(bundledEntries.map((s) => s.slug))
