@@ -624,6 +624,27 @@
     ]
   },
   {
+    "slug": "ren-systems-architect",
+    "name": "ren-systems-architect",
+    "description": "Explains the Ren data model, scope tiers, and the build chain, and decides what pods, projects, agents, skills, MCPs, stores, and triggers to set up and in what order. Load before any Ren build to choose the right primitives, run the reuse-before-create path, and wire everything together; and whenever a user asks how to structure or arrange their Ren setup. Owns the Ren CLI / registry mutations that compose a build — reuse, create, version, attach, scope, wire; the standalone dev skills hold only authoring craft.",
+    "license": null,
+    "metadata": {
+      "tags": [
+        "ren"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "efefc9b7ba989689538418871a3156993be6acfb7da1c9b4d300ae2d642f195c",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "efefc9b7ba989689538418871a3156993be6acfb7da1c9b4d300ae2d642f195c"
+      }
+    ]
+  },
+  {
     "slug": "ren-trigger-dev",
     "name": "ren-trigger-dev",
     "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",

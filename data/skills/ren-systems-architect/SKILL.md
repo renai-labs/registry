@@ -5,8 +5,9 @@ description: >-
   pods, projects, agents, skills, MCPs, stores, and triggers to set up and in what
   order. Load before any Ren build to choose the right primitives, run the
   reuse-before-create path, and wire everything together; and whenever a user asks
-  how to structure or arrange their Ren setup. Owns every Ren CLI / registry
-  mutation — the standalone dev skills hold only authoring craft.
+  how to structure or arrange their Ren setup. Owns the Ren CLI / registry
+  mutations that compose a build — reuse, create, version, attach, scope, wire;
+  the standalone dev skills hold only authoring craft.
 metadata:
   tags:
     - ren
@@ -69,6 +70,31 @@ Dependencies build **leaf-up**. Each step routes to where its mechanics live —
 7. **Trigger** (optional) — cron schedule → `references/wiring.md`.
 8. **Sandbox readiness + session** — get the sandbox `ready`, then hand off → `references/wiring.md`.
 
+## Blueprint — make the build visual and checkable
+
+The build chain above is the *what* and the *order*. The **blueprint loop** runs that chain as a durable,
+machine-checkable record that survives context bloat and lets the user see their setup form: author a
+desired-state `topology.json` from the interview, render it to a canvas, then diff against live and build
+the gap until they match. **[[ren-onboarding]] always runs this loop;** for ad-hoc "design my setup"
+builds it's optional. Two bundled assets back it — `assets/topology.schema.json` (the desired-state schema;
+same shape as live `GET /api/topology`, but `id` optional so a draft is keyed by `slug`) and
+`assets/canvas.html` (a self-contained diagram that takes that JSON directly). The on-disk draft is the
+source of truth — re-read it rather than trusting context.
+
+It runs on the **CLI transport only** (the scripts need a shell + `bun`); on the MCP or any no-shell
+transport, author and self-validate the draft by hand, reconcile by reading live state directly, and hand
+the live UI link instead of the canvas. Working-file paths and invocation: `references/blueprint.md`.
+
+```
+author topology.json → render (scripts/render.ts) → ren topology get → diff (scripts/diff.ts)
+   → build the gap (this chain) → write back ids → re-render → repeat until clean
+```
+
+`projects[].requirements[]` (`must` / `verify` / `blocking` / `blockedBy`) is the checklist `diff.ts`
+works through — structurally confirming the kinds it can (agent / skill / mcp / credential / vault /
+trigger / slack / store), and surfacing the rest as `manual` with their `verify` for you to run. Full
+procedure, requirement kinds, and script runtime deps: `references/blueprint.md`.
+
 ## Credentials — the design
 
 A vault is a credential safe; credentials live inside it, encrypted at rest, and are injected as env vars at runtime — **secrets never live in prompts.** Vaults are `user`- or `org`-scoped (no registry tier); a credential inherits its vault's scope. Resolution walks the pod's attached vaults by priority (lower number wins), first-match-by-name, mapping a credential `name` to the env var a skill/MCP reads. The OAuth connect/poll flow, API-key shape, and lazy refresh are all in [[ren-vaults-credentials-dev]].
@@ -82,3 +108,4 @@ One **private pod per user** for personal work. **Team pods are shaped around sh
 - `references/operations.md` — the Ren CLI / registry operations for the composable artifacts (skills, MCPs, agents) plus credential ops: search, fork, create, version, attach, OAuth.
 - `references/wiring.md` — the plumbing primitives: pods & sandbox readiness, projects & sessions, stores, triggers.
 - `references/integrations.md` — the index of native integrations and registry MCPs by category.
+- `references/blueprint.md` — the desired-state spec + canvas + diff reconcile loop, with the bundled `assets/topology.schema.json` and `assets/canvas.html` and the `scripts/render.ts` / `scripts/diff.ts` helpers.

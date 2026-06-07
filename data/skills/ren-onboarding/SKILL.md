@@ -89,7 +89,7 @@ ren init --device-poll  --wait 25 --output json
 
 ## 1.5 Load the architect, then bootstrap the transport
 
-Before you build, load **[[ren-systems-architect]]** — it owns the Ren manual (data model, scope tiers, the build chain, reuse rules, the integrations index) and is the design engine for everything in §4. **Read it; don't recite it to the user.**
+Before you build, load **[[ren-systems-architect]]** — it owns the Ren manual (data model, scope tiers, the build chain, reuse rules, the integrations index) and is the design engine for everything in §4. It also carries the **blueprint loop** (`references/blueprint.md`) and its bundled assets — the desired-state `topology.json` schema and the self-contained `canvas.html` — which §4 uses to make the build visual and checkable. **Read it; don't recite it to the user.**
 
 Then pull the one transport reference the architect doesn't carry, and keep it handy:
 
@@ -157,7 +157,13 @@ Team-shaped pains ("my teammate needs this too") get filed for the close, not wi
 
 ## 4. Build leaf-up, narrate in their words
 
-Execute the build chain owned by [[ren-systems-architect]] — it holds the dependency order, the scope discipline (`--scope user` default and why), and the reuse-before-create inventory (private pod, default vault/file/memory stores, the never-touch "Ren" project). Your job here is to **run that chain to the end** and narrate each step in the user's register.
+Drive the **blueprint loop** owned by [[ren-systems-architect]] (`references/blueprint.md`), so the user *watches* their setup form instead of hearing it narrated blind. The architect holds the dependency order, the scope discipline (`--scope user` default and why), and the reuse-before-create inventory (private pod, default vault/file/memory stores, the never-touch "Ren" project). Your job here is to **run the loop to the end** and narrate each step in the user's register.
+
+The scripted loop is **CLI-transport only** (it needs a shell + `bun`). On the MCP / no-shell transport, run the *same* loop by hand — author and self-validate the draft against the architect's `assets/topology.schema.json`, reconcile by reading live state directly, and hand the live UI link (§6) instead of the canvas. Invocation and working-file paths: `references/blueprint.md`.
+
+1. **Draft from the intake.** Turn the §3 answers into a desired-state draft at `/tmp/ren-topology.json` (architect's `assets/topology.schema.json`): the private pod, a fresh project, the agent, its skills/MCPs, any store/cron the pain called for. **Seed it with the defaults you're reusing** (private pod, default stores) so the diff stays quiet. Key everything by `slug`; capture the "must be true"s as `projects[].requirements[]`.
+2. **Show it.** `bun run <skill-dir>/scripts/render.ts /tmp/ren-topology.json` opens the canvas — the user sees the stack they're about to get. (Headless/sandbox: hand the written file path, or skip to the live link per §6.)
+3. **Build the gap, re-render.** Run the architect's build chain leaf-up for what isn't live yet; after each step `bun run <skill-dir>/scripts/diff.ts /tmp/ren-topology.json` reports what's left — write the new `id`s back into the draft and re-render to keep the canvas current. Repeat until the diff is clean and every blocking requirement passes (the diff worklist is the authority on what remains).
 
 - **Stay in `--scope user`** and build inside the user's **private pod** (already provisioned) and a **fresh project**.
 
