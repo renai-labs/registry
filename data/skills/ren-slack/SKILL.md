@@ -30,7 +30,7 @@ A channel mapping binds one Slack channel to one project. When someone posts in 
 `channels set` needs all three (validated server-side):
 
 - **`projectId`** — the project that answers in this channel.
-- **`defaultProjectAgentId`** — the **`pra_` attachment id**, *not* the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as triggers, see [[ren-trigger-dev]]). Must be an agent attached to that project.
+- **`defaultProjectAgentId`** — the **`pra_` attachment id**, *not* the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as triggers, see [[ren-systems-architect]]). Must be an agent attached to that project.
 - **`fallbackSenderUserId`** — a **pod member** user id; who a message is attributed to when the Slack sender isn't a known Ren user. During onboarding, default this to the onboarding user themselves.
 
 ## Scope
@@ -45,6 +45,6 @@ Slack is **org-level**: the install and its channel mappings are keyed to the ca
 
 ## Next steps
 
-- **Map a channel to a project**, then post in it to confirm the agent answers. See [[ren-project-dev]].
-- **Run it unattended** with a cron trigger if the user wants scheduled posts as well as on-demand. See [[ren-trigger-dev]].
+- **Map a channel to a project**, then post in it to confirm the agent answers. See [[ren-systems-architect]].
+- **Run it unattended** with a cron trigger if the user wants scheduled posts as well as on-demand. See [[ren-systems-architect]].
 - **Wire GitHub** if the agent also needs a repo. See [[ren-github]].

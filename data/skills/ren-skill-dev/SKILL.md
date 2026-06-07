@@ -1,10 +1,11 @@
 ---
 name: ren-skill-dev
 description: >-
-  Author, edit, fork, and optimize skills — the modular capabilities
-  (instructions plus optional scripts, references, and templates) an agent loads
+  Author, edit, fork, optimize, and adapt skills — the modular capabilities
+  (instructions plus optional scripts, references, and assets) an agent loads
   on demand when a task makes them relevant. Use when the user wants to create,
-  update, improve, or debug a skill, or add a custom capability to an agent.
+  update, improve, or debug a skill, adapt a third-party / community SKILL.md,
+  or add a custom capability to an agent.
 metadata:
   icon: 'https://cdn.renai.build/skill-icons/skill-dev.svg'
   tags:
@@ -14,41 +15,36 @@ metadata:
 
 # Skill Dev
 
-A skill is a modular capability that can be used by agents - packaged instructions plus optional resources (`scripts/`, `references/`, `templates/`) that the agent reaches for on its own, only when a task makes it relevant. The package is a folder with a `SKILL.md` (frontmatter + markdown body) at its root. The frontmatter `name` + `description` are all the agent sees up front, listed in its skill catalog; it loads the full body and any bundled files on demand. That's the point: an agent can carry many skills and pay for none of their content until one is actually needed.
+A skill is a modular capability that can be used by agents - packaged instructions plus optional resources (`scripts/`, `references/`, `assets/`) that the agent reaches for on its own, only when a task makes it relevant. The package is a folder with a `SKILL.md` (frontmatter + markdown body) at its root. The frontmatter `name` + `description` are all the agent sees up front, listed in its skill catalog; it loads the full body and any bundled files on demand. That's the point: an agent can carry many skills and pay for none of their content until one is actually needed.
 
-> Commands and flags: `ren docs commands`. Entities, scope, versioning: `ren docs model`. This skill is the authoring craft on top of those.
+> This skill is the **authoring craft** — how to write a skill well, whether from scratch or by adapting an existing one. Forking, publishing, attaching to agents, scope, versioning, and every Ren CLI / registry operation live in [[ren-systems-architect]].
 
-## Runtime behavior
+## Two ways to start — pick one first
 
-`scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files. By default an agent tracks a skill's **latest** version and auto-rolls-forward (see `ren docs model` on versioning).
+Every skill is created one of two ways. Decide which before you write anything:
 
-`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. The platform resolves them from the pod's vault stack and makes them available as env vars; an unresolved one is simply absent — the skill still loads, then fails when it reaches for the missing variable. The declaration is advisory: it surfaces a missing-auth prompt to the user, not a hard gate.
+1. **From scratch** — a blank `SKILL.md`. Write the frontmatter and body from real expertise; follow the anatomy, writing principles, and bundled-resource guidance below.
+2. **Fork / adapt** — start from an existing skill (a registry skill you want a variant of, or a third-party / community `SKILL.md`) and edit it down to fit Ren. This is **copy first, then migrate** — two distinct steps, and the copy step is the one people skip.
 
-## Scope
+### Forking is copy → migrate
 
-Follows the Ren standard (`ren docs model`). Key constraint: a `user` skill can back a `user` or `org` agent, but you can't pull a narrower-scope skill into a broader-scope publication.
+A skill **is its folder**: the `SKILL.md` plus any `scripts/`, `references/`, `assets/` beside it. The "data" is not just the SKILL.md body — it's the whole directory. So forking starts by duplicating that directory, not by opening one file.
 
-## 1. Reuse before authoring - three tiers, in order
+1. **Copy the whole folder to a new slug.** Never edit in place.
+   - Registry skill → `cp -r data/skills/<source-slug>/ data/skills/<new-slug>/`
+   - Community source (a local dir or a cloned git repo) → copy the folder that holds `SKILL.md` (with its bundled `scripts/` / `references/` / `assets/`) into `data/skills/<new-slug>/`; leave the repo's other files behind.
+2. **Make the name match the folder.** Rename the new folder to `<new-slug>` if needed and set frontmatter `name: <new-slug>` — `name` **must equal the folder basename**.
+3. **Migrate the copy.** Walk it through the **Adapting an existing skill** section below (full steps in `references/adapting-skills.md`) — minimum-surface edits that satisfy Ren's runtime model and frontmatter spec. Operate only on the copy; never touch the source.
 
-1. **Reuse** an existing registry / org / user skill as-is.
-2. **Fork** a close-enough registry skill into your scope and edit it - the baked-in domain knowledge is worth keeping.
-3. **Author from scratch** only when neither fits.
+Both paths converge on the same craft — everything below applies to whichever you chose.
 
-Registry skills encode battle-tested commands, schemas, and gotchas — inherit them rather than reasoning from scratch. `ren skills list` shows only your own items; only `ren skills search --sources user org registry` reaches the registry. For *which* skill to reach for per task, see `ren docs integrations`.
+## Runtime behavior — it shapes how you write
 
-Download a skill's bundled files before deciding whether to fork:
+`scripts/` run when the agent calls them; `references/` only load when the agent opens them; `assets/` (templates, images, data files) ship alongside but never load into context — so the SKILL.md body should be tight and the depth belongs in the bundled files.
 
-```
-ren skills versions data <id> <version> --scope user --format presigned
-```
+`requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. The declaration is advisory — it surfaces a missing-auth prompt rather than hard-gating — and an unresolved secret is simply absent, so the skill still loads then fails at the call site. How secrets are resolved and wired: [[ren-vaults-credentials-dev]].
 
-Fork copies a skill into your scope as an editable copy, leaving the original untouched (`--scope user` to read a user-scope source; registry/org sources don't need it):
-
-```
-ren skills copy <id> --scope user --name "my-variant"
-```
-
-## 2. SKILL.md anatomy
+## SKILL.md anatomy & frontmatter spec
 
 ```
 ---
@@ -68,7 +64,20 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 `name` and `description` determine when the skill triggers, and the `description` carries the entire burden: only `name` + `description` load up front; the body loads on demand. Be specific about *what it does* AND *when to reach for it*. See `references/descriptions.md`.
 
-## 3. Writing principles
+Frontmatter is validated against a **strict** top level — only these keys are allowed:
+
+| Key             | Rule                                                                                          |
+| --------------- | --------------------------------------------------------------------------------------------- |
+| `name`          | **required.** kebab-case `^[a-z0-9]+(?:-[a-z0-9]+)*$`, ≤64 chars, **must equal the skill's folder name.** |
+| `description`   | **required.** 1–1024 chars.                                                                    |
+| `license`       | optional string (SPDX id).                                                                     |
+| `compatibility` | optional string, ≤500 chars.                                                                   |
+| `allowed-tools` | optional string.                                                                               |
+| `metadata`      | optional open map. Ren extras live here: `author`, `source`, `homepage`, `icon`, `docUrl`, `tags` (kebab slugs), `requiredCredentials`. |
+
+Any other top-level key fails validation — **notably `version`**. Ren owns versioning; never put `version` in frontmatter, and don't relocate it to `metadata.version` either.
+
+## Writing principles
 
 1. **Stay lean — ≤500 lines / ~5,000 tokens.** Move depth into `references/`.
 2. **Add what the agent lacks, omit what it knows.** Skip generic background; spend tokens on project conventions, non-obvious edge cases, and which tool/API to use.
@@ -80,30 +89,38 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 See `references/output-patterns.md` and `references/progressive-disclosure-patterns.md`.
 
-## 4. requiredCredentials
+## requiredCredentials
 
 UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace - omit to inherit (update) or declare none (create). Only declare credentials the SKILL.md actually references. **Do not write credential-setup steps into SKILL.md** - assume the env var is present and use it; the platform injects it.
 
-## 5. Bundled resources
+## Bundled resources
 
-| Resource      | Use for                            | Loaded into context? |
-| ------------- | ---------------------------------- | -------------------- |
-| `scripts/`    | Deterministic, repeated operations | No (executed)        |
-| `references/` | Domain depth, schemas, long docs   | Only when read       |
-| `templates/`  | Boilerplate output assets          | No                   |
+| Resource      | Use for                                              | Loaded into context? |
+| ------------- | ---------------------------------------------------- | -------------------- |
+| `scripts/`    | Deterministic, repeated operations                   | No (executed)        |
+| `references/` | Domain depth, schemas, long docs                     | Only when read       |
+| `assets/`     | Static resources — templates, images, data files     | No                   |
 
 See `references/bundled-resources.md` for the full decision matrix and — before writing any `scripts/` file — how to design scripts for agentic use (no Python: Bash/Node/Bun only).
 
-## 6. Iterate
+## Adapting an existing skill — fork or community source
+
+Once you've copied the source (see "Two ways to start" above), migrate the copy. It's minimum-surface work: keep the source's wording, examples, headings, and structure; edit only what conflicts with Ren's runtime model or fails the frontmatter spec — never the source.
+
+The full step-by-step lives in **`references/adapting-skills.md`**: frontmatter reshaping, credential / MCP / file-store / memory-store rewrites, bundled-resource layout, assistant-identity stripping, attribution, the hard rules, and a before/after table. Read it before touching the copy.
+
+## Iterate
 
 **Start from real expertise.** Generic LLM knowledge yields vague procedures ("handle errors appropriately"). Ground the skill in specifics: extract the pattern from a real task you completed with an agent (steps that worked, corrections you made, project facts you supplied), or synthesize from your own runbooks, schemas, and the patches that actually fixed things.
 
 **Then refine with real execution.** Ship → use → tighten. Read a session's *execution trace*, not just the output — wasted steps usually mean instructions too vague, inapplicable, or lacking a default. Fix the failing step, bump the version; every hand correction is a gotcha to add. Don't anticipate every edge case in v1 — edit from real runs.
 
-## Next steps
+## Verify before reporting done
 
-A skill does nothing until an agent uses it inside a project.
+- `name` equals the folder basename and is kebab-case ≤64 chars.
+- `description` is 1–1024 chars.
+- No top-level key outside { `name`, `description`, `license`, `compatibility`, `allowed-tools`, `metadata` } — especially no `version`.
+- `metadata.tags` (if any) are kebab slugs; `metadata.requiredCredentials[].name` match `^[A-Z_][A-Z0-9_]*$`.
+- Inside the ren registry repo, `bun run validate` confirms frontmatter early.
 
-- **Attach to an agent** — add the `skillId` to the agent version's `skills: [{ skillId }]` list. See [[ren-agent-dev]] for attach details and the full-replace dep pattern.
-- **Wire its credentials** if the skill declares `requiredCredentials`. See [[ren-vaults-credentials-dev]].
-- **Put the agent in a project** so a session can actually call the skill. See [[ren-project-dev]].
+To fork, publish, attach the skill to an agent, or wire its credentials — all Ren operations — see [[ren-systems-architect]].

@@ -32,7 +32,7 @@ The org's GitHub App installation gives Ren repo access. When a project's `gitRe
 
 ## Binding a repo
 
-`gitRepo` is nested, so it goes through `--body` on `projects update` (see [[ren-project-dev]]). `url` is the only required field; `baseBranch` and `mountPath` are optional. Pick the `url` from a `github repos` `fullName` (`https://github.com/<fullName>`). `github connect` is a fallback to re-link personal OAuth if a bind says "account not linked" — skip it during onboarding.
+`gitRepo` is nested, so it goes through `--body` on `projects update` (see [[ren-systems-architect]]). `url` is the only required field; `baseBranch` and `mountPath` are optional. Pick the `url` from a `github repos` `fullName` (`https://github.com/<fullName>`). `github connect` is a fallback to re-link personal OAuth if a bind says "account not linked" — skip it during onboarding.
 
 ## Scope
 
@@ -45,5 +45,5 @@ The install and its repo grants are **org-level** — keyed to the caller's org 
 
 ## Next steps
 
-- **Bind the repo to a private-pod project** and open a session — the working tree mounts at `mountPath`. See [[ren-project-dev]].
+- **Bind the repo to a private-pod project** and open a session — the working tree mounts at `mountPath`. See [[ren-systems-architect]].
 - **Wire Slack** if the user also wants channel-driven triggers. See [[ren-slack]].

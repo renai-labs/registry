@@ -1,22 +1,22 @@
 ---
 name: ren-mcp-dev
 description: >-
-  Discover and define MCP servers - the third-party tool surfaces an agent can
-  call. Use when an agent needs an external tool:
-  reach for Ren's registry MCPs first, and register a custom remote MCP only
-  when asked explicitly.
+  Define a custom remote MCP server - the third-party tool surface an agent can
+  call - for when no registry MCP fits. Use to shape a custom remote MCP's
+  server URL and auth-config and validate its Ren compatibility.
 ---
 
 # MCP Dev
 
+An MCP server is a remote tool surface an agent can call. This skill is the **craft of defining a custom remote MCP** — its server URL, the `authConfig` shape, and validating Ren compatibility. The architect routes you here only when no registry MCP fits; reuse/search, create/update, OAuth, attaching, and scope all live in [[ren-systems-architect]].
 
-> Commands and flags (`mcps search / get / get-by-slug / create / update`, the OAuth verbs): `ren docs commands`. Scope and credential resolution: `ren docs model`. Which MCP to reach for per task: `ren docs integrations`.
-
-## Runtime behavior
+## What a custom MCP definition needs
 
 - **It's a remote HTTP server.** A custom MCP needs a real, reachable `mcpServerUrl` — one without it is dropped at compose time and the agent simply won't see its tools.
-- **Defining an MCP ≠ authorizing it.** `authConfig` only declares **how** a secret is presented (which header / query param / basic-auth slot). It carries no secret. Wiring the actual credential is a separate step (see Next steps).
+- **Defining an MCP ≠ authorizing it.** `authConfig` only declares **how** a secret is presented (which header / query param / basic-auth slot). It carries no secret — wiring the actual credential is a separate step ([[ren-vaults-credentials-dev]]).
 - **Attaching to an agent makes its tools available** the next time a session opens — no restart. Definition-level edits (URL, `authConfig`) propagate on the next manifest refresh.
+
+## Auth-config shape
 
 The credential a paired vault entry creates must use the env-var name Ren derives from the MCP's slug:
 
@@ -26,21 +26,15 @@ The credential a paired vault entry creates must use the env-var name Ren derive
 | `basic`    | `MCP_<SLUG>_BASIC`        |
 | `oauth`    | `MCP_<SLUG>_ACCESS_TOKEN` |
 
-`<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[ren-vaults-credentials-dev]]). `authConfig` is nested, so it goes through `--body` on create.
+`<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[ren-vaults-credentials-dev]]). `authConfig` is nested.
 
-## Scope
+## When no registry MCP fits — the fallback
 
-Follows the Ren standard (`ren docs model`). Note `--sources` (the read-time tier filter on `mcps search`) and `--scope` (the auth-resolution lens on every other command) are different flags. If a valid MCP id 404s, missing `--scope user` is the first thing to check.
-
-## Reach for Ren's registry MCPs first
-
-Ren ships a public registry of MCPs that are **tested and production-ready** - the server URL, transport, and auth config are already correct. Always prefer a registry MCP over rolling your own: a custom MCP is unmaintained surface you now own. `ren docs integrations` indexes the best picks per task; `ren mcps search --sources user org registry` is the live search.
-
-**Not every product exposes an MCP server.** If the registry has no fit and a web search turns up no official MCP hosted by the third party, the fallback is an **API-key-backed skill** ([[ren-skill-dev]]): a skill that calls the product's HTTP API directly, with the API key declared in its `requiredCredentials`.
+A custom MCP is unmaintained surface you now own, so it's the last resort. **Not every product exposes an MCP server.** If the registry has no fit and a web search turns up no official MCP hosted by the third party, the fallback is an **API-key-backed skill** ([[ren-skill-dev]]): a skill that calls the product's HTTP API directly, with the API key declared in its `requiredCredentials`.
 
 ## Validate Ren compatibility
 
-Before attaching a custom MCP, run the validator script
+Before a custom MCP is attached, run the validator script:
 
 ```
 ./scripts/validate-mcp.js https://mcp.acme.com/mcp           # public server
@@ -49,10 +43,4 @@ Before attaching a custom MCP, run the validator script
 ./scripts/validate-mcp.js --help                             # drift checks, --json, all options
 ```
 
-## Next steps
-
-An MCP does nothing until an agent uses it and the credential is wired.
-
-- **Attach to an agent** — add the id to the agent version's `mcps: [{ mcpId }]` list. See [[ren-agent-dev]].
-- **Authorize it** — OAuth (`ren mcps oauths connect <mcp-id>` runs the consent flow and resolves the default vault automatically) or API key (a credential in a vault). See [[ren-vaults-credentials-dev]].
-- **Put the agent in a project** so a session can actually call the MCP's tools. See [[ren-project-dev]].
+For the registry-reuse path, the create / update commands, OAuth authorization, and attaching to an agent — all Ren operations — see [[ren-systems-architect]].

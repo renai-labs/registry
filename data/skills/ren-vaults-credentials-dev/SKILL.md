@@ -9,13 +9,11 @@ description: >-
 
 # Vaults & Credentials Dev
 
-A **vault** is a credential safe. **Credentials** live inside it, encrypted at rest. Secrets never live in prompts — they live in a vault and are injected at runtime.
+> This skill is the **OAuth / API-key choreography and the gotchas** on top. What a vault and a credential are, vault scope tiers and inheritance, and the resolution model (priority walk, first-match-by-name, env var vs header) are design — see [[ren-systems-architect]] / `ren docs model`. Commands and flags (`vaults`, `credentials`, the OAuth verbs): `ren docs commands`.
 
-> Commands and flags (`vaults`, `credentials`, the OAuth verbs): `ren docs commands`. How resolution works (priority walk, first-match-by-name, env var vs header) and the scope rules for vaults: `ren docs model`. This skill is the OAuth choreography and the gotchas on top.
+## Scope — operational
 
-## Scope — vaults are scoped, credentials inherit
-
-Follows the Ren standard (`ren docs model`). Vaults have no registry tier — only **user** or **org**; a credential inherits its vault's scope. The personal pod's default vault is user-scope — `ren vaults list --scope user`, look for `isDefault: true`. A user vault attaches only to a user-private pod; an org vault attaches to either. Match scopes before attaching ([[ren-pod-dev]]).
+The personal pod's default vault is user-scope — `ren vaults list --scope user`, look for `isDefault: true`. A user vault attaches only to a user-private pod; an org vault attaches to either — match scopes before attaching. (Tiers, inheritance, resolution: [[ren-systems-architect]] / `ren docs model`.)
 
 ## Two paths to a credential
 
@@ -56,12 +54,11 @@ The credential lives inside a vault, so create needs `<vault-id>`. The personal 
 
 - Never write credential-setup steps into a skill's SKILL.md — the skill assumes the env var is already present (see [[ren-skill-dev]]).
 - The credential `name` must equal the skill's declared `requiredCredentials` entry, or the MCP's derived env-var name ([[ren-mcp-dev]]), or resolution misses and the env var is simply absent at runtime.
-- Match scopes before attaching: a user vault won't attach to an org pod.
 
 ## Next steps
 
 A credential does nothing until its vault is attached to a pod that runs the agent.
 
-- **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[ren-pod-dev]].
-- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[ren-project-dev]] for the deep link.
+- **Attach the vault to the pod** — `ren pods vaults add <pod-id> --vault-id vlt_… --priority 0`. See [[ren-systems-architect]].
+- **Open a session** — the env var resolves at startup and the skill/MCP works. See [[ren-systems-architect]] for the deep link.
 - **Add more credentials** to the same vault as you wire more skills/MCPs — one vault can back many.
