@@ -2,16 +2,15 @@
 name: ren-mcp-dev
 description: >-
   Discover and define MCP servers - the third-party tool surfaces an agent can
-  call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool:
+  call. Use when an agent needs an external tool:
   reach for Ren's registry MCPs first, and register a custom remote MCP only
-  when nothing fits.
+  when asked explicitly.
 ---
 
 # MCP Dev
 
-## What an MCP is
 
-An MCP (Model Context Protocol server) is a standardized interface for giving agents access to external tools and services — databases, APIs, internal systems, or any custom capability you want to expose.
+> Commands and flags (`mcps search / get / get-by-slug / create / update`, the OAuth verbs): `ren docs commands`. Scope and credential resolution: `ren docs model`. Which MCP to reach for per task: `ren docs integrations`.
 
 ## Runtime behavior
 
@@ -27,11 +26,15 @@ The credential a paired vault entry creates must use the env-var name Ren derive
 | `basic`    | `MCP_<SLUG>_BASIC`        |
 | `oauth`    | `MCP_<SLUG>_ACCESS_TOKEN` |
 
-`<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[ren-vaults-credentials-dev]]).
+`<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[ren-vaults-credentials-dev]]). `authConfig` is nested, so it goes through `--body` on create.
+
+## Scope
+
+Follows the Ren standard (`ren docs model`). Note `--sources` (the read-time tier filter on `mcps search`) and `--scope` (the auth-resolution lens on every other command) are different flags. If a valid MCP id 404s, missing `--scope user` is the first thing to check.
 
 ## Reach for Ren's registry MCPs first
 
-Ren ships a public registry of MCPs that are **tested and production-ready** - the server URL, transport, and auth config are already correct. Always prefer a registry MCP over rolling your own: a custom MCP is unmaintained surface you now own. Search before you build.
+Ren ships a public registry of MCPs that are **tested and production-ready** - the server URL, transport, and auth config are already correct. Always prefer a registry MCP over rolling your own: a custom MCP is unmaintained surface you now own. `ren docs integrations` indexes the best picks per task; `ren mcps search --sources user org registry` is the live search.
 
 **Not every product exposes an MCP server.** If the registry has no fit and a web search turns up no official MCP hosted by the third party, the fallback is an **API-key-backed skill** ([[ren-skill-dev]]): a skill that calls the product's HTTP API directly, with the API key declared in its `requiredCredentials`.
 

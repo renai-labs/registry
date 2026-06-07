@@ -16,6 +16,8 @@ metadata:
 
 A project lives inside a pod and groups the agents, file/memory stores, and triggers for one scope of work. Agents attach as `primary`, `subagent`, or `all` (both at once - the default).
 
+> Commands and flags (`projects create / get / list`, `projects agents|file-stores|memory-stores add/list/remove`): `ren docs commands`. Scope inheritance from the pod and attachment-version roll-forward: `ren docs model`. This skill is the attachment model and gotchas.
+
 ## Primary vs subagent
 
 - **Primary** - a top-level assistant the user (or a trigger) talks to directly. Triggers and chat sessions route to the project's primary agent.
@@ -24,61 +26,11 @@ A project lives inside a pod and groups the agents, file/memory stores, and trig
 
 **Every project needs at least one agent attached as `primary` (or `all`).** Without one, triggers can't fire and chat sessions have nothing to land on.
 
-## Runtime behavior
-
-The project is what binds agents, stores, and triggers to a pod. Attaching (or detaching) an agent or a store propagates without restart — the next session sees it.
-
-An agent attachment **tracks the agent's latest version by default**: omit `agentVersionId` (or pass `null`) on `projects agents add`, and a new published agent version rolls out to this project automatically. Pass an explicit `agentVersionId` to freeze the snapshot — useful when you want stability while the agent is iterated elsewhere.
-
-## Scope
-
-See [[ren-scope]]. A project inherits its pod's scope — if the pod is user-private, every project command needs `--scope user` (CLI) / `"query": { "scope": "user" }` (MCP).
-
-## Build via Ren CLI
-
-```
-ren pods list --output json
-ren projects create --pod-id pod_… --name "My Project" --description "…"
-```
-
-Nested fields (`gitRepo`, `permission`) go through `--body`:
-
-```
-ren projects create --pod-id pod_… --scope user --name "My Project" \
-  --body '{ "gitRepo": { "url": "…", "mountPath": "/repo" }, "permission": { … } }'
-```
-
-Attach agents and stores (managed per-attachment - no atomic "set the list"):
-
-```
-ren projects agents        add    prj_… --agent-id agt_primary --type primary                   # tracks agent's latest version
-ren projects agents        add    prj_… --agent-id agt_helper  --type subagent
-ren projects agents        add    prj_… --agent-id agt_primary --agent-version-id agv_… --type primary   # pinned
-ren projects agents        list   prj_…
-ren projects agents        remove prj_… agt_helper
-
-ren projects file-stores   add    prj_… --file-store-id   fst_…    # also: list / remove
-ren projects memory-stores add    prj_… --memory-store-id mst_…    # also: list / remove
-```
-
-Read with `ren projects get prj_…` (returns the project plus attached agents); list with `ren projects list --pod-id pod_…`.
-
-## Build via Ren MCP
-
-`{ path, query, body }` envelope (params are the API field names):
-
-```
-mcp__ren__project_create           { "query": { "scope": "user" }, "body": { "podId": "pod_…", "name": "My Project" } }
-mcp__ren__project_agent_add        { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "type": "primary" } }
-mcp__ren__project_agent_add        { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "agentId": "agt_…", "agentVersionId": "agv_…", "type": "primary" } }
-mcp__ren__project_fileStore_add    { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "fileStoreId": "fst_…" } }
-mcp__ren__project_memoryStore_add  { "query": { "scope": "user" }, "path": { "id": "prj_…" }, "body": { "memoryStoreId": "mst_…" } }
-mcp__ren__project_get              { "query": { "scope": "user" }, "path": { "id": "prj_…" } }
-```
+An agent attachment **tracks the agent's latest version by default** (omit `agentVersionId` on `projects agents add`); pass an explicit `agentVersionId` to freeze the snapshot. Attaching or detaching an agent or store propagates without restart — the next session sees it.
 
 ## Sessions
 
-A **session** is one chat with the project's primary agent. Creating, inspecting, and deep-linking sessions lives in [[ren-sessions-dev]].
+A **session** is one chat with the project's primary agent (a user's, or one a fired trigger opens). The sandbox must be `ready` for it to load ([[ren-pod-dev]]). `ren sessions list / get / messages list` inspect past runs; `session.create` itself is SDK/web-app only. Hand a user the Ren UI deep link `<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>` (see the onboarding hand-off for base-URL rules).
 
 ## Gotchas
 
@@ -88,7 +40,7 @@ A **session** is one chat with the project's primary agent. Creating, inspecting
 
 ## Next steps
 
-- **Start a session** — confirm the agent loads cleanly. The pod's sandbox must be `ready` ([[ren-pod-dev]]); create and inspect sessions via [[ren-sessions-dev]].
+- **Start a session** — confirm the agent loads cleanly. The pod's sandbox must be `ready` ([[ren-pod-dev]]).
 - **Run it unattended** with a cron trigger — only after one clean manual session. See [[ren-trigger-dev]].
 - **Give the agent more context** by attaching a file store (uploads / reference docs, read-only) or a memory store (persistent learnings, read-write). See [[ren-file-memory-store-dev]].
 - **Wire missing credentials** if a session surfaces a missing API key or OAuth. See [[ren-vaults-credentials-dev]].

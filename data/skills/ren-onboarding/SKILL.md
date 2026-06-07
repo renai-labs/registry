@@ -51,12 +51,11 @@ Pull the row that matches their stack. Give each tool credit for what it does we
 | Claude Code / OpenCode / Hermes | Coding agent for one developer in one terminal | One person, one machine, one session. Nothing survives past the terminal. The reason Anthropic and others now ship managed agent platforms: durable cloud agents orchestrated on a schedule is a categorically different problem. |
 | Claude / Google Managed Agents  | One agent inside one app, via API              | Locked to one vendor's model and MCPs. No cross-agent memory, no teammates in thread, no per-tool-call cost visibility.                                                                                                           |
 
-
 ## 1. Pick a transport
 
 Decide how you'll drive the Ren onboarding:
 
-- **Coding-agent environment (has a shell)** → **install and use the CLI.** `npm install -g @renai-labs/cli`, then `ren <cmd>`. 
+- **Coding-agent environment (has a shell)** → **install and use the CLI.** `npm install -g @renai-labs/cli`, then `ren <cmd>`.
 - **Ren MCP already connected** (`mcp__ren__`* tools exposed) → **use it.** Each dev skill's "Build via Ren MCP" section applies.
 - **Neither** → the user is in a hosted chat (claude.ai, chatgpt.com, etc.) without a shell or the Ren MCP. Hand them the right one-click connector for their host, ask them to reload (or start a new chat) once it's added, then **stop** until a transport exists.
   - **claude.ai** → [https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Ren&connectorUrl=https://api.renai.build/mcp](https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Ren&connectorUrl=https://api.renai.build/mcp) - opens the custom-connector modal pre-filled; user confirms and grants OAuth.
@@ -86,7 +85,21 @@ Parse the JSON. **Before doing anything else**, show the user: `"Open this link 
 ren init --device-poll  --wait 25 --output json
 ```
 
-`already-signed-in` → skip ahead. Otherwise **start polling immediately - do not wait for the user to confirm they opened the URL**. Loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL). Once signed in, list both pod scopes:
+`already-signed-in` → skip ahead. Otherwise **start polling immediately - do not wait for the user to confirm they opened the URL**. Loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL).
+
+## 1.5 Load the manual once, up front
+
+Before you build, pull the source-of-truth references for your transport and keep them handy. **Read them; don't recite them to the user.**. Keep them as reference.
+
+- **MCP transport** — the manual is exposed as MCP resources. Read both before building:
+  - `ren://docs/data-model` — the Ren data model: entities, scope tiers, credential resolution, build-chain ordering.
+  - `ren://docs/integrations` — which skill/MCP to reach for, and how to choose (the best setups per task).
+- **CLI transport** — run the three offline references once:
+  - `ren docs model` — the data model. Read it.
+  - `ren docs commands > /tmp/ren-commands.txt` — the **full** command tree, every command and flag.
+  - `ren docs integrations > /tmp/ren-integrations.md` — best skill / MCP / setup flows for a task.
+
+Then list both pod scopes so you know where you can build:
 
 ```
 ren pods list --scope user --output json   # private pod - where you'll build
@@ -95,7 +108,7 @@ ren pods list             --output json   # org pods
 
 ## 2. Read the user before proposing anything
 
-Pull the user's memory before any proposal: host's memory (Claude Code auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store CLI: `ren memory-store list --scope user` and `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` then fetch the URL. MCP: `memoryStore_files_presignDownload`. 
+Pull the user's memory before any proposal: host's memory (Claude Code auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store. CLI: `ren memory-store list --scope user`, then `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` and fetch the URL. MCP: `memoryStore_files_presignDownload`.
 
 Build a picture of:
 
@@ -105,7 +118,7 @@ Build a picture of:
 
 Speak their language first. Identify the pattern of problems they solve and the recurring pains. The translation comes after you understand the shape of the work.
 
-Summarise everything you've gathered about the user in crisp 2-3 sentences. 
+Summarise everything you've gathered about the user in crisp 2-3 sentences.
 
 ## 3. Intake
 
@@ -113,12 +126,12 @@ Two questions, in order. Don't skip either.
 
 ### Q1 - Intent (always ask)
 
-**Use the native question tool** - only fallback to plain text if theres no tool. Ask what they would like to do today; use memory from §2 to frame the question in their language. Their answer buckets into one of three modes:
+**Use the native question tool** - only fallback to plain text if there's no tool. Ask what they would like to do today; use memory from §2 to frame the question in their language. Their answer buckets into one of three modes:
 
 
 | Mode                   | Signal from their answer                                        | What you do                                                                                                                                                                   |
 | ---------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tour**               | Exploring, no clear pain, wants to understand Ren first         | No build. Walk through the build chain (§4), the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off if they want something live. |
+| **Tour**               | Exploring, no clear pain, wants to understand Ren first         | No build. Walk through the build chain, the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off if they want something live.      |
 | **Quick demo**         | Wants to see the flow before committing, or time is short       | One agent, one skill, one model - universal starter (inbox summary, calendar digest, meeting-notes → actions). Skip cron and stores.                                          |
 | **Personalised agent** | Has a recurring pain or concrete thing to offload - **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                                |
 
@@ -140,7 +153,7 @@ Two questions, in order. Don't skip either.
 | "I keep pasting the same API key"   | "Wiring it to my CRM / inbox once would save hours"       | Vault credential     |
 | "It forgets what worked last time"  | "Last quarter's playbook should carry over"               | Memory store         |
 | "I need to feed it docs / data"     | "Here's my customer list / pricing sheet - use this"      | File store           |
-| "It needs Linear / Notion"          | "It needs Gmail / HubSpot / Salesforce / Calendar"        | MCP (registry first) |
+| "It needs Linear / Notion"          | "It needs Gmail / HubSpot / Salesforce / Calendar"        | MCP - check `ren docs integrations` for the best fit |
 | "It needs to work against my GitHub repo" | "It should run from / post into Slack"              | Native integration ([[ren-github]] / [[ren-slack]]) - **org-level**, see §5 |
 
 
@@ -148,7 +161,7 @@ Team-shaped pains ("my teammate needs this too") get filed for the close, not wi
 
 ## 4. Build leaf-up, narrate in their words
 
-**Critical: The entire onboarding stays strictly in user scope.** Always pass `--scope user` on every create - agents, skills, MCPs, stores, vaults all default to `org` otherwise. Children inherit from their parent: projects (from pod), triggers (from project) and credentials (from vaults). You also need `--scope user` on `ren pods list` to see the user's private pod at all. See [[ren-scope]]. Always stay in user scope, unless the user explictly wants something shared across the org.
+**Stay in `--scope user` for the whole onboarding** unless the user explicitly wants something shared across the org - agents, skills, MCPs, stores, vaults all default to `org` otherwise, and you need `--scope user` even to *see* the private pod. The full scope rules (inheritance, reference direction, the `search` exception) are in `ren docs model` / `ren://docs/data-model`.
 
 Build inside the user's **private pod** (already provisioned) and a **fresh project**.
 
@@ -160,28 +173,20 @@ Build inside the user's **private pod** (already provisioned) and a **fresh proj
 - **Default memory store** (`<UserName> Memory`) - reuse. This is the user's persistent private memory; don't create a new one.
 - **Default "Ren" project** - **never touch.** Always create a fresh project for what you build.
 
-You must do a quick audit before building:
+Audit what exists before building (`ren docs commands` has the exact list/get invocations) - pods, vaults, file/memory stores, and the projects already in the private pod.
 
-```
-ren pods         list --scope user --output json
-ren vaults       list             --output json
-ren file-stores  list             --output json
-ren memory-stores list            --output json
-ren projects     list --pod-id <pod-id> --output json
-```
+### The build chain - which skill to load at each step
 
-### The build chain
+The dependency order and mechanics are in `ren docs model`. Your job is to load the right dev skill as you reach each step and narrate it in the user's register:
 
-Primitives in order: skills → MCPs → credentials → agent → stores → project → trigger → session. Load each dev skill as you reach its step.
-
-1. **Skills** → load [[ren-skill-dev]] first, then follow its search instructions. `ren skills list` shows only your own items - only `ren skills search --sources user org registry` reaches the registry.
-2. **MCPs** → load [[ren-mcp-dev]] first, then follow its search instructions. `ren mcps list` shows only your own items - only `ren mcps search --sources user org registry` reaches the registry.
-3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP from 1–2 needs auth. Add into user's **existing default private vault** (`isDefault: true`). Can be wired before *or* after the chat opens - skip for speed if the agent can still demonstrate something useful.
-4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/mcps from steps 1–2. Follow the "Choosing the model" section in that skill - model selection is a required user decision before creation. Clean up any temporary build files (e.g. `/tmp/<build-dir>`) after the agent is created.
-5. **Stores** → [[ren-file-memory-store-dev]] - **default: attach the existing default file/memory stores to the fresh project.** Create new only if the agent's learnings should stay isolated (memory) or its docs are agent-specific (file).
-6. **Project** → [[ren-project-dev]] - **always a fresh project** in the private pod. Attach the agent as `primary`, attach the stores from step 5. (Inherits scope from the pod.)
+1. **Skills** → [[ren-skill-dev]]. Reuse / fork / author - see `ren docs integrations` for the best pick per task.
+2. **MCPs** → [[ren-mcp-dev]]. Registry MCP first; `ren docs integrations` is the index of what to reach for.
+3. **Credentials** (optional, orthogonal) → [[ren-vaults-credentials-dev]] - only if a skill/MCP needs auth. Add into the existing default private vault. Can be wired before *or* after the chat opens.
+4. **Agent** → [[ren-agent-dev]] - prompt + model + the skills/MCPs above. Model selection is a required user decision (the skill's "Choosing the model" section). Clean up any temporary build files after the agent is created.
+5. **Stores** → [[ren-file-memory-store-dev]] - **default: attach the existing default file/memory stores to the fresh project.** Create new only if the agent's learnings should stay isolated or its docs are agent-specific.
+6. **Project** → [[ren-project-dev]] - **always a fresh project** in the private pod. Attach the agent as `primary`, attach the stores from step 5.
 7. **Trigger** (optional) → [[ren-trigger-dev]] - cron schedule.
-8. **Sandbox readiness + session** → [[ren-pod-dev]] for `sandbox status` / `provision`, then [[ren-project-dev]] for the deep-link URL.
+8. **Sandbox readiness + session** → [[ren-pod-dev]] for `sandbox status` / `provision`, then §6 for the hand-off URL.
 
 ### Narration register - match the user
 
@@ -197,11 +202,11 @@ The user's camp tells you which register. A builder gets value from "forking skl
 
 ## 5. Credentials - the decision (when you hit step 3 of the chain)
 
-**Do not skip this step.** If any skill or MCP needs auth, stop and ask using the **native question tool**: *connect now, or start incomplete and wire from inside the chat?* Default is **connect now**. See [[ren-vaults-credentials-dev]] for the full OAuth and API key flows - including the DCR requirement and web-app fallback when a provider's OAuth server doesn't support it.
+**Do not skip this step.** If any skill or MCP needs auth, stop and ask using the **native question tool**: *connect now, or start incomplete and wire from inside the chat?* Default is **connect now**. See [[ren-vaults-credentials-dev]] for the full OAuth and API-key flows - including the DCR requirement and web-app fallback when a provider's OAuth server doesn't support it.
 
 **Skip** → only if the user explicitly wants speed and accepts the agent will fail on the auth step. Make the gap visible before proceeding.
 
-Native integrations are org-level: load [[ren-github]] to install the org's GitHub App and mount a repo on a project, or [[ren-slack]] to install the workspace and route a slack channel to a project.
+Native integrations are org-level: load [[ren-github]] to install the org's GitHub App and mount a repo on a project, or [[ren-slack]] to install the workspace and route a channel to a project.
 
 ## 6. Hand off - link + capability nudges that preview the depth
 
@@ -209,11 +214,13 @@ Land them in a chat that loads.
 
 1. **Sandbox ready** ([[ren-pod-dev]]) - `ren pods sandboxes status <pod-id>`; if `absent`, `provision` and poll to `ready`. Narrate one line up front, one when ready.
 2. **Session** - `session.create` is SDK/web-app only, not in CLI/MCP. If your transport wraps the SDK, create the session and deep-link it. Otherwise hand the project page and tell them to click "New session" honestly.
-3. **URL** - base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
-  ```
-   <base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
-   <base>/pods/<podId>/projects/<projectId>                        # project page
-  ```
+3. **URLs** - a session has two kinds; default to the Ren UI link for hand-off.
+  - **Ren UI link (the web app)** - hand-built, no command returns it. Base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
+    ```
+     <base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
+     <base>/pods/<podId>/projects/<projectId>                        # project page
+    ```
+  - **OpenCode sandbox URL** - `ren sessions url <session-id>` (`session_url`) returns the sandbox's OpenCode URL (`<publicHost>/<dir>/session/<id>`), pointing straight at the running server. Only reach for it if the user wants the raw sandbox server. It's gated by HTTP basic auth: username is always `opencode`; password is the sandbox's `serverPassword`, read from the pod sandbox status (returned only when `ready` - see [[ren-pod-dev]]). Present as `https://opencode:<serverPassword>@<host>/…`, or hand the URL plus the `opencode` / `<serverPassword>` credentials.
 
 Pick 1–2 nudges contextual to what they just built. The point is concrete reasons to come back. One closing sentence in their register - don't congratulate.
 
@@ -236,4 +243,3 @@ Close with one open invitation - *"anything else you've been wanting to offload?
 
 - One agent + one fresh project in the user's private pod. Never touch the default "Ren" project. Multi-agent stacks, team pods, and org-scope promotion are nudges in the close - not onboarding.
 - If the user won't engage with the requirement, skip to hand-off and give them the default Ren meta-agent - a session in hand is still a win.
-

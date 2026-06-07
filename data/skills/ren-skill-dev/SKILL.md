@@ -16,17 +16,17 @@ metadata:
 
 A skill is a modular capability that can be used by agents - packaged instructions plus optional resources (`scripts/`, `references/`, `templates/`) that the agent reaches for on its own, only when a task makes it relevant. The package is a folder with a `SKILL.md` (frontmatter + markdown body) at its root. The frontmatter `name` + `description` are all the agent sees up front, listed in its skill catalog; it loads the full body and any bundled files on demand. That's the point: an agent can carry many skills and pay for none of their content until one is actually needed.
 
-Skills are version-controlled - every version is immutable; updating means publishing a new version. One new version = one logical change.
+> Commands and flags: `ren docs commands`. Entities, scope, versioning: `ren docs model`. This skill is the authoring craft on top of those.
 
 ## Runtime behavior
 
-By default an agent attaches to a skill's **latest** version (`skillVersionId` omitted on the agent's `skills: [{ skillId }]` entry) and **auto-rolls-forward**: a new published version reaches every unpinned agent without a restart. `scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files.
+`scripts/` run when the agent calls them; `references/` only load when the agent opens them; `templates/` are copied verbatim — so the SKILL.md body should be tight and the depth belongs in the bundled files. By default an agent tracks a skill's **latest** version and auto-rolls-forward (see `ren docs model` on versioning).
 
 `requiredCredentials` (UPPER_SNAKE_CASE env names) **declare** the secrets the skill expects at runtime. The platform resolves them from the pod's vault stack and makes them available as env vars; an unresolved one is simply absent — the skill still loads, then fails when it reaches for the missing variable. The declaration is advisory: it surfaces a missing-auth prompt to the user, not a hard gate.
 
 ## Scope
 
-Scoping follows the Ren standard — see [[ren-scope]]. Key constraint: a `user` skill can back a `user` or `org` agent, but you can't pull a narrower-scope skill into a broader-scope publication.
+Follows the Ren standard (`ren docs model`). Key constraint: a `user` skill can back a `user` or `org` agent, but you can't pull a narrower-scope skill into a broader-scope publication.
 
 ## 1. Reuse before authoring - three tiers, in order
 
@@ -34,61 +34,21 @@ Scoping follows the Ren standard — see [[ren-scope]]. Key constraint: a `user`
 2. **Fork** a close-enough registry skill into your scope and edit it - the baked-in domain knowledge is worth keeping.
 3. **Author from scratch** only when neither fits.
 
-Registry skills encode battle-tested commands, schemas, and gotchas — inherit them rather than reasoning from scratch.
+Registry skills encode battle-tested commands, schemas, and gotchas — inherit them rather than reasoning from scratch. `ren skills list` shows only your own items; only `ren skills search --sources user org registry` reaches the registry. For *which* skill to reach for per task, see `ren docs integrations`.
+
+Download a skill's bundled files before deciding whether to fork:
 
 ```
-ren skills search --query "<topic>" --sources user org registry --output json
-ren skills get <id> --scope user --output json
-ren skills versions data <id> <version> --scope user --format presigned        # download bundled files before deciding
+ren skills versions data <id> <version> --scope user --format presigned
 ```
 
-Fork copies a skill into the user's scope as an editable copy, leaving the original untouched. Pass `--scope user` to read a user-scope source skill (registry/org sources don't need it):
+Fork copies a skill into your scope as an editable copy, leaving the original untouched (`--scope user` to read a user-scope source; registry/org sources don't need it):
 
 ```
 ren skills copy <id> --scope user --name "my-variant"
 ```
 
-## 2. Build via Ren CLI
-
-`ren skills create` uploads a local folder (it validates the SKILL.md frontmatter first):
-
-```
-ren skills create /abs/path/to/my-skill \
-  --name "Human-readable name" \
-  --description "When this skill triggers and what it does" \
-  --icon "✨" \
-  --scope user \
-  --required-credentials @creds.json \
-  --release-notes "Initial release"            # → skillId
-```
-
-New version replaces the full folder (no patch flow):
-
-```
-ren skills versions create skl_… /abs/path/to/my-skill --scope user --version patch --release-notes "…"
-```
-
-`--version` is `patch` (wording), `minor` (new sections/scripts), or `major` (renamed triggers / breaking). Metadata-only edits: `ren skills update <id> --scope user [--name …] [--description …]`.
-
-## 3. Build via Ren MCP
-
-The MCP path takes files **inline** as JSON instead of a folder upload:
-
-```
-mcp__ren__skill_search  { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
-mcp__ren__skill_copy    { "query": { "scope": "user" }, "path": { "id": "skl_…" }, "body": { "name": "my-variant" } }
-mcp__ren__skill_create  { "query": { "scope": "user" },
-                          "body":  { "name": "…", "description": "…", "icon": "✨",
-                                     "requiredCredentials": [{ "name": "SLACK_BOT_TOKEN", "description": "…" }],
-                                     "files": [{ "path": "SKILL.md", "content": "---\nname: …\n---\n# …" }] } }
-mcp__ren__skill_version_create { "query": { "scope": "user" },
-                                 "path":  { "id": "skl_…" },
-                                 "body":  { "version": "patch",
-                                            "files": [{ "path": "SKILL.md", "content": "…" }] } }
-mcp__ren__skill_version_data   { "query": { "scope": "user", "format": "presigned" }, "path": { "id": "skl_…", "version": "1" } }
-```
-
-## 4. SKILL.md anatomy
+## 2. SKILL.md anatomy
 
 ```
 ---
@@ -108,7 +68,7 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 `name` and `description` determine when the skill triggers, and the `description` carries the entire burden: only `name` + `description` load up front; the body loads on demand. Be specific about *what it does* AND *when to reach for it*. See `references/descriptions.md`.
 
-## 5. Writing principles
+## 3. Writing principles
 
 1. **Stay lean — ≤500 lines / ~5,000 tokens.** Move depth into `references/`.
 2. **Add what the agent lacks, omit what it knows.** Skip generic background; spend tokens on project conventions, non-obvious edge cases, and which tool/API to use.
@@ -120,11 +80,11 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 
 See `references/output-patterns.md` and `references/progressive-disclosure-patterns.md`.
 
-## 6. requiredCredentials
+## 4. requiredCredentials
 
 UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace - omit to inherit (update) or declare none (create). Only declare credentials the SKILL.md actually references. **Do not write credential-setup steps into SKILL.md** - assume the env var is present and use it; the platform injects it.
 
-## 7. Bundled resources
+## 5. Bundled resources
 
 | Resource      | Use for                            | Loaded into context? |
 | ------------- | ---------------------------------- | -------------------- |
@@ -134,7 +94,7 @@ UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace -
 
 See `references/bundled-resources.md` for the full decision matrix and — before writing any `scripts/` file — how to design scripts for agentic use (no Python: Bash/Node/Bun only).
 
-## 8. Iterate
+## 6. Iterate
 
 **Start from real expertise.** Generic LLM knowledge yields vague procedures ("handle errors appropriately"). Ground the skill in specifics: extract the pattern from a real task you completed with an agent (steps that worked, corrections you made, project facts you supplied), or synthesize from your own runbooks, schemas, and the patches that actually fixed things.
 
