@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from "bun:test"
 import { existsSync } from "node:fs"
-import { readdir } from "node:fs/promises"
+import { lstat, readlink, readdir } from "node:fs/promises"
 import type { SkillsRegistry } from "@renai-labs/registry-schemas"
 import { gitCommitAll, initGit, makeFixture, type Fixture } from "./fixtures"
 
@@ -13,6 +13,17 @@ afterEach(async () => {
 
 async function loadSkillsJson(fixture: Fixture): Promise<SkillsRegistry> {
   return JSON.parse(await fixture.read("data/skills.json")) as SkillsRegistry
+}
+
+async function isSymlinkTo(path: string, expectedTarget: string): Promise<boolean> {
+  try {
+    const stat = await lstat(path)
+    if (!stat.isSymbolicLink()) return false
+    const target = await readlink(path)
+    return target === expectedTarget
+  } catch {
+    return false
+  }
 }
 
 describe("validate", () => {
@@ -159,7 +170,7 @@ describe("build", () => {
     expect(r.stderr + r.stdout).toContain("bundled-missing: ghost-skill")
   })
 
-  test("mirrors only the bundled set", async () => {
+  test("creates symlinks that expose all skills", async () => {
     fx = await makeFixture({
       skills: [{ slug: "pod-dev" }, { slug: "content-skill" }],
       bundledSlugs: ["pod-dev"],
@@ -168,13 +179,19 @@ describe("build", () => {
     const r = fx.run(["build"])
     expect(r.status).toBe(0)
     expect(r.stdout).toContain("mirrored 1/2 skill(s)")
+
+    // Mirrors are symlinks to data/skills/
+    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
+    expect(await isSymlinkTo(fx.path("skills"), "data/skills")).toBe(true)
+
+    // Symlinks resolve to data/skills/, so all skills are reachable
     const pluginDirs = await readdir(fx.path("plugins/ren/skills"))
-    expect(pluginDirs.sort()).toEqual(["pod-dev"])
+    expect(pluginDirs.sort()).toEqual(["content-skill", "pod-dev"])
     const rootDirs = await readdir(fx.path("skills"))
-    expect(rootDirs.sort()).toEqual(["pod-dev"])
+    expect(rootDirs.sort()).toEqual(["content-skill", "pod-dev"])
   })
 
-  test("mirrors SKILL.md verbatim, without injecting version", async () => {
+  test("symlinks resolve to the source SKILL.md verbatim", async () => {
     fx = await makeFixture({ skills: [{ slug: "pod-dev" }] })
     fx.run(["release", "pod-dev", "--bump", "minor", "--yes"])
     fx.run(["build"])
@@ -229,19 +246,22 @@ describe("build", () => {
     fx.run(["release", "pod-dev", "--bump", "patch", "--yes"])
     fx.run(["build"])
     const before = await fx.read("plugins/ren/skills/pod-dev/SKILL.md")
+    const beforeIsLink = await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")
     fx.run(["build"])
     const after = await fx.read("plugins/ren/skills/pod-dev/SKILL.md")
+    const afterIsLink = await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")
     expect(after).toBe(before)
+    expect(afterIsLink).toBe(beforeIsLink)
   })
 
-  test("prunes mirror dirs when bundled set shrinks", async () => {
+  test("symlinks stay intact when bundled set shrinks", async () => {
     fx = await makeFixture({
       skills: [{ slug: "pod-dev" }, { slug: "agent-dev" }],
       bundledSlugs: ["pod-dev", "agent-dev"],
     })
     fx.run(["release", "--bump", "patch", "--yes"])
     fx.run(["build"])
-    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(true)
+    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
 
     // Remove agent-dev from skills.sh.json
     await fx.write(
@@ -249,7 +269,10 @@ describe("build", () => {
       JSON.stringify({ groupings: [{ title: "Test", skills: ["pod-dev"] }] }, null, 2) + "\n",
     )
     fx.run(["build"])
-    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(false)
+    // Symlink is still there — it always points to data/skills/ which holds everything
+    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
+    // agent-dev is still reachable through the symlink
+    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(true)
   })
 })
 
@@ -269,6 +292,6 @@ describe("check", () => {
     // No build → mirrors absent
     const r = fx.run(["check"])
     expect(r.status).toBe(1)
-    expect(r.stderr + r.stdout).toContain("mirror drift")
+    expect(r.stderr + r.stdout).toContain("mirror missing")
   })
 })
