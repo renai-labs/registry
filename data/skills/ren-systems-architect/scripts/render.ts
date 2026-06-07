@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// bun run scripts/render.ts [topology.json] [--out <file>] [--no-open]
+// bun run scripts/render.ts [topology.json] [--out <file>] [--no-open] [--live <file>]
 
 import { join, resolve } from "node:path"
 
@@ -11,7 +11,8 @@ const opt = (name: string) => {
 }
 
 const here = import.meta.dir
-const draftPath = resolve(args.find((a) => !a.startsWith("--") && a !== opt("--out")) ?? "topology.json")
+const draftPath = resolve(args.find((a) => !a.startsWith("--") && a !== opt("--out") && a !== opt("--live")) ?? "topology.json")
+const livePath = opt("--live") ? resolve(opt("--live")!) : undefined
 const outPath = resolve(opt("--out") ?? "/tmp/ren-canvas.html")
 const canvasAsset = join(here, "..", "assets", "canvas.html")
 
@@ -21,23 +22,45 @@ if (!(await draftFile.exists())) {
   process.exit(1)
 }
 
-let topology: unknown
+let draftTopology: unknown
+let liveTopology: unknown = { surfaces: [], pods: [], projects: [], vaults: [], stores: [], env: null, edges: [] }
+
 try {
-  topology = JSON.parse(await draftFile.text())
+  draftTopology = JSON.parse(await draftFile.text())
 } catch (e) {
   console.error(`draft is not valid JSON: ${(e as Error).message}`)
   process.exit(1)
 }
 
-const problems = validate(topology as Spec)
-if (problems.length) {
+const draftProblems = validate(draftTopology as Spec)
+if (draftProblems.length) {
   console.error("draft has unresolved references:")
-  for (const p of problems) console.error(`  - ${p}`)
+  for (const p of draftProblems) console.error(`  - ${p}`)
   process.exit(1)
 }
 
+if (livePath) {
+  const liveFile = Bun.file(livePath)
+  if (!(await liveFile.exists())) {
+    console.error(`live topology not found: ${livePath}`)
+    process.exit(1)
+  }
+  try {
+    liveTopology = JSON.parse(await liveFile.text())
+  } catch (e) {
+    console.error(`live topology is not valid JSON: ${(e as Error).message}`)
+    process.exit(1)
+  }
+  const liveProblems = validate(liveTopology as Spec)
+  if (liveProblems.length) {
+    console.error("live topology has unresolved references:")
+    for (const p of liveProblems) console.error(`  - ${p}`)
+    process.exit(1)
+  }
+}
+
 const html = await Bun.file(canvasAsset).text()
-const injected = injectTopology(html, topology)
+const injected = injectTopology(html, draftTopology, liveTopology)
 await Bun.write(outPath, injected)
 console.log(`rendered → ${outPath}`)
 
@@ -109,9 +132,19 @@ function validate(s: Spec): string[] {
   return out
 }
 
-function injectTopology(html: string, topology: unknown): string {
-  const json = JSON.stringify(topology).replace(/<\/script/gi, "<\\/script")
-  const re = /(<script[^>]*id="ren-topology"[^>]*>)([\s\S]*?)(<\/script>)/i
-  if (!re.test(html)) throw new Error("canvas.html has no #ren-topology block — rebuild the asset")
-  return html.replace(re, `$1\n${json}\n$3`)
+function injectTopology(html: string, draftTopology: unknown, liveTopology: unknown): string {
+  const draftJson = JSON.stringify(draftTopology).replace(/<\/script/gi, "<\\/script")
+  const liveJson = JSON.stringify(liveTopology).replace(/<\/script/gi, "<\\/script")
+
+  // Replace the draft block
+  const draftRe = /(<script[^>]*id="ren-topology-draft"[^>]*>)([\s\S]*?)(<\/script>)/i
+  if (!draftRe.test(html)) throw new Error("canvas.html has no #ren-topology-draft block — rebuild the asset")
+  html = html.replace(draftRe, `$1\n${draftJson}\n$3`)
+
+  // Replace the live block
+  const liveRe = /(<script[^>]*id="ren-topology-live"[^>]*>)([\s\S]*?)(<\/script>)/i
+  if (!liveRe.test(html)) throw new Error("canvas.html has no #ren-topology-live block — rebuild the asset")
+  html = html.replace(liveRe, `$1\n${liveJson}\n$3`)
+
+  return html
 }

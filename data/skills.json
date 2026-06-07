@@ -675,14 +675,20 @@
         "ren"
       ]
     },
-    "currentVersion": "0.0.1",
-    "contentHash": "87e0dfda2862e76ec0f27f7cc5762bb63de6f906fc93a87a9c380d2812c4d5c9",
+    "currentVersion": "0.0.2",
+    "contentHash": "31a8b050cebe427c5d35feeaf0556f239f3e70621d3c2edee43e62704b21447d",
     "versions": [
       {
         "version": "0.0.1",
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "87e0dfda2862e76ec0f27f7cc5762bb63de6f906fc93a87a9c380d2812c4d5c9"
+      },
+      {
+        "version": "0.0.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "31a8b050cebe427c5d35feeaf0556f239f3e70621d3c2edee43e62704b21447d"
       }
     ]
   },

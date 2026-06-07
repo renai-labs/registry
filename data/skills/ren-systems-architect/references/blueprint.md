@@ -43,8 +43,11 @@ the live Ren UI link (SKILL.md hand-off) instead of the canvas.
    without it, and a `verify` CLI command. These requirements are the deterministic checklist.
 
 2. **Render** so the user sees the stack they're about to get: `bun run <skill-dir>/scripts/render.ts /tmp/ren-topology.json`.
-   Writes `/tmp/ren-canvas.html` and opens it. In a headless/sandbox transport it still writes the file
-   and prints the path — hand that over, or fall back to the live Ren UI link (SKILL.md hand-off).
+    Writes `/tmp/ren-canvas.html` and opens it. Pass `--live <file>` to produce a togglable Draft/Live view:
+    Draft shows the desired topology with planned (not-yet-built) entities marked by a dashed border;
+    Live shows the current ground truth. The browser remembers the last chosen view in `sessionStorage`.
+    In a headless/sandbox transport it still writes the file and prints the path — hand that over, or fall
+    back to the live Ren UI link (SKILL.md hand-off).
 
 3. **Fetch live** — `ren topology get --output json` (CLI) or `topology_get` (MCP).
 
@@ -60,9 +63,10 @@ the live Ren UI link (SKILL.md hand-off) instead of the canvas.
    requirement whose blocker is unmet.
 
 6. **Re-render and repeat** from step 2 until `diff` reports clean and every blocking requirement passes.
-   The `diff` worklist — not the picture — is the authoritative signal for what's left; the canvas is the
-   shared view of the target stack, kept current as you write `id`s back. Show the converged canvas at
-   hand-off.
+    The `diff` worklist — not the picture — is the authoritative signal for what's left; the canvas is the
+    shared view of the target stack, kept current as you write `id`s back. After writing IDs back, flip to
+    Live view to confirm reality matches. `sessionStorage` persists the last chosen view across re-renders.
+    Show the converged canvas at hand-off.
 
 ## Notes
 
