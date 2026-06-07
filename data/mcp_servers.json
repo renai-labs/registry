@@ -1274,7 +1274,7 @@
       "url": "https://www.blockscout.com/"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13845,
@@ -1632,7 +1632,7 @@
       "url": "https://www.cbinsights.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 12887,
@@ -2274,7 +2274,7 @@
       "url": "https://www.coindesk.com/"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13396,
@@ -2688,7 +2688,7 @@
       "url": "https://crypto.com"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 15143,
@@ -3160,7 +3160,7 @@
       "url": "https://www.egnyte.com"
     },
     "useCases": [
-      "finance"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 14805,
@@ -4192,7 +4192,7 @@
       "url": "https://groww.in"
     },
     "useCases": [
-      "market-data"
+      "stock-trading"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -4400,7 +4400,7 @@
       "url": "https://harmonic.ai"
     },
     "useCases": [
-      "research"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 14012,
@@ -5894,7 +5894,7 @@
       "url": "https://lunarcrush.com"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13949,
@@ -7698,7 +7698,7 @@
       "url": "https://www.pitchbook.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 17582,
@@ -10341,7 +10341,7 @@
       "url": "https://www.thirdbridge.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 12593,
@@ -11590,7 +11590,7 @@
       "url": "https://zerodha.com"
     },
     "useCases": [
-      "market-data"
+      "stock-trading"
     ],
     "sortOrder": null,
     "popularityScore": null,
