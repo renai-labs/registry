@@ -11,6 +11,7 @@ import {
   formatDriftProblems,
 } from "@/lib/build"
 import { loadSkillsRegistry } from "@/lib/snapshot"
+import { validateChangedMcps } from "@/lib/mcp-validate"
 import { validate } from "@/commands/validate"
 import { diffDirs, diffFiles } from "@/lib/diff"
 import { PATHS } from "@/lib/paths"
@@ -46,6 +47,16 @@ export async function check(): Promise<CheckResult> {
   }
 
   problems.push(...formatDriftProblems(await detectDrift()))
+
+  const mcp = await validateChangedMcps()
+  if (mcp.results.length) {
+    const bad = mcp.results.filter((r) => !r.compatible)
+    if (bad.length) {
+      for (const r of bad) log.warn(`mcp ${r.slug}: ${r.detail}`)
+    } else {
+      log.step(`mcp: ${mcp.results.length} changed server(s) validated, all Ren-compatible`)
+    }
+  }
 
   if (problems.length) return { ok: false, problems }
 

@@ -35,52 +35,15 @@ Ren ships a public registry of MCPs that are **tested and production-ready** - t
 
 **Not every product exposes an MCP server.** If the registry has no fit and a web search turns up no official MCP hosted by the third party, the fallback is an **API-key-backed skill** ([[ren-skill-dev]]): a skill that calls the product's HTTP API directly, with the API key declared in its `requiredCredentials`.
 
-### Search via Ren CLI
+## Validate Ren compatibility
+
+Before attaching a custom MCP, run the validator script
 
 ```
-ren mcps search --query "<topic>" --sources user org registry --output json
-ren mcps get        <mcp-id> --scope user --output json
-ren mcps get-by-slug <slug>  --scope user --output json
-```
-
-### Search via Ren MCP
-
-```
-mcp__ren__mcp_search    { "body":  { "query": "<topic>", "sources": ["user","org","registry"] } }
-mcp__ren__mcp_get       { "query": { "scope": "user" }, "path": { "id":   "mcp_…" } }
-mcp__ren__mcp_getBySlug { "query": { "scope": "user" }, "path": { "slug": "<slug>" } }
-```
-
-## Scope
-
-See [[ren-scope]]. `--sources` / `sources` is the read-time filter on `mcps search` (which tiers come back); `--scope` / `query.scope` is the auth-resolution lens every other command uses — these are different flags. Pass `--scope user` on every command (create, get, get-by-slug, update, oauth connect/session) when the MCP lives in your user namespace; omit for org. `search` uses `--sources`, not `--scope`. If a valid MCP id 404s, missing `--scope user` is the first thing to check.
-
-## Build a custom MCP
-
-Only when the registry has nothing in the neighborhood. `--name` and `--mcp-server-url` (a URL) are required; `authConfig` is nested, so pass it via `--body`.
-
-### Via Ren CLI
-
-```
-ren mcps create \
-  --name "Acme API" \
-  --mcp-server-url "https://mcp.acme.com" \
-  --auth api_key \
-  --scope user \
-  --body '{ "authConfig": { "type": "api_key", "headerName": "Authorization" } }'
-```
-
-- `--auth` is one of `none | oauth | api_key | basic` (default `none`).
-- The slug is generated from the name; the slug drives the env-var name the credential must match (see Runtime behavior above).
-
-### Via Ren MCP
-
-```
-mcp__ren__mcp_create {
-  "query": { "scope": "user" },
-  "body":  { "name": "Acme API", "mcpServerUrl": "https://mcp.acme.com",
-             "auth": "api_key", "authConfig": { "type": "api_key", "headerName": "Authorization" } }
-}
+./scripts/validate-mcp.js https://mcp.acme.com/mcp           # public server
+./scripts/validate-mcp.js https://mcp.acme.com/mcp --auth oauth   # protected: discovery-only
+./scripts/validate-mcp.js https://mcp.acme.com/mcp --token "$TOKEN"   # list tools through the auth wall
+./scripts/validate-mcp.js --help                             # drift checks, --json, all options
 ```
 
 ## Next steps

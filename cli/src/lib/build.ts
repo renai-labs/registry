@@ -146,7 +146,7 @@ export type PrBaseDiffOptions = {
   baseRef?: string
 }
 
-function resolveBaseRef(opt: string | undefined): string | null {
+export function resolveBaseRef(opt: string | undefined): string | null {
   if (opt) return opt
   const env = process.env.RENREGISTRY_BASE_REF
   if (env) return env
