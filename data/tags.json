@@ -1,77 +1,77 @@
 [
   {
-    "name": "crm"
-  },
-  {
-    "name": "marketing"
-  },
-  {
-    "name": "support"
-  },
-  {
-    "name": "ecommerce"
-  },
-  {
-    "name": "payments"
-  },
-  {
-    "name": "finance"
-  },
-  {
-    "name": "market-data"
-  },
-  {
-    "name": "stock-trading"
-  },
-  {
-    "name": "crypto"
-  },
-  {
-    "name": "private-markets"
-  },
-  {
-    "name": "hr"
-  },
-  {
-    "name": "communication"
-  },
-  {
-    "name": "productivity"
-  },
-  {
-    "name": "email"
-  },
-  {
-    "name": "calendar"
-  },
-  {
-    "name": "meetings"
-  },
-  {
-    "name": "docs"
-  },
-  {
-    "name": "project-management"
-  },
-  {
-    "name": "design"
-  },
-  {
-    "name": "engineering"
-  },
-  {
     "name": "analytics"
   },
   {
     "name": "automation"
   },
   {
-    "name": "research"
+    "name": "calendar"
+  },
+  {
+    "name": "communication"
+  },
+  {
+    "name": "crm"
+  },
+  {
+    "name": "crypto"
+  },
+  {
+    "name": "design"
+  },
+  {
+    "name": "docs"
+  },
+  {
+    "name": "ecommerce"
+  },
+  {
+    "name": "email"
+  },
+  {
+    "name": "engineering"
+  },
+  {
+    "name": "finance"
+  },
+  {
+    "name": "hr"
   },
   {
     "name": "lifestyle"
   },
   {
+    "name": "market-data"
+  },
+  {
+    "name": "marketing"
+  },
+  {
+    "name": "meetings"
+  },
+  {
+    "name": "payments"
+  },
+  {
+    "name": "private-markets"
+  },
+  {
+    "name": "productivity"
+  },
+  {
+    "name": "project-management"
+  },
+  {
     "name": "ren"
+  },
+  {
+    "name": "research"
+  },
+  {
+    "name": "stock-trading"
+  },
+  {
+    "name": "support"
   }
 ]

@@ -350,7 +350,7 @@
   {
     "slug": "ren-agent-dev",
     "name": "ren-agent-dev",
-    "description": "Create, configure, and update agents — their prompt, model, and skill / MCP dependencies. Use when the user asks to build, configure, modify, or debug an agent.",
+    "description": "Design and write agents — their system prompt, model choice, and skill / MCP dependency shape. Use when the user asks to build, configure, modify, or debug an agent.",
     "license": null,
     "metadata": {
       "icon": "https://cdn.renai.build/skill-icons/agent-dev.svg",
@@ -359,14 +359,20 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.1",
-    "contentHash": "29a3c5a25f4d851b99035b6216b0a7133f8390ff6fc63d59eafa5472be571a6d",
+    "currentVersion": "1.1.2",
+    "contentHash": "9c1010c293ee6106c438cb602d0528af24f69f08fc2d401747b293bd3bbc2cdd",
     "versions": [
       {
         "version": "1.1.1",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "29a3c5a25f4d851b99035b6216b0a7133f8390ff6fc63d59eafa5472be571a6d"
+      },
+      {
+        "version": "1.1.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "9c1010c293ee6106c438cb602d0528af24f69f08fc2d401747b293bd3bbc2cdd"
       }
     ]
   },
@@ -376,6 +382,7 @@
     "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "1.0.1",
     "contentHash": "c16d4b718c4f61380a304f8558a7110322d5375b8a267d5ec5e204fc40493aea",
     "versions": [
@@ -405,31 +412,43 @@
         "code"
       ]
     },
-    "currentVersion": "0.0.1",
-    "contentHash": "612935705123038830b3eb6553c31ed2179e9f59eb0c959db7e45b69e837a3e8",
+    "currentVersion": "0.0.2",
+    "contentHash": "5ab3a0de1e6615e36c867ec68b0fa7b37c3b34e075dc9acf6863f24d3642e655",
     "versions": [
       {
         "version": "0.0.1",
         "gitRef": "8c937bbf918af6963b32d71ae244090c732cbeee",
         "publishedAt": "2026-06-01T18:12:48.415Z",
         "contentHash": "612935705123038830b3eb6553c31ed2179e9f59eb0c959db7e45b69e837a3e8"
+      },
+      {
+        "version": "0.0.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "5ab3a0de1e6615e36c867ec68b0fa7b37c3b34e075dc9acf6863f24d3642e655"
       }
     ]
   },
   {
     "slug": "ren-mcp-dev",
     "name": "ren-mcp-dev",
-    "description": "Discover and define MCP servers - the third-party tool surfaces an agent can call (Linear, Gmail, GitHub, …). Use when an agent needs an external tool: reach for Ren's registry MCPs first, and register a custom remote MCP only when nothing fits.",
+    "description": "Define a custom remote MCP server - the third-party tool surface an agent can call - for when no registry MCP fits. Use to shape a custom remote MCP's server URL and auth-config and validate its Ren compatibility.",
     "license": null,
     "metadata": null,
-    "currentVersion": "1.0.0",
-    "contentHash": "9f4b4a4c53e969ad2eba4a96b61da4d2d9ad7012fb222691ac60a1de643ed2ce",
+    "currentVersion": "1.0.1",
+    "contentHash": "56eecbd97e8c5afd123cd867e28ff11eb5721bf73d0ceb1d2ec0877559a08428",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "9f4b4a4c53e969ad2eba4a96b61da4d2d9ad7012fb222691ac60a1de643ed2ce"
+      },
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "56eecbd97e8c5afd123cd867e28ff11eb5721bf73d0ceb1d2ec0877559a08428"
       }
     ]
   },
@@ -444,8 +463,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.0.6",
-    "contentHash": "e5e8ecbcc2e3753e1f32cc7ee04e6c193fcabe2785a32a55149e1d3cfaa0ebc6",
+    "currentVersion": "1.0.7",
+    "contentHash": "2bfabccbd1b862bc64a08ed3fa2b02b4a94cf9aa4b048aa52a6d68bd30215c78",
     "versions": [
       {
         "version": "1.0.1",
@@ -470,6 +489,12 @@
         "gitRef": "99cba648cec4a937ddace897296429f92a2efc82",
         "publishedAt": "2026-06-03T14:01:56.464Z",
         "contentHash": "e5e8ecbcc2e3753e1f32cc7ee04e6c193fcabe2785a32a55149e1d3cfaa0ebc6"
+      },
+      {
+        "version": "1.0.7",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "2bfabccbd1b862bc64a08ed3fa2b02b4a94cf9aa4b048aa52a6d68bd30215c78"
       }
     ]
   },
@@ -479,6 +504,7 @@
     "description": "Inspect and manage pods - the durable sandbox boundary that runs agents. Use when the user wants to find a pod, check or wake its sandbox, add members, or attach vaults. Read this before any build, to know where the work will live.",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "1.0.0",
     "contentHash": "c2d5f0fea4d34156a47b23bc9f2fc68267490752ca47ea2b54462f677e4d8059",
     "versions": [
@@ -503,6 +529,7 @@
         "ren"
       ]
     },
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "1.1.3",
     "contentHash": "63a20dddd13920069562157e35fc2bcac2bdf494cac28a207974d51f730cb386",
     "versions": [
@@ -532,6 +559,7 @@
     "description": "Explains the three scope tiers (user, org, registry) for all Ren entities, their visibility rules, and how to use --scope / query.scope correctly. Load this whenever scope behavior is relevant.",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "1.0.0",
     "contentHash": "9d04ec447f97b66640c5de22a3f5ce9f2776423d0dfaacf13fc976f78574ca0e",
     "versions": [
@@ -549,6 +577,7 @@
     "description": "Create, inspect, and deep-link sessions - the individual chats a user or a fired trigger has with a project's primary agent. Use when the user wants to start a session, read what happened in a past run, or get a link to one.",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "0.0.1",
     "contentHash": "2cac70d7aa14794ca45d8ac7eb45dad54c855cf1f32f2bf43116bfa5377664eb",
     "versions": [
@@ -563,7 +592,7 @@
   {
     "slug": "ren-skill-dev",
     "name": "ren-skill-dev",
-    "description": "Author, edit, fork, and optimize skills — the modular capabilities (instructions plus optional scripts, references, and templates) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, or add a custom capability to an agent.",
+    "description": "Author, edit, fork, optimize, and adapt skills — the modular capabilities (instructions plus optional scripts, references, and assets) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, adapt a third-party / community SKILL.md, or add a custom capability to an agent.",
     "license": null,
     "metadata": {
       "icon": "https://cdn.renai.build/skill-icons/skill-dev.svg",
@@ -572,14 +601,20 @@
         "ren"
       ]
     },
-    "currentVersion": "1.1.2",
-    "contentHash": "942bfb88203cc0e827cb600fb581a5af8f6b338fcd07c26a9647664de01c684d",
+    "currentVersion": "1.1.3",
+    "contentHash": "33e979c7d094ef5ae3dcf474a53534e80b4c699632d5d289e94e9cc9d5cd5bf3",
     "versions": [
       {
         "version": "1.1.2",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "942bfb88203cc0e827cb600fb581a5af8f6b338fcd07c26a9647664de01c684d"
+      },
+      {
+        "version": "1.1.3",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "33e979c7d094ef5ae3dcf474a53534e80b4c699632d5d289e94e9cc9d5cd5bf3"
       }
     ]
   },
@@ -589,6 +624,7 @@
     "description": "Copy an existing community skill (local folder or git URL) into a new destination folder and apply only the edits needed to pass the ren registry spec — rewrites SKILL.md frontmatter to the agentskills.io shape, strips credential / MCP / file / memory setup steps, and generalizes assistant-specific identity references. A dumb copy plus compatibility fixes; it does not author, optimize, or publish. Use when the user wants to adopt a third-party SKILL.md as a ren skill without rewriting it.",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "0.0.1",
     "contentHash": "1a034a3a39a6b4ef24ce072e0da5ae3e445c54c197a6f3c0b01c774ec756e56e",
     "versions": [
@@ -612,14 +648,20 @@
         "productivity"
       ]
     },
-    "currentVersion": "0.0.1",
-    "contentHash": "be4a7478bd91858c0b8673792f735b2297fa0d05b954366f7c829e48ab761944",
+    "currentVersion": "0.0.2",
+    "contentHash": "150d9834c135bf3caecf9160bc69a89c4650fd5a730fca489ac817193bb18f8b",
     "versions": [
       {
         "version": "0.0.1",
         "gitRef": "8c937bbf918af6963b32d71ae244090c732cbeee",
         "publishedAt": "2026-06-01T18:12:48.415Z",
         "contentHash": "be4a7478bd91858c0b8673792f735b2297fa0d05b954366f7c829e48ab761944"
+      },
+      {
+        "version": "0.0.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "150d9834c135bf3caecf9160bc69a89c4650fd5a730fca489ac817193bb18f8b"
       }
     ]
   },
@@ -634,13 +676,13 @@
       ]
     },
     "currentVersion": "0.0.1",
-    "contentHash": "efefc9b7ba989689538418871a3156993be6acfb7da1c9b4d300ae2d642f195c",
+    "contentHash": "87e0dfda2862e76ec0f27f7cc5762bb63de6f906fc93a87a9c380d2812c4d5c9",
     "versions": [
       {
         "version": "0.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "efefc9b7ba989689538418871a3156993be6acfb7da1c9b4d300ae2d642f195c"
+        "contentHash": "87e0dfda2862e76ec0f27f7cc5762bb63de6f906fc93a87a9c380d2812c4d5c9"
       }
     ]
   },
@@ -650,6 +692,7 @@
     "description": "Make a project run on its own via a cron trigger - schedule the project's primary agent on a fixed cadence with a fixed input message. Use when the user wants an agent to fire on a schedule.",
     "license": null,
     "metadata": null,
+    "deprecatedAt": "2026-06-07T14:04:29.229Z",
     "currentVersion": "1.0.0",
     "contentHash": "b0c2ae336f33fcf4516d8b7349c70941f062f44426c31c6b91b43ef486346833",
     "versions": [
@@ -667,14 +710,20 @@
     "description": "Manage vaults and credentials - the encrypted secret store that backs skills and MCPs. Use when a skill or MCP needs an API key, token, or OAuth credential, when running an OAuth connect flow, or when attaching a vault to a pod.",
     "license": null,
     "metadata": null,
-    "currentVersion": "1.0.0",
-    "contentHash": "db541343e623b3c07afe70e8a29512c75a6ebbe899ca2a14ac84b84905246f4b",
+    "currentVersion": "1.0.1",
+    "contentHash": "5f60a34867298f6282b9a2986e58a075fab263d4555d01cc4dee6a1c362c248b",
     "versions": [
       {
         "version": "1.0.0",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "db541343e623b3c07afe70e8a29512c75a6ebbe899ca2a14ac84b84905246f4b"
+      },
+      {
+        "version": "1.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "5f60a34867298f6282b9a2986e58a075fab263d4555d01cc4dee6a1c362c248b"
       }
     ]
   },

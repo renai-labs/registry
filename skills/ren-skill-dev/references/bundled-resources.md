@@ -1,14 +1,14 @@
 # Bundled Resources
 
-A skill can ship `scripts/`, `references/`, and `templates/` alongside SKILL.md. Use them to keep the body focused while extending what the skill can do.
+A skill can ship `scripts/`, `references/`, and `assets/` alongside SKILL.md. Use them to keep the body focused while extending what the skill can do.
 
 ## Decision matrix
 
-| Type           | Loaded into context?         | Use for                                                     | Example                            |
-| -------------- | ---------------------------- | ----------------------------------------------------------- | ---------------------------------- |
-| `scripts/`     | No (executed)                | Deterministic operations the agent runs repeatedly          | `validate.ts`, `deploy.sh`         |
-| `references/`  | Only when explicitly read    | Schemas, long docs, domain depth                            | `bigquery-tables.md`, `api-spec.md`|
-| `templates/`   | No                           | Boilerplate output assets — logos, fonts, starter HTML/code | `letter.html`, `logo.svg`          |
+| Type           | Loaded into context?         | Use for                                                          | Example                            |
+| -------------- | ---------------------------- | --------------------------------------------------------------- | ---------------------------------- |
+| `scripts/`     | No (executed)                | Deterministic operations the agent runs repeatedly               | `validate.ts`, `deploy.sh`         |
+| `references/`  | Only when explicitly read    | Schemas, long docs, domain depth                                 | `bigquery-tables.md`, `api-spec.md`|
+| `assets/`      | No                           | Static resources — templates, images, data files (lookup tables) | `letter.html`, `logo.svg`          |
 
 ## scripts/
 
@@ -53,15 +53,16 @@ bigquery-skill/
     └── product.md
 ```
 
-## templates/
+## assets/
 
-For assets that show up in output but don't need to be loaded as text.
+For static resources that show up in output or feed a workflow but don't need to be loaded as text.
 
+- Templates — document templates, config templates, sample docs for fill-in-the-blanks workflows.
 - Brand assets (logos, fonts, color tokens).
-- Boilerplate code (project starters, config templates).
-- Sample documents for fill-in-the-blanks workflows.
+- Boilerplate code (project starters).
+- Data files (lookup tables, schemas, fixtures).
 
-The agent reads templates only when it needs to copy or adapt them, not on every trigger.
+The agent reads an asset only when it needs to copy or adapt it, not on every trigger.
 
 ## Avoiding duplication
 
