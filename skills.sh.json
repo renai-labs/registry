@@ -11,6 +11,7 @@
         "ren-vaults-credentials-dev",
         "ren-github",
         "ren-slack",
+        "ren-email",
         "ren-onboarding",
         "ren-systems-architect"
       ]

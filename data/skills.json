@@ -377,6 +377,30 @@
     ]
   },
   {
+    "slug": "ren-email",
+    "name": "ren-email",
+    "description": "Use when configuring Ren's native project email channel: enabling, listing, or disabling a project mailbox; explaining the `<org_slug>.<project_slug>@agents.renai.build` address; routing inbound email to a project's agent with same-thread replies; or attaching the `ren` MCP so cron, webhook, or other proactive agent runs can call `send-email`. Do not use for Gmail scanning, labelling, or mailbox automation; use Google Workspace for that.",
+    "license": null,
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/email.svg",
+      "tags": [
+        "ren",
+        "email",
+        "communication"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "20253b6300e8a6b64d4b7c97afb5575eed9c65dc510705b20d003af1c9877dd6",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "20253b6300e8a6b64d4b7c97afb5575eed9c65dc510705b20d003af1c9877dd6"
+      }
+    ]
+  },
+  {
     "slug": "ren-file-memory-store-dev",
     "name": "ren-file-memory-store-dev",
     "description": "Create and attach file stores and memory stores - the durable volumes an agent reads from and writes to. Use when the user wants the agent to consume uploaded artifacts (file store, read-only) or keep long-term memory across runs (memory store, read-write).",

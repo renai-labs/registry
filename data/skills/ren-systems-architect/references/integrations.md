@@ -2,13 +2,17 @@
 
 ## Native
 
-| name             | mcp_slugs | skill_slugs      | notes                                                                                                                                                                                |
-| ---------------- | --------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Slack            | slack     | ren-slack        | Native org integration — install via `ren slack <>` for channel→project routing; attach the registry MCP `slack` to agents that call Slack proactively (`auth: "none"`, no credential)            |
-| GitHub           |           | ren-github       | Native org integration; not a registry MCP — connect via `ren github <>`                                                                                                             |
-| Google Workspace |           | google-workspace | Native — connect via `ren google <>`; requires a personal OAuth app ([setup](https://console.cloud.google.com/auth/overview)). Covers Gmail, Calendar, Drive, Contacts, Sheets, Docs |
+
+| name                                                              | mcp_slugs | skill_slugs      | notes                                                                                                                                                                                                           |
+| ----------------------------------------------------------------- | --------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Slack                                                             | slack     | ren-slack        | Native org integration — install via `ren slack <>` for channel→project routing; attach the registry MCP `slack` to agents that call Slack proactively (`auth: "none"`, no credential)                          |
+| GitHub                                                            |           | ren-github       | Native org integration; not a registry MCP — connect via `ren github <>`                                                                                                                                        |
+| Google Workspace (Gmail, Calendar, Drive, Contacts, Sheets, Docs) |           | google-workspace | Native integration - requires user to create an oauth app. Use `ren google <>` Read google-workspace skill for setup instructions                                                                               |
+| Email                                                             | email     | ren-email        | Use when user wants to send emails to Ren agents to delegate tasks or if Ren agents want to proactively send email notifications to users. For managing user's mailbox, use gmail(google workspace integration) |
+
 
 ## CRM
+
 
 | name                      | mcp_slugs              | skill_slugs | notes |
 | ------------------------- | ---------------------- | ----------- | ----- |
@@ -26,7 +30,9 @@
 | Clarify                   | clarify                |             |       |
 | Sprouts Data Intelligence | sprouts                |             |       |
 
+
 ## Marketing
+
 
 | name                             | mcp_slugs                | skill_slugs | notes |
 | -------------------------------- | ------------------------ | ----------- | ----- |
@@ -51,7 +57,9 @@
 | MailerLite                       | mailerlite               |             |       |
 | Local Falcon                     | local-falcon             |             |       |
 
+
 ## Support
+
 
 | name     | mcp_slugs | skill_slugs | notes |
 | -------- | --------- | ----------- | ----- |
@@ -60,7 +68,9 @@
 | Unthread | unthread  |             |       |
 | Lorikeet | lorikeet  |             |       |
 
+
 ## Ecommerce
+
 
 | name             | mcp_slugs        | skill_slugs | notes |
 | ---------------- | ---------------- | ----------- | ----- |
@@ -68,7 +78,9 @@
 | Square           | square           |             |       |
 | Ticket Tailor    | ticket-tailor    |             |       |
 
+
 ## Payments
+
 
 | name                | mcp_slugs           | skill_slugs | notes |
 | ------------------- | ------------------- | ----------- | ----- |
@@ -79,7 +91,9 @@
 | Airwallex Developer | airwallex-developer |             |       |
 | GoCardless          | gocardless          |             |       |
 
+
 ## Finance
+
 
 | name                            | mcp_slugs   | skill_slugs | notes |
 | ------------------------------- | ----------- | ----------- | ----- |
@@ -94,7 +108,9 @@
 | Digits                          | digits      |             |       |
 | Aiwyn Tax (formerly Column Tax) | aiwyn-tax   |             |       |
 
+
 ## Market data
+
 
 | name                             | mcp_slugs                        | skill_slugs | notes |
 | -------------------------------- | -------------------------------- | ----------- | ----- |
@@ -115,14 +131,18 @@
 | Clarity AI                       | clarity-ai                       |             |       |
 | Verisk Underwriting Intelligence | verisk-underwriting-intelligence |             |       |
 
+
 ## Stock trading
+
 
 | name            | mcp_slugs    | skill_slugs | notes |
 | --------------- | ------------ | ----------- | ----- |
 | Groww           | groww        |             |       |
 | Kite by Zerodha | zerodha-kite |             |       |
 
+
 ## Crypto
+
 
 | name       | mcp_slugs  | skill_slugs | notes |
 | ---------- | ---------- | ----------- | ----- |
@@ -131,7 +151,9 @@
 | Blockscout | blockscout |             |       |
 | CoinDesk   | coindesk   |             |       |
 
+
 ## Private markets
+
 
 | name              | mcp_slugs    | skill_slugs | notes |
 | ----------------- | ------------ | ----------- | ----- |
@@ -140,7 +162,9 @@
 | Third Bridge      | third-bridge |             |       |
 | Harmonic          | harmonic     |             |       |
 
+
 ## HR
+
 
 | name           | mcp_slugs      | skill_slugs | notes |
 | -------------- | -------------- | ----------- | ----- |
@@ -151,19 +175,25 @@
 | ZipRecruiter   | ziprecruiter   |             |       |
 | Workable       | workable       |             |       |
 
+
 ## Email
+
 
 | name            | mcp_slugs       | skill_slugs | notes |
 | --------------- | --------------- | ----------- | ----- |
 | Superhuman Mail | superhuman-mail |             |       |
 
+
 ## Calendar
+
 
 | name     | mcp_slugs | skill_slugs | notes |
 | -------- | --------- | ----------- | ----- |
 | Calendly | calendly  |             |       |
 
+
 ## Meetings
+
 
 | name       | mcp_slugs  | skill_slugs | notes |
 | ---------- | ---------- | ----------- | ----- |
@@ -180,7 +210,9 @@
 | Sybill     | sybill     |             |       |
 | Zocks      | zocks      |             |       |
 
+
 ## Docs
+
 
 | name                   | mcp_slugs  | skill_slugs | notes |
 | ---------------------- | ---------- | ----------- | ----- |
@@ -195,7 +227,9 @@
 | Lumin                  | lumin      |             |       |
 | LILT                   | lilt       |             |       |
 
+
 ## Project management
+
 
 | name           | mcp_slugs | skill_slugs | notes |
 | -------------- | --------- | ----------- | ----- |
@@ -205,7 +239,9 @@
 | ClickUp        | clickup   |             |       |
 | Todoist        | todoist   |             |       |
 
+
 ## Design
+
 
 | name                  | mcp_slugs             | skill_slugs | notes |
 | --------------------- | --------------------- | ----------- | ----- |
@@ -224,7 +260,9 @@
 | Splice                | splice                |             |       |
 | Eraser                | eraser                |             |       |
 
+
 ## Engineering
+
 
 | name                          | mcp_slugs         | skill_slugs | notes |
 | ----------------------------- | ----------------- | ----------- | ----- |
@@ -263,7 +301,9 @@
 | pg-aiguide                    | pg-aiguide        |             |       |
 | GraphOS MCP Tools             | graphos-tools     |             |       |
 
+
 ## Analytics
+
 
 | name             | mcp_slugs        | skill_slugs | notes |
 | ---------------- | ---------------- | ----------- | ----- |
@@ -283,7 +323,9 @@
 | MoSPI            | mospi            |             |       |
 | Shapes           | shapes           |             |       |
 
+
 ## Automation
+
 
 | name   | mcp_slugs | skill_slugs | notes |
 | ------ | --------- | ----------- | ----- |
@@ -292,7 +334,9 @@
 | IFTTT  | ifttt     |             |       |
 | Jentic | jentic    |             |       |
 
+
 ## Research
+
 
 | name            | mcp_slugs       | skill_slugs | notes |
 | --------------- | --------------- | ----------- | ----- |
@@ -309,7 +353,9 @@
 | AdisInsight     | adisinsight     |             |       |
 | Ketryx          | ketryx          |             |       |
 
+
 ## Lifestyle
+
 
 | name                          | mcp_slugs             | skill_slugs | notes |
 | ----------------------------- | --------------------- | ----------- | ----- |
@@ -324,3 +370,5 @@
 | Taskrabbit Booking Assistance | taskrabbit            |             |       |
 | Melon                         | melon                 |             |       |
 | Fever Event Discovery         | fever-event-discovery |             |       |
+
+
