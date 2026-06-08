@@ -1274,7 +1274,7 @@
       "url": "https://www.blockscout.com/"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13845,
@@ -1632,7 +1632,7 @@
       "url": "https://www.cbinsights.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 12887,
@@ -2274,7 +2274,7 @@
       "url": "https://www.coindesk.com/"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13396,
@@ -2688,7 +2688,7 @@
       "url": "https://crypto.com"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 15143,
@@ -3160,7 +3160,7 @@
       "url": "https://www.egnyte.com"
     },
     "useCases": [
-      "finance"
+      "docs"
     ],
     "sortOrder": null,
     "popularityScore": 14805,
@@ -3170,6 +3170,40 @@
       "longDescription": "Egnyte MCP server enables AI agents to securely search, retrieve, and analyze content stored in any Egnyte domain. It wraps Egnyte’s public APIs and enforces native permissions, compliance rules, and audit logging.",
       "supportUrl": "mailto:support@egnyte.com",
       "privacyPolicyUrl": "https://www.egnyte.com/privacy-policy"
+    }
+  },
+  {
+    "slug": "email",
+    "name": "Email",
+    "description": "Send email from the project's Ren mailbox on behalf of Ren",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": null,
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "email_send"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Ren",
+      "url": "https://renai.build"
+    },
+    "useCases": [
+      "productivity",
+      "communication"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Give each project its own mailbox so agents can send email as the Ren mailbox. Served through Ren's native email integration — enable the channel on a project and agents send on its behalf."
     }
   },
   {
@@ -4192,7 +4226,7 @@
       "url": "https://groww.in"
     },
     "useCases": [
-      "market-data"
+      "stock-trading"
     ],
     "sortOrder": null,
     "popularityScore": null,
@@ -4400,7 +4434,7 @@
       "url": "https://harmonic.ai"
     },
     "useCases": [
-      "research"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 14012,
@@ -5894,7 +5928,7 @@
       "url": "https://lunarcrush.com"
     },
     "useCases": [
-      "market-data"
+      "crypto"
     ],
     "sortOrder": null,
     "popularityScore": 13949,
@@ -7698,7 +7732,7 @@
       "url": "https://www.pitchbook.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 17582,
@@ -10341,7 +10375,7 @@
       "url": "https://www.thirdbridge.com"
     },
     "useCases": [
-      "market-data"
+      "private-markets"
     ],
     "sortOrder": null,
     "popularityScore": 12593,
@@ -11590,7 +11624,7 @@
       "url": "https://zerodha.com"
     },
     "useCases": [
-      "market-data"
+      "stock-trading"
     ],
     "sortOrder": null,
     "popularityScore": null,

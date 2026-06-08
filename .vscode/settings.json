@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    "skills": true,
+    "plugins/ren/skills": true
+  }
+}

@@ -86,6 +86,8 @@ export const SkillEntry = z.object({
   license: z.string().nullable().optional(),
   metadata: SkillMetadata.nullable().optional(),
   websiteMetadata: WebsiteMetadata.nullable().optional(),
+  // Set when a published skill is retired: its source dir is gone but the frozen entry stays.
+  deprecatedAt: z.iso.datetime().nullable().optional(),
   currentVersion: Semver,
   contentHash: z.string().min(1),
   versions: z.array(SkillVersionEntry).min(1),

@@ -36,7 +36,7 @@ import {
   writeCodexManifest,
   writeSkillsShManifest,
 } from "./manifests"
-import { mirrorSkill, mirrorSkillToDir, pruneMirrors } from "./mirror"
+import { createMirrorSymlinks, pruneMirrors } from "./mirror"
 import { writeJson } from "./json"
 import { log } from "./log"
 
@@ -66,15 +66,32 @@ export async function detectDrift(): Promise<DriftReport> {
       drifted.push({ slug, sourceHash, snapshotHash: entry.contentHash })
     }
   }
-  const orphaned = entries.filter((e) => !sourceSet.has(e.slug)).map((e) => e.slug)
+  // A deprecated entry has no source dir by design — not an orphan, not a missing bundle entry.
+  const deprecated = new Set(entries.filter((e) => e.deprecatedAt).map((e) => e.slug))
+  const orphaned = entries.filter((e) => !sourceSet.has(e.slug) && !deprecated.has(e.slug)).map((e) => e.slug)
 
   // Catch the "skills.sh.json names a slug that doesn't exist" case so the
   // curated bundle list can't quietly drift out of sync with reality.
   const skillsSh = await readSkillsShManifest()
   const bundled = bundledSlugs(skillsSh)
-  const unbundled = bundled.filter((s) => !sourceSet.has(s))
+  const unbundled = bundled.filter((s) => !sourceSet.has(s) && !deprecated.has(s))
 
   return { drifted, unreleased, orphaned, unbundled }
+}
+
+// data/skills is the source of truth: a published entry whose dir was removed is auto-retired.
+// Sets deprecatedAt (idempotent), persists, and returns the slugs newly deprecated this run.
+export async function autoDeprecateOrphans(at: string): Promise<string[]> {
+  const sourceSet = new Set(await discoverSkillSlugs())
+  const entries = await loadSkillsRegistry()
+  const newly: string[] = []
+  const next = entries.map((e) => {
+    if (sourceSet.has(e.slug) || e.deprecatedAt) return e
+    newly.push(e.slug)
+    return { ...e, deprecatedAt: at }
+  })
+  if (newly.length) await saveSkillsRegistry(next)
+  return newly
 }
 
 export function formatDriftProblems(drift: DriftReport): string[] {
@@ -83,7 +100,7 @@ export function formatDriftProblems(drift: DriftReport): string[] {
     problems.push(`drift: ${d.slug} — source content changed without a release; run \`ren-registry release ${d.slug}\``)
   for (const s of drift.unreleased) problems.push(`unreleased: ${s} — new skill; run \`ren-registry release ${s}\``)
   for (const s of drift.orphaned)
-    problems.push(`orphaned: ${s} — snapshot entry has no matching data/skills/ directory`)
+    problems.push(`orphaned: ${s} — source dir removed; run \`ren-registry build\` to deprecate it`)
   for (const s of drift.unbundled)
     problems.push(`bundled-missing: ${s} — listed in skills.sh.json but no data/skills/${s}/ directory`)
   return problems
@@ -146,7 +163,7 @@ export type PrBaseDiffOptions = {
   baseRef?: string
 }
 
-function resolveBaseRef(opt: string | undefined): string | null {
+export function resolveBaseRef(opt: string | undefined): string | null {
   if (opt) return opt
   const env = process.env.RENREGISTRY_BASE_REF
   if (env) return env
@@ -388,6 +405,11 @@ function readBumpBaseline(fallbackVersion: string): BumpBaseline {
 }
 
 export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
+  if (!opts.scratch) {
+    const deprecated = await autoDeprecateOrphans(new Date().toISOString())
+    if (deprecated.length) log.step(`auto-deprecated ${deprecated.length} orphaned skill(s): ${deprecated.join(", ")}`)
+  }
+
   if (!opts.skipDriftCheck) {
     const problems: string[] = []
 
@@ -406,10 +428,11 @@ export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
   }
 
   const skills = await loadSkillsRegistry()
+  const liveSkills = skills.filter((s) => !s.deprecatedAt)
 
   // Frontmatter must still parse — guards against deletions or renames that
   // happened between release and build.
-  for (const slug of skills.map((s) => s.slug)) {
+  for (const slug of liveSkills.map((s) => s.slug)) {
     await parseSkill(slug)
   }
 
@@ -419,9 +442,9 @@ export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
   const forceMajor = pluginMajorMarkerExists()
 
   // bundled = curated subset for plugin distribution; full skills.json goes to the backend payload
-  const skillsSh = reconcileSkillsShManifest(await readSkillsShManifest(), skills.map((s) => s.slug))
+  const skillsSh = reconcileSkillsShManifest(await readSkillsShManifest(), liveSkills.map((s) => s.slug))
   const bundled = new Set(bundledSlugs(skillsSh))
-  const bundledEntries = skills.filter((s) => bundled.has(s.slug))
+  const bundledEntries = liveSkills.filter((s) => bundled.has(s.slug))
 
   const baseline = readBumpBaseline(priorVersion)
   const bump = decidePluginBump({
@@ -436,14 +459,15 @@ export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
   const rootTarget = opts.scratch?.rootSkillsMirror ?? PATHS.rootSkillsMirror
 
   if (opts.scratch) {
-    await mkdir(pluginTarget, { recursive: true })
-    await mkdir(rootTarget, { recursive: true })
-    for (const entry of bundledEntries) {
-      await mirrorSkillToDir(entry, pluginTarget)
-      await mirrorSkillToDir(entry, rootTarget)
-    }
+    // Scratch build: create symlinks in the scratch dir so check can compare targets
+    const { symlink } = await import("node:fs/promises")
+    const { relative, dirname } = await import("node:path")
+    await mkdir(dirname(rootTarget), { recursive: true })
+    await mkdir(dirname(pluginTarget), { recursive: true })
+    await symlink(relative(dirname(rootTarget), PATHS.dataSkills), rootTarget)
+    await symlink(relative(dirname(pluginTarget), PATHS.dataSkills), pluginTarget)
   } else {
-    for (const entry of bundledEntries) await mirrorSkill(entry)
+    await createMirrorSymlinks()
   }
 
   const prunedMirrorPaths = opts.scratch ? [] : await pruneMirrors(bundledEntries.map((s) => s.slug))

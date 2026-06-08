@@ -11,19 +11,31 @@ Usage:
   python google_api.py gmail get MESSAGE_ID
   python google_api.py gmail send --to user@example.com --subject "Hi" --body "Hello"
   python google_api.py gmail reply MESSAGE_ID --body "Thanks"
-  python google_api.py calendar list [--from DATE] [--to DATE] [--calendar primary]
+  python google_api.py calendar list [--start DATE] [--end DATE] [--calendar primary]
   python google_api.py calendar create --summary "Meeting" --start DATETIME --end DATETIME
+  python google_api.py calendar delete EVENT_ID
   python google_api.py drive search "budget report" [--max 10]
+  python google_api.py drive get FILE_ID
+  python google_api.py drive upload /path/to/file.pdf [--name NAME] [--parent FOLDER_ID]
+  python google_api.py drive download FILE_ID [--output PATH] [--export-mime MIME]
+  python google_api.py drive create-folder NAME [--parent FOLDER_ID]
+  python google_api.py drive share FILE_ID --email USER --role ROLE [--notify]
+  python google_api.py drive share FILE_ID --type anyone --role reader
+  python google_api.py drive delete FILE_ID [--permanent]
   python google_api.py contacts list [--max 20]
+  python google_api.py sheets create --title "Title" [--sheet-name "Sheet1"]
   python google_api.py sheets get SHEET_ID RANGE
   python google_api.py sheets update SHEET_ID RANGE --values '[[...]]'
   python google_api.py sheets append SHEET_ID RANGE --values '[[...]]'
+  python google_api.py docs create --title "Title" [--body "First paragraph..."]
   python google_api.py docs get DOC_ID
+  python google_api.py docs append DOC_ID --text "More content"
 """
 
 import argparse
 import base64
 import json
+import mimetypes
 import os
 import sys
 from datetime import datetime, timedelta, timezone
@@ -306,6 +318,161 @@ def drive_search(args):
     print(json.dumps(files, indent=2, ensure_ascii=False))
 
 
+
+def drive_get(args):
+    service = build_service("drive", "v3")
+    file = service.files().get(
+        fileId=args.file_id,
+        fields="id, name, mimeType, modifiedTime, size, webViewLink, parents, owners",
+    ).execute()
+    print(json.dumps(file, indent=2, ensure_ascii=False))
+
+
+
+def drive_upload(args):
+    file_path = args.file_path
+    file_name = args.name or os.path.basename(file_path)
+    mime_type, _ = mimetypes.guess_type(file_path)
+    if not mime_type:
+        mime_type = "application/octet-stream"
+
+    from googleapiclient.http import MediaFileUpload
+
+    metadata = {"name": file_name}
+    if args.parent:
+        metadata["parents"] = [args.parent]
+
+    service = build_service("drive", "v3")
+    media = MediaFileUpload(file_path, mimetype=mime_type, resumable=True)
+    file = service.files().create(
+        body=metadata, media_body=media,
+        fields="id, name, mimeType, webViewLink",
+    ).execute()
+    print(json.dumps({
+        "status": "uploaded",
+        "id": file["id"],
+        "name": file["name"],
+        "mimeType": file["mimeType"],
+        "webViewLink": file.get("webViewLink", ""),
+    }, indent=2))
+
+
+
+# Google-native MIME types are not directly downloadable; the API exports them.
+# Default export is the most useful format for the type. Pass --export-mime to override.
+GOOGLE_NATIVE_MIMES = {
+    "application/vnd.google-apps.document",
+    "application/vnd.google-apps.spreadsheet",
+    "application/vnd.google-apps.presentation",
+    "application/vnd.google-apps.drawing",
+}
+
+DEFAULT_EXPORT_MIMES = {
+    "application/vnd.google-apps.document": "application/pdf",
+    "application/vnd.google-apps.spreadsheet": "text/csv",
+    "application/vnd.google-apps.presentation": "application/pdf",
+    "application/vnd.google-apps.drawing": "image/png",
+}
+
+
+def drive_download(args):
+    from googleapiclient.http import MediaIoBaseDownload
+
+    service = build_service("drive", "v3")
+    file_meta = service.files().get(
+        fileId=args.file_id, fields="id, name, mimeType",
+    ).execute()
+    file_name = file_meta.get("name", "download")
+    mime_type = file_meta.get("mimeType", "")
+
+    output_path = args.output or os.path.basename(file_name)
+
+    if mime_type in GOOGLE_NATIVE_MIMES:
+        export_mime = args.export_mime or DEFAULT_EXPORT_MIMES.get(mime_type, "application/pdf")
+        request = service.files().export_media(fileId=args.file_id, mimeType=export_mime)
+    else:
+        request = service.files().get_media(fileId=args.file_id)
+
+    with open(output_path, "wb") as fh:
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while not done:
+            _, done = downloader.next_chunk()
+
+    print(json.dumps({
+        "status": "downloaded",
+        "id": file_meta["id"],
+        "name": file_name,
+        "path": os.path.abspath(output_path),
+        "mimeType": mime_type,
+    }, indent=2))
+
+
+
+def drive_create_folder(args):
+    service = build_service("drive", "v3")
+    metadata = {
+        "name": args.name,
+        "mimeType": "application/vnd.google-apps.folder",
+    }
+    if args.parent:
+        metadata["parents"] = [args.parent]
+
+    file = service.files().create(body=metadata, fields="id, name, webViewLink").execute()
+    print(json.dumps({
+        "status": "created",
+        "id": file["id"],
+        "name": file["name"],
+        "webViewLink": file.get("webViewLink", ""),
+    }, indent=2))
+
+
+
+def drive_share(args):
+    service = build_service("drive", "v3")
+
+    if args.type == "anyone":
+        permission = {"type": "anyone", "role": args.role}
+    elif args.type == "domain":
+        if not args.domain:
+            print("--domain is required when --type domain", file=sys.stderr)
+            sys.exit(2)
+        permission = {"type": "domain", "role": args.role, "domain": args.domain}
+    else:
+        if not args.email:
+            print("--email is required when --type user", file=sys.stderr)
+            sys.exit(2)
+        permission = {"type": "user", "role": args.role, "emailAddress": args.email}
+
+    result = service.permissions().create(
+        fileId=args.file_id, body=permission, sendNotificationEmail=args.notify,
+    ).execute()
+    print(json.dumps({
+        "status": "shared",
+        "permissionId": result.get("id", ""),
+        "fileId": args.file_id,
+        "role": args.role,
+        "type": args.type,
+    }, indent=2))
+
+
+
+def drive_delete(args):
+    service = build_service("drive", "v3")
+    if args.permanent:
+        service.files().delete(fileId=args.file_id).execute()
+        status = "deleted"
+    else:
+        service.files().update(fileId=args.file_id, body={"trashed": True}).execute()
+        status = "trashed"
+
+    print(json.dumps({
+        "status": status,
+        "fileId": args.file_id,
+        "permanent": args.permanent,
+    }, indent=2))
+
+
 # =========================================================================
 # Contacts
 # =========================================================================
@@ -370,6 +537,24 @@ def sheets_append(args):
     print(json.dumps({"updatedCells": result.get("updates", {}).get("updatedCells", 0)}, indent=2))
 
 
+
+def sheets_create(args):
+    service = build_service("sheets", "v4")
+    body = {"properties": {"title": args.title}}
+    if args.sheet_name:
+        body["sheets"] = [{"properties": {"title": args.sheet_name}}]
+
+    result = service.spreadsheets().create(
+        body=body, fields="spreadsheetId, properties, spreadsheetUrl",
+    ).execute()
+    print(json.dumps({
+        "status": "created",
+        "spreadsheetId": result["spreadsheetId"],
+        "title": result.get("properties", {}).get("title", ""),
+        "spreadsheetUrl": result.get("spreadsheetUrl", ""),
+    }, indent=2))
+
+
 # =========================================================================
 # Docs
 # =========================================================================
@@ -384,6 +569,49 @@ def docs_get(args):
         "body": _extract_doc_text(doc),
     }
     print(json.dumps(result, indent=2, ensure_ascii=False))
+
+
+
+def docs_create(args):
+    service = build_service("docs", "v1")
+    result = service.documents().create(body={"title": args.title}).execute()
+    doc_id = result["documentId"]
+
+    if args.body:
+        requests = [{"insertText": {"location": {"index": 1}, "text": args.body}}]
+        service.documents().batchUpdate(documentId=doc_id, body={"requests": requests}).execute()
+
+    print(json.dumps({
+        "status": "created",
+        "documentId": doc_id,
+        "title": result.get("title", args.title),
+        "url": f"https://docs.google.com/document/d/{doc_id}/edit",
+    }, indent=2))
+
+
+
+def docs_append(args):
+    service = build_service("docs", "v1")
+    doc = service.documents().get(documentId=args.doc_id).execute()
+
+    body_content = doc.get("body", {}).get("content", [])
+    end_index = 1
+    if body_content:
+        end_index = max(1, body_content[-1].get("endIndex", 1) - 1)
+
+    text = args.text
+    if not text.endswith("\n"):
+        text = text + "\n"
+
+    requests = [{"insertText": {"location": {"index": end_index}, "text": text}}]
+    service.documents().batchUpdate(documentId=args.doc_id, body={"requests": requests}).execute()
+
+    print(json.dumps({
+        "status": "appended",
+        "documentId": args.doc_id,
+        "inserted_at": end_index,
+        "characters": len(text),
+    }, indent=2))
 
 
 # =========================================================================
@@ -469,6 +697,41 @@ def main():
     p.add_argument("--raw-query", action="store_true", help="Use query as raw Drive API query")
     p.set_defaults(func=drive_search)
 
+    p = drv_sub.add_parser("get")
+    p.add_argument("file_id")
+    p.set_defaults(func=drive_get)
+
+    p = drv_sub.add_parser("upload")
+    p.add_argument("file_path", help="Local file to upload")
+    p.add_argument("--name", default="", help="Drive file name (default: basename of file_path)")
+    p.add_argument("--parent", default="", help="Parent folder ID")
+    p.set_defaults(func=drive_upload)
+
+    p = drv_sub.add_parser("download")
+    p.add_argument("file_id")
+    p.add_argument("--output", default="", help="Local output path (default: file's name in cwd)")
+    p.add_argument("--export-mime", default="", help="Override export MIME for Google-native files (e.g. text/plain)")
+    p.set_defaults(func=drive_download)
+
+    p = drv_sub.add_parser("create-folder")
+    p.add_argument("name")
+    p.add_argument("--parent", default="", help="Parent folder ID")
+    p.set_defaults(func=drive_create_folder)
+
+    p = drv_sub.add_parser("share")
+    p.add_argument("file_id")
+    p.add_argument("--email", default="", help="User email (for --type user)")
+    p.add_argument("--type", dest="type", default="user", choices=["user", "anyone", "domain"])
+    p.add_argument("--domain", default="", help="Domain (for --type domain)")
+    p.add_argument("--role", required=True, choices=["reader", "writer", "commenter", "owner"])
+    p.add_argument("--notify", action="store_true", help="Send notification email to the grantee")
+    p.set_defaults(func=drive_share)
+
+    p = drv_sub.add_parser("delete")
+    p.add_argument("file_id")
+    p.add_argument("--permanent", action="store_true", help="Skip trash (irreversible)")
+    p.set_defaults(func=drive_delete)
+
     # --- Contacts ---
     con = sub.add_parser("contacts")
     con_sub = con.add_subparsers(dest="action", required=True)
@@ -485,6 +748,11 @@ def main():
     p.add_argument("sheet_id")
     p.add_argument("range")
     p.set_defaults(func=sheets_get)
+
+    p = sh_sub.add_parser("create")
+    p.add_argument("--title", required=True)
+    p.add_argument("--sheet-name", default="", help="Name of the first sheet (default: Sheet1)")
+    p.set_defaults(func=sheets_create)
 
     p = sh_sub.add_parser("update")
     p.add_argument("sheet_id")
@@ -505,6 +773,16 @@ def main():
     p = docs_sub.add_parser("get")
     p.add_argument("doc_id")
     p.set_defaults(func=docs_get)
+
+    p = docs_sub.add_parser("create")
+    p.add_argument("--title", required=True)
+    p.add_argument("--body", default="", help="Initial body text")
+    p.set_defaults(func=docs_create)
+
+    p = docs_sub.add_parser("append")
+    p.add_argument("doc_id")
+    p.add_argument("--text", required=True)
+    p.set_defaults(func=docs_append)
 
     args = parser.parse_args()
     args.func(args)

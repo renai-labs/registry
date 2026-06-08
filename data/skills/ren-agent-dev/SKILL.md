@@ -1,9 +1,9 @@
 ---
 name: ren-agent-dev
 description: >-
-  Create, configure, and update agents — their prompt, model, and skill / MCP
-  dependencies. Use when the user asks to build, configure, modify, or debug an
-  agent.
+  Design and write agents — their system prompt, model choice, and skill / MCP
+  dependency shape. Use when the user asks to build, configure, modify, or debug
+  an agent.
 metadata:
   icon: 'https://cdn.renai.build/skill-icons/agent-dev.svg'
   tags:
@@ -15,92 +15,32 @@ metadata:
 
 Agents are specialized AI assistants configured for specific tasks and workflows — a system prompt + model + dependencies (skills and MCPs). Design them as small atomic units so they compose cleanly, stay debuggable, and can be independently versioned or swapped.
 
-Every version is immutable; `agent.create` always lands an initial `0.0.1` and updates publish a new version. One new version = one logical change.
+> This skill is the **design judgment** — how to write the prompt, choose the model, and shape dependencies. Creating and versioning agents, attaching them to projects, scope, and every Ren CLI / registry operation live in [[ren-systems-architect]].
 
-## Runtime behavior
+## Versioning discipline
 
-An agent version is an immutable snapshot of the prompt, model, and skill/MCP versions it depends on. By default a project attaches to the agent's **latest** version (`agentVersionId` omitted on attach) and **auto-rolls-forward**: publishing a new version propagates to every project using it without a restart. Pin a specific `agentVersionId` on attach (see [[ren-project-dev]]) only to freeze a snapshot.
-
-## Scope
-
-See [[ren-scope]]. Pass `--scope user` / `"query": { "scope": "user" }` on every command (create, get, update, `versions create`) when the agent lives in your user namespace; omit for org. `search` is the exception — it uses `--sources` (read-time filter across user/org/registry tiers) and ignores `--scope`.
-
-## Build via Ren CLI
-
-`agents create` returns an agent with its initial version (`0.0.1`):
-
-```
-ren agents create --name "My Agent" --icon "🤖" \
-  --scope user \
-  --prompt "You are…" --model "claude-sonnet-4-6" \
-  --release-notes "initial" \
-  --body '{
-    "skills": [{ "skillId": "skl_…" }],
-    "mcps":   [{ "mcpId":   "mcp_…" }]
-  }'
-```
-
-Subsequent revisions go through `agents versions create`:
-
-```
-ren agents versions create agt_… \
-  --scope user \
-  --prompt "You are…" \
-  --model "claude-sonnet-4-6" \
-  --release-notes "…" \
-  --body '{
-    "skills": [{ "skillId": "skl_…" }, { "skillId": "skl_…" }],
-    "mcps":   [{ "mcpId": "mcp_…" }],
-    "version": "patch"
-  }'
-```
-
-`--body` accepts a JSON string, `@file.json`, or `@-`. Scalar flags merge over `--body`. Read with `ren agents get agt_… --scope user`; discover across scopes with `ren agents search --query "…" --sources user org registry`.
-
-## Build via Ren MCP
-
-`{ path, query, body }` envelope (params are the API field names):
-
-```
-mcp__ren__agent_create         { "query": { "scope": "user" },
-                                 "body":  { "name": "My Agent", "icon": "🤖",
-                                            "prompt": "…", "model": "claude-sonnet-4-6",
-                                            "skills": [{ "skillId": "skl_…" }],
-                                            "mcps":   [{ "mcpId":   "mcp_…" }],
-                                            "releaseNotes": "initial" } }
-mcp__ren__agent_version_create { "query": { "scope": "user" },
-                                 "path":  { "id": "agt_…" },
-                                 "body":  { "prompt": "…", "model": "claude-sonnet-4-6",
-                                            "skills": [{ "skillId": "skl_…" }],
-                                            "mcps":   [{ "mcpId":   "mcp_…" }],
-                                            "version": "patch" } }
-mcp__ren__agent_get            { "query": { "scope": "user" }, "path": { "id": "agt_…" } }
-mcp__ren__agent_search         { "body": { "query": "…", "sources": ["user","org","registry"] } }
-```
+An agent version is an immutable snapshot of the prompt, model, and the skill/MCP versions it depends on. **One new version = one logical change** — it keeps runs debuggable and lets you bisect a regression to a single edit. (How versions attach and auto-roll-forward: [[ren-systems-architect]].)
 
 ## Choosing the model
 
-**Do not pick a model silently. Stop and ask the user before creating the agent.**
-Run `ren models list --output json` to get the live catalog — Ren supports models from many providers; the full list is always in the catalog. From that list, surface three options across the price/capability range (heavy / balanced / light) with a one-line trade-off each. Suggested defaults: **Claude Opus 4.7** for heavy work, **Claude Sonnet 4.6** balanced, **Claude Haiku 4.5** for light/cheap. Enrich each with `$/M input` + `$/M output` from the provider's public pricing. Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default.
+**Do not pick a model silently. Stop and ask the user before the agent is created.** Surface three options across the price/capability range (heavy / balanced / light) with a one-line trade-off each, enriched with `$/M input` + `$/M output` from the provider's public pricing. Suggested defaults: **Claude Opus 4.8** for heavy work, **Claude Sonnet 4.6** balanced, **Claude Haiku 4.5** for light/cheap. An agent can also inherit the pod default instead of naming a model. (The live model catalog and the create flag live in [[ren-systems-architect]].)
 
-## Easy to miss
+## Writing the prompt
 
-- Pass the prompt via `--body @file.json` for anything over a few lines — inline JSON breaks on quotes, backticks, and code fences.
-- `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }` objects. To add one skill, `ren agents get` first and pass the union. Omit `skillVersionId` to track latest (auto-roll-forward); pin it only to freeze.
-- Keep the prompt focused: role → workflow → output format → rules. Push detail into skills, not the prompt. See `references/prompt-writing.md` and `references/dependency-patterns.md`.
+- Keep it focused: **role → workflow → output format → rules.** The prompt is the spine; push detail into skills, not the prompt.
+- Author anything over a few lines as a file, not inline — quotes, backticks, and code fences break inline JSON.
+- See `references/prompt-writing.md` and `references/dependency-patterns.md`.
+
+## Dependency shape
+
+`skills` and `mcps` are **full-replace** sets — when you change deps you provide the complete list, not a delta. Track latest by default (auto-roll-forward); pin a specific version only to freeze a snapshot. Keep the dep set minimal and purposeful — every skill an agent carries is catalog surface it must reason about. See `references/dependency-patterns.md`.
 
 ## Iterate
 
-1. `ren agents get` — verify current state.
+Improve from real runs, not in the abstract:
+
+1. Verify the agent's current state.
 2. Watch a real run — find the wrong output.
-3. `ren skills versions create` to fix skill content, `ren agents versions create` to fix prompt or deps.
+3. Fix the failing thing: skill content for a capability gap, the prompt or dep set for behavior — one logical change per version.
 
-## Next steps
-
-An agent does nothing until a project routes to it.
-
-- **Attach to a project** as `primary` so chat sessions and triggers route to it. See [[ren-project-dev]].
-- **Wire its credentials** if any skill or MCP it depends on needs auth. See [[ren-vaults-credentials-dev]] (and [[ren-mcp-dev]] for OAuth).
-- **Give it persistent context** with a memory store, or feed it artifacts via a file store. See [[ren-file-memory-store-dev]].
-- **Run it on a schedule** once a session works manually. See [[ren-trigger-dev]].
-
+To create or version the agent, attach it to a project, wire credentials, or add stores/triggers — all Ren operations — see [[ren-systems-architect]].

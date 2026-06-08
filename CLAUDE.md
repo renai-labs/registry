@@ -7,12 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Registry monorepo for Ren skills, built with **Bun** (`bun@1.3.11`).
 
 - `data/` — **source of truth.** Skills live at `data/skills/<slug>/SKILL.md` (+ assets); `data/skills.json` is the registry snapshot; `data/{agents,mcp_servers,tags}.json` are flat registries.
-- `skills/`, `plugins/ren/skills/` — **generated mirrors** of `data/skills/`. `plugins/.../plugin.json`, `marketplace.json`, `skills.sh.json` — **generated manifests.**
+- `skills/`, `plugins/ren/skills/` — **symlinked mirrors** pointing to `data/skills/`. `plugins/.../plugin.json`, `marketplace.json`, `skills.sh.json` — **generated manifests.**
 - `cli/` — the `ren-registry` CLI (commander; logic in `cli/src/lib/`). `schemas/` — shared Zod schemas (`@renai-labs/registry-schemas`).
 
 ## Dos & Don'ts
 
-- **DO** edit skills only under `data/skills/<slug>/`. **DON'T** hand-edit `skills/`, `plugins/ren/skills/`, or any generated manifest — `ren-registry build` overwrites them and `check` fails on drift.
+- **DO** edit skills only under `data/skills/<slug>/`. **DON'T** hand-edit `skills/`, `plugins/ren/skills/`, or any generated manifest — `ren-registry build` recreates the symlinks and manifests; `check` fails if they're missing or point to the wrong target.
 - **DON'T** hand-edit `data/skills.json` except `websiteMetadata` — everything else is generated from SKILL.md frontmatter plus CLI-owned version bookkeeping (`release`/`publish`). **DON'T** put `version:` in SKILL.md frontmatter (frontmatter is `.strict()`); bump versions via `ren-registry release`.
 - **DON'T** mutate or delete a frozen version (one whose `gitRef !== null`) — it's published and immutable; `check` rejects PRs that do.
 - **DO** run `ren-registry build && git add -A` after a release so generated files stay in sync.
