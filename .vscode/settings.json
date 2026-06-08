@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "skills": true,
+    "plugins/ren/skills": true,
+    "plugins/ren/plugin.json": true,
+    "marketplace.json": true,
+    "skills.sh.json": true
+  }
+}
