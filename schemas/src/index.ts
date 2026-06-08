@@ -230,9 +230,22 @@ export const MarketplaceManifest = z
         source: z.union([
           z.string(),
           z.object({ source: z.literal("local"), path: z.string() }),
+          z.object({
+            source: z.literal("url"),
+            url: z.url(),
+            ref: z.string().optional(),
+            sha: z.string().optional(),
+          }),
+          z.object({
+            source: z.literal("git-subdir"),
+            url: z.url(),
+            path: z.string(),
+            ref: z.string().optional(),
+            sha: z.string().optional(),
+          }),
         ]),
         description: z.string(),
-      }),
+      }).passthrough(),
     ),
   })
   .passthrough()

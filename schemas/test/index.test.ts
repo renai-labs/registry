@@ -4,6 +4,7 @@ import {
   Bump,
   ClaudePluginManifest,
   GitRef,
+  MarketplaceManifest,
   McpEntry,
   Semver,
   SkillEntry,
@@ -290,6 +291,47 @@ describe("SkillsShManifest", () => {
       groupings: [{ title: "Ren", skills: ["BadName"] }],
     })
     expect(result.success).toBe(false)
+  })
+})
+
+describe("MarketplaceManifest", () => {
+  test("accepts Codex Git-backed root plugin sources", () => {
+    const result = MarketplaceManifest.safeParse({
+      name: "renai-labs",
+      owner: { name: "Ren Labs", url: "https://renai.build" },
+      plugins: [
+        {
+          name: "ren",
+          source: { source: "url", url: "https://github.com/renai-labs/registry.git", ref: "main" },
+          description: "Ren plugin",
+          policy: { installation: "AVAILABLE", authentication: "ON_INSTALL" },
+          category: "Productivity",
+        },
+      ],
+    })
+    expect(result.success).toBe(true)
+  })
+
+  test("accepts Codex Git subdirectory plugin sources", () => {
+    const result = MarketplaceManifest.safeParse({
+      name: "example",
+      owner: { name: "Example" },
+      plugins: [
+        {
+          name: "remote-helper",
+          source: {
+            source: "git-subdir",
+            url: "https://github.com/example/codex-plugins.git",
+            path: "./plugins/remote-helper",
+            ref: "main",
+          },
+          description: "Remote helper",
+          policy: { installation: "AVAILABLE", authentication: "ON_INSTALL" },
+          category: "Productivity",
+        },
+      ],
+    })
+    expect(result.success).toBe(true)
   })
 })
 
