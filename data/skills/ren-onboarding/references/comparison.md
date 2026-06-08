@@ -1,0 +1,11 @@
+# When the user asks "why not just XYZ alternative?"
+
+Pull the row that matches their stack. Give each tool credit for what it does well; the point is what the user **can't** get out of it, in their own outcome terms.
+
+
+| Tool                            | Designed for                                   | Where it breaks down                                                                                                                                                                                                              |
+| ------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| n8n / Zapier                    | Deterministic automation over stable APIs      | Brittle when rules shift or inputs get fuzzy. No way to say "use judgment" and have it work. Edge cases fall back onto humans.                                                                                                    |
+| Hosted Claude / ChatGPT Teams   | Chat copilot                                   | Not built for agentic work - no schedules, no webhooks, non-persistent sandboxes. The reason these companies ship separate coding agents is that sustained stateful work is a different category.                                 |
+| Claude Code / OpenCode / Hermes | Coding agent for one developer in one terminal | One person, one machine, one session. Nothing survives past the terminal. The reason Anthropic and others now ship managed agent platforms: durable cloud agents orchestrated on a schedule is a categorically different problem. |
+| Claude / Google Managed Agents  | One agent inside one app, via API              | Locked to one vendor's model and MCPs. No cross-agent memory, no teammates in thread, no per-tool-call cost visibility.                                                                                                           |

@@ -1,4 +1,5 @@
 ---
+
 name: ren-onboarding
 description: >-
   First-session setup for a new Ren user. Run when the user pastes an onboarding
@@ -6,9 +7,11 @@ description: >-
   the user, translate Ren into their words, build their first real thing on Ren,
   and hand back a live session with concrete reasons to come back.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/onboarding.svg'
+  icon: '[https://cdn.renai.build/skill-icons/onboarding.svg](https://cdn.renai.build/skill-icons/onboarding.svg)'
   tags:
-    - ren
+
+- ren
+
 ---
 
 # Ren Onboarding
@@ -39,18 +42,6 @@ Spot which camp the user is in from memory and the transport you detected - each
 - **Personalised to their business.** Not generic - knows their pipeline, playbook, and tools from turn one. Demonstrate this immediately.
 - **Orchestration across the SaaS they already pay for** - CRM, calendar, inbox, ticketing. One agent composing across them, not ten separate chats.
 
-### When the user asks "why not just XYZ alternative?"
-
-Pull the row that matches their stack. Give each tool credit for what it does well; the point is what the user **can't** get out of it, in their own outcome terms.
-
-
-| Tool                            | Designed for                                   | Where it breaks down                                                                                                                                                                                                              |
-| ------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| n8n / Zapier                    | Deterministic automation over stable APIs      | Brittle when rules shift or inputs get fuzzy. No way to say "use judgment" and have it work. Edge cases fall back onto humans.                                                                                                    |
-| Hosted Claude / ChatGPT Teams   | Chat copilot                                   | Not built for agentic work - no schedules, no webhooks, non-persistent sandboxes. The reason these companies ship separate coding agents is that sustained stateful work is a different category.                                 |
-| Claude Code / OpenCode / Hermes | Coding agent for one developer in one terminal | One person, one machine, one session. Nothing survives past the terminal. The reason Anthropic and others now ship managed agent platforms: durable cloud agents orchestrated on a schedule is a categorically different problem. |
-| Claude / Google Managed Agents  | One agent inside one app, via API              | Locked to one vendor's model and MCPs. No cross-agent memory, no teammates in thread, no per-tool-call cost visibility.                                                                                                           |
-
 ## 1. Pick a transport
 
 Decide how you'll drive the Ren onboarding:
@@ -69,7 +60,7 @@ Some hosts - **Cowork, Codex, similar** - run in a network-isolated sandbox wher
 
 **When you hit this, STOP.** Don't retry the install, loop the device flow, re-authenticate Ren (an existing MCP connection is already authed - re-running just fails), or push for more permissions. Tell the user what failed and why, then redirect:
 
-> "Looks like I'm running in a network-isolated sandbox, so I can't reach the package registry or complete the Ren connection from here — that's what's blocking setup, nothing on your end. The quickest path is to head to **https://renai.build**, sign in, and onboard from the platform UI directly. You'll also want to connect Slack/GitHub there, on the integrations page. Happy to walk you through it once you're in."
+> "Looks like I'm running in a network-isolated sandbox, so I can't reach the package registry or complete the Ren connection from here — that's what's blocking setup, nothing on your end. The quickest path is to head to **[https://renai.build](https://renai.build)**, sign in, and onboard from the platform UI directly. You'll also want to connect Slack/GitHub there, on the integrations page. Happy to walk you through it once you're in."
 
 Then end onboarding - nothing more can be driven from here.
 
@@ -87,11 +78,11 @@ ren init --device-poll  --wait 25 --output json
 
 `already-signed-in` → skip ahead. Otherwise **start polling immediately - do not wait for the user to confirm they opened the URL**. Loop `--device-poll` without yielding (`pending` → re-poll immediately; `expired`/`denied` → restart from `--device-start` and surface a new URL).
 
-## 1.5 Load the architect, then bootstrap the transport
+## 1.a Load the architect, then bootstrap the transport
 
 Before you build, load **[[ren-systems-architect]]** — it owns the Ren manual (data model, scope tiers, the build chain, reuse rules, the integrations index) and is the design engine for everything in §4. It also carries the **blueprint loop** (`references/blueprint.md`) and its bundled assets — the desired-state `topology.json` schema and the self-contained `canvas.html` — which §4 uses to make the build visual and checkable. **Read it; don't recite it to the user.**
 
-Then pull the one transport reference the architect doesn't carry, and keep it handy:
+Then pull the one cli reference the architect doesn't carry, and keep it handy:
 
 - `ren docs commands > /tmp/ren-commands.txt` — the **full** command tree, every command and flag (CLI transport).
 
@@ -104,7 +95,7 @@ ren pods list             --output json   # org pods
 
 ## 2. Read the user before proposing anything
 
-Pull the user's memory before any proposal: host's memory (Claude Code auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store. CLI: `ren memory-store list --scope user`, then `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` and fetch the URL. MCP: `memoryStore_files_presignDownload`.
+Pull the user's memory before any proposal: host's memory (Claude Code / codex / hermes / auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store. CLI: `ren memory-store list --scope user`, then `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` and fetch the URL. MCP: `memoryStore_files_presignDownload`.
 
 Build a picture of:
 
@@ -125,11 +116,11 @@ Two questions, in order. Don't skip either.
 **Use the native question tool** - only fallback to plain text if there's no tool. Ask what they would like to do today; use memory from §2 to frame the question in their language. Their answer buckets into one of three modes:
 
 
-| Mode                   | Signal from their answer                                        | What you do                                                                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tour**               | Exploring, no clear pain, wants to understand Ren first         | No build. Walk through the build chain, the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off if they want something live.      |
-| **Quick demo**         | Wants to see the flow before committing, or time is short       | One agent, one skill, one model - universal starter (inbox summary, calendar digest, meeting-notes → actions). Skip cron and stores.                                          |
-| **Personalised agent** | Has a recurring pain or concrete thing to offload - **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                                |
+| Mode                   | Signal from their answer                                        | What you do                                                                                                                                                              |
+| ---------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tour**               | Exploring, no clear pain, wants to understand Ren first         | No build. Walk through the build chain, the comparison table, and [https://renai.build/docs/](https://renai.build/docs/). Light §6 hand-off if they want something live. |
+| **Quick demo**         | Wants to see the flow before committing, or time is short       | One agent, one skill, one model - universal starter (inbox summary, calendar digest, meeting-notes → actions). Skip cron and stores.                                     |
+| **Personalised agent** | Has a recurring pain or concrete thing to offload - **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                           |
 
 
 **One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one - surface the rest in the closing nudges.
@@ -142,15 +133,15 @@ Two questions, in order. Don't skip either.
 - **Consumer** → *"What work would you offload to the cloud if the agent actually knew your business?"*
 
 
-| Their pain (builder phrasing)       | Their pain (consumer phrasing)                            | The primitive        |
-| ----------------------------------- | --------------------------------------------------------- | -------------------- |
-| "It dies when I close the terminal" | "I keep retyping the same prep into ChatGPT every Monday" | Durable pod sandbox  |
-| "I need it to run every morning"    | "My weekly digest should just happen"                     | Cron trigger         |
-| "I keep pasting the same API key"   | "Wiring it to my CRM / inbox once would save hours"       | Vault credential     |
-| "It forgets what worked last time"  | "Last quarter's playbook should carry over"               | Memory store         |
-| "I need to feed it docs / data"     | "Here's my customer list / pricing sheet - use this"      | File store           |
-| "It needs Linear / Notion"          | "It needs Gmail / HubSpot / Salesforce / Calendar"        | MCP |
-| "It needs to work against my GitHub repo" | "It should run from / post into Slack"              | Native integration ([[ren-github]] / [[ren-slack]]) - **org-level**, see §5 |
+| Their pain (builder phrasing)             | Their pain (consumer phrasing)                            | The primitive                                                               |
+| ----------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------- |
+| "It dies when I close the terminal"       | "I keep retyping the same prep into ChatGPT every Monday" | Durable pod sandbox                                                         |
+| "I need it to run every morning"          | "My weekly digest should just happen"                     | Cron trigger                                                                |
+| "I keep pasting the same API key"         | "Wiring it to my CRM / inbox once would save hours"       | Vault credential                                                            |
+| "It forgets what worked last time"        | "Last quarter's playbook should carry over"               | Memory store                                                                |
+| "I need to feed it docs / data"           | "Here's my customer list / pricing sheet - use this"      | File store                                                                  |
+| "It needs Linear / Notion"                | "It needs Gmail / HubSpot / Salesforce / Calendar"        | MCP                                                                         |
+| "It needs to work against my GitHub repo" | "It should run from / post into Slack"                    | Native integration ([[ren-github]] / [[ren-slack]]) - **org-level**, see §5 |
 
 
 Team-shaped pains ("my teammate needs this too") get filed for the close, not wired now.
@@ -199,7 +190,7 @@ Land them in a chat that loads.
      <base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
      <base>/pods/<podId>/projects/<projectId>                        # project page
     ```
-  - **OpenCode sandbox URL** - `ren sessions url <session-id>` (`session_url`) returns the sandbox's OpenCode URL (`<publicHost>/<dir>/session/<id>`), pointing straight at the running server. Only reach for it if the user wants the raw sandbox server. It's gated by HTTP basic auth: username is always `opencode`; password is the sandbox's `serverPassword`, read from the pod sandbox status (returned only when `ready` - see [[ren-systems-architect]]). Present as `https://opencode:<serverPassword>@<host>/…`, or hand the URL plus the `opencode` / `<serverPassword>` credentials.
+  - **OpenCode sandbox URL** - `ren sessions url <session-id>` (`session_url`) returns the sandbox's OpenCode URL (`<publicHost>/<dir>/session/<id>`), username(always opencode), and password - pointing straight at the running server. Only reach for it if the user wants the raw sandbox server. It's gated by HTTP basic auth: username is always `opencode`; password is the sandbox's `serverPassword`.
 
 Pick 1–2 nudges contextual to what they just built. The point is concrete reasons to come back. One closing sentence in their register - don't congratulate.
 
@@ -221,3 +212,8 @@ Close with one open invitation - *"anything else you've been wanting to offload?
 ## Rules
 
 - If the user won't engage with the requirement, skip to hand-off and give them the default Ren meta-agent - a session in hand is still a win.
+
+## Footnotes
+
+- if user compares Ren with alternatives, read [[references/comparison.md]]
+
