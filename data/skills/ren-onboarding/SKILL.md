@@ -7,10 +7,9 @@ description: >-
   the user, translate Ren into their words, build their first real thing on Ren,
   and hand back a live session with concrete reasons to come back.
 metadata:
-  icon: '[https://cdn.renai.build/skill-icons/onboarding.svg](https://cdn.renai.build/skill-icons/onboarding.svg)'
+  icon: 'https://cdn.renai.build/skill-icons/onboarding.svg'
   tags:
-
-- ren
+    - ren
 
 ---
 
@@ -216,4 +215,3 @@ Close with one open invitation - *"anything else you've been wanting to offload?
 ## Footnotes
 
 - if user compares Ren with alternatives, read [[references/comparison.md]]
-

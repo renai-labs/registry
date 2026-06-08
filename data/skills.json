@@ -183,14 +183,20 @@
         "productivity"
       ]
     },
-    "currentVersion": "1.0.1",
-    "contentHash": "5867fc6f7dcad8a42800a4d4fa7c264551430be38105a845af1775fc881c1800",
+    "currentVersion": "1.0.2",
+    "contentHash": "3b669d8b908388de4cd84cb67b41efa439fef84ca4f815b8d27d39164980a3cf",
     "versions": [
       {
         "version": "1.0.1",
         "gitRef": "acc38ea2b530e489e6a4ac2cb44da05f3a02190d",
         "publishedAt": "2026-05-31T06:42:09.752Z",
         "contentHash": "5867fc6f7dcad8a42800a4d4fa7c264551430be38105a845af1775fc881c1800"
+      },
+      {
+        "version": "1.0.2",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "3b669d8b908388de4cd84cb67b41efa439fef84ca4f815b8d27d39164980a3cf"
       }
     ]
   },
@@ -379,7 +385,7 @@
   {
     "slug": "ren-email",
     "name": "ren-email",
-    "description": "Use when configuring Ren's native project email channel: enabling, listing, or disabling a project mailbox; explaining the `<org_slug>.<project_slug>@agents.renai.build` address; routing inbound email to a project's agent with same-thread replies; or attaching the `ren` MCP so cron, webhook, or other proactive agent runs can call `send-email`. Do not use for Gmail scanning, labelling, or mailbox automation; use Google Workspace for that.",
+    "description": "Use when configuring Ren's native project email channel: enabling, listing, or disabling a project mailbox; or attaching the `ren` MCP so cron, webhook, or other proactive agent runs can call `send-email`. Do not use for Gmail scanning, labelling, or mailbox automation; use Google Workspace for that.",
     "license": null,
     "metadata": {
       "icon": "https://cdn.renai.build/skill-icons/email.svg",
@@ -390,13 +396,13 @@
       ]
     },
     "currentVersion": "0.0.1",
-    "contentHash": "20253b6300e8a6b64d4b7c97afb5575eed9c65dc510705b20d003af1c9877dd6",
+    "contentHash": "012abdccc3a818cecb1be99087a4bb1e8d5cd330fe581724804f59dd43b0dfa7",
     "versions": [
       {
         "version": "0.0.1",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "20253b6300e8a6b64d4b7c97afb5575eed9c65dc510705b20d003af1c9877dd6"
+        "contentHash": "012abdccc3a818cecb1be99087a4bb1e8d5cd330fe581724804f59dd43b0dfa7"
       }
     ]
   },
@@ -437,7 +443,7 @@
       ]
     },
     "currentVersion": "0.0.2",
-    "contentHash": "5ab3a0de1e6615e36c867ec68b0fa7b37c3b34e075dc9acf6863f24d3642e655",
+    "contentHash": "4ca75bee1e2687e1b24b02e385f13608d44e11e74bb15e8f8b77d3e3dc660564",
     "versions": [
       {
         "version": "0.0.1",
@@ -449,7 +455,7 @@
         "version": "0.0.2",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "5ab3a0de1e6615e36c867ec68b0fa7b37c3b34e075dc9acf6863f24d3642e655"
+        "contentHash": "4ca75bee1e2687e1b24b02e385f13608d44e11e74bb15e8f8b77d3e3dc660564"
       }
     ]
   },
@@ -488,7 +494,7 @@
       ]
     },
     "currentVersion": "1.0.7",
-    "contentHash": "2bfabccbd1b862bc64a08ed3fa2b02b4a94cf9aa4b048aa52a6d68bd30215c78",
+    "contentHash": "7227eb3dc75bc853c8c47e3de3195b11e290772dbf785aef2ffee3887155cb79",
     "versions": [
       {
         "version": "1.0.1",
@@ -518,7 +524,7 @@
         "version": "1.0.7",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "2bfabccbd1b862bc64a08ed3fa2b02b4a94cf9aa4b048aa52a6d68bd30215c78"
+        "contentHash": "7227eb3dc75bc853c8c47e3de3195b11e290772dbf785aef2ffee3887155cb79"
       }
     ]
   },
@@ -663,17 +669,17 @@
   {
     "slug": "ren-slack",
     "name": "ren-slack",
-    "description": "Connect Slack to Ren - install the workspace, list channels, and map a channel to a project so messages route to its agent. Use when the user wants to drive a Ren agent from Slack.",
+    "description": "Connect Slack to Ren - install the workspace for channel-to-project routing, and attach the `slack` MCP to agents that need to call Slack proactively (post, reply, read history, look up users and channels, react). Use when the user wants a Ren agent to receive Slack messages, post to Slack, or both.",
     "license": null,
     "metadata": {
       "icon": "https://cdn.renai.build/skill-icons/slack.svg",
       "tags": [
         "ren",
-        "productivity"
+        "communication"
       ]
     },
     "currentVersion": "0.0.2",
-    "contentHash": "150d9834c135bf3caecf9160bc69a89c4650fd5a730fca489ac817193bb18f8b",
+    "contentHash": "d0e29ca9c7a12d625f30005cc9db9963f342a39704b73c024f533abda8a59814",
     "versions": [
       {
         "version": "0.0.1",
@@ -685,7 +691,7 @@
         "version": "0.0.2",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "150d9834c135bf3caecf9160bc69a89c4650fd5a730fca489ac817193bb18f8b"
+        "contentHash": "d0e29ca9c7a12d625f30005cc9db9963f342a39704b73c024f533abda8a59814"
       }
     ]
   },
@@ -700,7 +706,7 @@
       ]
     },
     "currentVersion": "0.0.2",
-    "contentHash": "31a8b050cebe427c5d35feeaf0556f239f3e70621d3c2edee43e62704b21447d",
+    "contentHash": "ea1066c683b995d17dca95ecdc001e93d4de6ba157645171893b17fd9b8dfbc1",
     "versions": [
       {
         "version": "0.0.1",
@@ -712,7 +718,7 @@
         "version": "0.0.2",
         "gitRef": null,
         "publishedAt": null,
-        "contentHash": "31a8b050cebe427c5d35feeaf0556f239f3e70621d3c2edee43e62704b21447d"
+        "contentHash": "ea1066c683b995d17dca95ecdc001e93d4de6ba157645171893b17fd9b8dfbc1"
       }
     ]
   },
