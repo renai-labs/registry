@@ -183,8 +183,8 @@
         "productivity"
       ]
     },
-    "currentVersion": "1.0.2",
-    "contentHash": "3b669d8b908388de4cd84cb67b41efa439fef84ca4f815b8d27d39164980a3cf",
+    "currentVersion": "1.0.3",
+    "contentHash": "f75785ca578dcabc189f9f4bab84e2ae412f55016ba11b0aa1c7b6a4e55f39f4",
     "versions": [
       {
         "version": "1.0.1",
@@ -197,6 +197,12 @@
         "gitRef": null,
         "publishedAt": null,
         "contentHash": "3b669d8b908388de4cd84cb67b41efa439fef84ca4f815b8d27d39164980a3cf"
+      },
+      {
+        "version": "1.0.3",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "f75785ca578dcabc189f9f4bab84e2ae412f55016ba11b0aa1c7b6a4e55f39f4"
       }
     ]
   },
