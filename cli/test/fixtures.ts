@@ -60,6 +60,7 @@ export async function makeFixture(opts: FixtureOptions = {}): Promise<Fixture> {
     "data/skills",
     "plugins/ren/.claude-plugin",
     "plugins/ren/.codex-plugin",
+    ".codex-plugin",
     ".claude-plugin",
     ".agents/plugins",
   ]) {
@@ -99,7 +100,7 @@ export async function makeFixture(opts: FixtureOptions = {}): Promise<Fixture> {
     description: "test plugin",
   }
   await writeFile(
-    join(root, "plugins", "ren", ".claude-plugin", "plugin.json"),
+    join(root, ".claude-plugin", "plugin.json"),
     JSON.stringify(claudePlugin, null, 2) + "\n",
     "utf8",
   )
@@ -108,10 +109,10 @@ export async function makeFixture(opts: FixtureOptions = {}): Promise<Fixture> {
     name: "ren",
     version: "0.1.0",
     description: "test plugin",
-    skills: "./skills/",
+    skills: "./data/skills/",
   }
   await writeFile(
-    join(root, "plugins", "ren", ".codex-plugin", "plugin.json"),
+    join(root, ".codex-plugin", "plugin.json"),
     JSON.stringify(codexPlugin, null, 2) + "\n",
     "utf8",
   )

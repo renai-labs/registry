@@ -393,7 +393,9 @@ function readBumpBaseline(fallbackVersion: string): BumpBaseline {
   )
 
   let priorVersion = fallbackVersion
-  const manifestRaw = gitShowFile(baseRef, "plugins/ren/.claude-plugin/plugin.json")
+  const manifestRaw =
+    gitShowFile(baseRef, ".claude-plugin/plugin.json") ??
+    gitShowFile(baseRef, "plugins/ren/.claude-plugin/plugin.json")
   if (manifestRaw !== null) {
     try {
       priorVersion = ClaudePluginManifest.parse(JSON.parse(manifestRaw)).version ?? fallbackVersion

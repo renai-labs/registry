@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "ren",
-      "source": "./plugins/ren",
+      "source": "./",
       "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding."
     }
   ]

@@ -206,7 +206,7 @@ describe("build", () => {
     initGit(fx)
     fx.run(["release", "pod-dev", "--bump", "patch", "--yes"])
     fx.run(["build"]) // no base ref yet → bootstrap, inherits the seeded 0.1.0
-    const claudeAfterBootstrap = JSON.parse(await fx.read("plugins/ren/.claude-plugin/plugin.json")) as {
+    const claudeAfterBootstrap = JSON.parse(await fx.read(".claude-plugin/plugin.json")) as {
       version: string
     }
     expect(claudeAfterBootstrap.version).toBe("0.1.0")
@@ -218,9 +218,9 @@ describe("build", () => {
     fx.run(["release", "pod-dev", "--bump", "patch", "--yes"])
     fx.run(["build"], { RENREGISTRY_BASE_REF: base })
 
-    const claudeAfter = JSON.parse(await fx.read("plugins/ren/.claude-plugin/plugin.json")) as { version: string }
+    const claudeAfter = JSON.parse(await fx.read(".claude-plugin/plugin.json")) as { version: string }
     expect(claudeAfter.version).toBe("0.1.1")
-    const codexAfter = JSON.parse(await fx.read("plugins/ren/.codex-plugin/plugin.json")) as { version: string }
+    const codexAfter = JSON.parse(await fx.read(".codex-plugin/plugin.json")) as { version: string }
     expect(codexAfter.version).toBe("0.1.1")
   })
 
@@ -237,7 +237,7 @@ describe("build", () => {
     fx.run(["build"], { RENREGISTRY_BASE_REF: base })
     fx.run(["build"], { RENREGISTRY_BASE_REF: base })
 
-    const v = JSON.parse(await fx.read("plugins/ren/.claude-plugin/plugin.json")) as { version: string }
+    const v = JSON.parse(await fx.read(".claude-plugin/plugin.json")) as { version: string }
     expect(v.version).toBe("0.1.1")
   })
 
