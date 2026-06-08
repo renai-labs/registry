@@ -4,7 +4,7 @@
 
 | name             | mcp_slugs | skill_slugs      | notes                                                                                                                                                                                |
 | ---------------- | --------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Slack            | slack     | ren-slack        | Native org integration — connect via `ren slack <>`, not as a generic MCP                                                                                                            |
+| Slack            | slack     | ren-slack        | Native org integration — install via `ren slack <>` for channel→project routing; attach the registry MCP `slack` to agents that call Slack proactively (`auth: "none"`, no credential)            |
 | GitHub           |           | ren-github       | Native org integration; not a registry MCP — connect via `ren github <>`                                                                                                             |
 | Google Workspace |           | google-workspace | Native — connect via `ren google <>`; requires a personal OAuth app ([setup](https://console.cloud.google.com/auth/overview)). Covers Gmail, Calendar, Drive, Contacts, Sheets, Docs |
 

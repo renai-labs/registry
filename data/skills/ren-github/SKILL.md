@@ -13,37 +13,38 @@ metadata:
 
 # GitHub Dev
 
-Connecting GitHub is two moves: **install the GitHub App on the org** (grants repo access), then **bind a repo to a project** so the project's agent gets it mounted. Installs and repo access are **org-level** — they live on the org, not a single user's pod.
+> There is **no GitHub MCP**. GitHub is a native Ren integration; you must install the Ren GitHub bot in your org.
+
+Connecting GitHub is two moves: **install the GitHub App on the org** (grants repo access), then **bind a repo to a project** so the project's agent gets it mounted.
 
 > Commands and flags (`github status / install / repos / connect / uninstall`, `projects update` with `gitRepo`): `ren docs commands`.
 
-## Runtime behavior
+## The install loop
 
-The org's GitHub App installation gives Ren repo access. When a project's `gitRepo.url` points at a repo the installation can reach, Ren mints an installation token at agent startup and mounts the working tree at `mountPath` — nothing to re-paste.
-
-- Installation happens at the **org level**.
-- When a repo is attached to a org pod project, the Ren bot is attributed directly (no, user attribution)
-- When a repo is attached to a private pod project, then user's oauth credentials are attributed to the commits and github actions.
-- During installation Ren auto-creates the user's GitHub OAuth credentials and stores them in their default private vault (attached to their private pod).
-
-## The install loop — no polling
-
-`install` and `connect` return `{ "url": "…" }` and **there is no poll endpoint** (unlike the vault OAuth flow in [[ren-vaults-credentials-dev]]). Hand the user the URL, let them complete it in the browser (the App install page is where they choose which repos to grant), then verify with `github status`. Don't loop a session call — re-read `status` once they're done.
+`ren github install` returns `{ "url": "…" }`. Hand the user the URL, let them complete it in the browser (the App install page is where they choose which repos to grant), then verify with `ren github status`. **There is no poll endpoint** — re-read `status` once they're done.
 
 ## Binding a repo
 
-`gitRepo` is nested, so it goes through `--body` on `projects update` (see [[ren-systems-architect]]). `url` is the only required field; `baseBranch` and `mountPath` are optional. Pick the `url` from a `github repos` `fullName` (`https://github.com/<fullName>`). `github connect` is a fallback to re-link personal OAuth if a bind says "account not linked" — skip it during onboarding.
+`gitRepo` is nested, so it goes through `--body` on `projects update` (see [[ren-systems-architect]]). `url` is the only required field; `baseBranch` and `mountPath` are optional. Pick the `url` from `ren github repos` using the `fullName` field.
 
-## Scope
+```bash
+ren projects update <project-id> --body '{"gitRepo":{"url":"https://github.com/<fullName>"}}'
+```
 
-The install and its repo grants are **org-level** — keyed to the caller's org regardless of any `--scope user` flag — but the project that mounts the repo must live in a user-private pod (see Runtime behavior). General scope rules: `ren docs model`.
+Open a session — Ren mints an installation token and mounts the working tree at `mountPath`. The project must live in a **user-private pod**; org pods mount the repo but do not get user-attributed commits.
+
+Also, explain to the user that every new session on this ren project will have a fresh clone of the github repo to work out of
+
+`github connect` is a fallback to re-link personal OAuth if a bind says "account not linked" — skip it during onboarding.
+
+## Attribution
+
+- **Org project**: the Ren GitHub bot claims attribution. There is **no user attribution**.
+- **Private project**: if the user has performed OAuth, both the Ren bot and the user claim attribution for the actions.
+- During installation Ren auto-creates the user's GitHub OAuth credentials and stores them in their default private vault.
 
 ## Gotchas
 
 - **Selected-repos installs.** If the user installed against specific repos (not "all"), a repo you don't see in `github repos` won't bind — they re-run `github install` to add it.
-- **`status` is the source of truth.** After the browser flow there's nothing to poll — re-read `github status` (`hasInstallation` / `hasUserCredential`) before binding.
 
-## Next steps
 
-- **Bind the repo to a private-pod project** and open a session — the working tree mounts at `mountPath`. See [[ren-systems-architect]].
-- **Wire Slack** if the user also wants channel-driven triggers. See [[ren-slack]].
