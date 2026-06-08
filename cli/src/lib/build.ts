@@ -232,6 +232,10 @@ export async function detectPrBaseDiffIssues(
         })
       }
       if (curV.contentHash !== baseV.contentHash) {
+        const correctedHash = recomputeFrozenHash(baseEntry.slug, baseV.gitRef)
+        if (correctedHash !== null && baseV.contentHash !== correctedHash && curV.contentHash === correctedHash) {
+          continue
+        }
         issues.push({
           slug: baseEntry.slug,
           version: baseV.version,
@@ -242,6 +246,18 @@ export async function detectPrBaseDiffIssues(
     }
   }
   return { issues, usedBaseRef: baseRef }
+}
+
+function recomputeFrozenHash(slug: string, gitRef: string): string | null {
+  if (!gitRefExists(gitRef)) return null
+  try {
+    const rows = gitLsTree(gitRef, `data/skills/${slug}`)
+    const filtered = rows.filter((r) => !isIgnoredRelPath(r.relPath))
+    const blobs = filtered.map((r) => ({ relPath: r.relPath, buf: gitCatBlob(r.oid) }))
+    return hashFromEntries(blobs)
+  } catch {
+    return null
+  }
 }
 
 // Skipped (with a warning) when the git ref isn't reachable (shallow clone) —
