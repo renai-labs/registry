@@ -3173,6 +3173,40 @@
     }
   },
   {
+    "slug": "email",
+    "name": "Email",
+    "description": "Send email from the project's Ren mailbox on behalf of Ren",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": null,
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "email_send"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Ren",
+      "url": "https://renai.build"
+    },
+    "useCases": [
+      "productivity",
+      "communication"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Give each project its own mailbox so agents can send email as the Ren mailbox. Served through Ren's native email integration — enable the channel on a project and agents send on its behalf."
+    }
+  },
+  {
     "slug": "enterpret-wisdom",
     "name": "Enterpret",
     "description": "Get answers from unified feedback of your customers.",
