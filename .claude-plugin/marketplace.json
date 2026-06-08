@@ -8,8 +8,17 @@
   "plugins": [
     {
       "name": "ren",
-      "source": "./",
-      "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding."
+      "source": {
+        "source": "url",
+        "url": "https://github.com/renai-labs/registry.git",
+        "ref": "main"
+      },
+      "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
     }
   ]
 }
