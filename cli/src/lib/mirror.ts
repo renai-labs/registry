@@ -1,9 +1,9 @@
 import { symlink, rm, readlink, lstat, mkdir } from "node:fs/promises"
 import { existsSync } from "node:fs"
-import { dirname, join, relative } from "node:path"
+import { dirname, relative } from "node:path"
 import { PATHS } from "./paths"
 
-// mirrors are symlinks to data/skills/ — single source of truth, no copies
+// Mirrors are symlinks to data/skills/ — single source of truth, no copies.
 const MIRROR_TARGETS = [PATHS.pluginSkillsMirror, PATHS.rootSkillsMirror] as const
 
 function expectedSymlinkTarget(targetRoot: string): string {

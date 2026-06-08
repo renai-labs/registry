@@ -81,11 +81,11 @@ export async function check(): Promise<CheckResult> {
 
     const claudeFileDiff = await diffFiles(PATHS.claudePluginJson, scratch.claudePluginJson)
     if (claudeFileDiff !== "equal") {
-      problems.push(`manifest drift: plugins/ren/.claude-plugin/plugin.json — run \`ren-registry build\``)
+      problems.push(`manifest drift: .claude-plugin/plugin.json — run \`ren-registry build\``)
     }
     const codexFileDiff = await diffFiles(PATHS.codexPluginJson, scratch.codexPluginJson)
     if (codexFileDiff !== "equal") {
-      problems.push(`manifest drift: plugins/ren/.codex-plugin/plugin.json — run \`ren-registry build\``)
+      problems.push(`manifest drift: .codex-plugin/plugin.json — run \`ren-registry build\``)
     }
     const sshDiff = await diffFiles(PATHS.skillsShJson, scratch.skillsShJson)
     if (sshDiff !== "equal") {
