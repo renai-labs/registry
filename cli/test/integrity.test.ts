@@ -150,6 +150,31 @@ describe("PR-base diff (check)", () => {
     expect(originalHash).not.toBe("f".repeat(64))
   })
 
+  test("allows correcting a frozen contentHash to match its gitRef tree", async () => {
+    fx = await makeFixture({ skills: [{ slug: "pod-dev" }] })
+    initGit(fx)
+    fx.run(["release", "pod-dev", "--bump", "patch", "--yes"])
+    fx.run(["build"])
+    const baseline = gitCommitAll(fx, "baseline")
+
+    const snap = await loadSnapshot(fx)
+    snap[0]!.versions[0]!.gitRef = baseline
+    snap[0]!.versions[0]!.publishedAt = new Date().toISOString()
+    const correctHash = snap[0]!.versions[0]!.contentHash
+    snap[0]!.versions[0]!.contentHash = "f".repeat(64)
+    snap[0]!.contentHash = "f".repeat(64)
+    await saveSnapshot(fx, snap)
+    const recorded = gitCommitAll(fx, "publish with bad hash")
+
+    const next = await loadSnapshot(fx)
+    next[0]!.versions[0]!.contentHash = correctHash
+    next[0]!.contentHash = correctHash
+    await saveSnapshot(fx, next)
+
+    const r = fx.run(["check"], { RENREGISTRY_BASE_REF: recorded })
+    expect(r.status).toBe(0)
+  })
+
   test("does not flag new pending entries (gitRef null in HEAD only)", async () => {
     fx = await makeFixture({ skills: [{ slug: "pod-dev" }] })
     initGit(fx)
