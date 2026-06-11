@@ -9433,6 +9433,42 @@
     }
   },
   {
+    "slug": "telegram",
+    "name": "Telegram",
+    "description": "Send messages and documents to Telegram chats the org has connected to Ren, and react to messages",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": null,
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "telegram_send_message",
+      "telegram_react",
+      "telegram_send_document"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Telegram",
+      "url": "https://telegram.org"
+    },
+    "useCases": [
+      "productivity",
+      "communication"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Connect Telegram to Ren so agents can send messages and documents to connected chats and react to messages. Served through Ren's native Telegram integration — connect a chat once and agents act as the Ren bot."
+    }
+  },
+  {
     "slug": "splice",
     "name": "Splice",
     "description": "Search Splice's sounds catalog, build stacks & more!",
