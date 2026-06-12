@@ -10345,7 +10345,7 @@
     "mcpServerUrl": "https://plugin-backed.invalid/mcp",
     "urlOptions": null,
     "docUrl": null,
-    "icon": null,
+    "icon": "https://cdn.renai.build/mcp-icons/telegram.png",
     "transport": "streamable-http",
     "version": "1.0.0",
     "repository": null,
