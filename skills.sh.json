@@ -12,7 +12,9 @@
         "ren-github",
         "ren-slack",
         "ren-email",
+        "ren-telegram",
         "ren-onboarding",
+        "ren-setup",
         "ren-systems-architect"
       ]
     }

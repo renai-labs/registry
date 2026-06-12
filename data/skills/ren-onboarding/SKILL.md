@@ -79,7 +79,7 @@ ren init --device-poll  --wait 25 --output json
 
 ## 1.a Load the architect, then bootstrap the transport
 
-Before you build, load **[[ren-systems-architect]]** — it owns the Ren manual (data model, scope tiers, the build chain, reuse rules, the integrations index) and is the design engine for everything in §4. It also carries the **blueprint loop** (`references/blueprint.md`) and its bundled assets — the desired-state `topology.json` schema and the self-contained `canvas.html` — which §4 uses to make the build visual and checkable. **Read it; don't recite it to the user.**
+Before you build, load **[[ren-systems-architect]]** — it owns the Ren manual (data model, scope tiers, the build chain, reuse rules, the integrations index) and is the design engine for the §4 build. **Read it; don't recite it to the user.** .
 
 Then pull the one cli reference the architect doesn't carry, and keep it handy:
 
@@ -122,7 +122,7 @@ Two questions, in order. Don't skip either.
 | **Personalised agent** | Has a recurring pain or concrete thing to offload - **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                           |
 
 
-**One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one - surface the rest in the closing nudges.
+**One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one — then hand the rest to [[ren-setup]] at the close (§6).
 
 ### Q2 - Shape the requirement (skip if Tour; light if Quick demo)
 
@@ -145,17 +145,18 @@ Two questions, in order. Don't skip either.
 
 Team-shaped pains ("my teammate needs this too") get filed for the close, not wired now.
 
-## 4. Build leaf-up, narrate in their words
+## 4. Build one agent leaf-up, narrate in their words
 
-Drive the **blueprint loop** owned by [[ren-systems-architect]] (`references/blueprint.md`), so the user *watches* their setup form instead of hearing it narrated blind. The architect holds the dependency order, the scope discipline (`--scope user` default and why), and the reuse-before-create inventory (private pod, default vault/file/memory stores, the never-touch "Ren" project). Your job here is to **run the loop to the end** and narrate each step in the user's register.
+Ship the single most important agent for the pain from §3 — **one agent, one set of skills/MCPs, one model**. No topology loop here; that's [[ren-setup]]'s job for the rest of the stack. The goal is a working chat fast.
 
-The scripted loop is **CLI-transport only** (it needs a shell + `bun`). On the MCP / no-shell transport, run the *same* loop by hand — author and self-validate the draft against the architect's `assets/topology.schema.json`, reconcile by reading live state directly, and hand the live UI link (§6) instead of the canvas. Invocation and working-file paths: `references/blueprint.md`.
+Follow the architect's leaf-up build chain (`references/operations.md` / `references/wiring.md`), reuse-before-create as always:
 
-1. **Draft from the intake.** Turn the §3 answers into a desired-state draft at `/tmp/ren-topology.json` (architect's `assets/topology.schema.json`): the private pod, a fresh project, the agent, its skills/MCPs, any store/cron the pain called for. **Seed it with the defaults you're reusing** (private pod, default stores) so the diff stays quiet. Key everything by `slug`; capture the "must be true"s as `projects[].requirements[]`.
-2. **Show it.** `bun run <skill-dir>/scripts/render.ts /tmp/ren-topology.json` opens the canvas — the user sees the stack they're about to get. (Headless/sandbox: hand the written file path, or skip to the live link per §6.)
-3. **Build the gap, re-render.** Run the architect's build chain leaf-up for what isn't live yet; after each step `bun run <skill-dir>/scripts/diff.ts /tmp/ren-topology.json` reports what's left — write the new `id`s back into the draft and re-render to keep the canvas current. Repeat until the diff is clean and every blocking requirement passes (the diff worklist is the authority on what remains).
+1. **Skills / MCPs** — search the registry first; reuse or fork what fits before authoring anything.
+2. **Credentials** — only if a skill/MCP needs auth (see §5).
+3. **Agent** — prompt + model + the skills/MCPs above. Don't pick the model silently (architect / [[ren-agent-dev]]).
+4. **Project** — a **fresh** project in the user's private pod; attach the agent as `primary`. Add a store only if the pain clearly needs one; skip cron/triggers — surface those at hand-off as a reason to come back.
 
-- **Stay in `--scope user`** and build inside the user's **private pod** (already provisioned) and a **fresh project**.
+- **Stay in `--scope user`** and build inside the user's **private pod** (already provisioned) and a **fresh project** — never the default "Ren" project.
 
 ### Narration register - match the user
 
@@ -196,7 +197,7 @@ Pick 1–2 nudges contextual to what they just built. The point is concrete reas
 - **Share the chat.** Every run is a replay - `ren replays share <id>` hands a scrub link to anyone.
 - **Run it as a routine.** Wire a cron; it fires in the pod and you read the session whenever.
 - **Transfer your preferences.** Export what the local agent already knows (`~/.claude/projects/<dir>/memory/` for Claude Code) into the memory store via `ren memory-stores files start-upload`. The Ren agent picks up where the local one left off.
-- **Build another agent.** Same private pod, same vault, same stores - the second agent is faster than the first.
+- **Build out the rest of the stack.** This was one agent. If they gestured at more — a multi-agent workflow, routines, teammates — hand off to **[[ren-setup]]**: it designs the whole topology, shows it as a canvas, and provisions it leaf-up. Same private pod, same vault, same stores.
 
 ## Memory add
 

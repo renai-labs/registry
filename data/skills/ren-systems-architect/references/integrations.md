@@ -9,6 +9,7 @@
 | GitHub                                                            |           | ren-github       | Native org integration; not a registry MCP — connect via `ren github <>`                                                                                                                                        |
 | Google Workspace (Gmail, Calendar, Drive, Contacts, Sheets, Docs) |           | google-workspace | Native integration - requires user to create an oauth app. Use `ren google <>` Read google-workspace skill for setup instructions                                                                               |
 | Email                                                             | email     | ren-email        | Use when user wants to send emails to Ren agents to delegate tasks or if Ren agents want to proactively send email notifications to users. For managing user's mailbox, use gmail(google workspace integration) |
+| Telegram                                                         | telegram  | ren-telegram     | Native org integration — map a Telegram DM or group chat to a project for chat→project routing (`ren telegrams chats set` / `claim-code`); attach the registry MCP `telegram` (`auth: "none"`, no credential) to agents that send messages/documents proactively. Decoupled from Ren accounts — link with `ren telegrams link-code`                                              |
 
 
 ## CRM

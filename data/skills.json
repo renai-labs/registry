@@ -499,8 +499,8 @@
         "ren"
       ]
     },
-    "currentVersion": "1.0.7",
-    "contentHash": "7227eb3dc75bc853c8c47e3de3195b11e290772dbf785aef2ffee3887155cb79",
+    "currentVersion": "1.0.8",
+    "contentHash": "6a6ba5ebe04613044df733c4ed850ffdd15b656618ccf744df182a3c62537f31",
     "versions": [
       {
         "version": "1.0.1",
@@ -531,6 +531,12 @@
         "gitRef": "18f2bc4a44fa3fee08eecc2b028990c8b5ec3f21",
         "publishedAt": "2026-06-08T12:49:42.928Z",
         "contentHash": "7227eb3dc75bc853c8c47e3de3195b11e290772dbf785aef2ffee3887155cb79"
+      },
+      {
+        "version": "1.0.8",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "6a6ba5ebe04613044df733c4ed850ffdd15b656618ccf744df182a3c62537f31"
       }
     ]
   },
@@ -626,6 +632,27 @@
     ]
   },
   {
+    "slug": "ren-setup",
+    "name": "ren-setup",
+    "description": "Topology- and loop-based setup that designs and provisions a full Ren agent-stack from an interview. Run when a user wants to build out or expand their stack beyond a single agent, or when ren-onboarding hands off after the first agent. Authors a desired-state topology.json, renders it to a canvas, diffs it against live, and builds the gap leaf-up until they match.",
+    "license": null,
+    "metadata": {
+      "tags": [
+        "ren"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "1e69de82994a7cccfb7f6ae6bd74b27315e1c9efa45e64852055ce16ccbfbbec",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "1e69de82994a7cccfb7f6ae6bd74b27315e1c9efa45e64852055ce16ccbfbbec"
+      }
+    ]
+  },
+  {
     "slug": "ren-skill-dev",
     "name": "ren-skill-dev",
     "description": "Author, edit, fork, optimize, and adapt skills — the modular capabilities (instructions plus optional scripts, references, and assets) an agent loads on demand when a task makes them relevant. Use when the user wants to create, update, improve, or debug a skill, adapt a third-party / community SKILL.md, or add a custom capability to an agent.",
@@ -711,8 +738,8 @@
         "ren"
       ]
     },
-    "currentVersion": "0.0.2",
-    "contentHash": "ea1066c683b995d17dca95ecdc001e93d4de6ba157645171893b17fd9b8dfbc1",
+    "currentVersion": "0.0.3",
+    "contentHash": "6251187cce2fea97a0562a3e038519fc87b74a768cd4df5fd617eed146e7f988",
     "versions": [
       {
         "version": "0.0.1",
@@ -725,6 +752,35 @@
         "gitRef": "18f2bc4a44fa3fee08eecc2b028990c8b5ec3f21",
         "publishedAt": "2026-06-08T12:49:42.928Z",
         "contentHash": "ea1066c683b995d17dca95ecdc001e93d4de6ba157645171893b17fd9b8dfbc1"
+      },
+      {
+        "version": "0.0.3",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "6251187cce2fea97a0562a3e038519fc87b74a768cd4df5fd617eed146e7f988"
+      }
+    ]
+  },
+  {
+    "slug": "ren-telegram",
+    "name": "ren-telegram",
+    "description": "Connect Telegram to Ren - map a Telegram DM or group chat to a project for chat-to-project routing, and attach the `telegram` MCP to agents that need to message Telegram proactively (send messages, send documents, react). Use when the user wants a Ren agent to receive Telegram messages, post to Telegram, or both.",
+    "license": null,
+    "metadata": {
+      "icon": "https://cdn.renai.build/skill-icons/telegram.svg",
+      "tags": [
+        "ren",
+        "communication"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "0dc254eb66cfa61e43e6083006a19b2056ac153b9b09506e71542ae65e9fc510",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "0dc254eb66cfa61e43e6083006a19b2056ac153b9b09506e71542ae65e9fc510"
       }
     ]
   },
