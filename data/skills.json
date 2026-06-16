@@ -851,6 +851,30 @@
     ]
   },
   {
+    "slug": "technical-docs",
+    "name": "technical-docs",
+    "description": "Write comprehensive, user-focused documentation following the Diataxis framework. Use this skill when creating or improving tutorials, how-to guides, reference documentation, or explanatory content. Helps identify the right documentation type and apply best practices for each.",
+    "license": "CC-BY-SA-4.0",
+    "metadata": {
+      "author": "Daniele Procida",
+      "source": "https://diataxis.fr",
+      "homepage": "https://diataxis.fr",
+      "tags": [
+        "docs"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "a73ea1ef98506ea5d1a80d1c14ed3788d7032ce60451f01eb885ef31c1b53cd3",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "a73ea1ef98506ea5d1a80d1c14ed3788d7032ce60451f01eb885ef31c1b53cd3"
+      }
+    ]
+  },
+  {
     "slug": "typefully",
     "name": "typefully",
     "description": "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.",
