@@ -475,20 +475,15 @@ export async function build(opts: BuildOptions = {}): Promise<BuildResult> {
 
   const pluginTarget = opts.scratch?.pluginSkillsMirror ?? PATHS.pluginSkillsMirror
   const rootTarget = opts.scratch?.rootSkillsMirror ?? PATHS.rootSkillsMirror
+  const bundledSlugList = bundledEntries.map((s) => s.slug)
 
   if (opts.scratch) {
-    // Scratch build: create symlinks in the scratch dir so check can compare targets
-    const { symlink } = await import("node:fs/promises")
-    const { relative, dirname } = await import("node:path")
-    await mkdir(dirname(rootTarget), { recursive: true })
-    await mkdir(dirname(pluginTarget), { recursive: true })
-    await symlink(relative(dirname(rootTarget), PATHS.dataSkills), rootTarget)
-    await symlink(relative(dirname(pluginTarget), PATHS.dataSkills), pluginTarget)
+    await createMirrorSymlinks(bundledSlugList, [pluginTarget, rootTarget])
   } else {
-    await createMirrorSymlinks()
+    await createMirrorSymlinks(bundledSlugList)
   }
 
-  const prunedMirrorPaths = opts.scratch ? [] : await pruneMirrors(bundledEntries.map((s) => s.slug))
+  const prunedMirrorPaths = opts.scratch ? [] : await pruneMirrors(bundledSlugList)
 
   const nextClaude = { ...claudeManifest, version: bump.next }
   const nextCodex = { ...codexManifest, version: bump.next }

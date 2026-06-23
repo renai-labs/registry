@@ -170,7 +170,7 @@ describe("build", () => {
     expect(r.stderr + r.stdout).toContain("bundled-missing: ghost-skill")
   })
 
-  test("creates symlinks that expose all skills", async () => {
+  test("mirrors only the bundled skills as per-skill symlinks", async () => {
     fx = await makeFixture({
       skills: [{ slug: "pod-dev" }, { slug: "content-skill" }],
       bundledSlugs: ["pod-dev"],
@@ -180,15 +180,15 @@ describe("build", () => {
     expect(r.status).toBe(0)
     expect(r.stdout).toContain("mirrored 1/2 skill(s)")
 
-    // Mirrors are symlinks to data/skills/
-    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
-    expect(await isSymlinkTo(fx.path("skills"), "data/skills")).toBe(true)
+    // Each mirror is a directory of per-skill symlinks into data/skills/
+    expect(await isSymlinkTo(fx.path("plugins/ren/skills/pod-dev"), "../../../data/skills/pod-dev")).toBe(true)
+    expect(await isSymlinkTo(fx.path("skills/pod-dev"), "../data/skills/pod-dev")).toBe(true)
 
-    // Symlinks resolve to data/skills/, so all skills are reachable
+    // The un-bundled skill exists in data/skills/ but is NOT mirrored
     const pluginDirs = await readdir(fx.path("plugins/ren/skills"))
-    expect(pluginDirs.sort()).toEqual(["content-skill", "pod-dev"])
+    expect(pluginDirs.sort()).toEqual(["pod-dev"])
     const rootDirs = await readdir(fx.path("skills"))
-    expect(rootDirs.sort()).toEqual(["content-skill", "pod-dev"])
+    expect(rootDirs.sort()).toEqual(["pod-dev"])
   })
 
   test("symlinks resolve to the source SKILL.md verbatim", async () => {
@@ -246,22 +246,23 @@ describe("build", () => {
     fx.run(["release", "pod-dev", "--bump", "patch", "--yes"])
     fx.run(["build"])
     const before = await fx.read("plugins/ren/skills/pod-dev/SKILL.md")
-    const beforeIsLink = await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")
+    const beforeIsLink = await isSymlinkTo(fx.path("plugins/ren/skills/pod-dev"), "../../../data/skills/pod-dev")
     fx.run(["build"])
     const after = await fx.read("plugins/ren/skills/pod-dev/SKILL.md")
-    const afterIsLink = await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")
+    const afterIsLink = await isSymlinkTo(fx.path("plugins/ren/skills/pod-dev"), "../../../data/skills/pod-dev")
     expect(after).toBe(before)
     expect(afterIsLink).toBe(beforeIsLink)
   })
 
-  test("symlinks stay intact when bundled set shrinks", async () => {
+  test("prunes a skill from the mirrors when it leaves the bundle", async () => {
     fx = await makeFixture({
       skills: [{ slug: "pod-dev" }, { slug: "agent-dev" }],
       bundledSlugs: ["pod-dev", "agent-dev"],
     })
     fx.run(["release", "--bump", "patch", "--yes"])
     fx.run(["build"])
-    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
+    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(true)
+    expect(existsSync(fx.path("skills/agent-dev"))).toBe(true)
 
     // Remove agent-dev from skills.sh.json
     await fx.write(
@@ -269,10 +270,11 @@ describe("build", () => {
       JSON.stringify({ groupings: [{ title: "Test", skills: ["pod-dev"] }] }, null, 2) + "\n",
     )
     fx.run(["build"])
-    // Symlink is still there — it always points to data/skills/ which holds everything
-    expect(await isSymlinkTo(fx.path("plugins/ren/skills"), "../../data/skills")).toBe(true)
-    // agent-dev is still reachable through the symlink
-    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(true)
+    // agent-dev is un-bundled → dropped from both mirrors (still lives in data/skills/)
+    expect(existsSync(fx.path("plugins/ren/skills/agent-dev"))).toBe(false)
+    expect(existsSync(fx.path("skills/agent-dev"))).toBe(false)
+    expect(existsSync(fx.path("data/skills/agent-dev"))).toBe(true)
+    expect(existsSync(fx.path("plugins/ren/skills/pod-dev"))).toBe(true)
   })
 })
 
