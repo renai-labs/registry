@@ -32,7 +32,11 @@
           "ren-trigger-dev",
           "ren-vaults-credentials-dev"
         ],
-        "mcps": ["slack", "email", "telegram"],
+        "mcps": [
+          "slack",
+          "email",
+          "telegram"
+        ],
         "releaseNotes": "Bind Slack, Email, and Telegram channel MCPs directly to the Ren meta agent."
       },
       {
