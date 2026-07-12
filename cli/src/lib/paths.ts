@@ -13,6 +13,7 @@ export const PATHS = {
   skillsJson: join(REPO_ROOT, "data", "skills.json"),
   agentsJson: join(REPO_ROOT, "data", "agents.json"),
   mcpsJson: join(REPO_ROOT, "data", "mcp_servers.json"),
+  composioMcpsJson: join(REPO_ROOT, "data", "composio_mcps.json"),
   tagsJson: join(REPO_ROOT, "data", "tags.json"),
   rootSkillsMirror: join(REPO_ROOT, "skills"),
   pluginSkillsMirror: join(REPO_ROOT, "plugins", "ren", "skills"),

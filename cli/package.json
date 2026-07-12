@@ -11,6 +11,7 @@
     "test": "bun test"
   },
   "dependencies": {
+    "@composio/core": "catalog:",
     "@renai-labs/registry-schemas": "workspace:*",
     "@renai-labs/sdk": "catalog:",
     "commander": "catalog:",

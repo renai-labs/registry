@@ -6,6 +6,7 @@ import { runCheckCommand } from "@/commands/check"
 import { runReleaseCommand } from "@/commands/release"
 import { runBuildCommand } from "@/commands/build"
 import { runPublishCommand } from "@/commands/publish"
+import { runComposioSyncCommand } from "@/commands/composio-sync"
 import { runBumpPluginMajor } from "@/commands/bump"
 import { log } from "@/lib/log"
 
@@ -55,6 +56,14 @@ program
   .option("--dry-run", "skip the HTTP POST (still commits + tags)", false)
   .action(async (opts: { dryRun: boolean }) => {
     await runPublishCommand({ dryRun: opts.dryRun })
+  })
+
+program
+  .command("composio-sync")
+  .description("Provision Composio auth configs and publish the mcp_provider MCP rows")
+  .option("--dry-run", "resolve auth configs but skip publishing to the registry", false)
+  .action(async (opts: { dryRun: boolean }) => {
+    await runComposioSyncCommand({ dryRun: opts.dryRun })
   })
 
 program

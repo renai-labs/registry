@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "outlook",
+    "toolkit": "outlook",
+    "name": "Outlook",
+    "description": "Microsoft Outlook mail and calendar via Composio."
+  },
+  {
+    "slug": "gmail",
+    "toolkit": "gmail",
+    "name": "Gmail",
+    "description": "Gmail via Composio."
+  },
+  {
+    "slug": "google-calendar",
+    "toolkit": "googlecalendar",
+    "name": "Google Calendar",
+    "description": "Google Calendar via Composio."
+  },
+  {
+    "slug": "google-drive",
+    "toolkit": "googledrive",
+    "name": "Google Drive",
+    "description": "Google Drive via Composio."
+  },
+  {
+    "slug": "google-sheets",
+    "toolkit": "googlesheets",
+    "name": "Google Sheets",
+    "description": "Google Sheets via Composio."
+  },
+  {
+    "slug": "google-docs",
+    "toolkit": "googledocs",
+    "name": "Google Docs",
+    "description": "Google Docs via Composio."
+  }
+]

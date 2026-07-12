@@ -1,0 +1,56 @@
+name: composio-sync
+
+# Manually provisions Composio managed auth configs and publishes the mcp_provider
+# MCP rows to the Ren registry. Run after the Ren API supports mcp_provider.
+# COMPOSIO_API_KEY should be a scoped project key: Sessions RW, Auth configs RW,
+# Connected accounts R, everything else (notably Proxy execute) No access.
+on:
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        type: boolean
+        description: Resolve auth configs but skip publishing
+        default: false
+
+concurrency:
+  group: composio-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.11"
+
+      - run: bun install --frozen-lockfile
+
+      - name: ren-registry composio-sync
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          REN_PUBLISHER_PAT: ${{ secrets.REN_PUBLISHER_PAT }}
+          REN_REGISTRY_URL: ${{ secrets.REN_REGISTRY_URL }}
+        run: bun cli/src/index.ts composio-sync ${{ inputs.dryRun && '--dry-run' || '' }}
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Composio sync failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Composio Sync Failed* :x:\n*Workflow:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }}>\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>"
+                  }
+                }
+              ]
+            }

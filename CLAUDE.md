@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Registry monorepo for Ren skills, built with **Bun** (`bun@1.3.11`).
 
-- `data/` — **source of truth.** Skills live at `data/skills/<slug>/SKILL.md` (+ assets); `data/skills.json` is the registry snapshot; `data/{agents,mcp_servers,tags}.json` are flat registries.
+- `data/` — **source of truth.** Skills live at `data/skills/<slug>/SKILL.md` (+ assets); `data/skills.json` is the registry snapshot; `data/{agents,mcp_servers,tags}.json` are flat registries. `data/composio_mcps.json` is the Composio toolkit catalog — `ren-registry composio-sync` provisions a managed auth config per toolkit (via the Composio API) and publishes one `mcp_provider` MCP row each; the deployment-specific auth-config id is resolved at run time, never committed.
 - `skills/`, `plugins/ren/skills/` — **symlinked mirrors** pointing to `data/skills/`. `plugins/.../plugin.json`, `marketplace.json`, `skills.sh.json` — **generated manifests.**
 - `cli/` — the `ren-registry` CLI (commander; logic in `cli/src/lib/`). `schemas/` — shared Zod schemas (`@renai-labs/registry-schemas`).
 
