@@ -3880,6 +3880,44 @@
     "websiteMetadata": null
   },
   {
+    "slug": "gmail",
+    "name": "Gmail",
+    "description": "Gmail is Google’s email service, featuring spam protection, search functions, and seamless integration with other G Suite apps for productivity",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/gmail",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "gmail",
+      "authConfigId": "ac_azwZDapuOfit"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "useCases": [
+      "email",
+      "communication"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Send, read, search, and organize email in Gmail. Draft and reply to messages, manage labels, threads, and drafts, and keep the inbox under control.",
+      "privacyPolicyUrl": "https://policies.google.com/privacy"
+    }
+  },
+  {
     "slug": "gocardless",
     "name": "GoCardless",
     "description": "Build GoCardless payment API integrations",
@@ -3951,6 +3989,160 @@
       "longDescription": "Use GoDaddy to find available domains and get smart suggestions based on your ideas and keywords.",
       "supportUrl": "mailto:mcp@godaddy.com",
       "privacyPolicyUrl": "https://www.godaddy.com/legal/agreements/privacy-policy"
+    }
+  },
+  {
+    "slug": "google-calendar",
+    "name": "Google Calendar",
+    "description": "Google Calendar is a time management tool providing scheduling features, event reminders, and integration with email and other apps for streamlined organization",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/googlecalendar",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "googlecalendar",
+      "authConfigId": "ac_Up6WOKj0UGRc"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "useCases": [
+      "calendar",
+      "meetings",
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Create, update, and manage events on Google Calendar. Check availability, schedule meetings, set reminders, and keep the agenda organized.",
+      "privacyPolicyUrl": "https://policies.google.com/privacy"
+    }
+  },
+  {
+    "slug": "google-docs",
+    "name": "Google Docs",
+    "description": "Google Docs is a cloud-based word processor with real-time collaboration, version history, and integration with other Google Workspace apps",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/googledocs",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "googledocs",
+      "authConfigId": "ac_J7MOyMLS2eop"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "useCases": [
+      "docs",
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Create, read, and edit documents in Google Docs. Draft content, apply formatting, and collaborate on files stored in the workspace.",
+      "privacyPolicyUrl": "https://policies.google.com/privacy"
+    }
+  },
+  {
+    "slug": "google-drive",
+    "name": "Google Drive",
+    "description": "Google Drive is a cloud storage solution for uploading, sharing, and collaborating on files across devices, with robust search and offline access",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/googledrive",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "googledrive",
+      "authConfigId": "ac_kWPmZ9CZ7qmx"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "useCases": [
+      "docs",
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Upload, search, organize, and share files in Google Drive. Manage folders and permissions and retrieve documents on demand.",
+      "privacyPolicyUrl": "https://policies.google.com/privacy"
+    }
+  },
+  {
+    "slug": "google-sheets",
+    "name": "Google Sheets",
+    "description": "Google Sheets is a cloud-based spreadsheet tool enabling real-time collaboration, data analysis, and integration with other Google Workspace apps",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/googlesheets",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "googlesheets",
+      "authConfigId": "ac_KYGmV48v7FHk"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "useCases": [
+      "docs",
+      "analytics",
+      "productivity"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Read, write, and analyze data in Google Sheets. Update cells and ranges, add rows, and manage spreadsheets programmatically.",
+      "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
   {
@@ -7438,6 +7630,45 @@
       "longDescription": "Otter's MCP Server integrates with Otter.ai's meeting intelligence platform, enabling users to search meeting transcripts, retrieve conversation records, and extract insights. It provides tools to find meetings by date, participants, or topics, and access full transcripts, summaries, and action items. This helps teams review past discussions and prepare for meetings without leaving Ren.",
       "supportUrl": "https://help.otter.ai",
       "privacyPolicyUrl": "https://otter.ai/privacy-policy"
+    }
+  },
+  {
+    "slug": "outlook",
+    "name": "Outlook",
+    "description": "Outlook is Microsoft's email and calendaring platform integrating contacts and scheduling, enabling users to manage communications and events in a unified workspace",
+    "mcpServerUrl": "https://backend.composio.dev",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://logos.composio.dev/api/outlook",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "mcp_provider",
+    "authConfig": {
+      "type": "mcp_provider",
+      "provider": "composio",
+      "toolkit": "outlook",
+      "authConfigId": "ac_0VsPkAsZ0RmH"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Microsoft",
+      "url": "https://microsoft.com"
+    },
+    "useCases": [
+      "email",
+      "calendar",
+      "communication"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Manage Outlook mail and calendar. Send, read, and organize email, schedule and update events, and keep communications and scheduling in one place.",
+      "privacyPolicyUrl": "https://privacy.microsoft.com/en-us/privacystatement"
     }
   },
   {
@@ -12135,237 +12366,6 @@
       "longDescription": "Connect Ren to Zoho CRM to read and manage your sales data through natural conversation. Query leads, contacts, accounts, deals, and custom modules using COQL; create, update, upsert, and delete records; manage notes, tags, fields, layouts, related lists, and users. This connector routes to the Zoho US data center.",
       "supportUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
       "privacyPolicyUrl": "https://www.zoho.com/privacy.html"
-    }
-  },
-  {
-    "slug": "gmail",
-    "name": "Gmail",
-    "description": "Gmail is Google’s email service, featuring spam protection, search functions, and seamless integration with other G Suite apps for productivity",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/gmail",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "gmail",
-      "authConfigId": "ac_azwZDapuOfit"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "useCases": [
-      "email",
-      "communication"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Send, read, search, and organize email in Gmail. Draft and reply to messages, manage labels, threads, and drafts, and keep the inbox under control.",
-      "privacyPolicyUrl": "https://policies.google.com/privacy"
-    }
-  },
-  {
-    "slug": "google-calendar",
-    "name": "Google Calendar",
-    "description": "Google Calendar is a time management tool providing scheduling features, event reminders, and integration with email and other apps for streamlined organization",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/googlecalendar",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "googlecalendar",
-      "authConfigId": "ac_Up6WOKj0UGRc"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "useCases": [
-      "calendar",
-      "meetings",
-      "productivity"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Create, update, and manage events on Google Calendar. Check availability, schedule meetings, set reminders, and keep the agenda organized.",
-      "privacyPolicyUrl": "https://policies.google.com/privacy"
-    }
-  },
-  {
-    "slug": "google-docs",
-    "name": "Google Docs",
-    "description": "Google Docs is a cloud-based word processor with real-time collaboration, version history, and integration with other Google Workspace apps",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/googledocs",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "googledocs",
-      "authConfigId": "ac_J7MOyMLS2eop"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "useCases": [
-      "docs",
-      "productivity"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Create, read, and edit documents in Google Docs. Draft content, apply formatting, and collaborate on files stored in the workspace.",
-      "privacyPolicyUrl": "https://policies.google.com/privacy"
-    }
-  },
-  {
-    "slug": "google-drive",
-    "name": "Google Drive",
-    "description": "Google Drive is a cloud storage solution for uploading, sharing, and collaborating on files across devices, with robust search and offline access",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/googledrive",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "googledrive",
-      "authConfigId": "ac_kWPmZ9CZ7qmx"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "useCases": [
-      "docs",
-      "productivity"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Upload, search, organize, and share files in Google Drive. Manage folders and permissions and retrieve documents on demand.",
-      "privacyPolicyUrl": "https://policies.google.com/privacy"
-    }
-  },
-  {
-    "slug": "google-sheets",
-    "name": "Google Sheets",
-    "description": "Google Sheets is a cloud-based spreadsheet tool enabling real-time collaboration, data analysis, and integration with other Google Workspace apps",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/googlesheets",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "googlesheets",
-      "authConfigId": "ac_KYGmV48v7FHk"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "useCases": [
-      "docs",
-      "analytics",
-      "productivity"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Read, write, and analyze data in Google Sheets. Update cells and ranges, add rows, and manage spreadsheets programmatically.",
-      "privacyPolicyUrl": "https://policies.google.com/privacy"
-    }
-  },
-  {
-    "slug": "outlook",
-    "name": "Outlook",
-    "description": "Outlook is Microsoft's email and calendaring platform integrating contacts and scheduling, enabling users to manage communications and events in a unified workspace",
-    "mcpServerUrl": "https://backend.composio.dev",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://logos.composio.dev/api/outlook",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [],
-    "prompts": [],
-    "auth": "mcp_provider",
-    "authConfig": {
-      "type": "mcp_provider",
-      "provider": "composio",
-      "toolkit": "outlook",
-      "authConfigId": "ac_0VsPkAsZ0RmH"
-    },
-    "permissions": "read-write",
-    "author": {
-      "name": "Microsoft",
-      "url": "https://microsoft.com"
-    },
-    "useCases": [
-      "email",
-      "calendar",
-      "communication"
-    ],
-    "sortOrder": null,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Manage Outlook mail and calendar. Send, read, and organize email, schedule and update events, and keep communications and scheduling in one place.",
-      "privacyPolicyUrl": "https://privacy.microsoft.com/en-us/privacystatement"
     }
   }
 ]
