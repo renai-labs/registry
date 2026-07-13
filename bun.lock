@@ -48,7 +48,7 @@
     },
   },
   "catalog": {
-    "@renai-labs/sdk": "0.1.9",
+    "@renai-labs/sdk": "0.1.18",
     "@tsconfig/bun": "1.0.9",
     "@types/bun": "1.3.11",
     "@types/semver": "7.5.8",
@@ -84,13 +84,13 @@
 
     "@lukeed/ms": ["@lukeed/ms@2.0.2", "", {}, "sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA=="],
 
-    "@opencode-ai/sdk": ["@opencode-ai/sdk@1.14.31", "", { "dependencies": { "cross-spawn": "7.0.6" } }, "sha512-QaV+ti3NYUITmgIDqtNMqGIYBXJOx2zheN1g+7w4HC8QQsbaW1c7glxXExQHRbdUzcQPP2vUQhnXOcEsTw5CcQ=="],
+    "@opencode-ai/sdk": ["@opencode-ai/sdk@1.17.9", "", { "dependencies": { "cross-spawn": "7.0.6" } }, "sha512-MHmXEpGPHkg14v1p+cUlIOUxd6DQdSElfau9nqY7tcDI0x5r4Y8D0dKXcyAh0Gc73ptaGW67Vg84nkcV6O27Pw=="],
 
     "@renai-labs/registry-cli": ["@renai-labs/registry-cli@workspace:cli"],
 
     "@renai-labs/registry-schemas": ["@renai-labs/registry-schemas@workspace:schemas"],
 
-    "@renai-labs/sdk": ["@renai-labs/sdk@0.1.9", "", { "dependencies": { "@hey-api/client-fetch": "0.13.1", "@opencode-ai/sdk": "1.14.31" }, "peerDependencies": { "@tanstack/react-query": "^5", "zod": "^4" }, "optionalPeers": ["@tanstack/react-query", "zod"] }, "sha512-i9xCDXCddTR3LWcUyGHTlPbv+ffMhBJ4Ofrmn+EHpQWAF4v+kvCztGyc4e8blZ6sOTR9IUxTu4kGBrqaD+pPbQ=="],
+    "@renai-labs/sdk": ["@renai-labs/sdk@0.1.18", "", { "dependencies": { "@hey-api/client-fetch": "0.13.1", "@opencode-ai/sdk": "1.17.9" }, "peerDependencies": { "@tanstack/react-query": "^5", "zod": "^4" }, "optionalPeers": ["@tanstack/react-query", "zod"] }, "sha512-AQ/b8gpP/kQgV63Uw3VGVLqDNso/2scDK5tYIBL/U7O/RKSpUUiBIFcLP0BryXwBdsegg18/HZuvGm5aceI2gA=="],
 
     "@tsconfig/bun": ["@tsconfig/bun@1.0.9", "", {}, "sha512-4M0/Ivfwcpz325z6CwSifOBZYji3DFOEpY6zEUt0+Xi2qRhzwvmqQN9XAHJh3OVvRJuAqVTLU2abdCplvp6mwQ=="],
 
