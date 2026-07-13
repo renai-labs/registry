@@ -12172,7 +12172,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Send, read, search, and organize email in Gmail. Draft and reply to messages, manage labels, threads, and drafts, and keep the inbox under control.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
@@ -12212,7 +12211,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Create, update, and manage events on Google Calendar. Check availability, schedule meetings, set reminders, and keep the agenda organized.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
@@ -12251,7 +12249,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Create, read, and edit documents in Google Docs. Draft content, apply formatting, and collaborate on files stored in the workspace.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
@@ -12290,7 +12287,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Upload, search, organize, and share files in Google Drive. Manage folders and permissions and retrieve documents on demand.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
@@ -12330,7 +12326,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Read, write, and analyze data in Google Sheets. Update cells and ranges, add rows, and manage spreadsheets programmatically.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://policies.google.com/privacy"
     }
   },
@@ -12370,7 +12365,6 @@
     "rank": null,
     "websiteMetadata": {
       "longDescription": "Manage Outlook mail and calendar. Send, read, and organize email, schedule and update events, and keep communications and scheduling in one place.",
-      "supportUrl": null,
       "privacyPolicyUrl": "https://privacy.microsoft.com/en-us/privacystatement"
     }
   }
