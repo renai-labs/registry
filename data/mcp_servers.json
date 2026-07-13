@@ -12367,5 +12367,39 @@
       "supportUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
       "privacyPolicyUrl": "https://www.zoho.com/privacy.html"
     }
+  },
+  {
+    "slug": "linear-ren",
+    "name": "Linear (Ren agent)",
+    "description": "Reply into Linear agent sessions when Ren is @-mentioned or assigned an issue",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://cdn.renai.build/mcp-icons/linear.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "linear-ren_reply_to_current_thread"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Ren",
+      "url": "https://renai.build"
+    },
+    "useCases": [
+      "communication",
+      "project-management"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Ren's native Linear agent channel. When Ren is @-mentioned or assigned an issue in a connected Linear workspace, this lets it reply back into the Linear agent session. Served through Ren's Linear integration — connect your workspace once and Ren acts as the agent."
+    }
   }
 ]
