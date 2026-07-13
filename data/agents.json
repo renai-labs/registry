@@ -32,7 +32,12 @@
           "ren-trigger-dev",
           "ren-vaults-credentials-dev"
         ],
-        "mcps": ["slack", "email", "telegram", "linear-ren"],
+        "mcps": [
+          "slack",
+          "email",
+          "telegram",
+          "linear-ren"
+        ],
         "releaseNotes": "Bind the Linear (Ren agent) channel MCP to the Ren meta agent so it can reply in Linear agent sessions."
       },
       {

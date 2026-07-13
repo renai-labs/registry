@@ -5649,6 +5649,40 @@
     }
   },
   {
+    "slug": "linear-ren",
+    "name": "Linear (Ren agent)",
+    "description": "Reply into Linear agent sessions when Ren is @-mentioned or assigned an issue",
+    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
+    "urlOptions": null,
+    "docUrl": null,
+    "icon": "https://cdn.renai.build/mcp-icons/linear.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": null,
+    "tools": [
+      "linear-ren_reply_to_current_thread"
+    ],
+    "prompts": [],
+    "auth": "none",
+    "authConfig": null,
+    "permissions": "read-write",
+    "author": {
+      "name": "Ren",
+      "url": "https://renai.build"
+    },
+    "useCases": [
+      "communication",
+      "project-management"
+    ],
+    "sortOrder": 0,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Ren's native Linear agent channel. When Ren is @-mentioned or assigned an issue in a connected Linear workspace, this lets it reply back into the Linear agent session. Served through Ren's Linear integration — connect your workspace once and Ren acts as the agent."
+    }
+  },
+  {
     "slug": "local-falcon",
     "name": "Local Falcon",
     "description": "AI visibility and local search intelligence platform",
@@ -12366,40 +12400,6 @@
       "longDescription": "Connect Ren to Zoho CRM to read and manage your sales data through natural conversation. Query leads, contacts, accounts, deals, and custom modules using COQL; create, update, upsert, and delete records; manage notes, tags, fields, layouts, related lists, and users. This connector routes to the Zoho US data center.",
       "supportUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
       "privacyPolicyUrl": "https://www.zoho.com/privacy.html"
-    }
-  },
-  {
-    "slug": "linear-ren",
-    "name": "Linear (Ren agent)",
-    "description": "Reply into Linear agent sessions when Ren is @-mentioned or assigned an issue",
-    "mcpServerUrl": "https://plugin-backed.invalid/mcp",
-    "urlOptions": null,
-    "docUrl": null,
-    "icon": "https://cdn.renai.build/mcp-icons/linear.png",
-    "transport": "streamable-http",
-    "version": "1.0.0",
-    "repository": null,
-    "tools": [
-      "linear-ren_reply_to_current_thread"
-    ],
-    "prompts": [],
-    "auth": "none",
-    "authConfig": null,
-    "permissions": "read-write",
-    "author": {
-      "name": "Ren",
-      "url": "https://renai.build"
-    },
-    "useCases": [
-      "communication",
-      "project-management"
-    ],
-    "sortOrder": 0,
-    "popularityScore": null,
-    "trendingScore": null,
-    "rank": null,
-    "websiteMetadata": {
-      "longDescription": "Ren's native Linear agent channel. When Ren is @-mentioned or assigned an issue in a connected Linear workspace, this lets it reply back into the Linear agent session. Served through Ren's Linear integration — connect your workspace once and Ren acts as the agent."
     }
   }
 ]
