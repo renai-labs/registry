@@ -2,6 +2,7 @@ import semver from "semver"
 import { createRenClient, pat } from "@renai-labs/sdk"
 import type { RenClient } from "@renai-labs/sdk"
 import { build, BuildError } from "@/lib/build"
+import { composioConfigured, ensureAuthConfigId } from "@/lib/composio"
 import { loadAgentsRegistry, loadMcpsRegistry, loadSkillsRegistry, saveSkillsRegistry } from "@/lib/snapshot"
 import { gitAdd, gitCommit, gitHasStagedChanges, gitHeadSha } from "@/lib/git"
 import { log } from "@/lib/log"
@@ -160,10 +161,29 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
   return ids
 }
 
+// mcp_provider entries carry no auth-config id in the registry; resolve it from
+// the publish-workflow's Composio account before create/update. Returns false to
+// skip the entry when the provider config or COMPOSIO_API_KEY is missing.
+async function resolveProviderAuthConfig(entry: McpEntry): Promise<boolean> {
+  if (entry.auth !== "mcp_provider") return true
+  const cfg = entry.authConfig
+  if (!cfg || cfg.type !== "mcp_provider") {
+    log.warn(`mcp ${entry.slug}: mcp_provider auth without a mcp_provider authConfig — skipped`)
+    return false
+  }
+  if (!composioConfigured()) {
+    log.warn(`mcp ${entry.slug}: COMPOSIO_API_KEY not set — skipped`)
+    return false
+  }
+  cfg.authConfigId = await ensureAuthConfigId(cfg.toolkit)
+  return true
+}
+
 export async function publishMcps(client: RenClient, entries: McpEntry[]): Promise<Map<string, string>> {
   const ids = new Map<string, string>()
 
   for (const entry of entries) {
+    if (!(await resolveProviderAuthConfig(entry))) continue
     const { data: existing } = await client.mcp.getBySlug({ path: { slug: entry.slug } })
 
     if (!existing) {

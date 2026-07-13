@@ -35,6 +35,7 @@ jobs:
           REN_PUBLISHER_PAT: ${{ secrets.REN_PUBLISHER_PAT }}
           REN_REGISTRY_URL: ${{ secrets.REN_REGISTRY_URL }}
           REN_REGISTRY_REPO_URL: https://github.com/${{ github.repository }}
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
         run: bun cli/src/index.ts publish
 
       - name: push commits
