@@ -161,9 +161,11 @@ export async function publishSkills(client: RenClient, entries: SkillEntry[]): P
   return ids
 }
 
-// mcp_provider entries carry no auth-config id in the registry; resolve it from
-// the publish-workflow's Composio account before create/update. Returns false to
-// skip the entry when the provider config or COMPOSIO_API_KEY is missing.
+// mcp_provider entries may pin an auth-config id in the registry; a pinned id is
+// authoritative across environments and used as-is. When absent, resolve it from the
+// publish-workflow's Composio account before create/update. Returns false to skip the
+// entry when the provider config is malformed, or when resolution is needed but
+// COMPOSIO_API_KEY is missing.
 async function resolveProviderAuthConfig(entry: McpEntry): Promise<boolean> {
   if (entry.auth !== "mcp_provider") return true
   const cfg = entry.authConfig
@@ -171,6 +173,7 @@ async function resolveProviderAuthConfig(entry: McpEntry): Promise<boolean> {
     log.warn(`mcp ${entry.slug}: mcp_provider auth without a mcp_provider authConfig — skipped`)
     return false
   }
+  if (cfg.authConfigId) return true
   if (!composioConfigured()) {
     log.warn(`mcp ${entry.slug}: COMPOSIO_API_KEY not set — skipped`)
     return false

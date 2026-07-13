@@ -12155,7 +12155,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "gmail",
-      "authConfigId": ""
+      "authConfigId": "ac_azwZDapuOfit"
     },
     "permissions": "read-write",
     "author": {
@@ -12194,7 +12194,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "googlecalendar",
-      "authConfigId": ""
+      "authConfigId": "ac_Up6WOKj0UGRc"
     },
     "permissions": "read-write",
     "author": {
@@ -12234,7 +12234,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "googledocs",
-      "authConfigId": ""
+      "authConfigId": "ac_J7MOyMLS2eop"
     },
     "permissions": "read-write",
     "author": {
@@ -12273,7 +12273,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "googledrive",
-      "authConfigId": ""
+      "authConfigId": "ac_kWPmZ9CZ7qmx"
     },
     "permissions": "read-write",
     "author": {
@@ -12312,7 +12312,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "googlesheets",
-      "authConfigId": ""
+      "authConfigId": "ac_KYGmV48v7FHk"
     },
     "permissions": "read-write",
     "author": {
@@ -12352,7 +12352,7 @@
       "type": "mcp_provider",
       "provider": "composio",
       "toolkit": "outlook",
-      "authConfigId": ""
+      "authConfigId": "ac_0VsPkAsZ0RmH"
     },
     "permissions": "read-write",
     "author": {
