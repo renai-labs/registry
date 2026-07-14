@@ -12469,5 +12469,96 @@
       "supportUrl": "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server",
       "privacyPolicyUrl": "https://www.figma.com/legal/developer-terms/"
     }
+  },
+  {
+    "slug": "github",
+    "name": "GitHub",
+    "description": "Connect AI tools directly to GitHub's platform to read repos, manage issues and PRs, and automate workflows",
+    "mcpServerUrl": "https://api.githubcopilot.com/mcp/",
+    "urlOptions": null,
+    "docUrl": "https://github.com/github/github-mcp-server",
+    "icon": "https://cdn.renai.build/mcp-icons/github.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": {
+      "url": "https://github.com/github/github-mcp-server",
+      "source": "github"
+    },
+    "tools": [
+      "get_me",
+      "get_team_members",
+      "get_teams",
+      "add_issue_comment",
+      "get_label",
+      "issue_read",
+      "issue_write",
+      "list_issue_fields",
+      "list_issue_types",
+      "list_issues",
+      "search_issues",
+      "sub_issue_write",
+      "add_comment_to_pending_review",
+      "add_reply_to_pull_request_comment",
+      "create_pull_request",
+      "list_pull_requests",
+      "merge_pull_request",
+      "pull_request_read",
+      "pull_request_review_write",
+      "search_pull_requests",
+      "update_pull_request",
+      "update_pull_request_branch",
+      "create_branch",
+      "create_or_update_file",
+      "create_repository",
+      "delete_file",
+      "fork_repository",
+      "get_commit",
+      "get_file_contents",
+      "get_latest_release",
+      "get_release_by_tag",
+      "get_tag",
+      "list_branches",
+      "list_commits",
+      "list_releases",
+      "list_repository_collaborators",
+      "list_tags",
+      "push_files",
+      "search_code",
+      "search_commits",
+      "search_repositories",
+      "search_users"
+    ],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth",
+      "scopes": [
+        "repo",
+        "read:org",
+        "read:user",
+        "user:email",
+        "notifications"
+      ],
+      "tokenEndpoint": "https://github.com/login/oauth/access_token",
+      "authorizationEndpoint": "https://github.com/login/oauth/authorize",
+      "tokenEndpointAuth": "client_secret_post"
+    },
+    "permissions": "write",
+    "author": {
+      "name": "GitHub",
+      "url": "https://github.com"
+    },
+    "useCases": [
+      "development"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "GitHub's official remote MCP server connects Ren directly to GitHub. Read repositories and files, search code and commits, manage issues and pull requests (create, update, comment, merge), browse branches/tags/releases, and look up users, teams, and org membership. This entry uses GitHub's default toolset (context, issues, pull_requests, repos, users) - the same scope GitHub itself uses when no toolset is specified. Broader toolsets (Actions, Code Security, Dependabot, Discussions, Projects, and more) are available on the same server via toolset headers if a future version needs them. Authentication is handled through GitHub OAuth, scoped to the connecting user's account and permissions.",
+      "supportUrl": "https://github.com/github/github-mcp-server/issues",
+      "privacyPolicyUrl": "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+    }
   }
 ]
