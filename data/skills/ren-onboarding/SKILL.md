@@ -94,7 +94,7 @@ ren pods list             --output json   # org pods
 
 ## 2. Read the user before proposing anything
 
-Pull the user's memory before any proposal: host's memory (Claude Code / codex / hermes / auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store. CLI: `ren memory-store list --scope user`, then `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` and fetch the URL. MCP: `memoryStore_files_presignDownload`.
+Pull the user's memory before any proposal: host's memory (Claude Code / codex / hermes / auto-memory, etc.), the conversation surface, and `WHOAMI.md` from the user's default private memory store. CLI: `ren memory-stores list --scope user`, then `ren memory-stores files presign-download <store-id> --path WHOAMI.md --scope user --output json` and fetch the URL. MCP: `memoryStore_files_presignDownload`.
 
 Build a picture of:
 
@@ -122,7 +122,7 @@ Two questions, in order. Don't skip either.
 | **Personalised agent** | Has a recurring pain or concrete thing to offload - **default** | Full leaf-up build against their real pain in their private pod. Stores if relevant, cron trigger if they ask.                                                           |
 
 
-**One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one — then hand the rest to [[ren-setup]] at the close (§6).
+**One agent per session.** If they gesture at a multi-agent stack, acknowledge it and ship the single most important one — then hand the rest to [[ren-systems-architect]]'s spec-driven mode at the close (§6).
 
 ### Q2 - Shape the requirement (skip if Tour; light if Quick demo)
 
@@ -147,7 +147,7 @@ Team-shaped pains ("my teammate needs this too") get filed for the close, not wi
 
 ## 4. Build one agent leaf-up, narrate in their words
 
-Ship the single most important agent for the pain from §3 — **one agent, one set of skills/MCPs, one model**. No topology loop here; that's [[ren-setup]]'s job for the rest of the stack. The goal is a working chat fast.
+Ship the single most important agent for the pain from §3 — **one agent, one set of skills/MCPs, one model**. No spec here; the full-stack spec-driven build is [[ren-systems-architect]]'s default mode. The goal is a working chat fast.
 
 Follow the architect's leaf-up build chain (`references/operations.md` / `references/wiring.md`), reuse-before-create as always:
 
@@ -197,7 +197,7 @@ Pick 1–2 nudges contextual to what they just built. The point is concrete reas
 - **Share the chat.** Every run is a replay - `ren replays share <id>` hands a scrub link to anyone.
 - **Run it as a routine.** Wire a cron; it fires in the pod and you read the session whenever.
 - **Transfer your preferences.** Export what the local agent already knows (`~/.claude/projects/<dir>/memory/` for Claude Code) into the memory store via `ren memory-stores files start-upload`. The Ren agent picks up where the local one left off.
-- **Build out the rest of the stack.** This was one agent. If they gestured at more — a multi-agent workflow, routines, teammates — hand off to **[[ren-setup]]**: it designs the whole topology, shows it as a canvas, and provisions it leaf-up. Same private pod, same vault, same stores.
+- **Build out the rest of the stack.** This was one agent. If they gestured at more — a multi-agent workflow, routines, teammates — hand off to **[[ren-systems-architect]]**: it interviews, captures the whole setup as a spec, and builds it leaf-up — and the resolved result can be published as a shareable blueprint ([[ren-blueprint-dev]]). Same private pod, same vault, same stores.
 
 ## Memory add
 
