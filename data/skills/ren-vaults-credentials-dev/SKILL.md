@@ -5,6 +5,9 @@ description: >-
   and MCPs. Use when a skill or MCP needs an API key, token, or OAuth
   credential, when running an OAuth connect flow, or when attaching a vault to a
   pod.
+metadata:
+  tags:
+    - ren
 ---
 
 # Vaults & Credentials Dev
