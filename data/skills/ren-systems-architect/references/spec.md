@@ -40,13 +40,19 @@ For gaps the registry can't fill, **web search** for adaptable third-party skill
 
 ## 3. Author + push a draft immediately
 
-Write `spec.json` at the pod workspace root. Then create the draft blueprint **right away** — the row exists from day one and is the durable, resumable home for the build:
+Write `spec.json` at the pod workspace root. Check its structure locally before anything hits the network — this parses against the real Spec schema (bundled in the CLI, no auth, no row created), so you catch shape errors fast:
 
 ```bash
-ren blueprints push --body @push.json      # { "name": "...", "spec": <contents of spec.json> }
+ren blueprints validate --body @spec.json   # -> { "valid": true } or exact issue paths; exits non-zero on failure
 ```
 
-Capture the returned `id` and pass it on **every** subsequent push (`{ "id": "blp_…", "name": …, "spec": … }`) so re-pushes update in place. Push validates the whole Spec server-side — a `400` carries the exact Zod paths, so read them and fix the doc. It also runs `canReference` on every pinned `ref`: only pin ids your scope can actually see (stay `--scope user` for a personal build).
+Once it's structurally valid, create the draft blueprint **right away** — the row exists from day one and is the durable, resumable home for the build:
+
+```bash
+ren blueprints push --body @push.json       # { "name": "...", "spec": <contents of spec.json> }
+```
+
+Capture the returned `id` and pass it on **every** subsequent push (`{ "id": "blp_…", "name": …, "spec": … }`) so re-pushes update in place. `validate` checks structure only; `push` is the authoritative gate — it re-validates the whole Spec server-side (a `400` carries the exact Zod paths) and runs `canReference` on every pinned `ref`, so only pin ids your scope can actually see (stay `--scope user` for a personal build).
 
 Re-read `spec.json` from disk each iteration rather than trusting context — the loop then survives context bloat.
 

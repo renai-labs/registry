@@ -19,6 +19,7 @@ A **blueprint** is a Ren row that holds a `Spec` — the slug-keyed snapshot of 
 
 CLI (`ren docs commands` for full flags; MCP transport exposes the same as `blueprint_*` tools):
 
+- `ren blueprints validate --body @spec.json` — check a Spec's structure against the schema locally (bundled in the CLI, no auth, no row created). Returns `{ valid: true }` or the exact issue paths, and exits non-zero on failure — a fast pre-flight before push.
 - `ren blueprints push --body @push.json` — upsert from a raw Spec (`{ id?, name?, description?, spec }`). This is [[ren-systems-architect]]'s authoring surface; you'll mostly `get`/`publish`/`install` an already-pushed draft.
 - `ren blueprints get <blp-id>` / `ren blueprints list` — inspect drafts and published rows.
 - `ren blueprints publish <blp-id>` — publish to the registry (gated + cascading, below).
