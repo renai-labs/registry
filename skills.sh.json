@@ -8,13 +8,13 @@
         "ren-agent-dev",
         "ren-skill-dev",
         "ren-mcp-dev",
+        "ren-blueprint-dev",
         "ren-vaults-credentials-dev",
         "ren-github",
         "ren-slack",
         "ren-email",
         "ren-telegram",
         "ren-onboarding",
-        "ren-setup",
         "ren-systems-architect"
       ]
     }
