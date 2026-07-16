@@ -4,6 +4,10 @@ description: >-
   Define a custom remote MCP server - the third-party tool surface an agent can
   call - for when no registry MCP fits. Use to shape a custom remote MCP's
   server URL and auth-config and validate its Ren compatibility.
+metadata:
+  tags:
+    - ren
+    - code
 ---
 
 # MCP Dev

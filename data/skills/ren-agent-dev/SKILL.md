@@ -23,7 +23,7 @@ An agent version is an immutable snapshot of the prompt, model, and the skill/MC
 
 ## Choosing the model
 
-**Do not pick a model silently. Stop and ask the user before the agent is created.** Surface three options across the price/capability range (heavy / balanced / light) with a one-line trade-off each, enriched with `$/M input` + `$/M output` from the provider's public pricing. Suggested defaults: **Claude Opus 4.8** for heavy work, **Claude Sonnet 4.6** balanced, **Claude Haiku 4.5** for light/cheap. An agent can also inherit the pod default instead of naming a model. (The live model catalog and the create flag live in [[ren-systems-architect]].)
+**Do not pick a model silently. Stop and ask the user before the agent is created.** Surface three options across the price/capability range (heavy / balanced / light) with a one-line trade-off each, enriched with `$/M input` + `$/M output` from the provider's public pricing. Suggested defaults: **Claude Opus 4.8** for heavy work, **Claude Sonnet 5** balanced, **Claude Haiku 4.5** for light/cheap. An agent can also inherit the pod default instead of naming a model. (The live model catalog and the create flag live in [[ren-systems-architect]].)
 
 ## Writing the prompt
 
