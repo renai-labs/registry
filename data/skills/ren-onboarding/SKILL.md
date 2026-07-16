@@ -197,7 +197,7 @@ Pick 1–2 nudges contextual to what they just built. The point is concrete reas
 - **Share the chat.** Every run is a replay - `ren replays share <id>` hands a scrub link to anyone.
 - **Run it as a routine.** Wire a cron; it fires in the pod and you read the session whenever.
 - **Transfer your preferences.** Export what the local agent already knows (`~/.claude/projects/<dir>/memory/` for Claude Code) into the memory store via `ren memory-stores files start-upload`. The Ren agent picks up where the local one left off.
-- **Build out the rest of the stack.** This was one agent. If they gestured at more — a multi-agent workflow, routines, teammates — hand off to **[[ren-systems-architect]]**: it interviews, captures the whole setup as a spec, and builds it leaf-up — and the resolved result can be published as a shareable blueprint ([[ren-blueprint-dev]]). Same private pod, same vault, same stores.
+- **Build out the rest of the stack.** This was one agent. If they gestured at more — a multi-agent workflow, routines, teammates — hand off to **[[ren-systems-architect]]**: it interviews, captures the whole setup as a spec, and builds it leaf-up. Same private pod, same vault, same stores.
 
 ## Memory add
 
