@@ -4,7 +4,7 @@ Command-level mechanics for the build chain's composable artifacts: skills, MCPs
 
 ## Skills
 
-- **Search.** `ren skills list` shows only your own items; only `ren skills search --sources user org registry` reaches the registry. Which skill per task → `references/integrations.md` / `ren docs integrations`.
+- **Search.** `ren skills list` shows only your own items; only `ren skills search --sources user org registry` reaches the registry. Which skill per task → `ren docs integrations`.
 - **Inspect before forking.** `ren skills versions data <id> <version> --scope user --format presigned` downloads a skill's bundled files so you can judge whether to fork.
 - **Fork.** `ren skills copy <id> --scope user --name "my-variant"` copies a skill into your scope as an editable copy, leaving the original untouched (`--scope user` to read a user-scope source; registry/org sources don't need it).
 - **Author custom.** The authoring craft is [[ren-skill-dev]] (incl. adapting a forked or community SKILL.md). Then create it (below).
@@ -14,7 +14,7 @@ Command-level mechanics for the build chain's composable artifacts: skills, MCPs
 
 ## MCPs
 
-- **Registry first.** Ren ships a public registry of tested, production-ready MCPs (server URL, transport, auth config already correct) — always prefer one over rolling your own. `ren mcps search --sources user org registry` is the live search; the index is `references/integrations.md`. Register a custom remote MCP → [[ren-mcp-dev]] (definition craft + the `validate-mcp.js` validator), then create it (below).
+- **Registry first.** Ren ships a public registry of tested, production-ready MCPs (server URL, transport, auth config already correct) — always prefer one over rolling your own. `ren mcps search --sources user org registry` is the live search; the index is `ren docs integrations`. Register a custom remote MCP → [[ren-mcp-dev]] (definition craft + the `validate-mcp.js` validator), then create it (below).
 - **Commands.** `ren mcps search / get / get-by-slug / create / update`, plus the OAuth verbs.
 - **Create mechanics.** `authConfig` is nested, so it goes through `--body` on create.
 - **Scope.** `--sources` (the read-time tier filter on `mcps search`) and `--scope` (the auth-resolution lens on every other command) are different flags. If a valid MCP id 404s, missing `--scope user` is the first thing to check.
