@@ -2,8 +2,8 @@
 name: ren-email
 description: >-
   Use when configuring Ren's native project email channel: enabling, listing, or
-  disabling a project mailbox; or attaching the `ren` MCP so
-  cron, webhook, or other proactive agent runs can call `send-email`. Do not use
+  disabling a project mailbox; or attaching the `email` MCP so
+  cron, webhook, or other proactive agent runs can call `email_send`. Do not use
   for Gmail scanning, labelling, or mailbox automation; use Google Workspace for
   that.
 metadata:
@@ -24,7 +24,7 @@ Ren email is a native project-level channel. It gives a project a deterministic 
 
 Users can send, forward, or cc emails to that address. Ren creates or resumes the project session, runs the agent, and replies back to the same email thread. The agent does not need to know email exists for normal inbound email workflows.
 
-> Commands and flags: `ren emails list`; `ren emails set <project-id>` with optional `--default-project-agent-id` and `--fallback-sender-user-id`; `ren emails unset <project-id>`; `ren mcps get-by-slug ren`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
+> Commands and flags: `ren emails list`; `ren emails set <project-id>` with optional `--default-project-agent-id` and `--fallback-sender-user-id`; `ren emails unset <project-id>`; `ren mcps get-by-slug email`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
 
 ## Setup order
 
@@ -32,7 +32,7 @@ Users can send, forward, or cc emails to that address. Ren creates or resumes th
 2. Pick the project agent attachment id (`pra_`) that should answer email.
 3. Enable the mailbox with `ren emails set <project-id>`.
 4. Share the returned mailbox address with the user.
-5. Attach the `ren` MCP only if the agent must proactively send email.
+5. Attach the `email` MCP only if the agent must proactively send email.
 
 ## Native inbound email
 
@@ -96,7 +96,7 @@ Typical proactive flow: a cron trigger creates a session, the agent completes th
 
 ## Gotchas
 
-- **Inbound does not need an MCP.** If the user only wants to forward emails or email the project mailbox, do not attach the `ren` MCP.
-- **Outbound does need the `ren` MCP.** A cron or webhook-triggered agent cannot send a proactive email unless its agent version includes the `email` MCP.
+- **Inbound does not need an MCP.** If the user only wants to forward emails or email the project mailbox, do not attach the `email` MCP.
+- **Outbound does need the `email` MCP.** A cron or webhook-triggered agent cannot send a proactive email unless its agent version includes the `email` MCP.
 - **`pra_`, not `agt_`.** `defaultProjectAgentId` is the project-agent attachment id from `projects agents list`.
 - **Use Google Workspace for Gmail operations.** Native Ren email is not a general Gmail automation surface.
