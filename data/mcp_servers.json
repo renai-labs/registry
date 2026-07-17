@@ -12401,5 +12401,82 @@
       "supportUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
       "privacyPolicyUrl": "https://www.zoho.com/privacy.html"
     }
+  },
+  {
+    "slug": "hubspot",
+    "name": "HubSpot",
+    "description": "Search, read, create, and update HubSpot CRM objects, properties, and owners, and pull campaign analytics, via the remote HubSpot MCP server.",
+    "mcpServerUrl": "https://mcp.hubspot.com",
+    "urlOptions": null,
+    "docUrl": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+    "icon": null,
+    "transport": "streamable-http",
+    "version": null,
+    "repository": null,
+    "tools": [
+      "get_user_details",
+      "search_crm_objects",
+      "get_crm_objects",
+      "manage_crm_objects",
+      "search_properties",
+      "get_properties",
+      "search_owners",
+      "get_campaign_contacts_by_type",
+      "get_campaign_analytics",
+      "get_campaign_asset_types",
+      "get_campaign_asset_metrics",
+      "submit_feedback"
+    ],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "HubSpot",
+      "url": "https://www.hubspot.com"
+    },
+    "useCases": [
+      "crm",
+      "sales"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": null
+  },
+  {
+    "slug": "salesforge",
+    "name": "Salesforge",
+    "description": "Run cold-outbound from one endpoint across the Forge stack: leads and enrichment (Leadsforge), sequences, mailboxes and sender rotation (Salesforge), domain and mailbox provisioning (Primeforge/Mailforge/Infraforge), and warmup, Heat Score and placement tests (Warmforge).",
+    "mcpServerUrl": "https://mcp.salesforge.ai/mcp",
+    "urlOptions": null,
+    "docUrl": "https://help.salesforge.ai/en/articles/10333582-salesforge-mcp-server-with-claude-for-cold-email-and-linkedin-outreach",
+    "icon": null,
+    "transport": "streamable-http",
+    "version": null,
+    "repository": null,
+    "tools": [],
+    "prompts": [],
+    "auth": "api_key",
+    "authConfig": {
+      "type": "api_key"
+    },
+    "permissions": "read-write",
+    "author": {
+      "name": "Salesforge",
+      "url": "https://www.salesforge.ai"
+    },
+    "useCases": [
+      "sales",
+      "email"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": null
   }
 ]
