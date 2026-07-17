@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Registry monorepo for Ren skills, built with **Bun** (`bun@1.3.11`).
 
 - `data/` — **source of truth.** Skills live at `data/skills/<slug>/SKILL.md` (+ assets); `data/skills.json` is the registry snapshot; `data/{agents,mcp_servers,tags}.json` are flat registries.
-- `skills/`, `plugins/ren/skills/` — **symlinked mirrors** pointing to `data/skills/`. `plugins/.../plugin.json`, `marketplace.json`, `skills.sh.json` — **generated manifests.**
+- `skills/`, `plugins/ren/skills/` — **curated mirror dirs** of per-skill symlinks into `data/skills/`, holding only the bundled slugs from `skills.sh.json` (the shipped plugin subset, not the full catalog). `plugins/.../plugin.json`, `marketplace.json`, `skills.sh.json` — **generated manifests.**
 - `cli/` — the `ren-registry` CLI (commander; logic in `cli/src/lib/`). `schemas/` — shared Zod schemas (`@renai-labs/registry-schemas`).
 
 ## Dos & Don'ts

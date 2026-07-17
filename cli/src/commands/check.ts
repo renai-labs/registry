@@ -70,9 +70,9 @@ export async function check(): Promise<CheckResult> {
       codexPluginJson: join(tmp, "codex-plugin.json"),
       skillsShJson: join(tmp, "skills.sh.json"),
     }
-    await build({ scratch, skipDriftCheck: true })
+    const buildResult = await build({ scratch, skipDriftCheck: true })
 
-    const mirrorProblems = await validateMirrorSymlinks()
+    const mirrorProblems = await validateMirrorSymlinks(buildResult.mirroredSlugs)
     if (mirrorProblems.length) {
       problems.push(
         ...mirrorProblems.map((p) => `${p}; run \`ren-registry build && git add -A\``),
