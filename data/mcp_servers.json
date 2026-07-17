@@ -12401,5 +12401,73 @@
       "supportUrl": "https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation",
       "privacyPolicyUrl": "https://www.zoho.com/privacy.html"
     }
+  },
+  {
+    "slug": "figma",
+    "name": "Figma",
+    "description": "Bring live Figma design context into your workflow and write to the canvas",
+    "mcpServerUrl": "https://mcp.figma.com/mcp",
+    "urlOptions": null,
+    "docUrl": "https://developers.figma.com/docs/figma-mcp-server/",
+    "icon": "https://cdn.renai.build/mcp-icons/figma.png",
+    "transport": "streamable-http",
+    "version": "1.0.0",
+    "repository": {
+      "url": "https://github.com/figma/mcp-server-guide",
+      "source": "github"
+    },
+    "tools": [
+      "get_design_context",
+      "get_metadata",
+      "get_screenshot",
+      "get_variable_defs",
+      "get_libraries",
+      "search_design_system",
+      "download_assets",
+      "upload_assets",
+      "create_new_file",
+      "use_figma",
+      "generate_diagram",
+      "generate_figma_design",
+      "get_code_connect_map",
+      "get_code_connect_suggestions",
+      "get_context_for_code_connect",
+      "send_code_connect_mappings",
+      "add_code_connect_map",
+      "get_figjam",
+      "get_shader_effect",
+      "get_shader_fill",
+      "list_shader_effects",
+      "list_shader_fills",
+      "whoami"
+    ],
+    "prompts": [],
+    "auth": "oauth",
+    "authConfig": {
+      "type": "oauth",
+      "scopes": [
+        "mcp:connect"
+      ],
+      "tokenEndpoint": "https://api.figma.com/v1/oauth/token",
+      "authorizationEndpoint": "https://www.figma.com/oauth/mcp",
+      "tokenEndpointAuth": "client_secret_post"
+    },
+    "permissions": "write",
+    "author": {
+      "name": "Figma",
+      "url": "https://www.figma.com"
+    },
+    "useCases": [
+      "design"
+    ],
+    "sortOrder": null,
+    "popularityScore": null,
+    "trendingScore": null,
+    "rank": null,
+    "websiteMetadata": {
+      "longDescription": "Figma's official remote MCP server connects Ren directly to your Figma design files. Read structured design context - frames, components, variables, styles, and screenshots - and turn it into production code, or write back to the canvas to create and edit frames, components, variables, and auto layout using your design system as the source of truth. Search design libraries, manage Code Connect mappings between Figma nodes and code components, generate FigJam diagrams from natural language, and download or upload assets. Authentication is handled through Figma OAuth, scoped to your account and plan.",
+      "supportUrl": "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server",
+      "privacyPolicyUrl": "https://www.figma.com/legal/developer-terms/"
+    }
   }
 ]
