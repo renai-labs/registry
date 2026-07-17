@@ -7,6 +7,28 @@
     },
     "versions": [
       {
+        "version": "0.0.8",
+        "description": "Meta-agent for building and managing automations",
+        "model": "claude-opus-4-8",
+        "prompt": "You are Ren, a helpful assistant that gets things done.\n\nComplete the user's task. That is your primary responsibility.\n\nPLATFORM:\n- Agent — a dedicated AI with its own prompt, model, and integrations\n- Skill — reusable prompt-based instructions (the knowledge layer)\n- MCP — external integrations (github, slack, notion, etc.)\n- Pod — your private compute boundary; everything you create lives in one\n- Project — a group of agents inside a pod\n\nTOOLS:\nAll Ren platform actions (search, agent/project/skill/session create/update/get/list, etc.) are exposed through tool_search + tool_execute. Use tool_search to discover what's available, then tool_execute to run a specific tool.\n\nRULES:\n- You CANNOT modify or delete yourself\n- Search before saying something isn't available\n- Confirm destructive operations before executing\n- Don't overwhelm users with platform jargon",
+        "permission": {},
+        "skills": [
+          "ren-agent-dev",
+          "ren-blueprint-dev",
+          "ren-email",
+          "ren-github",
+          "ren-mcp-dev",
+          "ren-onboarding",
+          "ren-skill-dev",
+          "ren-slack",
+          "ren-systems-architect",
+          "ren-telegram",
+          "ren-vaults-credentials-dev"
+        ],
+        "mcps": ["slack", "email", "telegram", "linear-ren"],
+        "releaseNotes": "Add ren-blueprint-dev and drop the retired ren-setup skill; pick up the latest spec-driven ren-systems-architect and refreshed meta-skills."
+      },
+      {
         "version": "0.0.7",
         "description": "Meta-agent for building and managing automations",
         "model": "claude-opus-4-8",
@@ -32,12 +54,7 @@
           "ren-trigger-dev",
           "ren-vaults-credentials-dev"
         ],
-        "mcps": [
-          "slack",
-          "email",
-          "telegram",
-          "linear-ren"
-        ],
+        "mcps": ["slack", "email", "telegram", "linear-ren"],
         "releaseNotes": "Bind the Linear (Ren agent) channel MCP to the Ren meta agent so it can reply in Linear agent sessions."
       },
       {
@@ -66,11 +83,7 @@
           "ren-trigger-dev",
           "ren-vaults-credentials-dev"
         ],
-        "mcps": [
-          "slack",
-          "email",
-          "telegram"
-        ],
+        "mcps": ["slack", "email", "telegram"],
         "releaseNotes": "Bind Slack, Email, and Telegram channel MCPs directly to the Ren meta agent."
       },
       {
@@ -160,12 +173,7 @@
         "model": "claude-haiku-4-5",
         "prompt": "You are Ren, a helpful assistant that gets things done.\n\nComplete the user's task. That is your primary responsibility.\n\nPLATFORM:\n- Agent — a dedicated AI with its own prompt, model, and integrations\n- Skill — reusable prompt-based instructions (the knowledge layer)\n- MCP — external integrations (github, slack, notion, etc.)\n- Pod — your private compute boundary; everything you create lives in one\n- Project — a group of agents inside a pod\n\nTOOLS:\nAll Ren platform actions (search, agent/project/skill/session create/update/get/list, etc.) are exposed through tool_search + tool_execute. Use tool_search to discover what's available, then tool_execute to run a specific tool.\n\nRULES:\n- You CANNOT modify or delete yourself\n- Search before saying something isn't available\n- Confirm destructive operations before executing\n- Don't overwhelm users with platform jargon",
         "permission": {},
-        "skills": [
-          "agent-dev",
-          "onboarding",
-          "project-dev",
-          "skill-dev"
-        ],
+        "skills": ["agent-dev", "onboarding", "project-dev", "skill-dev"],
         "mcps": [],
         "releaseNotes": "Drop retired skills system-architect and debug-run."
       },
@@ -189,9 +197,7 @@
     ],
     "_meta": {
       "com.renai/agent-registry": {
-        "tags": [
-          "ren"
-        ]
+        "tags": ["ren"]
       }
     }
   }
