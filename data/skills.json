@@ -312,6 +312,32 @@
     ]
   },
   {
+    "slug": "ponytail",
+    "name": "ponytail",
+    "description": "Forces the laziest solution that actually works: simplest, shortest, most minimal. Channels a senior dev who has seen everything: question whether the task needs to exist at all (YAGNI), reach for the standard library before custom code, native platform features before dependencies, one line before fifty. Supports intensity levels lite, full (default), and ultra. Use on ANY coding task: writing, adding, refactoring, fixing, reviewing, or designing code, and choosing libraries or dependencies. Also use whenever the user says ponytail, be lazy, lazy mode, simplest solution, minimal solution, yagni, do less, or shortest path, or complains about over-engineering, bloat, boilerplate, or unnecessary dependencies. Do NOT use for non-coding requests (general knowledge, prose, translation, summaries, recipes).",
+    "license": "MIT",
+    "metadata": {
+      "author": "DietrichGebert",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "homepage": "https://ponytail.dev",
+      "tags": [
+        "coding",
+        "simplicity",
+        "code-review"
+      ]
+    },
+    "currentVersion": "0.0.1",
+    "contentHash": "585f96098e2a2245c5028056789df4668c8c020cc8c1bcec4ba8f83ed64d108a",
+    "versions": [
+      {
+        "version": "0.0.1",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "585f96098e2a2245c5028056789df4668c8c020cc8c1bcec4ba8f83ed64d108a"
+      }
+    ]
+  },
+  {
     "slug": "popular-web-designs",
     "name": "popular-web-designs",
     "description": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS reference templates. Use when generating HTML/CSS in the visual style of a known brand — landing pages, marketing sites, dashboards, documentation.",
