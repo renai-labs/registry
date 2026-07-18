@@ -4,7 +4,7 @@ The containers and plumbing that hold a build together: pods (and sandbox readin
 
 ## Pods
 
-A pod is one durable sandbox plus a member set of users and agents. Agents run inside this sandbox; everything attached to the pod (skills, MCPs, stores, vaults) is available to every project in it. A pod is the unit of isolation: different member sets or credential boundaries → different pods. (How to *choose* pod boundaries: architect body, "How to arrange pods & projects.")
+A pod is one durable sandbox plus a member set of users and agents. Agents run inside this sandbox; everything attached to the pod (skills, MCPs, stores, vaults) is available to every project in it. A pod is the unit of isolation: different member sets or credential boundaries → different pods. (How to _choose_ pod boundaries: architect body, "How to arrange pods & projects.")
 
 ### Finding a pod
 
@@ -16,7 +16,7 @@ The **private pod** lives in your user namespace; every pod command targeting it
 
 ### Sandbox readiness — check before handing off a session
 
-Session creation fails with *"Pod has no live sandbox"* if the sandbox is paused or absent. Always check first with `ren pods sandboxes status <pod-id> --scope user --output json`. The response is a discriminated union on `status`:
+Session creation fails with _"Pod has no live sandbox"_ if the sandbox is paused or absent. Always check first with `ren pods sandboxes status <pod-id> --scope user --output json`. The response is a discriminated union on `status`:
 
 - `ready` → live, proceed.
 - `provisioning` → in flight; poll again without yielding to the user.
@@ -40,7 +40,7 @@ Agents attach as `primary`, `subagent`, or `all` (both at once — the default).
 
 - **Primary** — a top-level assistant the user (or a trigger) talks to directly. Triggers and chat sessions route to the project's primary agent.
 - **Subagent** — a specialised helper a primary agent invokes for a task (e.g. an `Explore` agent doing read-only search).
-- **`all`** (the attachment default) — the same agent is exposed both ways: a direct chat agent *and* callable as a subagent from any other primary.
+- **`all`** (the attachment default) — the same agent is exposed both ways: a direct chat agent _and_ callable as a subagent from any other primary.
 
 **Every project needs at least one agent attached as `primary` (or `all`).** Without one, triggers can't fire and chat sessions have nothing to land on.
 
@@ -95,11 +95,11 @@ A store does nothing until it's attached to a project. **Attach is not idempoten
 Failed query: insert into "project_memory_store" ... [500]
 ```
 
-That specific 500 means *already attached* — treat it as success, don't retry. To avoid it, `ren projects memory-stores list <prj_…>` first and only add if it's not already there.
+That specific 500 means _already attached_ — treat it as success, don't retry. To avoid it, `ren projects memory-stores list <prj_…>` first and only add if it's not already there.
 
 ### Gotchas
 
-- **Pick one scope — don't upload the same memories into both a user and an org store.** `--scope user` creates a *private* store (`userId` set); `--scope org` creates a *shared* one (`userId` null). They are distinct stores even with the same name. Onboarding a single user → `user`. Seeding shared team memory → `org`. Uploading the same files to both leaves two divergent copies that drift apart.
+- **Pick one scope — don't upload the same memories into both a user and an org store.** `--scope user` creates a _private_ store (`userId` set); `--scope org` creates a _shared_ one (`userId` null). They are distinct stores even with the same name. Onboarding a single user → `user`. Seeding shared team memory → `org`. Uploading the same files to both leaves two divergent copies that drift apart.
 - Attaching a store is **not idempotent** — re-adding an attached store 500s with a `project_*_store` duplicate error. List first.
 - The same memory store attached to two projects is one piece of state: concurrent writers see each other's files.
 - Don't attach empty stores speculatively.

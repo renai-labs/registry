@@ -7,7 +7,7 @@ description: >-
   update, improve, or debug a skill, adapt a third-party / community SKILL.md,
   or add a custom capability to an agent.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/skill-dev.svg'
+  icon: "https://cdn.renai.build/skill-icons/skill-dev.svg"
   tags:
     - code
     - ren
@@ -62,17 +62,17 @@ description: Does X when Y # what it does AND when to trigger; ≤1024 chars
 [Environment-specific facts that defy assumptions — the agent reads these before it errs]
 ```
 
-`name` and `description` determine when the skill triggers, and the `description` carries the entire burden: only `name` + `description` load up front; the body loads on demand. Be specific about *what it does* AND *when to reach for it*. See `references/descriptions.md`.
+`name` and `description` determine when the skill triggers, and the `description` carries the entire burden: only `name` + `description` load up front; the body loads on demand. Be specific about _what it does_ AND _when to reach for it_. See `references/descriptions.md`.
 
 Frontmatter is validated against a **strict** top level — only these keys are allowed:
 
-| Key             | Rule                                                                                          |
-| --------------- | --------------------------------------------------------------------------------------------- |
-| `name`          | **required.** kebab-case `^[a-z0-9]+(?:-[a-z0-9]+)*$`, ≤64 chars, **must equal the skill's folder name.** |
-| `description`   | **required.** 1–1024 chars.                                                                    |
-| `license`       | optional string (SPDX id).                                                                     |
-| `compatibility` | optional string, ≤500 chars.                                                                   |
-| `allowed-tools` | optional string.                                                                               |
+| Key             | Rule                                                                                                                                    |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`          | **required.** kebab-case `^[a-z0-9]+(?:-[a-z0-9]+)*$`, ≤64 chars, **must equal the skill's folder name.**                               |
+| `description`   | **required.** 1–1024 chars.                                                                                                             |
+| `license`       | optional string (SPDX id).                                                                                                              |
+| `compatibility` | optional string, ≤500 chars.                                                                                                            |
+| `allowed-tools` | optional string.                                                                                                                        |
 | `metadata`      | optional open map. Ren extras live here: `author`, `source`, `homepage`, `icon`, `docUrl`, `tags` (kebab slugs), `requiredCredentials`. |
 
 Any other top-level key fails validation — **notably `version`**. Ren owns versioning; never put `version` in frontmatter, and don't relocate it to `metadata.version` either.
@@ -81,7 +81,7 @@ Any other top-level key fails validation — **notably `version`**. Ren owns ver
 
 1. **Stay lean — ≤500 lines / ~5,000 tokens.** Move depth into `references/`.
 2. **Add what the agent lacks, omit what it knows.** Skip generic background; spend tokens on project conventions, non-obvious edge cases, and which tool/API to use.
-3. **Match specificity to fragility.** Open tasks → guidance (explain *why*); fragile sequences → exact scripts. See `references/workflows.md`.
+3. **Match specificity to fragility.** Open tasks → guidance (explain _why_); fragile sequences → exact scripts. See `references/workflows.md`.
 4. **Favor procedures over declarations.** Teach how to approach a class of problems, not the answer to one instance.
 5. **Provide defaults, not menus.** One recommended approach; alternatives brief.
 6. **Capture gotchas** in SKILL.md — concrete corrections to mistakes the agent will otherwise make. See `references/workflows.md`.
@@ -95,11 +95,11 @@ UPPER_SNAKE_CASE secrets the skill needs at runtime. Per-version, full-replace -
 
 ## Bundled resources
 
-| Resource      | Use for                                              | Loaded into context? |
-| ------------- | ---------------------------------------------------- | -------------------- |
-| `scripts/`    | Deterministic, repeated operations                   | No (executed)        |
-| `references/` | Domain depth, schemas, long docs                     | Only when read       |
-| `assets/`     | Static resources — templates, images, data files     | No                   |
+| Resource      | Use for                                          | Loaded into context? |
+| ------------- | ------------------------------------------------ | -------------------- |
+| `scripts/`    | Deterministic, repeated operations               | No (executed)        |
+| `references/` | Domain depth, schemas, long docs                 | Only when read       |
+| `assets/`     | Static resources — templates, images, data files | No                   |
 
 See `references/bundled-resources.md` for the full decision matrix and — before writing any `scripts/` file — how to design scripts for agentic use (no Python: Bash/Node/Bun only).
 
@@ -113,7 +113,7 @@ The full step-by-step lives in **`references/adapting-skills.md`**: frontmatter 
 
 **Start from real expertise.** Generic LLM knowledge yields vague procedures ("handle errors appropriately"). Ground the skill in specifics: extract the pattern from a real task you completed with an agent (steps that worked, corrections you made, project facts you supplied), or synthesize from your own runbooks, schemas, and the patches that actually fixed things.
 
-**Then refine with real execution.** Ship → use → tighten. Read a session's *execution trace*, not just the output — wasted steps usually mean instructions too vague, inapplicable, or lacking a default. Fix the failing step, bump the version; every hand correction is a gotcha to add. Don't anticipate every edge case in v1 — edit from real runs.
+**Then refine with real execution.** Ship → use → tighten. Read a session's _execution trace_, not just the output — wasted steps usually mean instructions too vague, inapplicable, or lacking a default. Fix the failing step, bump the version; every hand correction is a gotcha to add. Don't anticipate every edge case in v1 — edit from real runs.
 
 ## Verify before reporting done
 

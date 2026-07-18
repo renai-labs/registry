@@ -5,7 +5,7 @@ description: >-
   and bind a repo to a project so the agent gets it mounted. Use when the user
   wants their Ren agent to work against a GitHub repository.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/github.svg'
+  icon: "https://cdn.renai.build/skill-icons/github.svg"
   tags:
     - ren
     - code
@@ -46,5 +46,3 @@ Also, explain to the user that every new session on this ren project will have a
 ## Gotchas
 
 - **Selected-repos installs.** If the user installed against specific repos (not "all"), a repo you don't see in `github repos` won't bind — they re-run `github install` to add it.
-
-

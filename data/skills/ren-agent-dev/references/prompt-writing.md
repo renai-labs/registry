@@ -6,8 +6,8 @@ Most behaviour issues trace back to a vague prompt — not missing tools.
 
 1. **Specific.** States what the agent does, not what it could do.
 2. **Actionable.** Concrete steps or rules, not abstract goals.
-3. **Scoped.** Says what's *out* of scope to prevent spillover.
-4. **Tool-aware.** Says *when* to reach for each tool — don't restate what the tool description already says.
+3. **Scoped.** Says what's _out_ of scope to prevent spillover.
+4. **Tool-aware.** Says _when_ to reach for each tool — don't restate what the tool description already says.
 
 ## Skeleton
 
@@ -39,4 +39,4 @@ If your prompt has a multi-line "how to do X" section, that's a skill. The promp
 
 ## Iterate
 
-Revise *after* you've seen a real failure, not before. Identify the wrong call, add one specific rule to prevent it, `ren agents versions create <id> --prompt "…" --body '{"version":"patch"}'`.
+Revise _after_ you've seen a real failure, not before. Identify the wrong call, add one specific rule to prevent it, `ren agents versions create <id> --prompt "…" --body '{"version":"patch"}'`.

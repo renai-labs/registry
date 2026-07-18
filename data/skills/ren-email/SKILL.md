@@ -7,7 +7,7 @@ description: >-
   for Gmail scanning, labelling, or mailbox automation; use Google Workspace for
   that.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/email.svg'
+  icon: "https://cdn.renai.build/skill-icons/email.svg"
   tags:
     - ren
     - email

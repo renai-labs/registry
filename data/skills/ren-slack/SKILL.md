@@ -6,7 +6,7 @@ description: >-
   (post, reply, read history, look up users and channels, react). Use when the
   user wants a Ren agent to receive Slack messages, post to Slack, or both.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/slack.svg'
+  icon: "https://cdn.renai.build/skill-icons/slack.svg"
   tags:
     - ren
     - communication
@@ -36,7 +36,7 @@ Both surfaces share the workspace install. Without it, neither works.
 
 ## Surface A - Channel to project routing
 
-Use this when a user should be able to **message a Ren project from a Slack channel and get a reply in-thread**. The agent is *invoked* by Slack; it does not call Slack.
+Use this when a user should be able to **message a Ren project from a Slack channel and get a reply in-thread**. The agent is _invoked_ by Slack; it does not call Slack.
 
 ### The three ids `slack channels set` needs
 
@@ -50,19 +50,19 @@ ren slack channels set <channel-id> \
 All three are validated server-side:
 
 - **`projectId`** - the project that answers in this channel.
-- **`defaultProjectAgentId`** - the **`pra_` attachment id**, *not* the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as triggers, see [[ren-systems-architect]]). Must be an agent attached to that project.
+- **`defaultProjectAgentId`** - the **`pra_` attachment id**, _not_ the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as triggers, see [[ren-systems-architect]]). Must be an agent attached to that project.
 - **`fallbackSenderUserId`** - a **pod member** user id; who a message is attributed to when the Slack sender is not a known Ren user. During onboarding, default this to the onboarding user themselves.
 
 ### Runtime invariants
 
 - **The agent does not know it is Slack.** No Slack-specific code, no special tools, no environment hints. The message arrives as a normal session turn and the reply is streamed back to the thread.
-- **Deterministic channels.** Ren triggers *only* on messages posted in channels it has been explicitly mapped to. Unmapped channels are invisible to Ren - there is no implicit listener, no background poller, no message queue the agent can subscribe to.
+- **Deterministic channels.** Ren triggers _only_ on messages posted in channels it has been explicitly mapped to. Unmapped channels are invisible to Ren - there is no implicit listener, no background poller, no message queue the agent can subscribe to.
 
 ---
 
 ## Surface B - The `slack` MCP (agent tool-calls)
 
-Use this when the **agent itself** needs to do anything Slack-y: post a proactive message, reply in a thread, react, upload a file, read channel history, look up a user or channel, edit or delete a message. Surface A handles *inbound*; Surface B handles *outbound and read*.
+Use this when the **agent itself** needs to do anything Slack-y: post a proactive message, reply in a thread, react, upload a file, read channel history, look up a user or channel, edit or delete a message. Surface A handles _inbound_; Surface B handles _outbound and read_.
 
 ### What it is
 
@@ -74,7 +74,7 @@ The MCP declares `auth: "none"` because it acts on behalf of the Ren-installed S
 
 ### When to attach
 
-Attach the MCP **only to agents that need to call Slack proactively** - a digest agent that posts a daily summary, a triage agent that reads channel history, a reaction bot. For agents that only need to *receive* Slack messages, Surface A's channel mapping is enough; the MCP is unnecessary and adds tool noise.
+Attach the MCP **only to agents that need to call Slack proactively** - a digest agent that posts a daily summary, a triage agent that reads channel history, a reaction bot. For agents that only need to _receive_ Slack messages, Surface A's channel mapping is enough; the MCP is unnecessary and adds tool noise.
 
 ### How to attach
 

@@ -31,13 +31,17 @@ The whole flow runs server-side — you never see or paste the token. Ren uses t
 Pass `--scope user` so the owner context resolves the user-scope default vault. Without it, the org-scope vault is used.
 
 1. **Connect.** `ren mcps oauths connect <mcp-id> --scope user --output json` auto-resolves or creates the default vault for that scope, then returns a discriminated result:
-  - `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
-  - `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser. Surface **exactly one** URL: if a prior connect call was cancelled or errored, its URL is dead — discard it and only ever hand out the URL from the latest successful connect. Some providers show a redirect confirmation page ("You will be redirected to…") before sending the callback — tell the user to click through it. Then poll immediately without waiting.
+
+- `{ "alreadyConnected": true, "credentialId": "crd_…" }` → already wired, nothing to do.
+- `{ "alreadyConnected": false, "authorizationUrl": "…", "sessionId": "…" }` → give the URL to the user to open in a browser. Surface **exactly one** URL: if a prior connect call was cancelled or errored, its URL is dead — discard it and only ever hand out the URL from the latest successful connect. Some providers show a redirect confirmation page ("You will be redirected to…") before sending the callback — tell the user to click through it. Then poll immediately without waiting.
+
 2. **Poll the session** until it leaves `pending`:
-  ```
-   ren mcps oauths session <mcp-id> <session-id> --scope user --output json
-  ```
-   `status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s; don't yield to the user between polls once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
+
+```
+ ren mcps oauths session <mcp-id> <session-id> --scope user --output json
+```
+
+`status` is one of `pending | active | failed | expired` (session TTL **10 min**). Loop on `pending` every ~2s; don't yield to the user between polls once the URL is out. `active` → the callback has materialized the credential and `credentialId` is populated, done. `failed` / `expired` → surface `failureReason` and restart from connect.
 
 To target a **specific** (non-default) vault instead, swap the first call for `ren credentials oauths start <vault-id> --body '{"mcpId":"mcp_…"}'` (same return shape, plus `state`) and poll `ren credentials oauths session <vault-id> <session-id>`.
 

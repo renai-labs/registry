@@ -1,6 +1,6 @@
 # Ren operations — composing the artifacts
 
-Command-level mechanics for the build chain's composable artifacts: skills, MCPs, agents, and the credential wiring that backs them. The architect body owns the decisions (reuse-first, scope, ordering); this file is how to actually mutate Ren. The dev skills ([[ren-skill-dev]], [[ren-agent-dev]], [[ren-mcp-dev]]) hold authoring craft only — load one to *write* a custom artifact well, not to run these commands. Full flag detail: `ren docs commands` (CLI) or the equivalent `mcp__ren__*` tools (MCP transport).
+Command-level mechanics for the build chain's composable artifacts: skills, MCPs, agents, and the credential wiring that backs them. The architect body owns the decisions (reuse-first, scope, ordering); this file is how to actually mutate Ren. The dev skills ([[ren-skill-dev]], [[ren-agent-dev]], [[ren-mcp-dev]]) hold authoring craft only — load one to _write_ a custom artifact well, not to run these commands. Full flag detail: `ren docs commands` (CLI) or the equivalent `mcp__ren__*` tools (MCP transport).
 
 ## Skills
 
@@ -24,7 +24,7 @@ Command-level mechanics for the build chain's composable artifacts: skills, MCPs
 ## Agents
 
 - **Commands.** `ren agents create`, `ren agents versions create`, `ren agents get`, `ren agents search`.
-- **Model catalog.** `ren models list --output json` for the live catalog (many providers). Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default. The choice *judgment* — stop and ask the user, present heavy/balanced/light with pricing — is [[ren-agent-dev]].
+- **Model catalog.** `ren models list --output json` for the live catalog (many providers). Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default. The choice _judgment_ — stop and ask the user, present heavy/balanced/light with pricing — is [[ren-agent-dev]].
 - **Create mechanics.** Pass the prompt via `--body @file.json` for anything over a few lines — inline JSON breaks on quotes, backticks, and code fences. `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }`; to add one, `ren agents get` first and pass the union. Omit `skillVersionId` / `agentVersionId` to track latest (auto-roll-forward); pin only to freeze.
 - **Scope.** Pass `--scope user` on every command when the agent lives in the user namespace; `search` is the exception (it uses `--sources`).
 - **Iterate.** `ren agents get` (verify state) → `ren skills versions create` (fix skill content) / `ren agents versions create` (fix prompt or deps). The discipline — one logical change per version, fix from real runs — is [[ren-agent-dev]].

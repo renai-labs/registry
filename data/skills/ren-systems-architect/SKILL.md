@@ -31,7 +31,7 @@ Before any build, pull the source-of-truth references and keep them handy. **Rea
 
 **Threshold rule.** A single-entity tweak — bump a prompt, attach one skill, change a schedule — just runs the operation directly (`references/operations.md`); no ceremony. Anything that spans **more than one entity**, or that the user might reuse or share, is built **spec-driven**: capture it as a `Spec` first, then build from it.
 
-The flow: interview the user into a `brief` → research what already exists (org before registry, then the web) → author a slug-keyed `Spec` where each entry is *planned* (`def`) or *built* (`ref`) → `ren blueprints push` it as a **draft blueprint from the first minute** → build the graph leaf-up, pinning each live id back into the doc and re-pushing → a fully-resolved Spec is a publishable blueprint. The Spec is the durable, resumable plan even when nothing is ever shared. Narrate each step in the user's register (builder vs consumer — [[ren-onboarding]] owns that framing).
+The flow: interview the user into a `brief` → research what already exists (org before registry, then the web) → author a slug-keyed `Spec` where each entry is _planned_ (`def`) or _built_ (`ref`) → `ren blueprints push` it as a **draft blueprint from the first minute** → build the graph leaf-up, pinning each live id back into the doc and re-pushing → a fully-resolved Spec is a publishable blueprint. The Spec is the durable, resumable plan even when nothing is ever shared. Narrate each step in the user's register (builder vs consumer — [[ren-onboarding]] owns that framing).
 
 Full method, entry shapes, and a worked example: **`references/spec.md`**. The data model, scope, reuse, credentials, and wiring below are what that loop draws on at each step.
 
@@ -41,7 +41,7 @@ A **pod** is a durable sandbox plus a member set; everything attached to it (ski
 
 ## Scope discipline
 
-Default to **`--scope user`** for a personal build — agents, skills, MCPs, stores, and vaults all default to `org` otherwise, and you need `--scope user` even to *see* the private pod. Promote to `org` only when the user explicitly wants something shared. Key constraint: you can't pull a narrower-scope artifact into a broader-scope publication (a `user` skill backs a `user` or `org` agent, not the reverse). Full rules — inheritance, reference direction, the `search` / `--sources` exception — are in `ren docs model`.
+Default to **`--scope user`** for a personal build — agents, skills, MCPs, stores, and vaults all default to `org` otherwise, and you need `--scope user` even to _see_ the private pod. Promote to `org` only when the user explicitly wants something shared. Key constraint: you can't pull a narrower-scope artifact into a broader-scope publication (a `user` skill backs a `user` or `org` agent, not the reverse). Full rules — inheritance, reference direction, the `search` / `--sources` exception — are in `ren docs model`.
 
 ## Reuse before you create
 
@@ -79,7 +79,6 @@ Dependencies build **leaf-up**. Each step routes to where its mechanics live —
 6. **Project** — always a fresh project in the private pod; attach the agent as `primary` and the stores from step 5 → `references/wiring.md`.
 7. **Trigger** (optional) — cron schedule → `references/wiring.md`.
 8. **Sandbox readiness + session** — get the sandbox `ready`, then hand off → `references/wiring.md`.
-
 
 ## Credentials — the design
 

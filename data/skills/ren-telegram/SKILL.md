@@ -7,7 +7,7 @@ description: >-
   the user wants a Ren agent to receive Telegram messages, post to Telegram, or
   both.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/telegram.svg'
+  icon: "https://cdn.renai.build/skill-icons/telegram.svg"
   tags:
     - ren
     - communication
@@ -33,7 +33,7 @@ Both surfaces share the bot. Without the bot in the chat, neither works.
 
 ## Surface A - Chat to project routing
 
-Use this when a user should be able to **message a Ren project from a Telegram chat and get a reply in-thread**. The agent is *invoked* by Telegram; it does not call Telegram.
+Use this when a user should be able to **message a Ren project from a Telegram chat and get a reply in-thread**. The agent is _invoked_ by Telegram; it does not call Telegram.
 
 ### Two ways to map a chat to a project
 
@@ -49,7 +49,7 @@ ren telegrams chats set <chat-id> \
   [--blocked-senders <telegram-user-id> ...]
 ```
 
-**Claim deep link** - the way to map a chat (especially a DM) whose id you cannot easily get. Mint a link and open it *inside* the target DM or group:
+**Claim deep link** - the way to map a chat (especially a DM) whose id you cannot easily get. Mint a link and open it _inside_ the target DM or group:
 
 ```
 ren telegrams claim-code \
@@ -62,10 +62,10 @@ ren telegrams claim-code \
 ### The fields
 
 - **`projectId`** - the project that answers in this chat.
-- **`defaultProjectAgentId`** - the **`pra_` attachment id**, *not* the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as Slack/email and triggers, see [[ren-systems-architect]]). Must be an agent attached to that project. When no slash command is used, this is the agent that answers.
+- **`defaultProjectAgentId`** - the **`pra_` attachment id**, _not_ the agent id. Get it from `ren projects agents list <project-id>` (same gotcha as Slack/email and triggers, see [[ren-systems-architect]]). Must be an agent attached to that project. When no slash command is used, this is the agent that answers.
 - **`fallbackSenderUserId`** - a **pod member** user id; who a message is attributed to when the Telegram sender is not a linked Ren user. During onboarding, default this to the onboarding user themselves.
-- **`topicId`** *(optional)* - map a single forum topic inside a group rather than the whole chat.
-- **`allowedSenders` / `blockedSenders`** *(optional)* - Telegram user id allow/block lists for who may run agents in this chat.
+- **`topicId`** _(optional)_ - map a single forum topic inside a group rather than the whole chat.
+- **`allowedSenders` / `blockedSenders`** _(optional)_ - Telegram user id allow/block lists for who may run agents in this chat.
 
 ### Linking a Telegram account to a Ren user (sender identity)
 
@@ -82,7 +82,7 @@ An unlinked sender runs as the chat's `fallbackSenderUserId`.
 ### Runtime invariants
 
 - **The agent does not know it is Telegram.** No Telegram-specific code, no special tools, no environment hints. The message arrives as a normal session turn and the reply is streamed back to the thread.
-- **Deterministic chats.** Ren triggers *only* on messages in chats it has been explicitly mapped to. Unmapped chats are invisible - no implicit listener, no polling.
+- **Deterministic chats.** Ren triggers _only_ on messages in chats it has been explicitly mapped to. Unmapped chats are invisible - no implicit listener, no polling.
 
 ---
 
@@ -119,7 +119,7 @@ Documents and photos sent to a mapped chat are downloaded by Ren and passed to t
 
 ## Surface B - The `telegram` MCP (agent tool-calls)
 
-Use this when the **agent itself** needs to send to Telegram: post a proactive message after a cron/webhook run, send a generated document, or react to a message. Surface A handles *inbound*; Surface B handles *outbound*.
+Use this when the **agent itself** needs to send to Telegram: post a proactive message after a cron/webhook run, send a generated document, or react to a message. Surface A handles _inbound_; Surface B handles _outbound_.
 
 ### What it is
 
@@ -131,7 +131,7 @@ The MCP acts on behalf of the Ren-installed Telegram bot. It uses the org's bot 
 
 ### When to attach
 
-Attach the MCP **only to agents that need to message Telegram proactively** - a digest agent that posts a daily summary, an agent that pushes a generated report as a document. For agents that only need to *receive* Telegram messages, Surface A's chat mapping is enough; the MCP is unnecessary and adds tool noise.
+Attach the MCP **only to agents that need to message Telegram proactively** - a digest agent that posts a daily summary, an agent that pushes a generated report as a document. For agents that only need to _receive_ Telegram messages, Surface A's chat mapping is enough; the MCP is unnecessary and adds tool noise.
 
 ### How to attach
 

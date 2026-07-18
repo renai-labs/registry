@@ -32,7 +32,7 @@ For tasks with branching logic, guide Ren through decision points:
 
 ## Gotchas
 
-Often the highest-value content: environment-specific facts that defy assumptions — concrete corrections to mistakes the agent *will* make otherwise, not general advice. Keep them in **SKILL.md itself** (the agent must read them before hitting the situation), and grow the section every time you correct a real mistake.
+Often the highest-value content: environment-specific facts that defy assumptions — concrete corrections to mistakes the agent _will_ make otherwise, not general advice. Keep them in **SKILL.md itself** (the agent must read them before hitting the situation), and grow the section every time you correct a real mistake.
 
 ```markdown
 ## Gotchas

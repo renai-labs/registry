@@ -67,7 +67,7 @@ Re-read `spec.json` from disk each iteration rather than trusting context — th
 
 ### Channels & requirements
 
-- `project.channels[]` — declarative `{ slug, kind, purpose, agent? }` where `kind` ∈ `slack | linear | github | telegram | email`. Declares *what channel, for what, on which agent* — never the concrete workspace/channel/repo ids (those are org-foreign, resolved live at install). Native channel setup itself is [[ren-slack]] / [[ren-github]] / [[ren-email]] / [[ren-telegram]].
+- `project.channels[]` — declarative `{ slug, kind, purpose, agent? }` where `kind` ∈ `slack | linear | github | telegram | email`. Declares _what channel, for what, on which agent_ — never the concrete workspace/channel/repo ids (those are org-foreign, resolved live at install). Native channel setup itself is [[ren-slack]] / [[ren-github]] / [[ren-email]] / [[ren-telegram]].
 - Per-entry `requirements[]` — `{ id, kind, must, verify? }` with `kind` ∈ `credential_present | capability | other`, for non-derivable needs the operator must satisfy ("operator has prod DB read access"). These become the installer's checklist. Derivable credential needs (a skill/MCP's `requiredCredentials`) and channel-config items are computed at install — don't author those.
 
 ## 4. Build loop — leaf-up, pin, re-push
@@ -95,26 +95,44 @@ When `spec.json` has no planned entries left, it's a shareable blueprint. Hand o
     "successCriteria": ["every #bugs message gets a triaged Linear issue within 5 min"]
   },
   "skills": [
-    { "slug": "linear-triage", "ref": { "id": "skl_123", "versionId": "skv_123" },
-      "def": { "name": "Linear triage", "purpose": "classify + file issues", "registrySlug": "linear-triage" } },
-    { "slug": "repro-writer",
-      "def": { "name": "Repro writer", "purpose": "turn a raw report into numbered repro steps" } }
+    {
+      "slug": "linear-triage",
+      "ref": { "id": "skl_123", "versionId": "skv_123" },
+      "def": { "name": "Linear triage", "purpose": "classify + file issues", "registrySlug": "linear-triage" }
+    },
+    {
+      "slug": "repro-writer",
+      "def": { "name": "Repro writer", "purpose": "turn a raw report into numbered repro steps" }
+    }
   ],
   "mcps": [],
   "agents": [
-    { "slug": "triage",
-      "def": { "name": "Triage", "model": "sonnet-5", "scope": "user",
-               "promptIntent": "read a bug report, classify severity, file a Linear issue",
-               "skills": ["linear-triage", "repro-writer"], "mcps": [] } }
+    {
+      "slug": "triage",
+      "def": {
+        "name": "Triage",
+        "model": "sonnet-5",
+        "scope": "user",
+        "promptIntent": "read a bug report, classify severity, file a Linear issue",
+        "skills": ["linear-triage", "repro-writer"],
+        "mcps": []
+      }
+    }
   ],
   "projects": [
-    { "slug": "triage-proj",
+    {
+      "slug": "triage-proj",
       "def": { "name": "Bug triage", "primaryAgent": "triage" },
-      "channels": [{ "slug": "bugs-in", "kind": "slack", "purpose": "bug-report intake" }] }
+      "channels": [{ "slug": "bugs-in", "kind": "slack", "purpose": "bug-report intake" }]
+    }
   ],
   "triggers": [
-    { "slug": "daily-digest", "project": "triage-proj", "schedule": "0 9 * * *",
-      "inputMessage": "post yesterday's triaged issues as a digest" }
+    {
+      "slug": "daily-digest",
+      "project": "triage-proj",
+      "schedule": "0 9 * * *",
+      "inputMessage": "post yesterday's triaged issues as a digest"
+    }
   ]
 }
 ```

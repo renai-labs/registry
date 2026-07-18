@@ -4,15 +4,15 @@ A skill can ship `scripts/`, `references/`, and `assets/` alongside SKILL.md. Us
 
 ## Decision matrix
 
-| Type           | Loaded into context?         | Use for                                                          | Example                            |
-| -------------- | ---------------------------- | --------------------------------------------------------------- | ---------------------------------- |
-| `scripts/`     | No (executed)                | Deterministic operations the agent runs repeatedly               | `validate.ts`, `deploy.sh`         |
-| `references/`  | Only when explicitly read    | Schemas, long docs, domain depth                                 | `bigquery-tables.md`, `api-spec.md`|
-| `assets/`      | No                           | Static resources — templates, images, data files (lookup tables) | `letter.html`, `logo.svg`          |
+| Type          | Loaded into context?      | Use for                                                          | Example                             |
+| ------------- | ------------------------- | ---------------------------------------------------------------- | ----------------------------------- |
+| `scripts/`    | No (executed)             | Deterministic operations the agent runs repeatedly               | `validate.ts`, `deploy.sh`          |
+| `references/` | Only when explicitly read | Schemas, long docs, domain depth                                 | `bigquery-tables.md`, `api-spec.md` |
+| `assets/`     | No                        | Static resources — templates, images, data files (lookup tables) | `letter.html`, `logo.svg`           |
 
 ## scripts/
 
-For tasks where the *what* is fixed and the *how* shouldn't drift across runs.
+For tasks where the _what_ is fixed and the _how_ shouldn't drift across runs.
 
 **Runtime:** limited to what the sandbox image ships — **Bash/shell, Node.js, or Bun (TypeScript/JS)**. There is **no Python** runtime (nor Ruby, Deno, Go) — a `.py` script won't execute. Pick one per script.
 
@@ -66,7 +66,7 @@ The agent reads an asset only when it needs to copy or adapt it, not on every tr
 
 ## Avoiding duplication
 
-A fact lives in *one* place: SKILL.md, a reference, or a script comment — never two. If you find yourself repeating, pick one home and link to it from the others.
+A fact lives in _one_ place: SKILL.md, a reference, or a script comment — never two. If you find yourself repeating, pick one home and link to it from the others.
 
 ## When to NOT bundle
 

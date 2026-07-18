@@ -2,7 +2,6 @@
 
 Pull the row that matches their stack. Give each tool credit for what it does well; the point is what the user **can't** get out of it, in their own outcome terms.
 
-
 | Tool                            | Designed for                                   | Where it breaks down                                                                                                                                                                                                              |
 | ------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | n8n / Zapier                    | Deterministic automation over stable APIs      | Brittle when rules shift or inputs get fuzzy. No way to say "use judgment" and have it work. Edge cases fall back onto humans.                                                                                                    |

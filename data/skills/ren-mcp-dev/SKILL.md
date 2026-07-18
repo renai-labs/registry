@@ -24,11 +24,11 @@ An MCP server is a remote tool surface an agent can call. This skill is the **cr
 
 The credential a paired vault entry creates must use the env-var name Ren derives from the MCP's slug:
 
-| `auth`     | Env var                   |
-| ---------- | ------------------------- |
-| `api_key`  | `MCP_<SLUG>_KEY`          |
-| `basic`    | `MCP_<SLUG>_BASIC`        |
-| `oauth`    | `MCP_<SLUG>_ACCESS_TOKEN` |
+| `auth`    | Env var                   |
+| --------- | ------------------------- |
+| `api_key` | `MCP_<SLUG>_KEY`          |
+| `basic`   | `MCP_<SLUG>_BASIC`        |
+| `oauth`   | `MCP_<SLUG>_ACCESS_TOKEN` |
 
 `<SLUG>` is the MCP's slug upper-cased with every non-alphanumeric replaced by `_`. `authConfig` decides where that value lands on each outbound request: `{ type: "api_key", headerName: "Authorization", prefix: "Bearer " }` (header), `{ type: "api_key", queryParam: "api_key" }` (query), `{ type: "basic" }` (raw `user:password`, runtime base64-encodes), or `{ type: "oauth" }` (Bearer; refresh handled server-side, see [[ren-vaults-credentials-dev]]). `authConfig` is nested.
 

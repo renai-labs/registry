@@ -5,7 +5,7 @@ description: >-
   dependency shape. Use when the user asks to build, configure, modify, or debug
   an agent.
 metadata:
-  icon: 'https://cdn.renai.build/skill-icons/agent-dev.svg'
+  icon: "https://cdn.renai.build/skill-icons/agent-dev.svg"
   tags:
     - code
     - ren

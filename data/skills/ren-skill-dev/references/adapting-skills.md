@@ -12,18 +12,19 @@ Walk SKILL.md top-to-bottom, then the bundled folder:
 6. **Bundled resource layout.** Leave `scripts/`, `references/`, `assets/` as-is. A source's `templates/` folder still ships fine — rename it to `assets/` only if you're already touching it, never as a standalone churn. Other folders (`docs/`, `examples/`, `data/`) ship fine too — don't rename unless ren rejects them. Delete only platform config dirs (step 7).
 7. **Strip assistant / platform identity.** Ren agents are user-defined — remove or generalize any specific assistant or runtime:
 
-   | Found                                                  | Substitute with                                |
-   | ------------------------------------------------------ | ---------------------------------------------- |
-   | Claude / Claude Code / Anthropic's Claude              | the agent                                      |
-   | Cursor / Copilot / Codex / OpenCode / Cowork / Hermes  | the agent                                      |
-   | ChatGPT / GPT-4 / OpenAI's GPT (as runtime context)    | the agent                                      |
-   | "Claude will read the file…"                           | "the agent reads the file…"                    |
-   | "Ask Claude to…"                                       | "ask the agent to…"                            |
-   | Proper-noun tools (Read, Edit, Bash, Glob)             | generic capability ("read", "edit", "run")     |
-   | "Add this to your Claude Code settings / `.mcp.json`"  | _delete entirely_ — handled by ren primitives  |
-   | "Install in Cursor / VS Code extension"                | _delete entirely_                              |
+   | Found                                                 | Substitute with                               |
+   | ----------------------------------------------------- | --------------------------------------------- |
+   | Claude / Claude Code / Anthropic's Claude             | the agent                                     |
+   | Cursor / Copilot / Codex / OpenCode / Cowork / Hermes | the agent                                     |
+   | ChatGPT / GPT-4 / OpenAI's GPT (as runtime context)   | the agent                                     |
+   | "Claude will read the file…"                          | "the agent reads the file…"                   |
+   | "Ask Claude to…"                                      | "ask the agent to…"                           |
+   | Proper-noun tools (Read, Edit, Bash, Glob)            | generic capability ("read", "edit", "run")    |
+   | "Add this to your Claude Code settings / `.mcp.json`" | _delete entirely_ — handled by ren primitives |
+   | "Install in Cursor / VS Code extension"               | _delete entirely_                             |
 
    If the source ships a `.mcp.json` / `.cursor/` / `.claude/` directory, delete those files — ren attaches MCPs through agent definitions, not file-based config.
+
 8. **Attribution.** Capture provenance so the copy doesn't lose it. Walk back to the earliest known author: existing `ATTRIBUTION.md` / `CREDITS.md` / `AUTHORS`, then `LICENSE` headers, then frontmatter fields you moved in step 1, then the source repo's README / commit history. Record the earliest named author and immediate source in `metadata.author` / `metadata.source`. If the source already had an `ATTRIBUTION.md`, it carries forward verbatim — **never overwrite it**; append a short `## Migrated to ren` section noting the source and date. If the author truly can't be determined, leave `metadata.author` out and say so in the summary.
 
 ## Hard rules — do not
@@ -35,11 +36,11 @@ Walk SKILL.md top-to-bottom, then the bundled folder:
 
 ## Before / after — the minimum-surface edits
 
-| Source pattern                                                                                | Adapted pattern                                                                          |
-| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `Set GITHUB_TOKEN in your .env: export GITHUB_TOKEN=ghp_…`                                     | _(delete that line)_ + add `GITHUB_TOKEN` to `metadata.requiredCredentials` + insert vault hint line. |
-| `{"mcpServers": {"linear": {"command":"npx","args":["-y","@linear/mcp"]}}}`                    | _This skill expects the `linear` MCP to be attached to the agent. See [[ren-mcp-dev]]._    |
-| "First, `wget https://example.com/corpus.csv` into `./data/`."                                 | "First, the agent reads `corpus.csv` from the attached file store. See [[ren-systems-architect]]." |
-| "Claude will then summarize each row."                                                         | "The agent then summarizes each row."                                                     |
-| "Save progress to `./state.json` so you can resume later."                                     | "Persist progress to the attached memory store. See [[ren-systems-architect]]."           |
-| Frontmatter: `version: 1.2.0` / `author: Jane Doe` / `tags: [github, ci]`                      | Drop `version` (don't relocate). Move `author` + `tags` under `metadata`.                 |
+| Source pattern                                                              | Adapted pattern                                                                                       |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Set GITHUB_TOKEN in your .env: export GITHUB_TOKEN=ghp_…`                  | _(delete that line)_ + add `GITHUB_TOKEN` to `metadata.requiredCredentials` + insert vault hint line. |
+| `{"mcpServers": {"linear": {"command":"npx","args":["-y","@linear/mcp"]}}}` | _This skill expects the `linear` MCP to be attached to the agent. See [[ren-mcp-dev]]._               |
+| "First, `wget https://example.com/corpus.csv` into `./data/`."              | "First, the agent reads `corpus.csv` from the attached file store. See [[ren-systems-architect]]."    |
+| "Claude will then summarize each row."                                      | "The agent then summarizes each row."                                                                 |
+| "Save progress to `./state.json` so you can resume later."                  | "Persist progress to the attached memory store. See [[ren-systems-architect]]."                       |
+| Frontmatter: `version: 1.2.0` / `author: Jane Doe` / `tags: [github, ci]`   | Drop `version` (don't relocate). Move `author` + `tags` under `metadata`.                             |
