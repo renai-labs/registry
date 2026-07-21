@@ -1,6 +1,6 @@
 {
   "name": "ren",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
   "skills": "./data/skills/",
   "mcpServers": "./plugins/ren/.mcp.json",
