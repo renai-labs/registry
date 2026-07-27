@@ -1,5 +1,5 @@
 {
-  "pluginVersion": "0.5.1",
+  "pluginVersion": "0.6.0",
   "skills": {
     "audio-generation": "1.0.2",
     "baoyu-comic": "1.0.2",
@@ -20,12 +20,7 @@
     "popular-web-designs": "1.0.2",
     "pptx": "1.0.2",
     "ren-agent-dev": "1.1.5",
-    "ren-blueprint-dev": "0.0.3",
-    "ren-email": "0.0.4",
     "ren-github": "0.0.4",
-    "ren-mcp-dev": "1.0.4",
-    "ren-onboarding": "1.0.11",
-    "ren-repo-code-review": "0.0.2",
     "ren-skill-dev": "1.1.5",
     "ren-slack": "0.0.4",
     "ren-systems-architect": "0.1.2",
