@@ -1,6 +1,8 @@
 ---
 name: meta-ads-generate-creative-brief
 description: Generates creative testing plans and concept briefs for Meta Ads. Based on current performance data, produces prioritized creative concepts, hook strategies, format recommendations, and testing schedules. Reads [[meta-ads-creative-strategy-methodology]] to inform recommendations. Use when asked for a creative brief, new ad or creative concepts, a creative testing plan or creative calendar, or what ads to make next. Do NOT use to evaluate existing creative performance, which is [[meta-ads-analyze-creative]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Generate Creative Brief

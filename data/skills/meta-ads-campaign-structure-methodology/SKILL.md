@@ -1,6 +1,8 @@
 ---
 name: meta-ads-campaign-structure-methodology
 description: Campaign architecture framework for Meta Ads. Covers CBO vs ABO decision criteria, the three-campaign model (Testing, Winners, ASC), Consolidated Account Structure principles, and naming conventions. Reference material for [[meta-ads-audit-structure]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Campaign Structure Methodology

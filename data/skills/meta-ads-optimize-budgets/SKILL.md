@@ -1,6 +1,8 @@
 ---
 name: meta-ads-optimize-budgets
 description: Optimizes budget allocation across Meta Ads campaigns. Produces reallocation tables with projected impact, scaling recommendations, and pacing analysis. Uses marginal efficiency modeling to shift budget from diminishing-return campaigns to constrained-efficient ones. Use when asked to optimize, reallocate, or review budgets, scale spend, analyze pacing, or decide where to spend more. Do NOT use for bid strategy or cost caps, which is [[meta-ads-audit-bidding]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Optimize Budgets

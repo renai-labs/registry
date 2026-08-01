@@ -1,6 +1,8 @@
 ---
 name: meta-ads-performance-analysis
 description: Produces account and campaign-level performance dashboards for Meta Ads with week-over-week and month-over-month comparisons, trend analysis, and automated flag generation. Typically the first skill run in any review cadence. Use when asked for a performance analysis, performance dashboard, weekly report, account overview, or campaign performance review, or when asked how the ads are doing or for a week-over-week comparison. Do NOT use to run a full multi-skill review cadence, which is [[meta-ads-weekly-review]], or to root-cause a single campaign, which is [[meta-ads-investigate-campaign]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Performance Analysis

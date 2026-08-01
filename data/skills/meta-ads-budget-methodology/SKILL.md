@@ -1,6 +1,8 @@
 ---
 name: meta-ads-budget-methodology
 description: Budget allocation, scaling methodology, and pacing framework for Meta Ads. Covers the three-tier allocation model, vertical and horizontal scaling protocols, learning phase management, and budget scheduling. Reference material for [[meta-ads-optimize-budgets]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Budget Methodology

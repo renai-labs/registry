@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audit-audiences
 description: Audits audience strategy for Meta Ads accounts. Identifies audience overlap, saturation signals, expansion opportunities, and Advantage+ audience performance. Produces an audience health report with recommendations. Use when asked to audit or review audiences or targeting strategy, or to check audience overlap, saturation, or audience health.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audit Audiences

@@ -1,6 +1,8 @@
 ---
 name: meta-ads-catalog-methodology
 description: Product catalog and dynamic product ads (DPA) framework for Meta Ads. Covers catalog setup, feed optimization, product set strategies, Advantage+ Catalog Ads, and catalog-driven retargeting. Reference material for [[meta-ads-analyze-catalog]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Catalog Methodology

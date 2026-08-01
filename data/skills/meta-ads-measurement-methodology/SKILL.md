@@ -1,6 +1,8 @@
 ---
 name: meta-ads-measurement-methodology
 description: Measurement and attribution framework for Meta Ads. Covers attribution windows, Conversions API (CAPI) setup and deduplication, UTM strategies, third-party attribution tools (Triple Whale, Northbeam, Hyros), MER methodology, and incrementality testing. Reference material for [[meta-ads-audit-measurement]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Measurement Methodology

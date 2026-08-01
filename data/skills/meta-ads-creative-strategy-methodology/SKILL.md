@@ -1,6 +1,8 @@
 ---
 name: meta-ads-creative-strategy-methodology
 description: Comprehensive creative strategy framework for Meta Ads. Covers testing methodologies (DCT, 3:2:2, Faris method), creative fatigue detection, hook/hold rate benchmarks, creative diversification strategy, and volume requirements by spend level. Reference material for [[meta-ads-analyze-creative]] and [[meta-ads-generate-creative-brief]] when evaluating creative performance, planning creative tests, diagnosing fatigue, or calibrating benchmarks. Not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Creative Strategy Methodology

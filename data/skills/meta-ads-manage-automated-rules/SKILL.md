@@ -1,6 +1,8 @@
 ---
 name: meta-ads-manage-automated-rules
 description: Audits existing Meta Ads automated rules, identifies gaps in campaign protection, proposes new guardian rules for kill switches, budget pacing, creative fatigue, and scale triggers, and creates/updates rules with human approval before any changes execute. Use when asked to set up, check, or manage automated rules, guardian rules, kill switches, budget or pacing rules, creative fatigue alerts, or scale triggers. Do NOT use to change budgets directly, which is [[meta-ads-optimize-budgets]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Manage Automated Rules

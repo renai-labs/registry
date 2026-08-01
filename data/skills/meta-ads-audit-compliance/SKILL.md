@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audit-compliance
 description: Audits Meta Ads accounts for privacy and compliance requirements. Checks Special Ad Category status, GDPR/CCPA compliance, CAPI data processing options, ad content restrictions, and disapproval history. Produces a compliance status report. Use when asked for a compliance or privacy audit, a GDPR check, a Special Ad Category check, or a review of ad disapprovals.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audit Compliance

@@ -1,6 +1,8 @@
 ---
 name: meta-ads-campaign-diagnostics-methodology
 description: Systematic root-cause analysis framework for diagnosing underperforming Meta Ads campaigns. Provides an 8-branch diagnostic tree covering measurement, delivery, audience, creative, landing page, budget, bidding, and external factors. Each branch specifies diagnostic data to pull and resolution actions. Reference material for [[meta-ads-investigate-campaign]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Campaign Diagnostics Methodology

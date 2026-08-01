@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audit-measurement
 description: Audits measurement infrastructure for Meta Ads accounts. Checks dataset activity and event volume through the Meta MCP, then guides manual verification of Conversions API (CAPI), Event Match Quality, attribution, UTMs, and third-party integrations. Produces a measurement health report with clear evidence gaps. Use when asked for a measurement, tracking, pixel, CAPI, attribution, or conversion-tracking audit.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audit Measurement

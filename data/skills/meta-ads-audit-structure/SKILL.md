@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audit-structure
 description: Audits campaign structure for Meta Ads accounts. Assesses adherence to the three-campaign model, identifies fragmentation, evaluates CBO vs ABO usage, and checks naming convention compliance. Produces restructuring recommendations. Use when asked to audit or review account or campaign structure, restructure or simplify an account, check naming convention compliance, or when an account has too many campaigns.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audit Structure

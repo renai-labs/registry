@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audit-bidding
 description: Audits bidding strategies across Meta Ads campaigns. Assesses strategy-fit per campaign based on maturity level and performance data. Produces migration recommendations with sequenced timing to avoid learning phase disruption. Use when asked to audit or review bidding or bid strategy, review cost caps, optimize bidding, or assess whether bids are set correctly. Do NOT use for budget allocation or scaling spend, which is [[meta-ads-optimize-budgets]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audit Bidding

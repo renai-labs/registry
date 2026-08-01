@@ -1,6 +1,8 @@
 ---
 name: meta-ads-compliance-methodology
 description: Privacy and compliance framework for Meta Ads covering Special Ad Categories (housing, credit, employment), GDPR/CCPA requirements, Aggregated Event Measurement, Consent Mode, and data sharing restrictions. Reference material for [[meta-ads-audit-compliance]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Compliance Methodology

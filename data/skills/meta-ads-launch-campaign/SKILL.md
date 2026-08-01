@@ -1,6 +1,8 @@
 ---
 name: meta-ads-launch-campaign
 description: Takes a campaign brief and launches a complete Meta Ads campaign (campaign → ad set → creative → ad), enforcing naming conventions, running a pre-launch checklist, and producing a human-approved Launch Draft before any creation happens. Use when asked to launch, create, build, or set up a new Meta campaign or ad, or when handed a campaign brief.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Launch Campaign

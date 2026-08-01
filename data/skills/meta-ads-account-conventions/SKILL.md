@@ -1,6 +1,8 @@
 ---
 name: meta-ads-account-conventions
 description: Configuration engine for the Meta Ads skill set. Defines account identities, pixel/CAPI setup, KPI targets, flag thresholds, naming conventions, and business models. Every other Meta Ads skill reads from this configuration. Use when setting up Meta Ads for a new brand, agency, or client, or when account details change. Works for both single-brand media buyers and multi-client agencies.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Account Conventions

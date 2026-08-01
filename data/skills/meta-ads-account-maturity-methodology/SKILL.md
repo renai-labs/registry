@@ -1,6 +1,8 @@
 ---
 name: meta-ads-account-maturity-methodology
 description: Four-stage maturity model for Meta Ads accounts based on monthly conversion volume and spend level. Calibrates every recommendation across the Meta Ads skill set so guidance matches the account's sophistication level. Reference material read by the other Meta Ads skills at Step 0, not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Account Maturity Methodology

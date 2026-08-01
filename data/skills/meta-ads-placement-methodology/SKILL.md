@@ -1,6 +1,8 @@
 ---
 name: meta-ads-placement-methodology
 description: Placement optimization framework for Meta Ads covering performance benchmarks by placement (Feed, Stories, Reels, Right Column, Audience Network, Messenger), creative specifications per placement, and Advantage+ Placements vs manual selection. Reference material for any Meta Ads skill evaluating placement performance, not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Placement Methodology

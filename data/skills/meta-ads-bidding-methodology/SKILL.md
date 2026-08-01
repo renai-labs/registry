@@ -1,6 +1,8 @@
 ---
 name: meta-ads-bidding-methodology
 description: Bid strategy selection framework for Meta Ads mapped to account maturity stages. Covers Lowest Cost, Cost Cap, Bid Cap, and Minimum ROAS strategies with decision criteria, warning signals, and migration paths. Reference material for [[meta-ads-audit-bidding]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Bidding Methodology

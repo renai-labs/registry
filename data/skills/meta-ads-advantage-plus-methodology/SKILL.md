@@ -1,6 +1,8 @@
 ---
 name: meta-ads-advantage-plus-methodology
 description: Framework for analyzing Meta's Advantage+ suite, including shopping/app automation, Advantage+ Audience, Creative, Placements, and Catalog Ads. Requires current account/API verification before making creation or migration claims. Reference material for [[meta-ads-analyze-advantage-plus]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Advantage+ Methodology

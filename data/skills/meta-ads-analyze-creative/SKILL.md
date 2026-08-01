@@ -1,6 +1,8 @@
 ---
 name: meta-ads-analyze-creative
 description: Analyzes creative performance for Meta Ads accounts. Produces creative scorecards, fatigue detection reports, refresh priority lists, and creative test plans. Reads [[meta-ads-creative-strategy-methodology]] and [[meta-ads-account-maturity-methodology]] for calibrated analysis. Use when asked to analyze or audit creative or ad performance, detect creative or ad fatigue, plan a creative refresh, or work out which ads are working. Do NOT use to plan new concepts, which is [[meta-ads-generate-creative-brief]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Analyze Creative

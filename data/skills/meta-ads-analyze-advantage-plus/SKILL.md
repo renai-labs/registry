@@ -1,6 +1,8 @@
 ---
 name: meta-ads-analyze-advantage-plus
 description: Deep-analyzes Advantage+ campaigns including ASC performance, audience expansion behavior, existing vs new customer split, creative performance within Advantage+, and catalog performance. Produces an Advantage+ optimization report. Use when asked to analyze, review, audit, or optimize Advantage+ or ASC (Advantage+ Shopping) campaigns.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Analyze Advantage+

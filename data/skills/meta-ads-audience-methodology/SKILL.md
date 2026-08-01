@@ -1,6 +1,8 @@
 ---
 name: meta-ads-audience-methodology
 description: Audience strategy framework for Meta Ads covering broad targeting, interest targeting, lookalike audiences, custom audiences, Advantage+ audience, and exclusion strategies. Includes decision trees for when to use each approach based on account maturity and business model. Reference material for [[meta-ads-audit-audiences]], not a task to run on its own.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Audience Methodology

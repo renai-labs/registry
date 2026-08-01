@@ -1,6 +1,8 @@
 ---
 name: meta-ads-weekly-review
 description: Orchestrates the other Meta Ads skills into a structured weekly review workflow. Determines which skills to run for which accounts based on campaign types, maturity level, and cadence (weekly/monthly/quarterly). Includes 4 mandatory human checkpoints for recommendation review before output. Use when asked to run a weekly review, a Meta Ads review or audit, an account review, or a weekly ads check. Do NOT use for a single-area deep dive, which is the specific audit or analysis skill, or for a one-off dashboard, which is [[meta-ads-performance-analysis]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Meta Ads Weekly Review (Orchestration)

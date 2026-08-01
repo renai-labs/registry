@@ -1,6 +1,8 @@
 ---
 name: meta-ads-investigate-campaign
 description: Performs root-cause analysis on one underperforming Meta Ads campaign. Walks through the 8-branch diagnostic tree (measurement, delivery, audience, creative, landing page, budget, bidding, external) to identify the primary issue and produce a prioritized action plan with evidence chain. Use when asked to investigate, diagnose, or troubleshoot a campaign that is failing, underperforming, or not spending, or that has high CPA or delivery issues. Do NOT use for routine reporting, which is [[meta-ads-performance-analysis]].
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Investigate Campaign

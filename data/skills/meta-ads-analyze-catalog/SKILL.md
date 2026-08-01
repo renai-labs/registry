@@ -1,6 +1,8 @@
 ---
 name: meta-ads-analyze-catalog
 description: Analyzes product catalog and dynamic product ad performance for Meta Ads. Produces product tier classifications (Heroes/Sidekicks/Zombies/Villains), feed quality audit, product set performance analysis, and catalog optimization recommendations. Use when asked to analyze or audit a product catalog or product feed, review DPA performance, or work out which products are performing.
+metadata:
+  icon: "https://cdn.renai.build/skill-icons/meta.png"
 ---
 
 # Analyze Catalog
