@@ -50,9 +50,40 @@ Before execution, collect:
 - **Placements:** Advantage+ Placements or manual selection?
 - **Creatives:** Asset list — images/videos, headlines, primary text, CTAs, destination URL
 - **Flight dates:** Start date (and end date if lifetime budget)
-- **UTM parameters:** Tracking template or UTM string for destination URL
+- **UTM parameters:** The tracking string to apply. It travels as the creative's `url_tags` unless
+  the user asks for UTMs inside the destination URL itself.
 
 If any input is missing, ask before proceeding to the Launch Draft.
+
+### Optional: Launch Policy Requirements
+
+A user or an attached organization skill may declare requirements the launch must satisfy. Collect
+them verbatim — never invent, assume, or carry over defaults from another account or organization.
+
+- **Tracking mode:** `url_tags` (Meta appends the string to every destination URL) or UTMs written
+  into `link_url` directly. Default to `url_tags`.
+- **Exact `url_tags` string:** e.g. `utm_source=meta&utm_medium=cpc&utm_campaign={{campaign.name}}`.
+  No leading `?` or `&`, no spaces, no `#` fragment.
+- **Creative-feature enrollment:** which keys under
+  `degrees_of_freedom_spec.creative_features_spec` must be `OPT_IN` or `OPT_OUT`.
+- **Multi-advertiser preference:** whether ads must set `multi_advertiser_opt_out`.
+- **Which requirements are mandatory before activation.** A mandatory requirement that cannot be
+  proven blocks activation (Step 9).
+
+If no policy is declared, run the launch exactly as before — these fields are omitted entirely, not
+defaulted.
+
+**Verifiability, state it when the policy is collected:**
+
+| Requirement                    | Written by the MCP | Provable through the API                    |
+| ------------------------------ | ------------------ | ------------------------------------------- |
+| `url_tags`                     | Yes                | Yes — exact string returned on read-back    |
+| Creative-feature enrollment    | Yes                | Yes — for keys explicitly requested         |
+| `multi_advertiser_opt_out`     | Yes                | **No** — Graph rejects the field on ad reads |
+
+If the user declares multi-advertiser mandatory *and verified*, say plainly that no API can supply
+that proof today, and ask whether they accept it as write-only or want to drop the requirement. Do
+not resolve this for them.
 
 ---
 
@@ -97,6 +128,9 @@ Gather all inputs. For each field, validate:
   and switch to flat creatives or a manual Ads Manager workflow.
 - Day parting: if requested, confirm lifetime budget is being used (daily budget is incompatible with day parting).
 - CBO + ad set budgets: if CBO is enabled at campaign level, confirm no ad set-level budgets are set.
+- Launch policy, if declared: the `url_tags` string parses as `key=value` pairs joined by `&`; every
+  enrollment value is `OPT_IN` or `OPT_OUT`; each mandatory requirement is one this skill can
+  actually write. Reject a malformed value here rather than letting Graph reject the creative.
 
 ### Step 4: Apply Naming Convention
 
@@ -131,7 +165,7 @@ Pre-Launch Checklist
 ====================
 [PASS] Pixel is firing on destination URL (verified via pixel helper or recent events)
 [PASS] Custom conversion is active and receiving events
-[PASS] Tracking template / UTM parameters set
+[PASS] Tracking set -- url_tags supplied and well-formed
 [PASS] Cold audience estimated reach > 1M
 [PASS] Exclusions set (past purchasers, current customers)
 [WARN] No creative refresh since last campaign -- verify assets are new
@@ -193,13 +227,22 @@ Primary Text:   {text}
 Description:    {text or "None"}
 CTA Button:     {LEARN_MORE / SIGN_UP / etc.}
 Destination URL: {url}
-Tracking:       {UTM string}
+Tracking:       {url_tags string, or "UTMs written into the destination URL"}
+Creative Features: {requested enroll_status per key, or "None declared -- Meta defaults apply"}
 
 --- AD ---
 Name:    {generated name}
 Status:  PAUSED
 Creative: {creative name above}
 Ad Set:  {ad set name above}
+Multi-Advertiser Opt Out: {true/false, or "Not requested"}
+
+--- LAUNCH POLICY (omit this block when no policy was declared) ---
+| Requirement | Requested value | Mandatory before activation | Provable via API |
+|-------------|-----------------|-----------------------------|------------------|
+| url_tags | {exact string} | {yes/no} | yes |
+| Creative features | {key: status, ...} | {yes/no} | yes, for requested keys |
+| Multi-advertiser | {true/false} | {yes/no} | NO -- write-only |
 
 --- API CALL SEQUENCE ---
 1. create_campaign       -- creates campaign object
@@ -234,7 +277,11 @@ buying_type: "AUCTION"
 special_ad_categories: "[]"
 campaign_daily_budget: {minor_units}  # CBO only; omit for ABO
 campaign_bid_strategy: {strategy}     # CBO only
+is_adset_budget_sharing_enabled: false  # ABO only; Graph v25 requires the choice to be explicit
 ```
+
+For ABO the tool already defaults `is_adset_budget_sharing_enabled` to `false`; pass `true` only
+when ad sets are meant to share one budget. Omit it under a campaign budget.
 
 2. Call `meta_ads_create_ad_set` using the returned `campaign_id`. For CBO, omit ad-set budget and
 bid fields. For ABO, set `daily_budget` or `lifetime_budget` and the ad-set bid strategy. Use only
@@ -257,9 +304,24 @@ an optimization goal returned as valid by campaign creation.
    - static carousel: `cards`;
    - catalog carousel: `product_set_id` and `link_url`.
 
-Append UTM parameters to `link_url`; the tool has no `url_tags` parameter. Do not pass
-`asset_feed_spec`, `object_story_spec`, or `degrees_of_freedom_spec`. Dynamic Creative and
-Advantage+ creative asset-feed authoring are not supported by this path.
+Tracking: pass the requested string as `url_tags` and keep `link_url` the bare destination. Do not
+append UTMs to `link_url` when `url_tags` was requested — doing both double-tags the URL. Meta
+appends `url_tags` to every destination the creative serves.
+
+```
+url_tags: "utm_source=meta&utm_medium=cpc&utm_campaign={{campaign.name}}"
+link_url: "https://example.com/product"
+```
+
+Creative features: pass a declared enrollment policy as `degrees_of_freedom_spec`, either an object
+or a JSON-encoded string. Send only the keys the policy declares — Meta normalizes the rest itself.
+
+```
+degrees_of_freedom_spec: '{"creative_features_spec":{"product_tags":{"enroll_status":"OPT_OUT"}}}'
+```
+
+Still unsupported by this path: `asset_feed_spec` and `object_story_spec`. Dynamic Creative and
+Advantage+ creative asset-feed authoring remain a manual Ads Manager workflow.
 
 6. Call `meta_ads_create_ad`:
 
@@ -268,7 +330,12 @@ ad_account_id: {numeric_ad_account_id}
 ad_set_id: {ad_set_id}
 ad_name: {ad_name}
 creative: '{"creative_id":"{creative_id}"}'
+multi_advertiser_opt_out: true   # only when the policy asks for it; omit otherwise
 ```
+
+`multi_advertiser_opt_out` is accepted on write and **cannot be read back** — Graph rejects it as an
+Ad read field. A successful creation call is not proof. Never present the request echo, the `spec`
+field, or Ads Manager as verification.
 
 7. If day parting is requested, call `meta_ads_set_adset_schedule`:
 
@@ -307,10 +374,44 @@ Confirm:
 
 If any verification fails (object not found, wrong parameters), flag immediately.
 
+#### Policy verification matrix
+
+When a launch policy was declared, `meta_ads_get_creatives` returns `url_tags` and
+`degrees_of_freedom_spec` in its default field set. Compare read-back against what was requested and
+report every requirement:
+
+| Field | Requested | API read-back | Result |
+|-------|-----------|---------------|--------|
+| `url_tags` | {exact requested string} | {returned string, or "field absent"} | PASS / FAIL / NOT VERIFIED |
+| {feature key} | {OPT_IN or OPT_OUT} | {returned enroll_status, or "key absent"} | PASS / FAIL / NOT VERIFIED |
+| `multi_advertiser_opt_out` | {true/false} | not readable in Graph v25 | NOT VERIFIED (write accepted) |
+
+Rules for filling that table:
+
+- **PASS** only when Graph returned the value and it matches exactly.
+- **FAIL** when Graph returned a different value.
+- **NOT VERIFIED** when the field or key is absent, the read was rejected, or the field is not
+  readable at all. Never record an absent field as PASS, and never substitute `false`, empty, or an
+  inferred value for one Graph did not return.
+- Meta normalizes `degrees_of_freedom_spec` on read into a map of every feature it knows about —
+  roughly 80 entries, most of them `OPT_OUT`, even for a creative that requested nothing. **Compare
+  only the keys the policy declared.** An `OPT_OUT` for a key nobody asked about is Meta's default
+  state, not evidence that the policy was applied.
+- Report the requested and returned values verbatim. Do not summarize them as "tracking configured".
+
 ### Step 9: Activate Only After a Second Approval
 
-Show the verified IDs, PAUSED statuses, and preview links. Ask whether the user wants to activate
-now. If explicitly approved, call `meta_ads_activate_entity` in this order:
+Show the verified IDs, PAUSED statuses, preview links, and the policy verification matrix.
+
+**Activation guard.** If any requirement the user declared mandatory came out FAIL or NOT VERIFIED,
+do not activate. Leave every entity PAUSED, name the requirement and its exact read-back result, and
+say what would have to change: a corrected creative, a dropped requirement, or an explicit decision
+to accept a write-only field. A generic "proceed anyway" or an acknowledgment aimed at a pre-launch
+checklist item does not clear this — only the user retracting or amending that specific mandatory
+requirement does.
+
+Otherwise ask whether the user wants to activate now. If explicitly approved, call
+`meta_ads_activate_entity` in this order:
 
 1. `ad_account_id: {numeric_ad_account_id}`, `entity_id: {campaign_id}`, `entity_type: "campaign"`
 2. `ad_account_id: {numeric_ad_account_id}`, `entity_id: {ad_set_id}`, `entity_type: "ad_set"`
@@ -340,6 +441,15 @@ Objects Created:
 Ads Manager Links:
 - Campaign: https://www.facebook.com/adsmanager/manage/campaigns?act={account_id_digits}&selected_campaign_ids={campaign_id}
 - Ad Set: https://www.facebook.com/adsmanager/manage/adsets?act={account_id_digits}&selected_adset_ids={ad_set_id}
+
+Policy Verification (omit when no policy was declared):
+| Field | Requested | API read-back | Result |
+|-------|-----------|---------------|--------|
+| url_tags | {string} | {string or "absent"} | {PASS/FAIL/NOT VERIFIED} |
+| {feature key} | {enroll_status} | {enroll_status or "absent"} | {PASS/FAIL/NOT VERIFIED} |
+| multi_advertiser_opt_out | {true/false} | not readable in Graph v25 | NOT VERIFIED (write accepted) |
+
+Activation: {ALLOWED / BLOCKED -- mandatory requirement {name} is {FAIL/NOT VERIFIED}}
 
 Pre-Launch Checklist: {status}
 Naming Convention Applied: {yes/no}
@@ -381,6 +491,15 @@ See `references/campaign_templates.md` for full specs per type.
   `ad`. Obtain explicit approval immediately before activation.
 - This path cannot duplicate an existing ad while preserving its social proof. Treat that as a
   manual Ads Manager workflow.
+- `url_tags` and `degrees_of_freedom_spec` are creative fields written by `meta_ads_create_creative`
+  and returned by `meta_ads_get_creatives`. `link_url` stays the bare destination.
+- `multi_advertiser_opt_out` is an ad field: accepted on write, not readable in Graph v25.
+- `meta_ads_create_creative` never reuses an existing creative, so every call creates a new one. Two
+  creatives can differ only in tracking or enrollment policy without anything deduplicating them.
+- `has_payment_method: false` from `meta_ads_get_ad_accounts` means Graph exposed no funding source
+  to this token, not that the account is unfunded. Do not block a launch on it — a funded account
+  can report `false` and still create ads. Let Meta's own payment error be the answer, and report
+  that error verbatim along with every object already created.
 
 ---
 

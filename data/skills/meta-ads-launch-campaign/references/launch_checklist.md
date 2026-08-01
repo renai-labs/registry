@@ -145,10 +145,24 @@ This checklist runs before any campaign creation. Each item is evaluated as PASS
 ## Section 6: Tracking
 
 **6.1 UTM parameters / tracking template set**
-- Check: Destination URL includes UTM parameters or tracking template
+- Check: A `url_tags` string is supplied, or UTMs are written into the destination URL
 - PASS if: UTMs are present and correctly formatted
 - WARN if: No UTMs -- conversion will not be attributable in GA4 or other analytics tools
-- Note: `url_tags` field on the creative spec applies UTMs to all destination URLs
+- FAIL if: `url_tags` is malformed -- a leading `?` or `&`, whitespace, a `#` fragment, or anything
+  that is not `key=value` pairs joined by `&`. Meta appends the string to every destination URL, so
+  a malformed value corrupts every click.
+- Note: prefer `url_tags` over editing `link_url`. Meta applies it to all destination URLs the
+  creative serves, and it is readable back through `meta_ads_get_creatives` as launch evidence.
+- Note: do not do both. UTMs in `link_url` plus a `url_tags` string double-tags the URL.
+
+**6.3 Declared launch policy is writable and provable (only when a policy was declared)**
+- Check: every mandatory requirement can be written by this path, and whether the API can prove it
+- PASS if: each mandatory requirement is writable and readable back (`url_tags`, creative-feature
+  enrollment)
+- WARN if: a requirement is writable but not provable (`multi_advertiser_opt_out` -- Graph v25
+  rejects it as an Ad read field), and the user has accepted it as write-only
+- FAIL if: a mandatory requirement is not writable by this path, or the user requires API proof for
+  a field that has none. Resolve before creation rather than discovering it at the activation gate.
 
 **6.2 Destination URL is live and loads correctly**
 - Check: Manually verify the destination URL returns 200 OK and loads the correct page
@@ -170,7 +184,7 @@ Section 2 (Audience):    [X PASS, Y WARN, Z FAIL]
 Section 3 (Budget/Bid):  [X PASS, Y WARN, Z FAIL]
 Section 4 (Creative):    [X PASS, Y WARN, Z FAIL]
 Section 5 (Structure):   [X PASS, Y WARN, Z FAIL]
-Section 6 (Tracking):    [X PASS, Y WARN, Z FAIL]
+Section 6 (Tracking/Policy): [X PASS, Y WARN, Z FAIL]
 
 Overall: [PASS / PASS WITH WARNINGS / BLOCKED]
 
