@@ -28,7 +28,7 @@ Command-level mechanics for the build chain's composable artifacts: skills, MCPs
 - **Create mechanics.** Pass the prompt via `--body @file.json` for anything over a few lines — inline JSON breaks on quotes, backticks, and code fences. `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }`; to add one, `ren agents get` first and pass the union. Omit `skillVersionId` / `agentVersionId` to track latest (auto-roll-forward); pin only to freeze.
 - **Scope.** Pass `--scope user` on every command when the agent lives in the user namespace; `search` is the exception (it uses `--sources`).
 - **Iterate.** `ren agents get` (verify state) → `ren skills versions create` (fix skill content) / `ren agents versions create` (fix prompt or deps). The discipline — one logical change per version, fix from real runs — is [[ren-agent-dev]].
-- **Attach to a project.** As `primary` so chat sessions and triggers route to it → `references/wiring.md` (§Projects).
+- **Attach to a project.** In `all` mode (the default) so chat sessions and triggers route to it → `references/wiring.md` (§Projects).
 
 ## Credentials
 

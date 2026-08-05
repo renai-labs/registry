@@ -34,21 +34,20 @@ A `ready` status also returns `serverPassword` — the HTTP-basic password (user
 
 A project lives inside a pod and groups the agents, file/memory stores, and triggers for one scope of work. Commands: `ren projects create / get / list`, `ren projects agents|file-stores|memory-stores add/list/remove`. Scope inherits from the pod.
 
-### Primary vs subagent
+### Agent mode: `all` vs `subagent`
 
-Agents attach as `primary`, `subagent`, or `all` (both at once — the default).
+An attachment carries a `mode` — `all` (the default) or `subagent`, set with `--mode` on `ren projects agents add`. These are opencode's own mode names, passed straight through to the agent's runtime config.
 
-- **Primary** — a top-level assistant the user (or a trigger) talks to directly. Triggers and chat sessions route to the project's primary agent.
-- **Subagent** — a specialised helper a primary agent invokes for a task (e.g. an `Explore` agent doing read-only search).
-- **`all`** (the attachment default) — the same agent is exposed both ways: a direct chat agent _and_ callable as a subagent from any other primary.
+- **`all`** (the attachment default) — exposed both ways: a top-level assistant the user (or a trigger) talks to directly, _and_ callable as a subagent from any other agent.
+- **`subagent`** — a specialised helper another agent invokes for a task (e.g. an `Explore` agent doing read-only search). It never takes a chat session or a trigger fire itself.
 
-**Every project needs at least one agent attached as `primary` (or `all`).** Without one, triggers can't fire and chat sessions have nothing to land on.
+**Every project needs at least one agent attached as `all`.** Without one, triggers can't fire and chat sessions have nothing to land on.
 
 An agent attachment **tracks the agent's latest version by default** (omit `agentVersionId` on `projects agents add`); pass an explicit `agentVersionId` to freeze the snapshot. Attaching or detaching an agent or store propagates without restart — the next session sees it.
 
 ### Sessions
 
-A **session** is one chat with the project's primary agent (a user's, or one a fired trigger opens). The sandbox must be `ready` for it to load (§Pods). `ren sessions list / get / messages list` inspect past runs; `session.create` itself is SDK/web-app only. Hand a user the Ren UI deep link `<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>` (see the onboarding hand-off for base-URL rules).
+A **session** is one chat with one of the project's `all` agents (a user's, or one a fired trigger opens). The sandbox must be `ready` for it to load (§Pods). `ren sessions list / get / messages list` inspect past runs; `session.create` itself is SDK/web-app only. Hand a user the Ren UI deep link `<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>` (see the onboarding hand-off for base-URL rules).
 
 ### Gotchas
 
@@ -107,11 +106,11 @@ That specific 500 means _already attached_ — treat it as success, don't retry.
 
 ## Triggers
 
-A trigger runs a project's **primary** agent without anyone manually starting a session. It's pinned to a `projectAgent` (the agent's attachment to a project, id prefix `pra_`), so the project must already have a primary agent attached (§Projects). Today only **cron** triggers are in scope (id prefix `ctrg_`) — fire on a schedule with a fixed input message. Commands: `triggers create / update`.
+A trigger runs one of a project's agents without anyone manually starting a session. It's pinned to a `projectAgent` (the agent's attachment to a project, id prefix `pra_`), so the project must already have an agent attached in `all` mode (§Projects). Today only **cron** triggers are in scope (id prefix `ctrg_`) — fire on a schedule with a fixed input message. Commands: `triggers create / update`.
 
 ### Runtime behavior
 
-A trigger opens a fresh session against the project's primary agent on each fire, with `inputMessage` as the first user turn. The sandbox must be `ready` when it fires — Ren wakes a paused sandbox on demand, but a `failed` sandbox blocks the fire (§Pods). Toggling `isEnabled` propagates on the next manifest refresh; you don't need to recreate the trigger.
+A trigger opens a fresh session against its pinned agent on each fire, with `inputMessage` as the first user turn. The sandbox must be `ready` when it fires — Ren wakes a paused sandbox on demand, but a `failed` sandbox blocks the fire (§Pods). Toggling `isEnabled` propagates on the next manifest refresh; you don't need to recreate the trigger.
 
 ### Gotchas
 

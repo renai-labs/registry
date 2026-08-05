@@ -37,7 +37,7 @@ Full method, entry shapes, and a worked example: **`references/spec.md`**. The d
 
 ## The data model in one breath
 
-A **pod** is a durable sandbox plus a member set; everything attached to it (skills, MCPs, stores, vaults) is available to every project inside. A **project** groups the agents, stores, and triggers for one outcome. An **agent** is a prompt + model + dependencies (skills and MCPs). **Vaults** hold **credentials** (injected as env vars at runtime). **Stores** are durable volumes — file (read-only) or memory (read-write). **Triggers** run a project's primary agent on a cron. Scope tiers are `user` / `org` / `registry`. Full detail: `ren docs model`.
+A **pod** is a durable sandbox plus a member set; everything attached to it (skills, MCPs, stores, vaults) is available to every project inside. A **project** groups the agents, stores, and triggers for one outcome. An **agent** is a prompt + model + dependencies (skills and MCPs). **Vaults** hold **credentials** (injected as env vars at runtime). **Stores** are durable volumes — file (read-only) or memory (read-write). **Triggers** run one of a project's agents on a cron. Scope tiers are `user` / `org` / `registry`. Full detail: `ren docs model`.
 
 ## Scope discipline
 
@@ -76,7 +76,7 @@ Dependencies build **leaf-up**. Each step routes to where its mechanics live —
 3. **Credentials** (orthogonal) — wire only if a skill/MCP needs auth; connect/refresh choreography → [[ren-vaults-credentials-dev]]. Design below.
 4. **Agent** — prompt + model + the skills/MCPs above. Writing / model / dependency judgment → [[ren-agent-dev]]; create & version commands → `references/operations.md`.
 5. **Stores** — default: attach the existing default file/memory stores to the fresh project; create new only for isolation → `references/wiring.md`.
-6. **Project** — always a fresh project in the private pod; attach the agent as `primary` and the stores from step 5 → `references/wiring.md`.
+6. **Project** — always a fresh project in the private pod; attach the agent in `all` mode and the stores from step 5 → `references/wiring.md`.
 7. **Trigger** (optional) — cron schedule → `references/wiring.md`.
 8. **Sandbox readiness + session** — get the sandbox `ready`, then hand off → `references/wiring.md`.
 

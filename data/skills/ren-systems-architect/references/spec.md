@@ -10,7 +10,7 @@ Sections: `meta`, `brief`, `agents[]`, `skills[]`, `mcps[]`, `projects[]`, `trig
 
 - **planned** = the entry has a `def` (what to build), no `ref`.
 - **built** = the entry has a `ref` (`{ id, versionId? }`) pinning it to a live row. Keep the `def` as provenance.
-- **Cross-references are always by slug** — agent → its `skills`/`mcps`, project → `primaryAgent`/`subAgents`, trigger → `project`. Pinning an id never rewrites a reference.
+- **Cross-references are always by slug** — agent → its `skills`/`mcps`, project → its `agents[]`, trigger → `project`. Pinning an id never rewrites a reference.
 - A Spec is **resolved** when every entry has a `ref`. Publish requires this.
 
 `meta.notes`, the whole `brief`, and every entry's `def`/`requirements`/`notes` are **private** — stripped from the public registry view. Only `{ slug, ref, name }` (+ project `channels`) survives publish. Put the shareable pitch in `meta.name`/`meta.description`.
@@ -61,7 +61,7 @@ Re-read `spec.json` from disk each iteration rather than trusting context — th
 - **skill** — `{ name, purpose, registrySlug? }`. `purpose` drives [[ren-skill-dev]] for a planned custom skill; `registrySlug` marks a reuse.
 - **mcp** — `{ name, registrySlug? | remoteUrl?, auth? }` where `auth` ∈ `oauth | basic | api_key | none | mcp_provider`.
 - **agent** — `{ name, model?, scope?, promptIntent?, skills: slug[], mcps: slug[] }`. `model` is a Ren model key (`opus-4-8`, `sonnet-5`, `haiku-4-5`); the actual prompt lives on the agent version, never inlined in the Spec — `promptIntent` records what it must accomplish.
-- **project** — `{ name, description?, primaryAgent?, subAgents?, permission?, gitRepos?, buildOrder? }`. A project also carries `channels[]` (see below).
+- **project** — `{ name, description?, agents?, permission?, gitRepos?, buildOrder? }` where `agents` is `{ slug, mode }[]` and `mode` ∈ `all` (default) | `subagent`. A project also carries `channels[]` (see below).
 - **trigger** — `{ project, agent?, schedule, timezone?, until?, inputMessage, enabled? }`. Always concrete; `ref` is `{ id }` once created.
 - **environment** — `def: { networking, packages }` mirroring `environment/schema.ts`. One per Spec, attached to the pod at install.
 
@@ -122,7 +122,7 @@ When `spec.json` has no planned entries left, it's a shareable blueprint. Hand o
   "projects": [
     {
       "slug": "triage-proj",
-      "def": { "name": "Bug triage", "primaryAgent": "triage" },
+      "def": { "name": "Bug triage", "agents": [{ "slug": "triage", "mode": "all" }] },
       "channels": [{ "slug": "bugs-in", "kind": "slack", "purpose": "bug-report intake" }]
     }
   ],
