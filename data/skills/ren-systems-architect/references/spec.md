@@ -60,7 +60,7 @@ Re-read `spec.json` from disk each iteration rather than trusting context — th
 
 - **skill** — `{ name, purpose, registrySlug? }`. `purpose` drives [[ren-skill-dev]] for a planned custom skill; `registrySlug` marks a reuse.
 - **mcp** — `{ name, registrySlug? | remoteUrl?, auth? }` where `auth` ∈ `oauth | basic | api_key | none | mcp_provider`.
-- **agent** — `{ name, model?, scope?, promptIntent?, skills: slug[], mcps: slug[] }`. `model` is a Ren model key (`opus-4-8`, `sonnet-5`, `haiku-4-5`); the actual prompt lives on the agent version, never inlined in the Spec — `promptIntent` records what it must accomplish.
+- **agent** — `{ name, model?, scope?, promptIntent?, skills: slug[], mcps: slug[] }`. `model` is a Ren model key (`opus-5`, `sonnet-5`, `haiku-4-5`); the actual prompt lives on the agent version, never inlined in the Spec — `promptIntent` records what it must accomplish.
 - **project** — `{ name, description?, agents?, permission?, gitRepos?, buildOrder? }` where `agents` is `{ slug, mode }[]` and `mode` ∈ `all` (default) | `subagent`. A project also carries `channels[]` (see below).
 - **trigger** — `{ project, agent?, schedule, timezone?, until?, inputMessage, enabled? }`. Always concrete; `ref` is `{ id }` once created.
 - **environment** — `def: { networking, packages }` mirroring `environment/schema.ts`. One per Spec, attached to the pod at install.
