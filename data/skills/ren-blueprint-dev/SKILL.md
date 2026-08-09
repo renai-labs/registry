@@ -65,7 +65,7 @@ Then, in one transaction: insert staged forks, create + attach the environment, 
 Behaviors to tell the user about:
 
 - **Projects are always created fresh** (new ids) — install never reuses an existing project.
-- **Cron triggers install disabled and Temporal-unsynced.** They won't fire until the user deliberately enables one (a later `ren triggers update` re-syncs it). Never assume an installed blueprint's crons are live.
+- **Cron triggers install disabled but Temporal-synced.** Install creates them through the cron domain after the transaction commits, so each has a real (paused) schedule; they won't fire until the user deliberately enables one (`ren cron-triggers update <projectId> <id> --is-enabled true`). Never assume an installed blueprint's crons are live. A cron whose agent didn't materialize lands in `skipped[]`.
 - **Every installed project gets the `ren` meta-agent injected** — install hard-fails if no published `ren` agent exists in the registry.
 - **Environment is created in the installer's org and attached to the pod.** If the pod already has an environment, install **warns and skips** (appended to `skipped[]`) rather than overwriting.
 - **Replays are published but not installed** — a blueprint's replays cascade-publish but `install` has no replay step. Don't promise them in the installed pod.

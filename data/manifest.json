@@ -1,8 +1,8 @@
 {
-  "pluginVersion": "0.8.2",
+  "pluginVersion": "0.8.3",
   "skills": {
     "ren-agent-dev": "1.1.6",
-    "ren-blueprint-dev": "0.0.3",
+    "ren-blueprint-dev": "0.0.4",
     "ren-email": "0.0.4",
     "ren-github": "0.0.4",
     "ren-mcp-dev": "1.0.4",
