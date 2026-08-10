@@ -22,11 +22,11 @@ Telegram is **decoupled from Ren** - one org-level bot, and chats (DMs or groups
 
 Both surfaces share the bot. Without the bot in the chat, neither works.
 
-> Commands and flags: `ren telegrams chats list | set | unset`; `ren telegrams claim-code`; `ren telegrams link-code | me | unlink`; `ren mcps get-by-slug telegram`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
+> Commands and flags: `ren telegram chats list | set | unset`; `ren telegram claim-code`; `ren telegram link-code | me | unlink`; `ren mcps get-by-slug telegram`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
 
 ## Setup order - always
 
-1. **Add the bot to the chat first.** Start a DM with the bot, or add it to a group. A chat is invisible to Ren until the bot is a member - `ren telegrams chats list` only returns chats the bot can see.
+1. **Add the bot to the chat first.** Start a DM with the bot, or add it to a group. A chat is invisible to Ren until the bot is a member - `ren telegram chats list` only returns chats the bot can see.
 2. **Map the chat to a project** (Surface A) and/or **attach the `telegram` MCP** to an agent (Surface B). A and B are independent - one, both, or neither.
 
 ---
@@ -37,10 +37,10 @@ Use this when a user should be able to **message a Ren project from a Telegram c
 
 ### Two ways to map a chat to a project
 
-**Direct mapping** - when you already know the chat id (from `ren telegrams chats list`):
+**Direct mapping** - when you already know the chat id (from `ren telegram chats list`):
 
 ```
-ren telegrams chats set <chat-id> \
+ren telegram chats set <chat-id> \
   --project-id                 <prj_> \
   --default-project-agent-id   <pra_> \
   --fallback-sender-user-id    <usr_> \
@@ -52,7 +52,7 @@ ren telegrams chats set <chat-id> \
 **Claim deep link** - the way to map a chat (especially a DM) whose id you cannot easily get. Mint a link and open it _inside_ the target DM or group:
 
 ```
-ren telegrams claim-code \
+ren telegram claim-code \
   --project-id                 <prj_> \
   --default-project-agent-id   <pra_> \
   --fallback-sender-user-id    <usr_>
@@ -72,9 +72,9 @@ ren telegrams claim-code \
 Telegram senders are decoupled from Ren identities. To attribute a sender to their real Ren user (instead of the fallback), the user links their account:
 
 ```
-ren telegrams link-code     # mint a deep link to connect a Telegram account to the caller's Ren user
-ren telegrams me            # whether the caller's Ren user has a linked Telegram account
-ren telegrams unlink        # disconnect the linked Telegram account
+ren telegram link-code     # mint a deep link to connect a Telegram account to the caller's Ren user
+ren telegram me            # whether the caller's Ren user has a linked Telegram account
+ren telegram unlink        # disconnect the linked Telegram account
 ```
 
 An unlinked sender runs as the chat's `fallbackSenderUserId`.

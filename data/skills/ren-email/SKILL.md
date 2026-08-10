@@ -24,13 +24,13 @@ Ren email is a native project-level channel. It gives a project a deterministic 
 
 Users can send, forward, or cc emails to that address. Ren creates or resumes the project session, runs the agent, and replies back to the same email thread. The agent does not need to know email exists for normal inbound email workflows.
 
-> Commands and flags: `ren emails list`; `ren emails set <project-id>` with optional `--default-project-agent-id` and `--fallback-sender-user-id`; `ren emails unset <project-id>`; `ren mcps get-by-slug email`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
+> Commands and flags: `ren email list`; `ren email set <project-id>` with optional `--default-project-agent-id` and `--fallback-sender-user-id`; `ren email unset <project-id>`; `ren mcps get-by-slug email`; `ren agents versions create <agt_>` with `--body '{"mcpIds":[...]}'`. Full tree: `ren docs commands`.
 
 ## Setup order
 
 1. Find or create the project that should own the mailbox.
 2. Pick the project agent attachment id (`pra_`) that should answer email.
-3. Enable the mailbox with `ren emails set <project-id>`.
+3. Enable the mailbox with `ren email set <project-id>`.
 4. Share the returned mailbox address with the user.
 5. Attach the `email` MCP only if the agent must proactively send email.
 
@@ -39,7 +39,7 @@ Users can send, forward, or cc emails to that address. Ren creates or resumes th
 Use this when the user should be able to email a Ren project and get a reply in the same thread.
 
 ```bash
-ren emails set <project-id> \
+ren email set <project-id> \
   --default-project-agent-id <pra_> \
   --fallback-sender-user-id <usr_>
 ```
@@ -53,20 +53,20 @@ The body fields:
 Check existing mailboxes with:
 
 ```bash
-ren emails list
+ren email list
 ```
 
 Disable a project's mailbox with:
 
 ```bash
-ren emails unset <project-id>
+ren email unset <project-id>
 ```
 
 ## Runtime invariants
 
 - **The agent does not know it is email.** No email-specific prompt branch, no Email MCP, and no mailbox polling. The email arrives as a normal session turn.
 - **Replies are platform-managed.** When a user sends or forwards email to the project mailbox, Ren deterministically replies to that same email thread.
-- **Mailboxes are project-level.** Use `ren emails set` and `ren emails unset` per `projectId`; do not configure email at the agent, pod, or org level.
+- **Mailboxes are project-level.** Use `ren email set` and `ren email unset` per `projectId`; do not configure email at the agent, pod, or org level.
 - **No Gmail scanning.** For scanning Gmail, labelling messages, or taking actions inside a user's Google mailbox, use the Google Workspace skill instead. This skill is for Ren's native project mailbox.
 
 ## Proactive outbound email

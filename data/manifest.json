@@ -1,9 +1,9 @@
 {
-  "pluginVersion": "0.8.3",
+  "pluginVersion": "0.8.4",
   "skills": {
     "ren-agent-dev": "1.1.6",
     "ren-blueprint-dev": "0.0.4",
-    "ren-email": "0.0.4",
+    "ren-email": "0.0.5",
     "ren-github": "0.0.4",
     "ren-mcp-dev": "1.0.4",
     "ren-onboarding": "1.0.11",
@@ -11,7 +11,7 @@
     "ren-skill-dev": "1.1.6",
     "ren-slack": "0.0.4",
     "ren-systems-architect": "0.1.4",
-    "ren-telegram": "0.0.3",
+    "ren-telegram": "0.0.4",
     "ren-vaults-credentials-dev": "1.0.4"
   }
 }
