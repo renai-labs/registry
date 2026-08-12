@@ -37,7 +37,9 @@ scheduled read).
 - **Registry MCP** — server, transport and auth already correct, tools carry descriptions. Skip the
   "work out this API" phase. `ren mcps search --sources user org registry`, catalog in
   `ren docs integrations`.
-- **Skill + API key** — no registry MCP fits but the product has an HTTP API. Declare the env var in
+- **Skill + API key** — no registry MCP fits but the product has an HTTP API. Search for an existing
+  one first (`ren skills list --query X`) — this rung is where a connector most often already exists
+  under a name the MCP search never sees. Otherwise write it: declare the env var in
   `requiredCredentials`; the platform injects it.
 - **Custom MCP** — last. Unmaintained surface you now own. Right mainly when the user wants to bring
   their own MCP server onto the platform.

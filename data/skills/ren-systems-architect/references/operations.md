@@ -25,6 +25,20 @@ flags: `ren docs commands`; the MCP transport exposes the same operations as `mc
   (prompts, JSON blobs) belongs in a file: inline JSON breaks on quotes, backticks and fences.
 - `--output json` for anything you need to parse.
 
+## Finding an integration
+
+Before telling anyone a connection doesn't exist, search **both** surfaces — an integration arrives as
+an MCP *or* as a skill that drives the API with a credential, and only one of them is called an MCP:
+
+```bash
+ren mcp search --query shopify --sources user org registry
+ren skills list --query shopify          # private + org + published in one read
+```
+
+`ren topology get` is not this search: it shows what is **attached** to the agents here, so an MCP or
+skill that exists but sits on no agent is invisible in it. Attaching an existing skill to an agent is
+a far smaller ask than building a custom MCP — check for one before proposing to wire anything new.
+
 ## Pods and sandboxes
 
 ```bash

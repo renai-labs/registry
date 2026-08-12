@@ -84,6 +84,10 @@ wakes Ren first — a mapped Slack channel fires only on an @mention and **drops
 other apps**, so "the alert posts to the channel and Ren picks it up" never fires.
 `references/composition.md`.
 
+Search **both** surfaces before you call a connector missing — `ren mcp search --query X` and
+`ren skills list --query X`. A skill with a credential is as much a connection as an MCP, and the
+topology only shows what is already attached. `references/operations.md`.
+
 ## The outcome contract
 
 A build is done when you can say, unprompted and in two sentences: **what wakes it · where output
