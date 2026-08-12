@@ -3,18 +3,8 @@
   "groupings": [
     {
       "title": "Ren",
-      "description": "Meta-skills for building on Ren — pods, projects, agents, skills, MCPs, triggers, credentials, and onboarding.",
+      "description": "Building on Ren — turning recurring work into agents, projects, stores, credentials, channels, and triggers.",
       "skills": [
-        "ren-agent-dev",
-        "ren-skill-dev",
-        "ren-mcp-dev",
-        "ren-blueprint-dev",
-        "ren-vaults-credentials-dev",
-        "ren-github",
-        "ren-slack",
-        "ren-email",
-        "ren-telegram",
-        "ren-onboarding",
         "ren-systems-architect"
       ]
     }
