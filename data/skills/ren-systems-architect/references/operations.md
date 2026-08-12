@@ -1,35 +1,212 @@
-# Ren operations — composing the artifacts
+# Operations
 
-Command-level mechanics for the build chain's composable artifacts: skills, MCPs, agents, and the credential wiring that backs them. The architect body owns the decisions (reuse-first, scope, ordering); this file is how to actually mutate Ren. The dev skills ([[ren-skill-dev]], [[ren-agent-dev]], [[ren-mcp-dev]]) hold authoring craft only — load one to _write_ a custom artifact well, not to run these commands. Full flag detail: `ren docs commands` (CLI) or the equivalent `mcp__ren__*` tools (MCP transport).
+How to actually mutate Ren. Judgment about *what* to build is `references/design-patterns.md`. Full
+flags: `ren docs commands`; the MCP transport exposes the same operations as `mcp__ren__*` tools.
 
-## Skills
+## Contents
 
-- **Search.** `ren skills list` shows only your own items; only `ren skills search --sources user org registry` reaches the registry. Which skill per task → `ren docs integrations`.
-- **Inspect before forking.** `ren skills versions data <id> <version> --scope user --format presigned` downloads a skill's bundled files so you can judge whether to fork.
-- **Fork.** `ren skills copy <id> --scope user --name "my-variant"` copies a skill into your scope as an editable copy, leaving the original untouched (`--scope user` to read a user-scope source; registry/org sources don't need it).
-- **Author custom.** The authoring craft is [[ren-skill-dev]] (incl. adapting a forked or community SKILL.md). Then create it (below).
-- **Create / publish / version.** `ren skills create`; version bumps are Ren-owned — never put `version` in frontmatter.
-- **Scope.** A `user` skill can back a `user` or `org` agent, but you can't pull a narrower-scope skill into a broader-scope publication.
-- **Attach to an agent.** Add the `skillId` to the agent version's `skills: [{ skillId }]` list (full-replace — see §Agents).
+- [Conventions](#conventions)
+- [Pods and sandboxes](#pods-and-sandboxes)
+- [Projects](#projects)
+- [Sessions and hand-off](#sessions-and-hand-off)
+- [Stores and files](#stores-and-files)
+- [Pod databases](#pod-databases)
+- [Cron triggers](#cron-triggers)
+- [Artifacts](#artifacts)
+- [Environments](#environments)
+- [Models and instructions](#models-and-instructions)
 
-## MCPs
+## Conventions
 
-- **Registry first.** Ren ships a public registry of tested, production-ready MCPs (server URL, transport, auth config already correct) — always prefer one over rolling your own. `ren mcps search --sources user org registry` is the live search; the index is `ren docs integrations`. Register a custom remote MCP → [[ren-mcp-dev]] (definition craft + the `validate-mcp.js` validator), then create it (below).
-- **Commands.** `ren mcps search / get / get-by-slug / create / update`, plus the OAuth verbs.
-- **Create mechanics.** `authConfig` is nested, so it goes through `--body` on create.
-- **Scope.** `--sources` (the read-time tier filter on `mcps search`) and `--scope` (the auth-resolution lens on every other command) are different flags. If a valid MCP id 404s, missing `--scope user` is the first thing to check.
-- **Authorize.** OAuth — `ren mcps oauths connect <mcp-id>` runs the consent flow and resolves the default vault automatically — or an API-key credential in a vault. Choreography and gotchas: [[ren-vaults-credentials-dev]].
-- **Attach to an agent.** Add the id to the agent version's `mcps: [{ mcpId }]` list.
+- **No `--scope` flag.** Create with `--visibility private|org` (default `org`); reads return your
+  private rows, org rows and published rows together. `search` filters with
+  `--sources user org registry`.
+- **Nested fields go through `--body`** — JSON string, `@file`, or `@-`. Anything longer than a line
+  (prompts, JSON blobs) belongs in a file: inline JSON breaks on quotes, backticks and fences.
+- `--output json` for anything you need to parse.
 
-## Agents
+## Pods and sandboxes
 
-- **Commands.** `ren agents create`, `ren agents versions create`, `ren agents get`, `ren agents search`.
-- **Model catalog.** `ren models list --output json` for the live catalog (many providers). Pass `--model null` (via `--body '{"model":null}'`) to inherit the pod default. The choice _judgment_ — stop and ask the user, present heavy/balanced/light with pricing — is [[ren-agent-dev]].
-- **Create mechanics.** Pass the prompt via `--body @file.json` for anything over a few lines — inline JSON breaks on quotes, backticks, and code fences. `skills` / `mcps` are **full-replace** lists of `{ skillId }` / `{ mcpId }`; to add one, `ren agents get` first and pass the union. Omit `skillVersionId` / `agentVersionId` to track latest (auto-roll-forward); pin only to freeze.
-- **Scope.** Pass `--scope user` on every command when the agent lives in the user namespace; `search` is the exception (it uses `--sources`).
-- **Iterate.** `ren agents get` (verify state) → `ren skills versions create` (fix skill content) / `ren agents versions create` (fix prompt or deps). The discipline — one logical change per version, fix from real runs — is [[ren-agent-dev]].
-- **Attach to a project.** In `all` mode (the default) so chat sessions and triggers route to it → `references/wiring.md` (§Projects).
+```bash
+ren pods list                              # private and shared pods you can see
+ren pods get <pod_…>
+ren pods create --name "Growth" --visibility org
+ren pods members add <pod_…> --user-id <usr_…>      # members are pod-scoped, not project-scoped
+ren pods update <pod_…> --instructions @pod-agents.md
+```
 
-## Credentials
+Sandbox readiness — check before handing back a session:
 
-The design (what a vault is, scope, resolution) is in the architect body; the OAuth connect/poll flow, DCR-incompatible handling, the one-connect-at-a-time hazard, the API-key `--body` shape, and lazy refresh are all in [[ren-vaults-credentials-dev]]. A credential does nothing until its vault is attached to the pod that runs the agent — attach the vault (`references/wiring.md`, §Pods) and the env var resolves at session startup.
+```bash
+ren pods sandboxes status <pod_…> --output json
+```
+
+A discriminated union on `status`:
+
+| `status`       | Meaning and what to do                                                            |
+| -------------- | ----------------------------------------------------------------------------------- |
+| `ready`        | live; proceed. Also returns `serverPassword` (HTTP-basic, username `opencode`)     |
+| `provisioning` | in flight, with a `phase`; poll again without yielding to the user                 |
+| `absent`       | run `ren pods sandboxes provision <pod_…>`, then poll. Provision is idempotent and resumes a paused box |
+| `failed`       | carries `reason`. Surface it plainly and stop; do not retry on autopilot            |
+
+`ren pods sandboxes teardown <pod_…>` destroys it; the next session provisions a fresh one.
+
+## Projects
+
+```bash
+ren projects create --pod-id <pod_…> --name "Deploy watch" --visibility private
+ren projects update <prj_…> --instructions @project-agents.md
+ren projects get <prj_…> --output json
+# Write project-update.json with the existing gitRepos plus the new repository.
+ren projects update <prj_…> --body @project-update.json
+ren projects archive <prj_…>
+```
+
+`gitRepos`, `references` and `permission` are nested — `--body` only. Creating a project requires a
+published `ren` meta agent and injects it automatically, so every project starts with an agent that
+can answer. `gitRepos` is full-replace on update: read the project first, merge by repository URL and
+pass the complete list, or existing bindings are removed.
+
+Capabilities attach to the project or to an agent:
+
+```bash
+ren projects skills add <prj_…> --skill-id <skl_…>      # omit --skill-version-id to track latest
+ren projects mcps add <prj_…> --mcp-id <mcp_…>
+ren projects skills resolution <prj_…>                  # what actually resolved, with pin conflicts
+ren projects file-stores add <prj_…> --file-store-id <fst_…>
+ren projects memory-stores add <prj_…> --memory-store-id <mst_…>
+```
+
+Re-attaching something already attached is a conflict error, not an upsert — `… list` first.
+
+Agents attach with a mode:
+
+```bash
+ren projects agents add <prj_…> --agent-id <agt_…> --mode all
+ren projects agents list <prj_…>          # source of the pra_ attachment id
+ren projects agents update <prj_…> <agt_…> --mode subagent
+```
+
+- **`all`** (default) — talks to users and takes trigger fires, and is callable as a subagent.
+- **`subagent`** — only invoked by another agent; never takes a chat session or a trigger.
+
+A project needs at least one `all` agent or triggers and chats have nowhere to land. Omit
+`--agent-version-id` to track the agent's latest version; pass one to freeze.
+
+**Channel mappings and cron triggers pin the `pra_` attachment id, not the `agt_` agent id.**
+
+## Sessions and hand-off
+
+```bash
+ren sessions create --pod-id <pod_…> --project-id <prj_…> --title "First run"
+ren sessions create-status <job-id>
+ren sessions list --project-id <prj_…>
+ren sessions messages list <ses_…>
+ren sessions url <ses_…>        # raw OpenCode sandbox URL + basic-auth password
+ren sessions traces list <ses_…> --output json --fields core,io,observations,metrics,scores
+ren replays share --body '{"sessionId":"<ses_…>"}'   # public scrub link to a run
+```
+
+The sandbox must be `ready` before a session loads. Hand users the Ren app link, not the raw sandbox
+URL:
+
+```
+<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>
+<base>/pods/<podId>/projects/<projectId>
+<base>/pods/<podId>/vaults      where the user adds this pod's credentials
+<base>/vaults                   the org's credentials
+```
+
+`<base>` is `${REN_APP_URL}` when a shell resolves it, otherwise `https://renai.build/app`. Never
+emit a `localhost` link.
+
+## Stores and files
+
+```bash
+ren memory-stores create --name "Team memory" --visibility org
+ren file-stores files write-content <fst_…> --path notes.md --content @notes.md   # ≤5 MiB
+ren file-stores files list <fst_…>
+ren file-stores files presign-download <fst_…> --path notes.md
+ren file-stores files delete <fst_…> --path notes.md
+```
+
+`memory-stores` takes the identical subcommands. For anything above 5 MiB (ceiling 50 MiB), use the
+three-step upload — neither CLI nor MCP moves the bytes for you:
+
+```bash
+ren file-stores files start-upload <fst_…> --path data.csv --size 1234 --output json
+# → { url, uploadId, expiresAt }
+curl -X PUT --data-binary @data.csv "<url>"
+ren file-stores files finalize-upload <fst_…> --path data.csv --upload-id <uploadId>
+```
+
+Until finalize runs, the file sits in staging: invisible to workspaces, absent from the file list,
+and reaped after 24 hours.
+
+## Pod databases
+
+```bash
+ren pod-databases create <pod_…> --name "Seen items"     # → /home/user/db/<slug>.db
+ren pod-databases list <pod_…>
+ren pod-databases archive <pod_…> <pdb_…>                # keeps the replicated bytes
+```
+
+Shared by every project in the pod. Query the file; never edit it by hand.
+
+**Create the row first.** A SQLite file an agent writes bare into `/home/user/db/` replicates, but on
+the next sandbox rebuild only rows from the manifest hydrate back — the bare file vanishes.
+
+**Recreating an archived slug inherits its old data.** The replica is keyed by filename, so a new row
+under an old slug reads back the old replica. A fresh ledger that needs to start clean must use a new
+slug.
+
+## Cron triggers
+
+```bash
+ren cron-triggers create <prj_…> \
+  --project-agent-id <pra_…> \
+  --schedule "0 9 * * 1" --timezone "Europe/London" \
+  --input-message "Post last week's deploy failures to #deploys" \
+  --is-enabled true
+ren cron-triggers update <prj_…> <ctrg_…> --is-enabled false
+ren cron-triggers list <prj_…>
+```
+
+`--schedule` is a 5-field cron expression. **Always pass `--timezone`** — unset means UTC. Update
+takes the project id as well; it is the auth key, not a change field. Toggling `isEnabled` propagates
+on the next manifest refresh.
+
+Each fire opens a **fresh session** against the pinned agent with `inputMessage` as the first user
+turn. A paused sandbox is woken on demand; a `failed` one blocks the fire.
+
+## Artifacts
+
+These run **only inside a Ren sandbox** and infer the pod from the sandbox token — no pod id, no
+artifact id, slugs throughout. The building craft is the `ren-artifact` skill; when to reach for one
+and how it stays fresh is `references/artifacts.md`.
+
+```bash
+ren artifacts scaffold <slug> --title "Weekly report" --template <ren-artifact dir>/assets/template.tar.gz
+ren artifacts list                       # what this pod already has
+ren artifacts sync <slug>                # push the built directory to storage
+ren artifacts archive <slug>             # takes the URL offline, keeps the bytes
+```
+
+`bun run build` in the artifact directory after a code change, `bun run sync-data` after a data
+change; both push when they finish. The returned URL is unauthenticated and stable across rebuilds.
+
+## Environments
+
+`ren environments create|update|get|list`, `ren environments builds start|list`. An environment is
+the pod's networking and package set; attach it at pod create or update. Rebuild after changing
+packages.
+
+## Models and instructions
+
+```bash
+ren models list --output json          # live catalog with pricing
+ren orgs update --instructions @org-agents.md
+```
+
+Pod and project instructions are set with `ren pods update` / `ren projects update` above.

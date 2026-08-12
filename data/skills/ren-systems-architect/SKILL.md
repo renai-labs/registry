@@ -1,99 +1,123 @@
 ---
 name: ren-systems-architect
 description: >-
-  Explains the Ren data model, scope tiers, and the build chain, and decides what
-  pods, projects, agents, skills, MCPs, stores, and triggers to set up and in what
-  order. Load before any Ren build to choose the right primitives, run the
-  reuse-before-create path, and wire everything together; and whenever a user asks
-  how to structure or arrange their Ren setup. Designs multi-entity or share-worthy
-  setups spec-driven — interview into a brief, research, author a Spec, push a draft
-  blueprint, build the graph leaf-up pinning refs, publish. Owns the Ren CLI /
-  registry mutations that compose a build — reuse, create, version, attach, scope,
-  wire; the standalone dev skills hold only authoring craft.
+  Build and manage Ren setups: pods, projects, agents, subagents, skills, MCPs, stores, pod databases,
+  credentials, channels, triggers, artifacts, and blueprints. Use when a user asks what exists or is
+  connected; wants to create, change, debug, publish, install, or remove a Ren resource; describes
+  recurring manual work or a missing integration; or is getting started with Ren.
 metadata:
   tags:
     - ren
 ---
 
-# Ren Systems Architect
+# Ren systems architect
 
-This skill is Ren's mental model and decision engine: the map from a user's recurring work to the Ren primitives that deliver it, the order to build them, and every Ren operation that mutates the setup. The standalone dev skills — [[ren-skill-dev]], [[ren-agent-dev]], [[ren-mcp-dev]], [[ren-vaults-credentials-dev]] — hold only authoring craft (taste); reach for one only when you need its depth. Everything else — reuse, search, create, version, attach, scope, publish, wiring — happens here.
+Turn what a person describes — _"I check the deploy channel every morning to see if anything broke"_
+— into something that runs without them.
 
-## Load the manual
+## Read the map first
 
-Before any build, pull the source-of-truth references and keep them handy. **Read them; don't recite them to the user.**
+`ren topology get` returns the whole visible graph in one call. Run it before any "do we have / is X
+connected / what's running" answer, and before proposing new structure. It is also the only source of
+the user's identity in a shared pod. `references/topology.md`.
 
-- `ren docs model` / `ren://docs/data-model` — entities, scope tiers, credential resolution, build-chain ordering.
-- `ren docs integrations` / `ren://docs/integrations` — the index of what to reach for per task.
-- `ren docs commands` — the full command tree, every command and flag (CLI transport; MCP transport exposes the same surface as `mcp__ren__*` tools).
+## Work shapes
 
-## Default mode: spec-driven
+| What they said                                 | What they get                                                | What delivers it                                             |
+| ---------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
+| "Something should watch X"                     | A message when it matters, silence when it doesn't           | Ingress if the source can push, else cron + a dedup ledger     |
+| "This should happen every Monday"              | It happens every Monday, in their timezone                   | Cron trigger on a project agent, timezone set explicitly       |
+| "I keep being the router between two tools"    | The hand-off happens without them in the middle              | One project holding both integrations, woken by the first      |
+| "It should know our stuff"                     | Answers that already assume the company's facts              | Instructions at the widest layer where the fact is true        |
+| "It keeps forgetting what I told it"           | Next run picks up where this one left off                    | Memory store, read at start and written at the end             |
+| "I want to look at this, not read it"          | A page at a URL that refreshes itself                        | Artifact, rebuilt on the same schedule as its data             |
+| "My team needs this too"                       | Teammates get it without a hand-off conversation             | Build in the shared pod, or hand over a blueprint              |
+| "It dies when I close my laptop"               | It keeps running, and they read the result later             | A pod: durable sandbox, sessions they can reopen               |
+| "I keep re-pasting the same API key"           | Connected once, every agent in the pod uses it               | A credential in the vault the pod resolves                     |
+| "Here's our pricing sheet / customer list"     | The agent works from their material, not generic knowledge   | File store attached to the project                             |
+| "It needs Linear / HubSpot / our calendar"     | It acts in that tool directly                                | Registry MCP, else a skill with an API key, else a custom MCP  |
+| "It should work on our repo / in our channel"  | It reads and writes where the work already happens           | Native integration: GitHub, Slack, Telegram, email, Linear     |
+| "Stop telling me about this"                   | It goes quiet without losing what was useful                 | Narrow the condition or slow the cadence, then say what changed |
 
-**Threshold rule.** A single-entity tweak — bump a prompt, attach one skill, change a schedule — just runs the operation directly (`references/operations.md`); no ceremony. Anything that spans **more than one entity**, or that the user might reuse or share, is built **spec-driven**: capture it as a `Spec` first, then build from it.
+The middle column is the deliverable. Write it before you build.
 
-The flow: interview the user into a `brief` → research what already exists (org before registry, then the web) → author a slug-keyed `Spec` where each entry is _planned_ (`def`) or _built_ (`ref`) → `ren blueprints push` it as a **draft blueprint from the first minute** → build the graph leaf-up, pinning each live id back into the doc and re-pushing → a fully-resolved Spec is a publishable blueprint. The Spec is the durable, resumable plan even when nothing is ever shared. Narrate each step in the user's register (builder vs consumer — [[ren-onboarding]] owns that framing).
+## Primitives by kind
 
-Full method, entry shapes, and a worked example: **`references/spec.md`**. The data model, scope, reuse, credentials, and wiring below are what that loop draws on at each step.
+| Kind              | Nature                                              | Primitives                                                               |
+| ----------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+| **Config**        | declared, versioned, immutable per version, travels | skill, MCP, agent, blueprint, instructions (org / pod / project / store) |
+| **Volume**        | a mounted path read and written during a run        | file store, memory store, pod scratch, git repository                    |
+| **Durable state** | outlives the session, queryable or addressable      | pod database, artifact, credential (in a vault)                          |
+| **Delivery**      | how a run starts and where output lands             | project, channel mapping, cron trigger, subagent                         |
 
-## The data model in one breath
+A **pod** is one durable sandbox plus a member set; everything in it shares that machine. A
+**project** groups the agents, capabilities, stores and triggers for one outcome. An **agent** is a
+prompt + model + skills and MCPs. Mechanics: `references/operations.md`. Entity rules:
+`ren docs model`.
 
-A **pod** is a durable sandbox plus a member set; everything attached to it (skills, MCPs, stores, vaults) is available to every project inside. A **project** groups the agents, stores, and triggers for one outcome. An **agent** is a prompt + model + dependencies (skills and MCPs). **Vaults** hold **credentials** (injected as env vars at runtime). **Stores** are durable volumes — file (read-only) or memory (read-write). **Triggers** run one of a project's agents on a cron. Scope tiers are `user` / `org` / `registry`. Full detail: `ren docs model`.
+### The four state surfaces — pick by shape of data
 
-## Scope discipline
+| Surface          | Holds                                                       | Reach for it when                                  |
+| ---------------- | ----------------------------------------------------------- | -------------------------------------------------- |
+| **Memory store** | durable facts about people, teams, preferences; prose       | you learned something worth knowing next session   |
+| **File store**   | deliverables and working files; accumulates                 | the run produces something the next run builds on  |
+| **Pod database** | structured rows you query and dedupe against                | you need to know what you already saw              |
+| **Artifact**     | a browsable page at a URL                                   | the answer wants to be looked at, not read in chat |
 
-Default to **`--scope user`** for a personal build — agents, skills, MCPs, stores, and vaults all default to `org` otherwise, and you need `--scope user` even to _see_ the private pod. Promote to `org` only when the user explicitly wants something shared. Key constraint: you can't pull a narrower-scope artifact into a broader-scope publication (a `user` skill backs a `user` or `org` agent, not the reverse). Full rules — inheritance, reference direction, the `search` / `--sources` exception — are in `ren docs model`.
+Both stores mount **read-write** and neither has file locks. A SQLite file, git checkout or lockfile
+on a store corrupts. Cursors and seen-ids go in a pod database.
 
-## Reuse before you create
+## Where it belongs
 
-The cheapest, most reliable build reuses what already exists. Three tiers, in order:
+Visibility is `private` or `org`, chosen once at create. A shared pod **cannot create anything
+private** — route the user to their own workspace, offer the shared build as the alternative, and
+carry the plan across. `references/placement.md`.
 
-1. **Reuse** an existing registry / org / user artifact as-is.
-2. **Fork** a close-enough one into your scope and edit it — the baked-in domain knowledge is worth keeping.
-3. **Author / register custom** only when neither fits.
+## Before saying "we don't support that"
 
-Registry skills and MCPs are tested and production-ready — inherit their commands, schemas, and gotchas rather than reasoning from scratch. A custom MCP is unmaintained surface you now own: prefer a registry MCP, and when none fits, fall back to an API-key-backed skill. The index of what to reach for per task is `ren docs integrations`.
+Ask: can the source reach anything we have, or can anything we have reach it? Check what actually
+wakes Ren first — a mapped Slack channel fires only on an @mention and **drops messages posted by
+other apps**, so "the alert posts to the channel and Ren picks it up" never fires.
+`references/composition.md`.
 
-This skill carries enough to **search + attach + basic-fork** a registry skill/MCP (see `references/operations.md`). Descend into [[ren-skill-dev]] / [[ren-mcp-dev]] **only to author a custom skill or register a custom remote MCP** — that's the sole reason those skills exist as indirection.
+## The outcome contract
 
-## Reuse-before-create inventory — what's already there
+A build is done when you can say, unprompted and in two sentences: **what wakes it · where output
+lands · how often · how to stop or quiet it.** Nothing tells the user when a schedule starts failing,
+so the off-switch is their only control.
 
-A personal build starts with these already provisioned. Reuse them; don't recreate:
+## Ask, then act
 
-- **Private pod** (`<UserName>'s Pod`) — build here, never create another.
-- **Default vault** (`<UserName> Vault`) — attached at priority 0; add credentials here.
-- **Default file store** (`<UserName> Files`) — reuse unless this agent's docs shouldn't mix with the user's general files.
-- **Default memory store** (`<UserName> Memory`) — reuse; this is the user's persistent private memory.
-- **Default "Ren" project** — **never touch.** Always create a fresh project for what you build.
+| Situation                                 | Behaviour                                                         |
+| ----------------------------------------- | ------------------------------------------------------------------ |
+| Reversible, private, you're confident     | One sentence, answerable in one word. Then do it.                 |
+| Shared, scheduled, or costly if wrong     | One sentence naming trigger, destination, cadence. Then do it.    |
+| Genuinely ambiguous **and** expensive     | Interview.                                                        |
 
-Audit what exists before building (`ren docs commands` has the list/get invocations): pods, vaults, file/memory stores, and the projects already in the private pod.
+Size the ask by risk, not by how many entities are involved. Never ask what the topology already
+answers.
 
-## The build chain
+## Speak in outcomes
 
-Dependencies build **leaf-up**. Each step routes to where its mechanics live — commands in `references/operations.md` and `references/wiring.md`; authoring craft in the linked dev skills. In spec-driven mode this same order is what `Spec.buildPlan` yields (environment → skills → mcps → agents → projects → triggers); build one entry, pin its `ref`, re-push, repeat.
-
-1. **Skills** — reuse / fork here (`references/operations.md`); author a custom skill → [[ren-skill-dev]].
-2. **MCPs** — reuse here (`references/operations.md`); register a custom remote MCP → [[ren-mcp-dev]].
-3. **Credentials** (orthogonal) — wire only if a skill/MCP needs auth; connect/refresh choreography → [[ren-vaults-credentials-dev]]. Design below.
-4. **Agent** — prompt + model + the skills/MCPs above. Writing / model / dependency judgment → [[ren-agent-dev]]; create & version commands → `references/operations.md`.
-5. **Stores** — default: attach the existing default file/memory stores to the fresh project; create new only for isolation → `references/wiring.md`.
-6. **Project** — always a fresh project in the private pod; attach the agent in `all` mode and the stores from step 5 → `references/wiring.md`.
-7. **Trigger** (optional) — cron schedule → `references/wiring.md`.
-8. **Sandbox readiness + session** — get the sandbox `ready`, then hand off → `references/wiring.md`.
-
-## Credentials — the design
-
-A vault is a credential safe; credentials live inside it, encrypted at rest, and are injected as env vars at runtime — **secrets never live in prompts.** Vaults are `user`- or `org`-scoped (no registry tier); a credential inherits its vault's scope. Resolution walks the pod's attached vaults by priority (lower number wins), first-match-by-name, mapping a credential `name` to the env var a skill/MCP reads. The OAuth connect/poll flow, API-key shape, and lazy refresh are all in [[ren-vaults-credentials-dev]].
-
-## How to arrange pods & projects
-
-One **private pod per user** for personal work. **Team pods are shaped around shared work, not the org chart** — a sales team, an emergency warroom, a per-customer pod, a prod-vs-staging credential split. Ask "who else needs to see this?" before creating one. Use **separate projects per outcome** and **separate pods per member set** (members are pod-scoped). Don't reuse a project for a brand-new outcome — a fresh project keeps the agent isolated and trivial to throw away. Mechanics: `references/wiring.md`.
-
-## Share it
-
-When a spec-driven build is fully resolved (every entry pinned) and the user wants to reuse or hand it to others, it's a shareable **blueprint** — publish it to the registry or install it into another pod. That packaging craft — the resolution gate, cascade-publish consequences, public-view stripping, and install link-vs-fork semantics — is [[ren-blueprint-dev]]. An internal-only stack needs none of this; leave the draft blueprint unpublished and you're done.
+Default: no entity ids, version numbers, primitive names or CLI steps. Say what happens, when, and
+where it lands. Match the user's register the moment they use platform vocabulary, ask how it works,
+or drive the CLI themselves.
 
 ## References
 
-- `references/spec.md` — the spec-driven method: interview → brief, research, author the `Spec`, push a draft blueprint, build the graph leaf-up pinning refs, publish.
-- `references/operations.md` — the Ren CLI / registry operations for the composable artifacts (skills, MCPs, agents) plus credential ops: search, fork, create, version, attach, OAuth.
-- `references/wiring.md` — the plumbing primitives: pods & sandbox readiness, projects & sessions, stores, triggers.
+| File                            | Read it when                                                                      |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| `references/topology.md`        | before answering what exists, or proposing structure                               |
+| `references/placement.md`       | choosing visibility, or blocked by what this pod can create                        |
+| `references/composition.md`     | designing ingress, or no direct connector exists                                   |
+| `references/design-patterns.md` | choosing a primitive, or a cron/store/sandbox limit could bite                     |
+| `references/artifacts.md`       | the output wants to be a page, or one needs refreshing or sharing                  |
+| `references/operations.md`      | actually creating, attaching, uploading, scheduling, or handing back a session     |
+| `references/authoring.md`       | writing a skill, an agent prompt, or a custom MCP                                  |
+| `references/credentials.md`     | a skill or MCP needs auth, or one stopped working                                  |
+| `references/channels.md`        | wiring Slack, Telegram, email, GitHub or Linear, or posting to them                |
+| `references/blueprints.md`      | packaging a setup for reuse, or installing one                                     |
+| `references/comparison.md`      | the user asks "why not just Zapier / ChatGPT / Claude Code"                        |
+
+`ren docs model`, `ren docs integrations`, `ren docs commands` are the platform's own truth — read
+them rather than recalling. The MCP transport exposes the same surface as `mcp__ren__*` tools.
