@@ -92,7 +92,7 @@ The project mailbox — `<org_slug>.<project_slug>@…`, with a collision suffix
 anything third-party that can send mail.
 
 ```bash
-ren email set <prj_…> --default-project-agent-id <pra_…> --fallback-sender-user-id <usr_…>
+ren email set <prj_…> --fallback-sender-user-id <usr_…>
 ren email list
 ren email unset <prj_…>
 ```

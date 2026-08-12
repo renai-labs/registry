@@ -9,11 +9,11 @@
 Reuse first (`references/design-patterns.md` §Reuse). Author only when nothing fits.
 
 ```bash
-ren skills search --sources user org registry --query "<need>"   # list shows only your own
-ren mcps search   --sources user org registry --query "<need>"
-ren agents search --sources user org registry --query "<need>"
+ren skills list --query "<need>" --published                     # registry skills; drop --published for your org's
+ren mcps search --sources user org registry --query "<need>"     # --sources is repeatable, and only mcps has search
+ren agents list --query "<need>" --published
 ren skills pull <id-or-slug> ./local-copy [--version <v>]        # download the files to read or edit
-ren skills versions data <skl_…> <version> --format presigned    # raw bundle URLs
+ren skills versions data <skl_…> <version>                       # files, base64-encoded (or the git pointer)
 ren skills copy <skl_…> --name "my-variant" --visibility private # fork server-side; source untouched
 ```
 
