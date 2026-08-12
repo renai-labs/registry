@@ -47,7 +47,7 @@ An agent attachment **tracks the agent's latest version by default** (omit `agen
 
 ### Sessions
 
-A **session** is one chat with one of the project's `all` agents (a user's, or one a fired trigger opens). The sandbox must be `ready` for it to load (§Pods). `ren sessions list / get / messages list` inspect past runs; `session.create` itself is SDK/web-app only. Hand a user the Ren UI deep link `<base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>` (see the onboarding hand-off for base-URL rules).
+A **session** is one chat with one of the project's `all` agents (a user's, or one a fired trigger opens). The sandbox must be `ready` for it to load (§Pods). `ren sessions list / get / messages list` inspect past runs; `session.create` itself is SDK/web-app only. Hand a user the Ren UI deep link `<base>/sessions/<sessionId>` — a session is addressed by its own id, not by its pod and project (see the onboarding hand-off for base-URL rules).
 
 ### Gotchas
 

@@ -180,8 +180,8 @@ Land them in a chat that loads.
 
 - **Ren UI link (the web app)** - hand-built, no command returns it. Base is `${REN_APP_URL}` when a shell resolves it, else the prod SPA `https://renai.build/app` (no-shell / MCP transport - never emit a `localhost` link):
   ```
-   <base>/pods/<podId>/projects/<projectId>/sessions/<sessionId>   # deep link
-   <base>/pods/<podId>/projects/<projectId>                        # project page
+   <base>/sessions/<sessionId>                       # deep link
+   <base>/pods/<podId>/projects/<projectId>          # project page
   ```
 - **OpenCode sandbox URL** - `ren sessions url <session-id>` (`session_url`) returns the sandbox's OpenCode URL (`<publicHost>/<dir>/session/<id>`), username(always opencode), and password - pointing straight at the running server. Only reach for it if the user wants the raw sandbox server. It's gated by HTTP basic auth: username is always `opencode`; password is the sandbox's `serverPassword`.
 
