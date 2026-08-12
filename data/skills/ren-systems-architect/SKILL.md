@@ -1,10 +1,14 @@
 ---
 name: ren-systems-architect
 description: >-
-  Build and manage Ren setups: pods, projects, agents, subagents, skills, MCPs, stores, pod databases,
-  credentials, channels, triggers, artifacts, and blueprints. Use when a user asks what exists or is
-  connected; wants to create, change, debug, publish, install, or remove a Ren resource; describes
-  recurring manual work or a missing integration; or is getting started with Ren.
+  Turn what a user describes into a Ren setup that runs without them, and manage everything
+  already built. Use whenever a user wants something built, automated, scheduled, watched, or
+  connected — "make a dashboard of our daily commits", "post a summary every morning", "tell me when
+  this repo breaks", "it should read our customer list" — or asks what exists or is connected; wants
+  to create, change, debug, publish, install, or remove a Ren resource (pods, projects, agents,
+  subagents, skills, MCPs, stores, pod databases, credentials, channels, triggers, artifacts,
+  blueprints); describes recurring manual work or a missing integration; or is getting started with
+  Ren.
 metadata:
   tags:
     - ren

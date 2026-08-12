@@ -13,6 +13,15 @@ metadata:
   tags:
     - productivity
     - e-commerce
+  requiredCredentials:
+    - name: SHOPIFY_ACCESS_TOKEN
+      description: Admin API access token (shpat_…). Shopify admin → Settings → Apps and sales channels → Develop apps → API credentials. Shown once on install.
+    - name: SHOPIFY_STORE_DOMAIN
+      description: Permanent myshopify.com subdomain, e.g. my-store.myshopify.com. Not the custom domain.
+    - name: SHOPIFY_API_VERSION
+      description: Stable quarterly version, e.g. 2026-07. Defaults to 2026-07 if omitted.
+    - name: SHOPIFY_STOREFRONT_TOKEN
+      description: Public storefront access token (shpua_…) or private token — only needed for Storefront API calls.
 ---
 
 # Shopify — Admin & Storefront GraphQL APIs
@@ -27,7 +36,7 @@ The REST Admin API is legacy since 2024-04 and only receives security fixes. **U
 |---|---|---|
 | `SHOPIFY_ACCESS_TOKEN` | yes | Admin API access token (starts with `shpat_`). Shopify admin → Settings → Apps and sales channels → Develop apps → API credentials. Shown once on install. |
 | `SHOPIFY_STORE_DOMAIN` | yes | Permanent myshopify.com subdomain, e.g. `my-store.myshopify.com`. Not the custom domain. |
-| `SHOPIFY_API_VERSION` | no | Stable quarterly version, e.g. `2026-01`. Defaults to `2026-01` in examples below. |
+| `SHOPIFY_API_VERSION` | no | Stable quarterly version, e.g. `2026-07`. Defaults to `2026-07` in examples below. |
 | `SHOPIFY_STOREFRONT_TOKEN` | Storefront API only | Public storefront access token (`shpua_…`) or private token. |
 
 **CLI deps:** `curl`, `jq`
@@ -65,7 +74,7 @@ shop_gql() {
   local query="$1"
   local variables="${2:-{}}"
   curl -sS -X POST \
-    "https://${SHOPIFY_STORE_DOMAIN}/admin/api/${SHOPIFY_API_VERSION:-2026-01}/graphql.json" \
+    "https://${SHOPIFY_STORE_DOMAIN}/admin/api/${SHOPIFY_API_VERSION:-2026-07}/graphql.json" \
     -H "Content-Type: application/json" \
     -H "X-Shopify-Access-Token: ${SHOPIFY_ACCESS_TOKEN}" \
     --data "$(jq -nc --arg q "$query" --argjson v "$variables" '{query: $q, variables: $v}')"
@@ -298,7 +307,7 @@ Different endpoint, different token, used for customer-facing apps/hydrogen-styl
 
 ```bash
 curl -sS -X POST \
-  "https://${SHOPIFY_STORE_DOMAIN}/api/${SHOPIFY_API_VERSION:-2026-01}/graphql.json" \
+  "https://${SHOPIFY_STORE_DOMAIN}/api/${SHOPIFY_API_VERSION:-2026-07}/graphql.json" \
   -H "Content-Type: application/json" \
   -H "X-Shopify-Storefront-Access-Token: ${SHOPIFY_STOREFRONT_TOKEN}" \
   -d '{"query":"{ shop { name } products(first: 5) { edges { node { id title handle } } } }"}' | jq

@@ -64,6 +64,8 @@ rows, one trigger does both: write, then sync.
 
 `bun run build` after a code change, `bun run sync-data` after a data change. Both push when they
 finish; there is no separate publish step, and running a full build for a data change is wasted time.
+`ren artifacts sync <slug>` pushes the built directory on its own — the repair path when a build
+succeeded but the live page is stale, not part of the normal loop.
 
 ## The link is the capability
 
