@@ -18,10 +18,6 @@ metadata:
       description: Admin API access token (shpat_…). Shopify admin → Settings → Apps and sales channels → Develop apps → API credentials. Shown once on install.
     - name: SHOPIFY_STORE_DOMAIN
       description: Permanent myshopify.com subdomain, e.g. my-store.myshopify.com. Not the custom domain.
-    - name: SHOPIFY_API_VERSION
-      description: Stable quarterly version, e.g. 2026-07. Defaults to 2026-07 if omitted.
-    - name: SHOPIFY_STOREFRONT_TOKEN
-      description: Public storefront access token (shpua_…) or private token — only needed for Storefront API calls.
 ---
 
 # Shopify — Admin & Storefront GraphQL APIs
@@ -29,6 +25,8 @@ metadata:
 Work with Shopify stores directly through `curl`: list products, manage inventory, pull orders, update customers, read metafields. No SDK, no app framework — just the GraphQL endpoint and a custom-app access token.
 
 The REST Admin API is legacy since 2024-04 and only receives security fixes. **Use GraphQL Admin** for all admin work. Use **Storefront GraphQL** for read-only customer-facing queries (products, collections, cart).
+
+**For numbers rather than records — totals, rates, trends, funnels, conversion — use the `shopify-reporting` skill instead.** Those are ShopifyQL aggregates that the Admin GraphQL API cannot compute; counting them off paginated records here gives wrong answers, most obviously for conversion, which has no denominator without session data.
 
 ## Environment
 
@@ -38,6 +36,11 @@ The REST Admin API is legacy since 2024-04 and only receives security fixes. **U
 | `SHOPIFY_STORE_DOMAIN` | yes | Permanent myshopify.com subdomain, e.g. `my-store.myshopify.com`. Not the custom domain. |
 | `SHOPIFY_API_VERSION` | no | Stable quarterly version, e.g. `2026-07`. Defaults to `2026-07` in examples below. |
 | `SHOPIFY_STOREFRONT_TOKEN` | Storefront API only | Public storefront access token (`shpua_…`) or private token. |
+| `SHOPIFY_APP_SECRET` | Webhook verification only | The custom app's **client secret**, not the access token. Used solely to verify inbound webhook HMAC signatures. |
+
+Only the first two are declared as `requiredCredentials`. The rest are optional and
+would otherwise be demanded at install time, because the credential schema has no
+optional flag.
 
 **CLI deps:** `curl`, `jq`
 
@@ -355,7 +358,7 @@ mutation($topic: WebhookSubscriptionTopic!, $sub: WebhookSubscriptionInput!) {
 Verify incoming webhook HMAC using the app's client secret (not the access token):
 
 ```bash
-echo -n "$REQUEST_BODY" | openssl dgst -sha256 -hmac "$APP_SECRET" -binary | base64
+echo -n "$REQUEST_BODY" | openssl dgst -sha256 -hmac "$SHOPIFY_APP_SECRET" -binary | base64
 # Compare to X-Shopify-Hmac-Sha256 header
 ```
 
