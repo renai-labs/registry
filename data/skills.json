@@ -851,6 +851,41 @@
     ]
   },
   {
+    "slug": "shopify-reporting",
+    "name": "shopify-reporting",
+    "description": "Read-only Shopify analytics and reporting with ShopifyQL over the Admin GraphQL API. Use whenever the ask is for numbers, totals, rates, trends, funnels, or breakdowns rather than individual records — sales, orders, AOV, discounts, returns, sessions, checkout conversion, traffic sources, inventory, payments, fulfilment speed — sliced by dimension, bucketed over time, or compared period-over-period. Examples: \"checkout funnel last month\", \"why did conversion drop\", \"sales by channel this quarter vs last\", \"top landing pages by completed checkouts\". Runs headlessly with a token and curl, so it works inside a sandbox. Not for fetching or mutating individual products, orders, or customers.",
+    "license": "MIT",
+    "metadata": {
+      "author": "Ren Labs",
+      "source": "https://shopify.dev/docs/api/shopifyql",
+      "icon": "https://cdn.renai.build/skill-icons/shopify.svg",
+      "tags": [
+        "analytics",
+        "e-commerce"
+      ],
+      "requiredCredentials": [
+        {
+          "name": "SHOPIFY_ACCESS_TOKEN",
+          "description": "Admin API access token (shpat_…) for a custom app with the read_reports scope. ShopifyQL is read-only — do not grant write scopes for reporting."
+        },
+        {
+          "name": "SHOPIFY_STORE_DOMAIN",
+          "description": "Permanent myshopify.com subdomain, e.g. my-store.myshopify.com. Not the custom domain."
+        }
+      ]
+    },
+    "currentVersion": "0.1.0",
+    "contentHash": "fcbc55e8ca5b33a885a69e3d235c08a795f5acdfc9450cb4819ed7b7bc7090f1",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "gitRef": null,
+        "publishedAt": null,
+        "contentHash": "fcbc55e8ca5b33a885a69e3d235c08a795f5acdfc9450cb4819ed7b7bc7090f1"
+      }
+    ]
+  },
+  {
     "slug": "typefully",
     "name": "typefully",
     "description": "Create, schedule, and manage social media posts via Typefully. Use when asked to draft, schedule, post, or check tweets, posts, threads, or social media content for Twitter/X, LinkedIn, Threads, Bluesky, or Mastodon.",
