@@ -42,6 +42,16 @@ ren vaults list / ren vaults get <vlt_…>
 The response carries each entry's tier, a `shadowed` flag on anything losing to a higher-priority
 entry, and `writeVaultId` — where a new credential for this pod belongs.
 
+For the other direction — what this pod still **needs** rather than what it holds:
+
+```bash
+ren pods auth-requirements <pod_…> --output json
+```
+
+It aggregates every project in the pod, evaluates `satisfied` against the whole vault chain, and
+names in `neededBy` which skills and MCPs asked for each one. One call answers "what is this team
+missing" without opening a session.
+
 ## Where a missing credential goes
 
 The user adds it in the app; you never take it in the conversation. Name the service, hand the link,

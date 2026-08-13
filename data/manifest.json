@@ -1,13 +1,13 @@
 {
-  "pluginVersion": "0.11.3",
+  "pluginVersion": "0.11.4",
   "skills": {
     "ren-artifact": "0.0.1",
-    "ren-email-behaviour": "0.0.1",
+    "ren-email-behaviour": "0.0.2",
     "ren-github-behaviour": "0.0.1",
-    "ren-linear-behaviour": "0.0.1",
+    "ren-linear-behaviour": "0.0.2",
     "ren-repo-code-review": "0.0.2",
-    "ren-slack-behaviour": "0.0.2",
-    "ren-systems-architect": "0.1.9",
-    "ren-telegram-behaviour": "0.0.1"
+    "ren-slack-behaviour": "0.0.3",
+    "ren-systems-architect": "0.1.10",
+    "ren-telegram-behaviour": "0.0.2"
   }
 }

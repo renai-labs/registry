@@ -4,24 +4,24 @@
 
 ## The gate
 
-Run it before:
+Run it once when:
 
 1. any "do we have / is X connected / what's running / who has access" answer, and
-2. any proposal of new structure.
+2. you are about to propose or make a Ren configuration change.
 
-Re-run it after you build something, and after a long conversation, rather than trusting your memory
-of it.
+Do **not** run it for ordinary work the current project can already serve: writing, analysis, or
+using a tool you hold. Trust `<workspace_context>` for location. Once read, it remains good for the
+conversation. Re-run only after changing configuration, not because the thread got long.
 
 ## What comes back
 
-`meta`, `agents`, `pods`, `projects` always; the rest are omitted when empty.
+`meta`, `pods`, `projects` always; the rest are omitted when empty.
 
 | Key                             | Tells you                                                                       |
 | ------------------------------- | --------------------------------------------------------------------------------- |
 | `meta`                          | organisation name                                                                |
 | `pods`                          | every pod you can see, private and shared                                        |
 | `projects`                      | which pod each project is in, and any git repositories bound to it               |
-| `agents`                        | each agent's skills and MCPs, and which projects it is attached to               |
 | `mcps`, `credentials`, `vaults` | what tool surfaces exist and which credential backs each                         |
 | `fileStores`, `memoryStores`    | stores and the projects they are attached to                                     |
 | `slack`, `github`, `emails`     | which channel, repo or mailbox answers as which project                          |
@@ -55,13 +55,13 @@ Note these; raise at most one, after delivering what was asked.
 - A project doing recurring work with **no trigger**.
 - A **cron whose instruction names no destination** — output lands nowhere anyone reads.
 - An **MCP with no credential** behind it: every call fails at the call site.
-- A **channel mapped to an empty project**, or a project whose only agent was detached.
+- A **channel mapped to an archived or unusable project**.
 - A **memory store nobody reads**.
 - **Two projects on one store** writing the same paths: one prefix, two writers, no locks.
 - A **trigger on an archived project**: every fire throws, nothing disables it.
 
 ## Attachment is not resolution
 
-Archived skills and unresolvable dependencies are dropped from the running agent silently — the
+Archived skills and unresolvable dependencies are dropped from Ren's running project silently — the
 attachment stays. `ren projects skills resolution <project-id>` shows what actually loaded, including
 which pin won when the same skill is pinned twice.

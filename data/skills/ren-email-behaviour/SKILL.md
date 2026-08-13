@@ -18,7 +18,6 @@ metadata:
 ## Replying
 
 - To start a new message to a different recipient or subject, use `email_send`. When you are the one initiating, send from a mailbox listed in `<workspace_context>` unless you were told otherwise.
-- Subagents you spawn with `task` cannot send mail. Deliver their results yourself.
 
 ## No ack email
 

@@ -3,7 +3,6 @@
 ## Contents
 
 - [Skills](#skills)
-- [Agents](#agents)
 - [Custom MCPs](#custom-mcps)
 
 Reuse first (`references/design-patterns.md` §Reuse). Author only when nothing fits.
@@ -11,13 +10,12 @@ Reuse first (`references/design-patterns.md` §Reuse). Author only when nothing 
 ```bash
 ren skills list --query "<need>" --published                     # registry skills; drop --published for your org's
 ren mcps search --sources user org registry --query "<need>"     # --sources is repeatable, and only mcps has search
-ren agents list --query "<need>" --published
 ren skills pull <id-or-slug> ./local-copy [--version <v>]        # download the files to read or edit
 ren skills versions data <skl_…> <version>                       # files, base64-encoded (or the git pointer)
 ren skills copy <skl_…> --name "my-variant" --visibility private # fork server-side; source untouched
 ```
 
-Prefer org skills, MCPs and agents over registry entries. If neither has a fit, search the web for an
+Prefer org skills and MCPs over registry entries. If neither has a fit, search the web for an
 adaptable `SKILL.md` or an official remote MCP before writing your own.
 
 ---
@@ -149,7 +147,7 @@ minimum-surface edits, never the source.
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------- |
 | `version:` in frontmatter                                    | delete (don't relocate); move `author`/`source`/`tags` under `metadata`          |
 | `export FOO_API_KEY=…`, "add to `.env`", `${env:…}` in code  | add the env name to `metadata.requiredCredentials`, delete the setup prose only  |
-| `npx -y @some/mcp`, `mcpServers` JSON, `.mcp.json`           | one line: this skill expects the `<name>` MCP attached to the agent              |
+| `npx -y @some/mcp`, `mcpServers` JSON, `.mcp.json`           | one line: this skill expects the `<name>` MCP attached to the project            |
 | local input/output paths (`./data/`, `./output/report.md`)   | point at an attached file store, preserving meaningful relative paths            |
 | "remember the last processed record"                         | an attached memory store — or a pod database if it is rows to dedupe against     |
 | Claude / Cursor / Copilot / Codex / OpenCode as the runtime  | "the agent"; proper-noun tools (Read, Edit, Bash) → generic verbs                |
@@ -181,61 +179,6 @@ Iterate from real runs: read a session's execution trace, not just its output �
 instructions too vague, inapplicable, or missing a default. Fix the failing step, bump the version,
 add the correction as a gotcha. Don't try to anticipate every edge case in v1.
 
----
-
-# Agents
-
-A prompt + a model + a dependency set. Keep them small and atomic so they compose, stay debuggable,
-and version independently. Write one when the work wants its own prompt or model; attach it to the
-project (`references/design-patterns.md`).
-
-## Prompt
-
-Role → workflow → output format → rules. Specific (what it does, not what it could), actionable,
-scoped (say what is out of scope), tool-aware (say *when* to reach for a tool; don't restate its
-description). No personality fluff, no defensive padding.
-
-```
-You are <role>. Your job is <single primary responsibility>.
-
-## Workflow
-1. <step>
-
-## Output
-<format, structure, fields>
-
-## Rules
-- <always> / <never> / <how to handle ambiguity>
-```
-
-If the prompt grows a multi-line "how to do X" section, that is a skill. Most behaviour problems are
-a vague prompt, not a missing tool.
-
-## Model
-
-Don't pick silently. Offer heavy / balanced / light with a one-line trade-off each and current
-`$/M in` + `$/M out` — `ren models list --output json`. Sensible defaults: Claude Opus 5 heavy,
-Sonnet 5 balanced, Haiku 4.5 light. An agent can also inherit the pod default (`--body
-'{"model":null}'`).
-
-## Versions and dependencies
-
-An agent version is an immutable snapshot of prompt, model and dependencies. **One version = one
-logical change**, so a regression bisects. Anti-patterns: over-attaching (three focused skills beat
-ten loose ones), stale dep lists (the lists are full-replace — `ren agents get` first and pass the
-union), and one skill carrying two unrelated workflows.
-
-```bash
-ren agents create --body @agent.json --visibility private
-ren agents versions create <agt_…> --body @agent.json --release-notes "…"
-ren agents get <agt_…>
-```
-
-Iterate: verify current state → watch a real run → fix the one failing thing (skill content for a
-capability gap, prompt or deps for behaviour) → new version.
-
----
-
 # Custom MCPs
 
 Last resort in the fallback ladder (`references/composition.md`) — unmaintained surface you now own.
@@ -243,7 +186,7 @@ Not every product exposes an MCP server; when the registry has nothing and no of
 the fallback is an API-key-backed skill.
 
 - **It must be a reachable remote HTTP server.** Without `mcpServerUrl` it is dropped at compose time
-  and the agent never sees its tools.
+  and Ren never sees its tools.
 - **Defining is not authorizing.** `authConfig` declares only where a secret is presented and carries
   no secret; wiring the credential is separate (`references/credentials.md`).
 - `authConfig` is nested → `--body` on `ren mcps create`. Definition edits (URL, `authConfig`)

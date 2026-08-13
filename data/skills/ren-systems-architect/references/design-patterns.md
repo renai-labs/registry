@@ -10,7 +10,7 @@ mid-task.
 
 - [Reuse before you create](#reuse-before-you-create)
 - [Pods and projects](#pods-and-projects)
-- [Agents and subagents](#agents-and-subagents)
+- [Where behaviour comes from](#where-behaviour-comes-from)
 - [Where to attach a capability](#where-to-attach-a-capability)
 - [Instructions](#instructions--the-cheapest-primitive)
 - [Stores and pod databases](#stores-and-volumes)
@@ -21,7 +21,7 @@ mid-task.
 
 ## Reuse before you create
 
-1. **Reuse** an existing registry, org or private skill, MCP or agent as-is.
+1. **Reuse** an existing registry, org or private skill or MCP as-is.
 2. **Fork** a close-enough one and edit it — the baked-in domain knowledge is worth keeping.
 3. **Author** only when neither fits.
 
@@ -35,51 +35,31 @@ reasoning from scratch. `ren docs integrations` indexes what to reach for per ta
   prod-vs-staging credential split. Ask "who else needs to see this?" before creating one.
 - **A pod is one sandbox shared by every project in it**, which is why it is the credential and
   blast-radius boundary — a better reason for a new pod than a different member set.
-- **A fresh project per outcome.** Never reuse a project for new work, and never touch the default
-  "Ren" project. A fresh project keeps the work isolated and trivial to throw away.
+- **Reuse a project whose scope already fits.** A project is not per-task: new work that belongs to
+  an outcome already set up goes in that project, using what it already has. Create a new one only
+  for a genuinely distinct scope — then it stays isolated and trivial to throw away.
 - Members are **pod-scoped, not project-scoped**.
 
 Already provisioned — reuse, don't recreate: the user's private pod, their personal vault, a default
 file store and memory store, and the default "Ren" project.
 
-## Agents and subagents
+## Where behaviour comes from
 
-Every new project already has the published `ren` agent attached as `all`, so a project is runnable
-the moment it exists. Attaching to a project is how an agent runs work: mode `all` is the default and
-means it answers users and trigger fires, and can also be called as a subagent.
+Everything a person asks to change about how the work runs resolves to one of the project's own
+levers:
 
-Create a **custom agent** when the work wants its own prompt or its own model. Don't create one just
-to add a capability — the project's skills and MCPs already reach every agent in it.
-
-Attach as **subagent** when the work is an isolated, well-defined scope: a repeatable task worth
-keeping off the main thread, or one that should run on a cheaper model.
-
-What `subagent` mode isolates:
-
-- **Denies every project skill and MCP it doesn't own.** Opting one back in means naming the exact
-  slug in its permission config; a bare `*` is a default, not an opt-in, and globs are not expanded.
-- **Does not isolate volumes** — it still sees the project's stores, pod scratch, pod databases and
-  git repositories. A subagent is not a sandbox.
-
-Also true of agents:
-
-- Every version edit bumps semver, even metadata-only. Omitting a field inherits it; passing `null`
-  resets it.
-- `skills` and `mcps` are **full-replace** — read the agent first, pass the union, or you drop what
-  was there.
-- Channel MCPs (`slack`, `email`, `telegram`, `linear-ren`) are **rejected for non-meta agents** with
-  a 400. Ren speaks on channels; worker agents hand results back.
-- The `ren` CLI is denied to every agent but the published meta agent.
-- Attaching an already-attached agent is a 409, not an upsert.
-- Keep the dependency set small: three focused skills beat ten loose ones.
-
-**Signals:** the user asks for a named persona; one tightly-scoped job keeps interrupting the main
-thread; a cheap job is being paid for at full price.
+- Persona and stable behaviour → project instructions.
+- Evolving facts, preferences, decisions, and history → relevant project memory.
+- Capability → project skill or MCP.
+- Model choice → project default model.
+- What tools may do, or what needs approval first → project permissions
+  (`references/permissions.md`).
+- A genuinely distinct scope or outcome → a new project.
 
 ## Where to attach a capability
 
-Default to the **project**: it travels with the outcome and every agent gets it. Attach to the
-**agent** only when that agent is reused across projects and the skill is part of what it is for.
+Attach new and user-created capabilities to the **project** so they travel with the outcome and Ren
+receives them naturally. Existing system-owned capabilities on Ren stay unchanged.
 
 - Pinned at both levels, **the highest semver wins** — not the narrower attachment — and the loser is
   reported as a pin conflict.
@@ -88,7 +68,7 @@ Default to the **project**: it travels with the outcome and every agent gets it.
 - Archived skills and unresolvable dependencies are dropped silently; check
   `ren projects skills resolution`.
 - Attaching or detaching propagates without a restart — the next session sees it.
-- Tell the agent what it now has: a store or repo it is never told about goes unused.
+- Tell Ren what the project now has: a store or repo absent from instructions can go unused.
 
 ## Instructions — the cheapest primitive
 
@@ -97,16 +77,18 @@ fact at the widest layer where it is true.**
 
 | Layer                    | Holds                            |
 | ------------------------ | -------------------------------- |
-| Agent prompt (versioned) | identity and behaviour           |
 | Org instructions         | company facts                    |
 | Pod instructions         | team facts                       |
-| Project instructions     | this outcome's standing rules    |
+| Project instructions     | this outcome's stable behaviour and standing rules |
 | Store `AGENTS.md`        | how to use that store            |
 
 Org, pod and project instructions are re-read before every model request, so unlike conversation
-context they cannot be summarised away.
+context they cannot be summarised away. The layers accumulate — a project runs with its pod's and the
+org's text appended to its own — which makes them the home for doctrine: rules that must hold across
+every session and every trigger fire, not just this thread. A correction worth keeping belongs here,
+not repeated in the next message.
 
-A store's `AGENTS.md` is seeded empty and is **iterable by both people and agents** — update it when
+A store's `AGENTS.md` is seeded empty and is **iterable by both people and Ren** — update it when
 the way the store is used changes. Because it enters the system prompt: describe **how to use this
 store** only (never standing behaviour — that is an instructions layer), write under a provenance
 line saying who wrote it and when, and keep it short.
@@ -157,7 +139,7 @@ time.
 | A trigger on an **archived project** throws on every fire                     | still not disabled                                               |
 | `until` is **inclusive**                                                      | the tick at `until` fires                                        |
 | **No minimum interval** — `* * * * *` is accepted                             | nothing stops you scheduling something expensive                 |
-| No pinned agent → resolves the **project's meta agent at fire time**          | pin the attachment to actually choose the target                 |
+| Fires open a **fresh session on the project**                                 | there is nothing to select or pin                                |
 | Dispatch gets **one attempt, no retry**                                       | a tick lost to a sandbox that wouldn't come up is lost           |
 | Overlapping runs are not serialised                                           | two runs share one sandbox — match cadence to expected runtime   |
 
@@ -178,8 +160,7 @@ promise "instant" on a sleeping pod.
 A page at a URL, owned by the pod, refreshed without changing the link. Offer one when the output has
 the shape of a page — a long table, a chart, a report that will recur — the same way you offer a
 schedule. Its URL is **unauthenticated**: possession of the link is read access, so say so when
-handing it over. `references/artifacts.md`; how to build one is in the `ren-artifact` skill every
-agent already carries.
+handing it over. `references/artifacts.md`; how to build one is in Ren's `ren-artifact` skill.
 
 **Signals:** you just put a forty-row table in a message; the same summary is due again next week; the
 user says "send me a link" or asks to show someone else.
@@ -210,7 +191,7 @@ then say it back in two or three sentences before proposing anything.
   who says "it should just email me the numbers" gets outcomes.
 - **If they won't engage with the requirement**, stop asking and hand back a working session anyway.
 - **Close with concrete reasons to come back**, at most two: a schedule for what they just did, a
-  shareable replay of the run (`ren replays share`), moving what their local agent already knows into
+  shareable replay of the run (`ren replays share`), moving what their local coding tool already knows into
   the memory store, or the next piece of the stack.
 - **Write what you learned to the memory store** — who they are, what was built, what they declined.
 
@@ -229,9 +210,9 @@ context.
 
 ## Build order
 
-Build leaf-up, and pin each result before moving on: **environment → skills → MCPs → agent →
-stores/databases → project → channel or trigger → verify a real run.** Credentials are orthogonal —
-wire them when the thing that needs them is built.
+Build leaf-up and verify each result before moving on: **environment → project → instructions and
+default model → skills/MCPs → stores/databases → channel or trigger → verify a real run.**
+Credentials are orthogonal — wire them when the thing that needs them is built.
 
 ## After you deliver
 

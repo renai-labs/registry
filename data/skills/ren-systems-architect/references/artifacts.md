@@ -5,8 +5,8 @@ served at a share URL. The project survives sandbox recycles, so a later session
 the same page.
 
 **How to build one is in the `ren-artifact` skill** — scaffolding, the data contract, theming,
-components, troubleshooting. It is a system skill, so every agent in every project already carries
-it; load it when you build. This file covers the rest: when to reach for a page, who builds it, how
+components, troubleshooting. It is a system skill Ren already carries; load it when you build. This
+file covers the rest: when to reach for a page, who builds it, how
 it stays fresh, and what to tell the user when you hand over the link.
 
 ## When it's the right answer
@@ -31,9 +31,6 @@ Follow the data:
 
 - **You hold the data** — it's in a pod database, a store, or something you can query — build it
   yourself. Load `ren-artifact` and scaffold.
-- **Another agent holds the integration** — task it as a subagent. It carries `ren-artifact` too, and
-  the artifacts directory is pod-wide rather than project-scoped, so any agent in the pod can build
-  and sync one. You stay in the conversation and hand over the URL yourself.
 
 Artifacts belong to the **pod**, not a project — the same rung as the pod databases they read.
 `ren artifacts list` from inside the sandbox shows what the pod already has.
@@ -43,7 +40,7 @@ Artifacts belong to the **pod**, not a project — the same rung as the pod data
 **With data.** The canonical wiring, and the reason pod databases exist:
 
 ```
-skill or agent writes rows  →  pod database  →  sync-data.ts  →  build/data.json  →  the page fetches it
+Ren or a project skill writes rows  →  pod database  →  sync-data.ts  →  build/data.json  →  the page fetches it
 ```
 
 Data is not compiled into the page. Refreshing the numbers is `bun run sync-data` — no rebuild, no
@@ -55,11 +52,11 @@ database for content that has none.
 
 ## Keeping it fresh
 
-There is no scheduled sync inside the platform. A refresh is an agent run like any other: a cron fires
-the agent that owns the data, and its standing instruction says to re-sync the artifact by slug.
+There is no scheduled sync inside the platform. A refresh is a Ren run like any other: a cron fires
+the project, and its standing instruction says to re-sync the artifact by slug.
 
-Point the trigger at whoever owns the data source, not at yourself by default. Match the cadence to
-the data — don't rebuild hourly over numbers that change weekly. If the source run also writes the
+Point the trigger at the project that owns the data source. Match the cadence to the data — don't
+rebuild hourly over numbers that change weekly. If the source run also writes the
 rows, one trigger does both: write, then sync.
 
 `bun run build` after a code change, `bun run sync-data` after a data change. Both push when they
@@ -95,6 +92,6 @@ Two consequences worth naming when they apply:
 
 ## Outcome contract for a scheduled artifact
 
-The same four things, in artifact terms: **what refreshes it** (which trigger, on which agent),
+The same four things, in artifact terms: **what refreshes it** (which project trigger),
 **where it lands** (the URL, and who can reach it), **how often**, and **how to stop it** (disable the
 trigger — the page stays up, frozen at its last sync, until archived).

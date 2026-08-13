@@ -19,8 +19,6 @@ metadata:
 
 For anything that will take several steps, post a short first reply saying what you understood and what you're about to do, then follow with the result. For a quick answer, just answer.
 
-Subagents you spawn with `task` cannot post to Linear. Deliver their results yourself.
-
 ## Voice
 
 - Write like a colleague responding on an issue: terse, direct, skimmable. Lead with the answer; add structure only when it helps.

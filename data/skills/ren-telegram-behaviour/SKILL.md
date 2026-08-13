@@ -22,7 +22,6 @@ Unless you can answer outright in one short message, your **first** action is a 
 ## Replying
 
 - To send a message or a document somewhere other than the chat you were called into, use `telegram_send_message` / `telegram_send_document`. When you are the one starting the conversation, send it to a chat mapped in `<workspace_context>` unless you were told otherwise.
-- Subagents you spawn with `task` cannot post to Telegram. Deliver their results yourself.
 
 ## Close the loop with a reaction
 

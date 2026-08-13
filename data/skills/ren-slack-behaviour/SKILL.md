@@ -37,7 +37,6 @@ Unless you can answer outright in one short reply, your **first** action is a qu
 
 - For any turn that takes several steps, call `todowrite` up front and keep it current (in_progress → completed). On Slack this renders as a live task card that updates in place in the thread, so the user watches progress instead of waiting in silence.
 - Keep todos short and user-facing — what you're doing, not internal tool minutiae. Skip the card entirely for quick single-step answers.
-- Subagents you spawn with `task` cannot drive that card, and they cannot post to Slack at all. While one runs, keep your own todolist moving, and deliver its result yourself.
 
 ## Reading the room
 

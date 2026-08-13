@@ -23,12 +23,12 @@ org row, so don't pass it.
 
 ## References flow narrower → broader only
 
-A private skill backs a private agent. An **org** agent cannot reference a private skill: it fails
-with a scope violation, and the fix is to promote the dependency or build the referrer private. A
-published thing can depend only on published things.
+A private skill can attach to a private project. An **org-visible** project cannot reference a
+private skill: it fails with a scope violation, and the fix is to promote the dependency or keep the
+project private. A published thing can depend only on published things.
 
-Say it as a consequence: _"if I build it just for you, the team's agent can't use it — which do you
-want?"_
+Say it as a consequence: _"if I keep this just for you, the team's project can't use it — which do
+you want?"_
 
 ## The ceiling
 

@@ -31,13 +31,13 @@ Before telling anyone a connection doesn't exist, search **both** surfaces — a
 an MCP *or* as a skill that drives the API with a credential, and only one of them is called an MCP:
 
 ```bash
-ren mcp search --query shopify --sources user org registry
+ren mcps search --query shopify --sources user org registry
 ren skills list --query shopify          # private + org + published in one read
 ```
 
-`ren topology get` is not this search: it shows what is **attached** to the agents here, so an MCP or
-skill that exists but sits on no agent is invisible in it. Attaching an existing skill to an agent is
-a far smaller ask than building a custom MCP — check for one before proposing to wire anything new.
+`ren topology get` is not this search: it shows what is attached in the visible setup, so an MCP or
+skill that exists but is not attached to the project is invisible in it. Attaching an existing skill
+to the project is a far smaller ask than building a custom MCP — check before authoring anything.
 
 ## Pods and sandboxes
 
@@ -46,7 +46,7 @@ ren pods list                              # private and shared pods you can see
 ren pods get <pod_…>
 ren pods create --name "Growth" --visibility org
 ren pods members add <pod_…> --user-id <usr_…>      # members are pod-scoped, not project-scoped
-ren pods update <pod_…> --instructions @pod-agents.md
+ren pods update <pod_…> --instructions @pod-instructions.md
 ```
 
 Sandbox readiness — check before handing back a session:
@@ -70,7 +70,7 @@ A discriminated union on `status`:
 
 ```bash
 ren projects create --pod-id <pod_…> --name "Deploy watch" --visibility private
-ren projects update <prj_…> --instructions @project-agents.md
+ren projects update <prj_…> --instructions @project-instructions.md
 ren projects get <prj_…> --output json
 # Write project-update.json with the existing gitRepos plus the new repository.
 ren projects update <prj_…> --body @project-update.json
@@ -78,11 +78,15 @@ ren projects archive <prj_…>
 ```
 
 `gitRepos`, `references` and `permission` are nested — `--body` only. Creating a project requires a
-published `ren` meta agent and injects it automatically, so every project starts with an agent that
-can answer. `gitRepos` is full-replace on update: read the project first, merge by repository URL and
+published Ren definition and injects it automatically, so every project is immediately runnable by
+Ren. `gitRepos` is full-replace on update: read the project first, merge by repository URL and
 pass the complete list, or existing bindings are removed.
 
-Capabilities attach to the project or to an agent:
+`permission` decides what the project's tools may do — allow, ask, or deny, per tool or per glob.
+It is how a read-only or approval-first posture is achieved, and it is full-replace like the rest:
+`references/permissions.md`.
+
+New and user-created capabilities attach to the project:
 
 ```bash
 ren projects skills add <prj_…> --skill-id <skl_…>      # omit --skill-version-id to track latest
@@ -93,22 +97,6 @@ ren projects memory-stores add <prj_…> --memory-store-id <mst_…>
 ```
 
 Re-attaching something already attached is a conflict error, not an upsert — `… list` first.
-
-Agents attach with a mode:
-
-```bash
-ren projects agents add <prj_…> --agent-id <agt_…> --mode all
-ren projects agents list <prj_…>          # source of the pra_ attachment id
-ren projects agents update <prj_…> <agt_…> --mode subagent
-```
-
-- **`all`** (default) — talks to users and takes trigger fires, and is callable as a subagent.
-- **`subagent`** — only invoked by another agent; never takes a chat session or a trigger.
-
-A project needs at least one `all` agent or triggers and chats have nowhere to land. Omit
-`--agent-version-id` to track the agent's latest version; pass one to freeze.
-
-**Channel mappings and cron triggers pin the `pra_` attachment id, not the `agt_` agent id.**
 
 ## Sessions and hand-off
 
@@ -168,7 +156,7 @@ ren pod-databases archive <pod_…> <pdb_…>                # keeps the replica
 
 Shared by every project in the pod. Query the file; never edit it by hand.
 
-**Create the row first.** A SQLite file an agent writes bare into `/home/user/db/` replicates, but on
+**Create the row first.** A SQLite file Ren writes bare into `/home/user/db/` replicates, but on
 the next sandbox rebuild only rows from the manifest hydrate back — the bare file vanishes.
 
 **Recreating an archived slug inherits its old data.** The replica is keyed by filename, so a new row
@@ -179,7 +167,6 @@ slug.
 
 ```bash
 ren cron-triggers create <prj_…> \
-  --project-agent-id <pra_…> \
   --schedule "0 9 * * 1" --timezone "Europe/London" \
   --input-message "Post last week's deploy failures to #deploys" \
   --is-enabled true
@@ -191,8 +178,8 @@ ren cron-triggers list <prj_…>
 takes the project id as well; it is the auth key, not a change field. Toggling `isEnabled` propagates
 on the next manifest refresh.
 
-Each fire opens a **fresh session** against the pinned agent with `inputMessage` as the first user
-turn. A paused sandbox is woken on demand; a `failed` one blocks the fire.
+Each fire opens a **fresh session** on the project with `inputMessage` as the first user turn. A
+paused sandbox wakes on demand; a `failed` one blocks the fire.
 
 ## Artifacts
 
@@ -220,7 +207,15 @@ packages.
 
 ```bash
 ren models list --output json          # live catalog with pricing
-ren orgs update --instructions @org-agents.md
+ren orgs update --instructions @org-instructions.md
 ```
 
 Pod and project instructions are set with `ren pods update` / `ren projects update` above.
+
+The three layers **accumulate rather than override**: a project runs with the org's and its pod's
+instructions appended to its own. They are re-read before every model request, so unlike anything
+said in conversation they cannot be summarised away and hold on every turn, in every session, and on
+every trigger fire. That makes them the place for doctrine — the standing rules that must survive the
+conversation. Put each fact at the widest layer where it is true (`references/design-patterns.md`),
+and set them with `--instructions @file`: the flag replaces that layer's text, so read the current
+value first when adding to it.
