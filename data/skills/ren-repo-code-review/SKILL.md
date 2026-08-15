@@ -33,6 +33,10 @@ Review the source the author wrote. Skip:
 
 Read these only as context for a real finding elsewhere.
 
+## Read-only: never install, build, or run anything
+
+This is a read-and-review pass, not a verification pass. Never run `bun install`/`npm install`/`pnpm install`, never run a build, typecheck, lint, or test command, and never start a dev server. These are slow, memory-heavy, and not what this skill does - reason about correctness by reading the diff and the surrounding code, the same way a human reviewer would without pulling the branch into an IDE and running it. If you cannot tell whether something type-checks or behaves correctly from reading it, say so in the review as an open question rather than trying to execute it.
+
 ## Procedure: check it out and read it locally
 
 Do not pull the diff over the API a chunk at a time; that bloats context. Branch a worktree from the local reference checkout and read the change from the working tree.
