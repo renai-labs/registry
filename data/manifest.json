@@ -1,6 +1,6 @@
 {
-  "pluginVersion": "0.12.0",
+  "pluginVersion": "0.12.1",
   "skills": {
-    "ren-systems-architect": "0.1.10"
+    "ren-systems-architect": "0.1.11"
   }
 }

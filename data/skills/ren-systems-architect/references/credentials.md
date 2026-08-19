@@ -62,7 +62,7 @@ hold the work so it resumes.
 <base>/vaults                   the org's credentials, shared by every pod
 ```
 
-`<base>` is `${REN_APP_URL}` when a shell resolves it, otherwise `https://renai.build/app`. The pod
+`<base>` is `${REN_APP_URL}` when a shell resolves it, otherwise `https://useren.ai/app`. The pod
 id is in `<workspace_context>`; for a user's own private pod, read the id from `ren topology get`.
 
 Wire the skill or MCP first, then send them. Once it is attached, `ren pods credentials list <pod_…>`

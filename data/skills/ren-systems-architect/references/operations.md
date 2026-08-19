@@ -120,7 +120,7 @@ URL:
 <base>/vaults                   the org's credentials
 ```
 
-`<base>` is `${REN_APP_URL}` when a shell resolves it, otherwise `https://renai.build/app`. Never
+`<base>` is `${REN_APP_URL}` when a shell resolves it, otherwise `https://useren.ai/app`. Never
 emit a `localhost` link.
 
 ## Stores and files
