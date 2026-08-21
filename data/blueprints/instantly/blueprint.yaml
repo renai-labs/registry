@@ -1,0 +1,15 @@
+kind: app
+name: Instantly
+description: Run cold email outreach — accounts, campaigns, leads, and deliverability
+brandColor: "#0081ff"
+examplePrompts:
+  - Summarise how my Instantly campaigns performed this week and flag the
+    underperformers.
+  - Which of my Instantly sending accounts have deliverability or warmup
+    problems?
+  - Add these leads to the right Instantly campaign and verify their emails
+    first.
+  - Pull the replies from this Instantly campaign and draft follow-ups for the
+    interested ones.
+mcps:
+  - instantly
