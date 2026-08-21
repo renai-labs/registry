@@ -1,0 +1,7 @@
+kind: app
+name: Mem
+description: The AI notebook for everything on your mind
+examplePrompts:
+  - Find the relevant notes in Mem
+mcps:
+  - mem

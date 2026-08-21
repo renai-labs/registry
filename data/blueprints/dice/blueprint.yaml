@@ -1,0 +1,5 @@
+kind: app
+name: Dice
+description: Find active tech jobs on Dice
+mcps:
+  - dice

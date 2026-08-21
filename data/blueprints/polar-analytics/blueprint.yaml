@@ -1,0 +1,5 @@
+kind: app
+name: Polar Analytics
+description: Bring all your data in one place
+mcps:
+  - polar-analytics

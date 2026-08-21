@@ -1,0 +1,5 @@
+kind: app
+name: Zoho CRM (India)
+description: Manage your Zoho CRM records, modules, and workflows (India data center)
+mcps:
+  - zoho-crm-india

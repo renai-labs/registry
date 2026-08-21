@@ -1,0 +1,5 @@
+kind: app
+name: CoinDesk
+description: Access Live & Historical Crypto Data, Indices
+mcps:
+  - coindesk

@@ -1,0 +1,7 @@
+kind: app
+name: Scite
+description: Evidence-based answers grounded in research
+examplePrompts:
+  - What's latest research on impact of adolescent screen time
+mcps:
+  - scite

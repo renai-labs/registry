@@ -1,0 +1,8 @@
+kind: app
+name: Linear
+description: Manage issues, projects & team workflows in Linear
+brandColor: "#5e6ad2"
+examplePrompts:
+  - Triage or update relevant issues for this task with clear next actions
+mcps:
+  - linear

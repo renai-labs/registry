@@ -1,0 +1,7 @@
+kind: app
+name: Brex
+description: Intelligent finance automation
+examplePrompts:
+  - How much did I spend on Delta last year
+mcps:
+  - brex

@@ -1,0 +1,5 @@
+kind: app
+name: Make
+description: Run Make scenarios and manage your Make account
+mcps:
+  - make

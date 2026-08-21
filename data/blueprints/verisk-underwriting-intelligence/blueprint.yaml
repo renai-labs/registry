@@ -1,0 +1,5 @@
+kind: app
+name: Verisk Underwriting Intelligence
+description: Ask questions. Get underwriting insights from Verisk.
+mcps:
+  - verisk-underwriting-intelligence

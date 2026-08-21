@@ -1,0 +1,7 @@
+kind: app
+name: ClickUp
+description: Project management & collaboration for teams & agents
+examplePrompts:
+  - "Flag whether Sprint 14: Simplifying UI is at risk"
+mcps:
+  - clickup

@@ -1,0 +1,5 @@
+kind: app
+name: Miro
+description: Access and create new content on Miro boards
+mcps:
+  - miro

@@ -1,0 +1,5 @@
+kind: app
+name: Word Documents
+description: Create, read, and edit Word documents (.docx)
+skills:
+  - docx

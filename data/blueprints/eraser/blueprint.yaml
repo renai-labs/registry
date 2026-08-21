@@ -1,0 +1,5 @@
+kind: app
+name: Eraser
+description: Generate, manage, and update Eraser diagrams and files
+mcps:
+  - eraser

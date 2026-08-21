@@ -1,0 +1,5 @@
+kind: app
+name: Adobe Experience Manager
+description: Manage your Adobe Experience Manager content
+mcps:
+  - adobe-experience-manager

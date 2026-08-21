@@ -1,0 +1,5 @@
+kind: app
+name: Fellow.ai
+description: Chat with your meetings to uncover actionable insights
+mcps:
+  - fellow-ai

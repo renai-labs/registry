@@ -1,0 +1,5 @@
+kind: app
+name: Tripadvisor
+description: Find your perfect hotel based on Tripadvisor reviews
+mcps:
+  - tripadvisor

@@ -1,0 +1,7 @@
+kind: app
+name: Windsor.ai
+description: Connect 325+ marketing, analytics and CRM data sources
+examplePrompts:
+  - Pull the relevant attribution context from Windsor.ai
+mcps:
+  - windsor-ai

@@ -1,0 +1,11 @@
+name: Google Workspace
+description: Runs the recurring work that spans mail, calendar, and documents
+icon: https://cdn.useren.ai/skill-icons/google-workspace.svg
+skills:
+  - google-workspace
+mcps:
+  - gmail
+  - google-calendar
+  - google-drive
+  - google-docs
+  - google-sheets

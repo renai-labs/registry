@@ -1,0 +1,12 @@
+kind: app
+name: Midpage Legal Research
+description: Conduct legal research and create work product
+brandColor: "#000000"
+examplePrompts:
+  - Search Midpage for cases relevant to this legal issue and summarize the
+    strongest authorities.
+  - Find statutes and regulations related to this matter and explain how they
+    apply.
+  - Draft a research memo from Midpage results with citations and open questions.
+mcps:
+  - midpage

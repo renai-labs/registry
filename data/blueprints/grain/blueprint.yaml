@@ -1,0 +1,5 @@
+kind: app
+name: Grain
+description: Turn meetings into insights and next steps
+mcps:
+  - grain

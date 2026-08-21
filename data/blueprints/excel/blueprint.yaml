@@ -1,0 +1,5 @@
+kind: app
+name: Excel
+description: Create, read, and edit spreadsheets (.xlsx, .xlsm, .csv, .tsv)
+skills:
+  - xlsx

@@ -1,0 +1,5 @@
+kind: app
+name: tldraw
+description: Sketch, draw, and diagram
+mcps:
+  - tldraw

@@ -1,0 +1,7 @@
+kind: app
+name: Circleback
+description: Search and access context from meetings
+examplePrompts:
+  - Have I met anyone from Initech
+mcps:
+  - circleback

@@ -1,0 +1,5 @@
+kind: app
+name: Attention
+description: Search calls, analyze deals & manage your Attention workspace
+mcps:
+  - attention

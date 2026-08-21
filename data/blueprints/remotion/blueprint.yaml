@@ -1,0 +1,10 @@
+kind: app
+name: Remotion
+description: Make videos programmatically in React — compositions, animation, and rendering
+brandColor: "#0b84f3"
+examplePrompts:
+  - Create an animated chart with 5 bars
+  - Make an animated call-to-action subscribe button for our YouTube channel
+  - Use Remotion to add captions and audio to a video composition.
+skills:
+  - remotion-best-practices

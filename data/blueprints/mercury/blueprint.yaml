@@ -1,0 +1,5 @@
+kind: app
+name: Mercury
+description: Search, analyze and understand your finances on Mercury
+mcps:
+  - mercury

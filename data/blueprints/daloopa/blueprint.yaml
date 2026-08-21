@@ -1,0 +1,10 @@
+kind: app
+name: Daloopa
+description: Financial fundamental data and KPIs with hyperlinks
+brandColor: "#1b2a4a"
+examplePrompts:
+  - Create a tearsheet for AAPL.
+  - Review MSFT earnings and guidance.
+  - Build a DCF valuation for NVDA.
+mcps:
+  - daloopa

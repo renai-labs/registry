@@ -1,0 +1,8 @@
+kind: app
+name: Sentry
+description: Search, query, and debug errors intelligently
+brandColor: "#362d59"
+examplePrompts:
+  - Inspect recent Sentry issues and summarize the top production errors
+mcps:
+  - sentry

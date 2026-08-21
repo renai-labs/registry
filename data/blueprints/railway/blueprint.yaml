@@ -1,0 +1,6 @@
+kind: app
+name: Railway
+description: Develop, manage, and debug Railway projects, services, and
+  deployments from within agents.
+mcps:
+  - railway

@@ -1,0 +1,5 @@
+kind: app
+name: Workable
+description: Your AI assistant for Hiring and HR — inside Workable
+mcps:
+  - workable

@@ -1,0 +1,7 @@
+kind: app
+name: Granola
+description: The AI notepad for meetings
+examplePrompts:
+  - Summarize what happened in the Hearthbase deal so far
+mcps:
+  - granola

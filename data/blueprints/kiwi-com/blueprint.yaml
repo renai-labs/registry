@@ -1,0 +1,5 @@
+kind: app
+name: Kiwi.com
+description: Search flights
+mcps:
+  - kiwi-com

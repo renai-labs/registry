@@ -1,0 +1,5 @@
+kind: app
+name: GoDaddy
+description: Search domains and check availability
+mcps:
+  - godaddy

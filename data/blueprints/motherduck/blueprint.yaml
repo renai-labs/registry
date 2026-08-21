@@ -1,0 +1,7 @@
+kind: app
+name: MotherDuck
+description: Get answers from your data
+examplePrompts:
+  - Show the top 30 customers by revenue last quarter
+mcps:
+  - motherduck

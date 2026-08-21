@@ -1,0 +1,7 @@
+kind: app
+name: Otter.ai
+description: Unlock your meeting intelligence
+examplePrompts:
+  - List recent meetings
+mcps:
+  - otter-ai

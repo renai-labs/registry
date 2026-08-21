@@ -1,0 +1,8 @@
+kind: app
+name: Langfuse
+description: Manage Langfuse prompts, traces, observations, datasets, scores,
+  and metrics for LLM observability
+skills:
+  - langfuse
+mcps:
+  - langfuse

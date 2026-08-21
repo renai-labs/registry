@@ -1,0 +1,6 @@
+kind: app
+name: Swiggy Dineout
+description: Discover restaurants, check table availability, and book dining
+  reservations on Swiggy Dineout
+mcps:
+  - swiggy-dineout

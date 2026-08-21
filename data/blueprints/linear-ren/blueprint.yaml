@@ -1,0 +1,5 @@
+kind: app
+name: Linear (Ren agent)
+description: Reply into Linear agent sessions when Ren is @-mentioned or assigned an issue
+mcps:
+  - linear-ren

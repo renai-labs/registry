@@ -1,0 +1,5 @@
+kind: app
+name: Ticket Tailor
+description: Event platform for managing tickets, orders & more
+mcps:
+  - ticket-tailor

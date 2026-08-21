@@ -1,0 +1,5 @@
+kind: app
+name: Splitwise
+description: Record expenses, check balances, and settle up on Splitwise
+skills:
+  - splitwise-expense-tracking

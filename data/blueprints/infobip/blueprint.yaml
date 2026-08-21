@@ -1,0 +1,6 @@
+kind: app
+name: Infobip
+description: Infobip MCP server for omnichannel communication and messaging.
+  SMS, RCS, WhatsApp, Viber and more.
+mcps:
+  - infobip

@@ -1,0 +1,5 @@
+kind: app
+name: Udemy Business
+description: Search and explore skill-building resources
+mcps:
+  - udemy-business

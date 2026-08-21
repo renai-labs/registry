@@ -1,0 +1,7 @@
+kind: app
+name: Meme Generation
+description: Pick a meme template, overlay the text, and get a real .png back
+examplePrompts:
+  - Make a meme about our deploy queue using a template that fits the joke
+skills:
+  - meme-generation

@@ -1,0 +1,5 @@
+kind: app
+name: SurveyMonkey
+description: Design surveys, collect responses, and analyze results
+mcps:
+  - surveymonkey

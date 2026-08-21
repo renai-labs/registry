@@ -1,0 +1,5 @@
+kind: app
+name: PDF
+description: Read, create, merge, split, fill, and secure PDF files
+skills:
+  - pdf

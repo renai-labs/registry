@@ -1,0 +1,5 @@
+kind: app
+name: Gamma
+description: Create presentations, docs, socials, and sites with AI
+mcps:
+  - gamma

@@ -1,0 +1,6 @@
+kind: app
+name: Apify
+description: Extract data from any website with thousands of scrapers, crawlers,
+  and automations on Apify Store ⚡
+mcps:
+  - apify

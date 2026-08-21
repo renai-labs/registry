@@ -1,0 +1,5 @@
+kind: app
+name: Groww
+description: Access your Groww investments—stocks, mutual funds, holdings, and market data
+mcps:
+  - groww

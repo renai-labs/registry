@@ -1,0 +1,13 @@
+kind: app
+name: Fiscal.ai
+description: Clean Public Equity Fundamental Data
+brandColor: "#1a1b26"
+examplePrompts:
+  - Search Fiscal AI for a company and summarize recent financials, filings, and
+    key risks.
+  - Compare revenue growth, margins, and valuation for this peer set in Fiscal
+    AI.
+  - Find Fiscal AI insights for this ticker and highlight the most important
+    takeaways.
+mcps:
+  - fiscal-ai

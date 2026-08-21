@@ -1,0 +1,5 @@
+kind: app
+name: Adobe Marketing Agent
+description: Marketing campaign and audience insights from Adobe
+mcps:
+  - adobe-marketing-agent

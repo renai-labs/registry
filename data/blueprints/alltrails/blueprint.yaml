@@ -1,0 +1,5 @@
+kind: app
+name: AllTrails
+description: Find your next hike
+mcps:
+  - alltrails

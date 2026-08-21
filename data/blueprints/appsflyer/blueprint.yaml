@@ -1,0 +1,5 @@
+kind: app
+name: AppsFlyer
+description: Analyze your campaigns any way you want, with AI.
+mcps:
+  - appsflyer

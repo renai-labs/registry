@@ -1,0 +1,12 @@
+kind: app
+name: FactSet AI-Ready Data
+description: Access institutional-quality financial data and analytics
+brandColor: "#182850"
+examplePrompts:
+  - Pull FactSet consensus estimates and recent price performance for a ticker.
+  - Compare margins, revenue growth, and valuation multiples across this peer
+    set in FactSet.
+  - Find recent broker research headlines for a company in FactSet and summarize
+    sentiment.
+mcps:
+  - factset

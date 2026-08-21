@@ -1,0 +1,5 @@
+kind: app
+name: MailerLite
+description: Your email marketing assistant
+mcps:
+  - mailerlite

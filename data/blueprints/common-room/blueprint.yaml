@@ -1,0 +1,7 @@
+kind: app
+name: Common Room
+description: Your GTM Copilot
+examplePrompts:
+  - Build plan to approach Northstar Metrics account
+mcps:
+  - common-room

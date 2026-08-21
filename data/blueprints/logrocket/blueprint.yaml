@@ -1,0 +1,5 @@
+kind: app
+name: LogRocket
+description: Inspect sessions, metrics & product analytics from LogRocket
+mcps:
+  - logrocket

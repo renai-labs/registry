@@ -1,0 +1,5 @@
+kind: app
+name: Trivago
+description: Find your ideal hotel at the best price.
+mcps:
+  - trivago

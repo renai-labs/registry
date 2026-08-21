@@ -1,0 +1,9 @@
+kind: app
+name: Slack
+description: Post messages, reply in threads, react, and read Slack channels,
+  threads, and users
+brandColor: "#611f69"
+examplePrompts:
+  - Summarize unread activity, draft replies, or prepare updates
+mcps:
+  - slack

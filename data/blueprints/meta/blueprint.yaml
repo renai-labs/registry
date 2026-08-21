@@ -1,0 +1,34 @@
+kind: app
+name: Meta Ads
+description: Plan, launch, and optimize Meta advertising campaigns
+skills:
+  - meta-ads-account-conventions
+  - meta-ads-account-maturity-methodology
+  - meta-ads-advantage-plus-methodology
+  - meta-ads-analyze-advantage-plus
+  - meta-ads-analyze-catalog
+  - meta-ads-analyze-creative
+  - meta-ads-audience-methodology
+  - meta-ads-audit-audiences
+  - meta-ads-audit-bidding
+  - meta-ads-audit-compliance
+  - meta-ads-audit-measurement
+  - meta-ads-audit-structure
+  - meta-ads-bidding-methodology
+  - meta-ads-budget-methodology
+  - meta-ads-campaign-diagnostics-methodology
+  - meta-ads-campaign-structure-methodology
+  - meta-ads-catalog-methodology
+  - meta-ads-compliance-methodology
+  - meta-ads-creative-strategy-methodology
+  - meta-ads-generate-creative-brief
+  - meta-ads-investigate-campaign
+  - meta-ads-launch-campaign
+  - meta-ads-manage-automated-rules
+  - meta-ads-measurement-methodology
+  - meta-ads-optimize-budgets
+  - meta-ads-performance-analysis
+  - meta-ads-placement-methodology
+  - meta-ads-weekly-review
+mcps:
+  - meta

@@ -1,0 +1,5 @@
+kind: app
+name: Gainsight (Staircase AI)
+description: Power AI Workflows with Customer Context
+mcps:
+  - gainsight-staircase-ai

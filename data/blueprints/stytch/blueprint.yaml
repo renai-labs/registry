@@ -1,0 +1,5 @@
+kind: app
+name: Stytch
+description: Manage your Stytch Project
+mcps:
+  - stytch

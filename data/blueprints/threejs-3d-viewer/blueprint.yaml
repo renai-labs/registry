@@ -1,0 +1,5 @@
+kind: app
+name: Three.js 3D Viewer
+description: Demo 3D viewer that renders interactive 3D scenes and models using Three.js
+mcps:
+  - threejs-3d-viewer

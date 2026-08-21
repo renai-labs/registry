@@ -1,0 +1,5 @@
+kind: app
+name: Chronograph
+description: Interact with your Chronograph data
+mcps:
+  - chronograph

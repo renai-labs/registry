@@ -1,0 +1,5 @@
+kind: app
+name: Era Context
+description: Manage your personal finances
+mcps:
+  - era-context

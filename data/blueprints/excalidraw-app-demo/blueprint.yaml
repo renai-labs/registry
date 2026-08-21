@@ -1,0 +1,5 @@
+kind: app
+name: Excalidraw
+description: MCP for creating interactive hand-drawn diagrams in Excalidraw
+mcps:
+  - excalidraw-app-demo

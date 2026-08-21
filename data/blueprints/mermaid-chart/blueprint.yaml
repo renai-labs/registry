@@ -1,0 +1,7 @@
+kind: app
+name: Mermaid Chart
+description: Validates Mermaid syntax, renders diagrams as high-quality SVG, and
+  displays them instantly in an interactive UI where users can preview, zoom,
+  and iterate in real time.
+mcps:
+  - mermaid-chart

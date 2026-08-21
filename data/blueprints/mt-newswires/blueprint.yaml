@@ -1,0 +1,7 @@
+kind: app
+name: MT Newswires
+description: Trusted real-time global financial news provider
+examplePrompts:
+  - Summarize the latest MT Newswires updates on this company
+mcps:
+  - mt-newswires

@@ -1,0 +1,9 @@
+kind: app
+name: Netlify
+description: Create, deploy, manage, and secure websites on Netlify.
+brandColor: "#00ad9f"
+examplePrompts:
+  - Deploy this project to Netlify and return the preview URL plus any required
+    fixes
+mcps:
+  - netlify

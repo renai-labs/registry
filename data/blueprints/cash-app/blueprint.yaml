@@ -1,0 +1,5 @@
+kind: app
+name: Cash App
+description: Discover local food spots and order with a conversation
+mcps:
+  - cash-app

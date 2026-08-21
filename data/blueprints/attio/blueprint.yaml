@@ -1,0 +1,7 @@
+kind: app
+name: Attio
+description: Search, manage, and update your Attio CRM
+examplePrompts:
+  - Find the latest notes and next steps in Attio
+mcps:
+  - attio

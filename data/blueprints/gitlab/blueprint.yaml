@@ -1,0 +1,5 @@
+kind: app
+name: GitLab
+description: Official GitLab MCP Server
+mcps:
+  - gitlab

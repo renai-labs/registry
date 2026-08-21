@@ -1,0 +1,9 @@
+kind: app
+name: Base44
+description: Build and manage Base44 apps
+examplePrompts:
+  - Create a new Base44 app and deploy it.
+  - Build a feature in my existing Base44 app.
+  - Debug errors from my Base44 backend functions.
+mcps:
+  - base44

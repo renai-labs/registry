@@ -1,0 +1,8 @@
+kind: app
+name: Statsig
+description: MCP server for Statsig API - interact with Statsig's feature flags,
+  experiments, and analytics
+examplePrompts:
+  - Analyze results of Statsig experiment shorter_blog_titles
+mcps:
+  - statsig

@@ -1,0 +1,5 @@
+kind: app
+name: Jentic
+description: One connection to access all your tools securely
+mcps:
+  - jentic

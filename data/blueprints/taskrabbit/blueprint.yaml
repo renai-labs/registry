@@ -1,0 +1,5 @@
+kind: app
+name: Taskrabbit Booking Assistance
+description: Find & book local Taskrabbit services near you
+mcps:
+  - taskrabbit

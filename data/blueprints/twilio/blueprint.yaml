@@ -1,0 +1,10 @@
+kind: app
+name: Twilio
+description: Build powerful communications and customer engagement
+brandColor: "#f22f46"
+examplePrompts:
+  - Help me send an SMS notification with delivery tracking
+  - What Twilio API should I use to build a user verification flow?
+  - How do I register for A2P 10DLC before sending US SMS?
+mcps:
+  - twilio

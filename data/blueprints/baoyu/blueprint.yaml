@@ -1,0 +1,9 @@
+kind: app
+name: Baoyu Visuals
+description: Knowledge comics and high-density infographics in 21 layouts and 21
+  visual styles
+examplePrompts:
+  - Turn this explainer into an infographic, then a short knowledge comic
+skills:
+  - baoyu-comic
+  - baoyu-infographic

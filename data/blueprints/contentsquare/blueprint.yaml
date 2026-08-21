@@ -1,0 +1,5 @@
+kind: app
+name: Contentsquare
+description: Experience analytics platform for digital businesses
+mcps:
+  - contentsquare

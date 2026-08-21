@@ -1,0 +1,5 @@
+kind: app
+name: Ketryx
+description: Search and explore regulated software lifecycle data
+mcps:
+  - ketryx

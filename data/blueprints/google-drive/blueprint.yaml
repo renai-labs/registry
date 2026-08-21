@@ -1,0 +1,11 @@
+kind: app
+name: Google Drive
+description: Google Drive is a cloud storage solution for uploading, sharing,
+  and collaborating on files across devices, with robust search and offline
+  access
+brandColor: "#0f9d58"
+examplePrompts:
+  - Find the right Drive file, then summarize a Doc, update a Sheet, or edit a
+    Slides deck
+mcps:
+  - google-drive

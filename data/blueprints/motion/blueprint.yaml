@@ -1,0 +1,5 @@
+kind: app
+name: Motion Creative Analytics
+description: Analyze your Meta ad creative & competitor ad libraries
+mcps:
+  - motion

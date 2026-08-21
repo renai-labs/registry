@@ -1,0 +1,6 @@
+kind: app
+name: Swiggy Food
+description: Search restaurants, browse menus, manage a cart, and place food
+  orders on Swiggy
+mcps:
+  - swiggy-food

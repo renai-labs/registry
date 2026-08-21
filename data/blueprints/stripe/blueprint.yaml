@@ -1,0 +1,8 @@
+kind: app
+name: Stripe
+description: Payment processing and financial infrastructure tools
+brandColor: "#635bff"
+examplePrompts:
+  - Use Stripe to help with this task
+mcps:
+  - stripe

@@ -1,0 +1,8 @@
+kind: app
+name: Omni Analytics
+description: Query your data using natural language through Omni's semantic model
+brandColor: "#f686ac"
+examplePrompts:
+  - Show me last year's orders by status
+mcps:
+  - omni-analytics

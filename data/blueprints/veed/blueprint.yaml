@@ -1,0 +1,5 @@
+kind: app
+name: VEED
+description: Generate AI talking-head videos with custom characters and voices.
+mcps:
+  - veed

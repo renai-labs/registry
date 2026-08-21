@@ -1,0 +1,11 @@
+kind: app
+name: Google Calendar
+description: Google Calendar is a time management tool providing scheduling
+  features, event reminders, and integration with email and other apps for
+  streamlined organization
+brandColor: "#4285f4"
+examplePrompts:
+  - Summarize my calendar, compare availability, prep meetings, or draft event
+    details
+mcps:
+  - google-calendar

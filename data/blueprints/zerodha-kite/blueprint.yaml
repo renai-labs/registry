@@ -1,0 +1,5 @@
+kind: app
+name: Kite by Zerodha
+description: Trade, track your portfolio, and query live Indian market data on Zerodha
+mcps:
+  - zerodha-kite

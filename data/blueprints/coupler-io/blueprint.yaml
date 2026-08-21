@@ -1,0 +1,7 @@
+kind: app
+name: Coupler.io
+description: Access business data from hundreds of sources
+examplePrompts:
+  - Show overall spend, impressions, clicks, and CPC
+mcps:
+  - coupler-io

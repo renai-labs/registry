@@ -1,0 +1,6 @@
+kind: app
+name: Typefully
+description: Draft, schedule, and publish social posts across X, LinkedIn,
+  Threads, Bluesky, and Mastodon
+skills:
+  - typefully

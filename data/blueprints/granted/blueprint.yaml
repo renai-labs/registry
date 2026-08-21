@@ -1,0 +1,5 @@
+kind: app
+name: Granted
+description: Discover every grant opportunity in existence.
+mcps:
+  - granted

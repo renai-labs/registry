@@ -1,0 +1,5 @@
+kind: app
+name: Resy
+description: Find and book restaurants instantly
+mcps:
+  - resy

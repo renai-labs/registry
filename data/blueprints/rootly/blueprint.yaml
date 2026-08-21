@@ -1,0 +1,6 @@
+kind: app
+name: Rootly
+description: Incident management, on-call scheduling, and intelligent analysis
+  powered by Rootly.
+mcps:
+  - rootly

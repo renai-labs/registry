@@ -1,0 +1,7 @@
+kind: app
+name: Pylon
+description: Search and manage Pylon support issues
+examplePrompts:
+  - Can you summarize my most recent issues
+mcps:
+  - pylon

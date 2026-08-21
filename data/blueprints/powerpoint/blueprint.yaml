@@ -1,0 +1,5 @@
+kind: app
+name: PowerPoint
+description: Create, read, and edit PowerPoint presentations (.pptx)
+skills:
+  - pptx

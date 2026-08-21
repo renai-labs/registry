@@ -1,0 +1,5 @@
+kind: app
+name: Clarify
+description: Query your CRM. Create records. Ask anything.
+mcps:
+  - clarify

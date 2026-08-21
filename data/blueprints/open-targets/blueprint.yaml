@@ -1,0 +1,5 @@
+kind: app
+name: Open Targets
+description: Drug target discovery and prioritisation platform
+mcps:
+  - open-targets

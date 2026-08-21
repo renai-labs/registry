@@ -1,0 +1,12 @@
+kind: app
+name: Shopify
+description: Run your Shopify store from Ren — products, orders, customers, and
+  ShopifyQL analytics
+brandColor: "#008060"
+examplePrompts:
+  - Build a Shopify app or theme with current docs.
+  - Generate and validate a Shopify GraphQL operation.
+  - Use Shopify CLI to run or troubleshoot a store workflow.
+skills:
+  - shopify
+  - shopify-reporting

@@ -1,0 +1,5 @@
+kind: app
+name: OpenStreetMap
+description: Geocoding, places, routing, and timezones on OpenStreetMap — no API key
+skills:
+  - maps

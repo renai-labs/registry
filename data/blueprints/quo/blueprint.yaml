@@ -1,0 +1,5 @@
+kind: app
+name: Quo
+description: Surface call insights and missed opportunities
+mcps:
+  - quo

@@ -1,0 +1,6 @@
+kind: app
+name: Telegram
+description: Send messages and documents to Telegram chats the org has connected
+  to Ren, and react to messages
+mcps:
+  - telegram

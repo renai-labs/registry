@@ -1,0 +1,5 @@
+kind: app
+name: Lorikeet
+description: A universal concierge for complex businesses
+mcps:
+  - lorikeet

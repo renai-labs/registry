@@ -1,0 +1,7 @@
+kind: app
+name: GovTribe
+description: Search government procurement & spending data
+examplePrompts:
+  - Pull the relevant opportunity context from GovTribe
+mcps:
+  - govtribe

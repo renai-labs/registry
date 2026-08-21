@@ -1,0 +1,5 @@
+kind: app
+name: Guru
+description: Search and interact with your company knowledge
+mcps:
+  - guru

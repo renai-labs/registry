@@ -1,0 +1,6 @@
+kind: app
+name: Trunk
+description: Flaky test detection, root cause analysis, and fix suggestions for
+  development teams.
+mcps:
+  - trunk

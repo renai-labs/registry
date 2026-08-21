@@ -1,0 +1,7 @@
+kind: app
+name: BioRender
+description: Search for and use scientific templates and icons
+examplePrompts:
+  - Can you find me some GLP-1 diagram templates
+mcps:
+  - biorender

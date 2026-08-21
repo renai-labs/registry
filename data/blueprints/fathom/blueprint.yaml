@@ -1,0 +1,5 @@
+kind: app
+name: Fathom
+description: Your meetings, now part of every conversation
+mcps:
+  - fathom

@@ -1,0 +1,7 @@
+kind: app
+name: SignNow
+description: Automate eSignature workflows
+examplePrompts:
+  - Check the status of the relevant SignNow document
+mcps:
+  - signnow

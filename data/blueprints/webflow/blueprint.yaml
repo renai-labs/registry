@@ -1,0 +1,5 @@
+kind: app
+name: Webflow
+description: Manage Webflow CMS, pages, assets and sites
+mcps:
+  - webflow

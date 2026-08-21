@@ -1,0 +1,8 @@
+kind: app
+name: Video Generation
+description: Generate video from a text prompt or a reference image with Sora and Veo
+examplePrompts:
+  - Generate a short product teaser from this script, then download it when it
+    finishes
+skills:
+  - video-generation

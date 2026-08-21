@@ -1,0 +1,5 @@
+kind: app
+name: Klaviyo
+description: Report, strategize & create with real-time Klaviyo data
+mcps:
+  - klaviyo

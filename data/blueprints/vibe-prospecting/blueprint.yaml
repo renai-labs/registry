@@ -1,0 +1,5 @@
+kind: app
+name: Vibe Prospecting
+description: Find company & contact data
+mcps:
+  - vibe-prospecting

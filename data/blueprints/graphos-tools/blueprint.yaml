@@ -1,0 +1,5 @@
+kind: app
+name: GraphOS MCP Tools
+description: Search Apollo docs, specs, and best practices
+mcps:
+  - graphos-tools

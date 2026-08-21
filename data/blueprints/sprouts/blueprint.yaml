@@ -1,0 +1,5 @@
+kind: app
+name: Sprouts Data Intelligence
+description: From query to qualified lead in seconds.
+mcps:
+  - sprouts

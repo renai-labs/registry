@@ -1,0 +1,5 @@
+kind: app
+name: Email
+description: Send email from the project's Ren mailbox on behalf of Ren
+mcps:
+  - email

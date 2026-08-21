@@ -1,0 +1,5 @@
+kind: app
+name: Sybill
+description: Ask AI about your sales calls, deals & pipeline
+mcps:
+  - sybill

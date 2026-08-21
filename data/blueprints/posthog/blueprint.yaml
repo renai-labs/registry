@@ -1,0 +1,10 @@
+kind: app
+name: PostHog
+description: Query, analyze, and manage your PostHog insights
+brandColor: "#1d4aff"
+examplePrompts:
+  - Show me signups this month
+  - Create a feature flag for the new checkout
+  - Why are users dropping off in onboarding?
+mcps:
+  - posthog

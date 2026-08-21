@@ -1,0 +1,5 @@
+kind: app
+name: PlanetScale
+description: Authenticated access to your Postgres and MySQL DB's
+mcps:
+  - planetscale

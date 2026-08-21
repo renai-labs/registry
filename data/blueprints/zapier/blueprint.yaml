@@ -1,0 +1,5 @@
+kind: app
+name: Zapier
+description: Automate workflows across thousands of apps via conversation
+mcps:
+  - zapier

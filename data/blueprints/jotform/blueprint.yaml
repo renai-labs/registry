@@ -1,0 +1,5 @@
+kind: app
+name: Jotform
+description: Create forms & analyze submissions
+mcps:
+  - jotform

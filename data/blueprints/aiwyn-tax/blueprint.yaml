@@ -1,0 +1,5 @@
+kind: app
+name: Aiwyn Tax (formerly Column Tax)
+description: Estimate your federal & state taxes with Aiwyn's tax engine
+mcps:
+  - aiwyn-tax

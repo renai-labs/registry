@@ -1,0 +1,5 @@
+kind: app
+name: Ramp Data
+description: Search and analyze Ramp spend across 50,000+ businesses
+mcps:
+  - ramp-data

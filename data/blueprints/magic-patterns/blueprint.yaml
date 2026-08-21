@@ -1,0 +1,5 @@
+kind: app
+name: Magic Patterns
+description: Discuss and iterate on Magic Patterns designs
+mcps:
+  - magic-patterns

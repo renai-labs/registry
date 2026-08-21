@@ -1,0 +1,5 @@
+kind: app
+name: Shapes
+description: Analyse your live people data
+mcps:
+  - shapes

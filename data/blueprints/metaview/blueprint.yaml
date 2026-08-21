@@ -1,0 +1,5 @@
+kind: app
+name: Metaview
+description: The AI platform for recruiting.
+mcps:
+  - metaview

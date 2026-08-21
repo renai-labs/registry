@@ -1,0 +1,6 @@
+kind: app
+name: Google Sheets
+description: Google Sheets is a cloud-based spreadsheet tool enabling real-time
+  collaboration, data analysis, and integration with other Google Workspace apps
+mcps:
+  - google-sheets

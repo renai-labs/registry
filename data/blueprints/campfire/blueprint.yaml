@@ -1,0 +1,5 @@
+kind: app
+name: Campfire
+description: Search, analyze, and export Campfire data
+mcps:
+  - campfire

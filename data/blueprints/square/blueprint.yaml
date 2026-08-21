@@ -1,0 +1,5 @@
+kind: app
+name: Square
+description: Search and manage transaction, merchant, and payment data
+mcps:
+  - square

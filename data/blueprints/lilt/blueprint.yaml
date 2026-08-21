@@ -1,0 +1,5 @@
+kind: app
+name: LILT
+description: High-quality translation with human verification
+mcps:
+  - lilt

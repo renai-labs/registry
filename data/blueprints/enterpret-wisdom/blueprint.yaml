@@ -1,0 +1,5 @@
+kind: app
+name: Enterpret
+description: Get answers from unified feedback of your customers.
+mcps:
+  - enterpret-wisdom

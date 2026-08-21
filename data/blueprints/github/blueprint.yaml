@@ -1,0 +1,13 @@
+kind: app
+name: GitHub
+description: Work GitHub from Ren — issues, pull requests, reviews, and repositories
+brandColor: "#24292f"
+examplePrompts:
+  - Inspect PRs, triage issues, debug failing checks, and prepare code changes
+    for review
+skills:
+  - github-auth
+  - github-code-review
+  - github-issues
+  - github-pr-workflow
+  - github-repo-management

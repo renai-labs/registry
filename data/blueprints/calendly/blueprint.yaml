@@ -1,0 +1,10 @@
+kind: app
+name: Calendly
+description: Manage event types, availability, and bookings.
+brandColor: "#006bff"
+examplePrompts:
+  - Find my upcoming Calendly meetings and summarize who I am meeting with.
+  - Check Calendly availability for this week and suggest open meeting slots.
+  - Review recent Calendly events and summarize attendee details and follow-ups.
+mcps:
+  - calendly

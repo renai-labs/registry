@@ -1,0 +1,10 @@
+kind: app
+name: Notion
+description: Connect your Notion workspace to search, update, and power
+  workflows across tools
+brandColor: "#111111"
+examplePrompts:
+  - Search Notion workspace content, update pages, or turn specs, notes, and
+    meeting context into structured outputs
+mcps:
+  - notion

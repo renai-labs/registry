@@ -1,0 +1,5 @@
+kind: app
+name: Yardi Virtuoso
+description: Real-time Yardi data & insights
+mcps:
+  - yardi-virtuoso

@@ -1,0 +1,5 @@
+kind: app
+name: MSCI
+description: Turn data into insight
+mcps:
+  - msci

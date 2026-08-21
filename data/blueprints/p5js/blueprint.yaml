@@ -1,0 +1,5 @@
+kind: app
+name: p5.js
+description: Generative art, shaders, and interactive sketches as self-contained HTML
+skills:
+  - p5js

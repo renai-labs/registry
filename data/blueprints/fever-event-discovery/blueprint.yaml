@@ -1,0 +1,5 @@
+kind: app
+name: Fever Event Discovery
+description: Discover live entertainment events worldwide
+mcps:
+  - fever-event-discovery

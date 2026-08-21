@@ -1,0 +1,5 @@
+kind: app
+name: Unthread
+description: Manage and automate your support tickets
+mcps:
+  - unthread

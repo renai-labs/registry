@@ -1,0 +1,12 @@
+kind: app
+name: Outlook
+description: Outlook is Microsoft's email and calendaring platform integrating
+  contacts and scheduling, enabling users to manage communications and events in
+  a unified workspace
+brandColor: "#0078d4"
+examplePrompts:
+  - Summarize my day, compare availability, explain Outlook status, and draft
+    the right event update
+  - Triage inbox, summarize thread, or draft reply or forward
+mcps:
+  - outlook

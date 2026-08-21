@@ -1,0 +1,9 @@
+kind: app
+name: Neon
+description: Run Postgres on Neon — projects, branches, schema changes, and queries
+brandColor: "#37c38f"
+examplePrompts:
+  - Use Neon to create a new Serverless Postgres database for my project and
+    help me connect to it.
+mcps:
+  - neon

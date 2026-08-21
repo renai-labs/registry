@@ -1,0 +1,5 @@
+kind: app
+name: Zocks
+description: Analyze client conversations, patterns, and insights.
+mcps:
+  - zocks

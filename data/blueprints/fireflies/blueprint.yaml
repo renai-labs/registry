@@ -1,0 +1,7 @@
+kind: app
+name: Fireflies
+description: Analyze and generate insights from meeting transcripts
+examplePrompts:
+  - Summarize our conversation history with Acme so far
+mcps:
+  - fireflies

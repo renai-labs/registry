@@ -1,0 +1,10 @@
+kind: app
+name: Vercel
+description: Analyze, debug, and manage projects and deployments
+brandColor: "#000000"
+examplePrompts:
+  - Audit this repo for Vercel deployment risks
+  - Which Vercel tools fit this app best
+  - Help wire the Vercel app into this workflow
+mcps:
+  - vercel

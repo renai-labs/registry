@@ -1,0 +1,5 @@
+kind: app
+name: Splice
+description: Search Splice's sounds catalog, build stacks & more!
+mcps:
+  - splice

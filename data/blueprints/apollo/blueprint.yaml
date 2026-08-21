@@ -1,0 +1,12 @@
+kind: app
+name: Apollo.io
+description: Find buyers. Book more meetings. Close more deals.
+brandColor: "#e8f028"
+examplePrompts:
+  - Find verified contacts matching this ICP in Apollo and rank the best
+    prospects.
+  - Research a company in Apollo and identify decision makers for this use case.
+  - Build an outreach list for this industry with recent growth or hiring
+    signals.
+mcps:
+  - apollo

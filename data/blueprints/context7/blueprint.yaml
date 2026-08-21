@@ -1,0 +1,5 @@
+kind: app
+name: Context7
+description: Up-to-date docs for LLMs and AI code editors
+mcps:
+  - context7

@@ -1,0 +1,5 @@
+kind: app
+name: Ramp
+description: Search, access, and analyze your Ramp financial data
+mcps:
+  - ramp

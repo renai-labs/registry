@@ -1,0 +1,5 @@
+kind: app
+name: Tenor
+description: Search Tenor for GIFs and pull the best match
+skills:
+  - gif-search

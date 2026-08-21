@@ -1,0 +1,5 @@
+kind: app
+name: Bigdata.com
+description: Access real-time financial data
+mcps:
+  - bigdata

@@ -1,0 +1,5 @@
+kind: app
+name: Lumin
+description: Manage documents, send signature requests, and convert Markdown to PDF
+mcps:
+  - lumin

@@ -1,0 +1,11 @@
+kind: app
+name: Superhuman Mail
+description: Drive your email and calendar
+brandColor: "#ce9ec6"
+examplePrompts:
+  - "@Superhuman Mail flag what needs attention from the last 24 hours"
+  - "@Superhuman Mail forward today's invoices to finance@acme.co"
+  - "@Superhuman Mail summarize responses to the Founders Dinner and who hasn't
+    opened it"
+mcps:
+  - superhuman-mail

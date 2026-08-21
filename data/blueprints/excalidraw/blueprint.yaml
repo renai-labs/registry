@@ -1,0 +1,5 @@
+kind: app
+name: Excalidraw
+description: Hand-drawn-style architecture, flow, and sequence diagrams as Excalidraw files
+skills:
+  - excalidraw

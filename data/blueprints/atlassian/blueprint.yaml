@@ -1,0 +1,8 @@
+kind: app
+name: Atlassian Rovo
+description: Access Jira & Confluence
+brandColor: "#0052cc"
+examplePrompts:
+  - Create Jira tasks in project Vita MVP
+mcps:
+  - atlassian

@@ -1,0 +1,5 @@
+kind: app
+name: Adobe Journey Optimizer
+description: Understand and troubleshoot your Journeys and Campaigns
+mcps:
+  - adobe-journey-optimizer

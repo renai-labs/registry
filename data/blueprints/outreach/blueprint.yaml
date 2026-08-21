@@ -1,0 +1,10 @@
+kind: app
+name: Outreach
+description: Unleash your team's best performance with Outreach AI
+brandColor: "#5951ff"
+examplePrompts:
+  - Find stalled Outreach prospects and summarize the next best follow-up.
+  - Search Outreach sequences for this account and summarize recent engagement.
+  - Draft a concise Outreach follow-up using recent prospect activity.
+mcps:
+  - outreach

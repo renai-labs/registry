@@ -1,0 +1,9 @@
+kind: app
+name: Canva
+description: Search, create, autofill, and export Canva designs
+brandColor: "#00c4cc"
+examplePrompts:
+  - Create or adapt a Canva design for presentations, resized social variants,
+    or translated versions
+mcps:
+  - canva

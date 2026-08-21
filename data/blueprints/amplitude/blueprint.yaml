@@ -1,0 +1,7 @@
+kind: app
+name: Amplitude
+description: Search, access, and get insights on your Amplitude data
+examplePrompts:
+  - Show the signup funnel trend in Amplitude
+mcps:
+  - amplitude

@@ -1,0 +1,5 @@
+kind: app
+name: MoSPI
+description: India's official statistics via natural language
+mcps:
+  - mospi

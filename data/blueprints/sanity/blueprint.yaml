@@ -1,0 +1,5 @@
+kind: app
+name: Sanity
+description: Create, query, and manage structured content in Sanity
+mcps:
+  - sanity

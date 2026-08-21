@@ -1,0 +1,13 @@
+kind: app
+name: Mixpanel
+description: Analyze, query, and manage your Mixpanel data
+brandColor: "#7856ff"
+examplePrompts:
+  - "@Mixpanel how many sign ups did we have in Feb?"
+  - "@Mixpanel add descriptions to any events that don't have one"
+  - "@Mixpanel create a dashboard for purchase metrics"
+  - Analyze my Mixpanel signup funnel with Python
+  - Find product analytics insights in Mixpanel
+  - Build a Mixpanel dashboard from key events
+mcps:
+  - mixpanel

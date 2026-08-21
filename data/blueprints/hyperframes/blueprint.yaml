@@ -1,0 +1,17 @@
+kind: app
+name: HyperFrames
+description: Create, animate, and render videos from HTML compositions
+brandColor: "#0a0a0a"
+examplePrompts:
+  - Turn this website into a 20-second product promo
+  - Create an animated title card with kinetic type
+  - Add synced captions to this voiceover
+skills:
+  - hyperframes
+  - hyperframes-animation
+  - hyperframes-cli
+  - hyperframes-core
+  - hyperframes-creative
+  - hyperframes-keyframes
+  - hyperframes-registry
+  - media-use

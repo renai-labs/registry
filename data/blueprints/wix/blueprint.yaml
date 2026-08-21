@@ -1,0 +1,10 @@
+kind: app
+name: Wix
+description: Manage and build sites and apps on Wix
+brandColor: "#116dff"
+examplePrompts:
+  - Build a Wix app extension with Wix Design System UI
+  - Build a Wix app with a shipping fee service plugin
+  - Set up Wix Stores products, pickup, or CMS data
+mcps:
+  - wix

@@ -1,0 +1,5 @@
+kind: app
+name: Viator
+description: Book travel experiences around the world
+mcps:
+  - viator

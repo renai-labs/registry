@@ -1,0 +1,5 @@
+kind: app
+name: Local Falcon
+description: AI visibility and local search intelligence platform
+mcps:
+  - local-falcon

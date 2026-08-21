@@ -1,0 +1,5 @@
+kind: app
+name: Exa
+description: Web Search + Code Docs Search
+mcps:
+  - exa

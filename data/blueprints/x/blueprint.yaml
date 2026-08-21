@@ -1,0 +1,5 @@
+kind: app
+name: X
+description: Post, search, DM, and upload media on X through the v2 API
+skills:
+  - xurl

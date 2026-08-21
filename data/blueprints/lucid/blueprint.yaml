@@ -1,0 +1,5 @@
+kind: app
+name: Lucid
+description: Ideate, diagram, and align teams
+mcps:
+  - lucid

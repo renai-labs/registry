@@ -1,0 +1,5 @@
+kind: app
+name: Scholar Gateway
+description: Enhance responses with scholarly research and citations
+mcps:
+  - scholar-gateway

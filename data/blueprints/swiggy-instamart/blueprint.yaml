@@ -1,0 +1,6 @@
+kind: app
+name: Swiggy Instamart
+description: Search grocery products, manage a cart, and check out groceries on
+  Swiggy Instamart
+mcps:
+  - swiggy-instamart

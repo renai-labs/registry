@@ -1,0 +1,9 @@
+kind: app
+name: Gmail
+description: Gmail is Google’s email service, featuring spam protection, search
+  functions, and seamless integration with other G Suite apps for productivity
+brandColor: "#ea4335"
+examplePrompts:
+  - Summarize inbox, draft replies, or process email threads
+mcps:
+  - gmail

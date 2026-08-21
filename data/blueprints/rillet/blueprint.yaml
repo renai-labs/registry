@@ -1,0 +1,5 @@
+kind: app
+name: Rillet
+description: Query your live GL and financials in plain English
+mcps:
+  - rillet

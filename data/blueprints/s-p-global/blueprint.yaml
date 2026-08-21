@@ -1,0 +1,13 @@
+kind: app
+name: S&P Global
+description: Query a range of S&P Global datasets
+brandColor: "#d80028"
+examplePrompts:
+  - Pull S&P Global company financials and ratings context for a ticker and
+    summarize the main risks.
+  - Compare revenue growth, margins, and valuation multiples for a company and
+    its peers in S&P Global.
+  - Find recent S&P Global research or industry outlook items for a sector and
+    summarize the takeaways.
+mcps:
+  - s-p-global

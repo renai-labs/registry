@@ -1,0 +1,7 @@
+kind: app
+name: Third Bridge
+description: Expert-led enhanced insights
+examplePrompts:
+  - Competitive analysis based on Third Bridge expert network
+mcps:
+  - third-bridge

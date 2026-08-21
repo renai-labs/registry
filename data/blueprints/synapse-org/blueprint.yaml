@@ -1,0 +1,5 @@
+kind: app
+name: Synapse.org
+description: Search and metadata tools for Synapse scientific data
+mcps:
+  - synapse-org

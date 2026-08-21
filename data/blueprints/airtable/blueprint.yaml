@@ -1,0 +1,12 @@
+kind: app
+name: Airtable
+description: Bring in your structured data
+brandColor: "#18bfff"
+examplePrompts:
+  - Set up a system to manage my team's operations.
+  - Track my product roadmap, feedback, and releases.
+  - I need a simple database for my project.
+skills:
+  - airtable
+mcps:
+  - airtable

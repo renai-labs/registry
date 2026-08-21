@@ -1,0 +1,5 @@
+kind: app
+name: Peec AI
+description: Analyze your brand's visibility across LLMs
+mcps:
+  - peec-ai

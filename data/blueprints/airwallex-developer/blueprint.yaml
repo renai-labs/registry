@@ -1,0 +1,5 @@
+kind: app
+name: Airwallex Developer
+description: Integrate with the Airwallex Platform
+mcps:
+  - airwallex-developer

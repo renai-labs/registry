@@ -1,0 +1,5 @@
+kind: app
+name: Bitly
+description: Shorten links, generate QR Codes, and track performance
+mcps:
+  - bitly

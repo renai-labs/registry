@@ -1,0 +1,5 @@
+kind: app
+name: Blockscout
+description: Access and analyze blockchain data
+mcps:
+  - blockscout

@@ -1,0 +1,6 @@
+kind: app
+name: Parallel
+description: Web search, extraction, deep research, and dataset enrichment via
+  the Parallel API
+skills:
+  - parallel-cli

@@ -1,0 +1,5 @@
+kind: app
+name: ZipRecruiter
+description: Job search made easy
+mcps:
+  - ziprecruiter

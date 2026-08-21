@@ -1,0 +1,5 @@
+kind: app
+name: Clerk
+description: Add authentication, organizations, and billing
+mcps:
+  - clerk

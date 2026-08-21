@@ -1,0 +1,7 @@
+kind: app
+name: Cloudinary
+description: Manage, transform and deliver your images & videos
+examplePrompts:
+  - Upload this image and enable auto-tagging
+mcps:
+  - cloudinary

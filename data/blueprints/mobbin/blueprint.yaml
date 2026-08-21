@@ -1,0 +1,6 @@
+kind: app
+name: Mobbin
+description: Search real-world UI & UX design references for mobile apps, web
+  apps, and websites with Mobbin.
+mcps:
+  - mobbin

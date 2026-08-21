@@ -1,0 +1,7 @@
+kind: app
+name: Google Docs
+description: Google Docs is a cloud-based word processor with real-time
+  collaboration, version history, and integration with other Google Workspace
+  apps
+mcps:
+  - google-docs

@@ -1,0 +1,5 @@
+kind: app
+name: PDF Viewer
+description: Demo PDF viewer that renders PDFs from allowed URLs like arxiv.org
+mcps:
+  - pdf-viewer

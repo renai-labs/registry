@@ -1,0 +1,5 @@
+kind: app
+name: Play Sheet Music
+description: Generate and play sheet music with a visual component
+mcps:
+  - play-sheet-music

@@ -1,0 +1,5 @@
+kind: app
+name: CData Connect AI
+description: Managed MCP platform for 350 sources
+mcps:
+  - cdata-connect-ai

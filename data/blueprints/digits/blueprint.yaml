@@ -1,0 +1,5 @@
+kind: app
+name: Digits
+description: Track and analyze your finances with Digits
+mcps:
+  - digits

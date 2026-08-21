@@ -1,0 +1,5 @@
+kind: app
+name: Clarity AI
+description: Simulate fund classifications under proposed SFDR 2.0
+mcps:
+  - clarity-ai

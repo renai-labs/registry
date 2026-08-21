@@ -1,0 +1,5 @@
+kind: app
+name: Krisp
+description: Add your meetings context via transcripts and notes
+mcps:
+  - krisp

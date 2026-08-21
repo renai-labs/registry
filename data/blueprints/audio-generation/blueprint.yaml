@@ -1,0 +1,9 @@
+kind: app
+name: Audio Generation
+description: Turn text into speech and speech back into text with OpenAI TTS,
+  ElevenLabs, and Whisper
+examplePrompts:
+  - Narrate this script in a warm voice, then transcribe the recording that
+    comes back
+skills:
+  - audio-generation

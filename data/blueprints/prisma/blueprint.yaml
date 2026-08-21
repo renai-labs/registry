@@ -1,0 +1,5 @@
+kind: app
+name: Prisma
+description: MCP server for managing Prisma Postgres.
+mcps:
+  - prisma

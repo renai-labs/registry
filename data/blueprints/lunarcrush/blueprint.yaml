@@ -1,0 +1,5 @@
+kind: app
+name: LunarCrush
+description: Add real-time social media data to your searches
+mcps:
+  - lunarcrush

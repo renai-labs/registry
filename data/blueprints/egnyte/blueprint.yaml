@@ -1,0 +1,7 @@
+kind: app
+name: Egnyte
+description: Securely access and analyze Egnyte content
+examplePrompts:
+  - What IT contracts do we have
+mcps:
+  - egnyte

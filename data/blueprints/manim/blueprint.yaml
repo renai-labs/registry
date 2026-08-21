@@ -1,0 +1,8 @@
+kind: app
+name: Manim
+description: Animated explainer videos written as Manim scenes — equations,
+  graphs, and 3D camera work
+examplePrompts:
+  - Animate how this algorithm works as a Manim scene and render it
+skills:
+  - manim-video

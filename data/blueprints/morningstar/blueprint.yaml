@@ -1,0 +1,10 @@
+kind: app
+name: Morningstar
+description: Up-to-date investment and market insights
+brandColor: "#e4572e"
+examplePrompts:
+  - Use fund-screener to find Gold-rated US large-cap ETFs.
+  - Use fund-summarizer to analyze VFIAX.
+  - Use fund-comparison to compare VFIAX, SWPPX, and FXAIX.
+mcps:
+  - morningstar

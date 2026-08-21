@@ -1,0 +1,12 @@
+kind: app
+name: Quartr
+description: Financial data and AI infrastructure for company research.
+brandColor: "#000000"
+examplePrompts:
+  - Find the latest relevant Quartr materials for a company.
+  - Compare recurring analyst question themes from the last two earnings calls
+    for a company.
+  - Pull recent earnings transcripts and filings for a company and summarize
+    forward-looking statements.
+mcps:
+  - quartr

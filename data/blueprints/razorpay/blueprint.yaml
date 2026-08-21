@@ -1,0 +1,7 @@
+kind: app
+name: Razorpay
+description: Your Razorpay Dashboard Assistant
+examplePrompts:
+  - Check the relevant payment context in Razorpay
+mcps:
+  - razorpay

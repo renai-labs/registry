@@ -1,0 +1,9 @@
+kind: app
+name: Cloudflare Developer Platform
+description: Build applications with compute, storage, and AI
+brandColor: "#f48120"
+examplePrompts:
+  - Help me choose the right Cloudflare product, configure Wrangler, and use
+    Cloudflare MCP to inspect or deploy this project
+mcps:
+  - cloudflare

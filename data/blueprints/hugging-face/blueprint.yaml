@@ -1,0 +1,8 @@
+kind: app
+name: Hugging Face
+description: Access the Hugging Face Hub and thousands of Gradio Apps
+brandColor: "#ffd21e"
+examplePrompts:
+  - Generate a realistic farm using FLUX.1
+mcps:
+  - hugging-face

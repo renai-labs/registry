@@ -1,0 +1,5 @@
+kind: app
+name: pg-aiguide
+description: Search pg and Tiger docs, learn database skills
+mcps:
+  - pg-aiguide

@@ -1,0 +1,5 @@
+kind: app
+name: incident.io
+description: See and manage everything in incident.io
+mcps:
+  - incident-io

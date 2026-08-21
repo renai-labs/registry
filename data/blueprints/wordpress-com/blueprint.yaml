@@ -1,0 +1,5 @@
+kind: app
+name: WordPress.com
+description: Secure AI access to manage your WordPress.com sites
+mcps:
+  - wordpress-com

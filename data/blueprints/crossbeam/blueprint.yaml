@@ -1,0 +1,5 @@
+kind: app
+name: Crossbeam
+description: Explore partner data and ecosystem insights
+mcps:
+  - crossbeam

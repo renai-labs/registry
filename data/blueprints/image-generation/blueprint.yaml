@@ -1,0 +1,8 @@
+kind: app
+name: Image Generation
+description: Generate, edit, and vary images from a prompt with GPT-Image,
+  Gemini, and DALL·E
+examplePrompts:
+  - Generate a hero image from this description, then produce three variations
+skills:
+  - image-generation

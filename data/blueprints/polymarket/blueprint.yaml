@@ -1,0 +1,5 @@
+kind: app
+name: Polymarket
+description: Read Polymarket prediction markets — prices, orderbooks, and history
+skills:
+  - polymarket

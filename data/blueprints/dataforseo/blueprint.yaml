@@ -1,0 +1,12 @@
+kind: app
+name: DataForSEO
+description: SERP, keyword, backlink, and on-page data APIs
+brandColor: "#202d9e"
+examplePrompts:
+  - Pull the Google SERP for this keyword and tell me who owns the top ten.
+  - Compare search volume and difficulty across this list of keywords.
+  - Summarise the backlink profile of this domain and flag the toxic referring
+    domains.
+  - Audit this page's on-page issues and rank them by impact.
+mcps:
+  - dataforseo

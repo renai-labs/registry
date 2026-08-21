@@ -1,0 +1,5 @@
+kind: app
+name: Craft
+description: Notes & second brain
+mcps:
+  - craft

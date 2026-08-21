@@ -1,0 +1,7 @@
+kind: app
+name: CB Insights
+description: Predictive intelligence on private companies
+examplePrompts:
+  - Pull the latest market context from CB Insights
+mcps:
+  - cb-insights

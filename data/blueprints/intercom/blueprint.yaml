@@ -1,0 +1,10 @@
+kind: app
+name: Intercom
+description: Access to Intercom data for better customer insights
+brandColor: "#1f8ded"
+examplePrompts:
+  - Search Intercom for open billing conversations and summarize top issues.
+  - Find Intercom contacts from example.com and pull recent conversation history.
+  - Fetch this Intercom conversation and draft next steps.
+mcps:
+  - intercom

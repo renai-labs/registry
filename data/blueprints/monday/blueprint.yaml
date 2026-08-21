@@ -1,0 +1,7 @@
+kind: app
+name: monday.com
+description: Manage projects, boards, and workflows in monday.com
+examplePrompts:
+  - Check the marketing campaign status in monday.com
+mcps:
+  - monday

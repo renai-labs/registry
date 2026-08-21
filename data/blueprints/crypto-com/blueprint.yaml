@@ -1,0 +1,5 @@
+kind: app
+name: Crypto.com
+description: Real time prices, orders, charts, and more for crypto
+mcps:
+  - crypto-com

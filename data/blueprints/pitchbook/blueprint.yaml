@@ -1,0 +1,7 @@
+kind: app
+name: PitchBook Premium
+description: PitchBook data, embedded in the way you work.
+examplePrompts:
+  - Use PitchBook to help with this task
+mcps:
+  - pitchbook

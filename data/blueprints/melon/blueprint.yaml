@@ -1,0 +1,5 @@
+kind: app
+name: Melon
+description: Browse music charts & your personalized music picks
+mcps:
+  - melon
