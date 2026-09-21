@@ -5,12 +5,19 @@ appear in prompts, and you never collect one in a conversation.
 
 ## Contents
 
+- [Connecting an App from the chat](#connecting-an-app-from-the-chat)
 - [Three vaults](#three-vaults-and-nobody-creates-them)
 - [Credential resolution](#what-a-pod-resolves)
 - [Missing credentials](#where-a-missing-credential-goes)
 - [Adding a credential](#adding-one)
 - [OAuth](#oauth)
 - [Resolution rules](#rules-that-decide-whether-resolution-works)
+
+## Connecting an App from the chat
+
+`ren_app_connect` puts a connect card in the chat. Reply in one sentence and end your turn; the user
+finishes on the card. Not for channel or trigger turns (nobody is there to click) or facade Apps
+(Slack, Telegram, Email, Linear).
 
 ## Three vaults, and nobody creates them
 
@@ -54,8 +61,10 @@ missing" without opening a session.
 
 ## Where a missing credential goes
 
-The user adds it in the app; you never take it in the conversation. Name the service, hand the link,
-hold the work so it resumes.
+In an interactive session, `ren_app_connect` above puts the connect step in the chat. Everywhere
+else — channel and trigger turns, or a bare MCP/skill that is not an App — the user adds it in the
+app; you never take it in the conversation. Name the service, hand the link, hold the work so it
+resumes.
 
 ```
 <base>/pods/<pod-id>/vaults     the pod's own credentials — shared pod or private pod alike

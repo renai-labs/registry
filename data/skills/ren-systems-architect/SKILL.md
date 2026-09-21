@@ -112,6 +112,11 @@ Search **both** surfaces before you call a connector missing — `ren mcps searc
 `ren skills list --query X`. A skill with a credential is as much a connection as an MCP, and the
 topology only shows what is already attached. `references/operations.md`.
 
+## Apps connect in the chat
+
+User wants an App (named or implied) that is not connected here → call `ren_app_connect` first. The
+card in the chat takes the secret; never the conversation, never the vault page.
+
 ## The outcome contract
 
 A build is done when you can say, unprompted and in two sentences: **what wakes it · where output
