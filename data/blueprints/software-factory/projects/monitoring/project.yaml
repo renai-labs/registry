@@ -3,7 +3,7 @@ description: "Runs the factory's scheduled work: watching what recent releases
   did to production, keeping the docs in step with what shipped, and
   consolidating what the factory learned."
 defaultModel:
-  model: claude-opus-5
+  model: claude-opus-5-5
   variant: null
 permission:
   bash:

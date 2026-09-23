@@ -30,7 +30,7 @@ pod:
     its plan, GitHub holds the code and the review, and Ren tasks move work
     between projects.
   defaultModel:
-    model: claude-opus-5
+    model: claude-opus-5-5
     variant: null
   environment:
     def:
