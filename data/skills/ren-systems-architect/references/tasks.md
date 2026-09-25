@@ -32,21 +32,23 @@ you:
 
 ## Scope
 
-The usual ladder. Org-wide by default; attach it to a pod or a project with `--pod-id` /
-`--project-id` when the work belongs there; `--visibility private` when it is one person's. Setting
-a project pins its pod.
+Org-wide by default, visible to every org member. Attach it to a pod or a project with `--pod-id` /
+`--project-id` when the work belongs there; then only that pod's members see it. Setting a project
+pins its pod.
 
-The wrinkle: a **private task in a shared pod stays private**. Pod-scoping widens who can see a task
-only when it is org-visible. `references/placement.md`.
+## Owner, project and start
 
-## Owner and executor
-
-`--assigned-to-user-id` is who **owes** the task; `--assigned-to-project-agent-id` is what
-**executes** it. Either, both, or neither. An executing assignee requires `--project-id` and must
-already be attached to that project; a human assignee must be a member of the org, and of the pod
+`--assigned-to-user-id` is who **owes** the task; `--project-id` is the project whose Ren agent
+**works** it. Either, both, or neither. A human assignee must be a member of the org, and of the pod
 when the task is pod-scoped.
 
-`ren tasks update` is the only way to change any of it (`references/operations.md`).
+Assigning never runs anything. `ren tasks start <tsk_…> --mode continue` runs the assigned project's
+agent, resuming the session that agent last worked the task in (a task you create from a chat counts
+as worked in that chat), or opening a new one; `--mode new` always opens a new one. To hand work to
+another project: `ren tasks update <tsk_…> --project-id <prj_…>`, then `ren tasks start`.
+
+A GitHub pull request, Linear issue or Slack thread in the task's links routes messages there to the
+assigned project's session, so a reply on the PR or issue reaches the agent working the task.
 
 ## Status is a vocabulary, not a workflow
 

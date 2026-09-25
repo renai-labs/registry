@@ -1,6 +1,7 @@
 name: Build
-description: Turns an approved plan into a draft pull request, and fixes what
-  Review and QA send back. Starts when a task is assigned to it.
+description: Turns an approved plan into a draft pull request, fixes what Review
+  and QA send back, and makes the changes a person asks for once it is ready.
+  Starts when a task assigned to it is started.
 defaultModel:
   model: claude-opus-5-5
   variant: medium

@@ -187,16 +187,20 @@ paused sandbox wakes on demand; a `failed` one blocks the fire.
 ```bash
 ren tasks list                                   # open + in_progress, newest first
 ren tasks list --include-done                    # the whole history, dismissed included
-ren tasks create --title "Migrate CI to pnpm" --assigned-to-user-id <usr_…> --priority high
+ren tasks create --title "Migrate CI to pnpm" --project-id <prj_…> --priority high
 ren tasks get <tsk_…>                            # the task plus its activity trail
+ren tasks update <tsk_…> --project-id <prj_…>    # hand off to another project; starts nothing
+ren tasks start <tsk_…> --mode continue          # run it: resume that project's last session, or open one
 ren tasks update <tsk_…> --status in_progress
 ren tasks archive <tsk_…>
 ```
 
-`update` is the **only** mutation path — there is no separate assign or set-status call. An omitted
-field is unchanged; an explicit `null` clears one, so unassigning goes through
-`--body '{"assignedToUserId":null}'`. Scope flags are `--pod-id`, `--project-id` (which pins the pod)
-and `--visibility private|org` on create.
+`update` is the only way to change a task — status, owner, project and links. An omitted field is
+unchanged; an explicit `null` clears one, so unassigning goes through
+`--body '{"projectId":null}'`. Add or drop links with `addLinks` / `removeLinks` rather than replacing
+`links`. Scope flags are `--pod-id` and `--project-id` (which pins the pod). `start` is the only thing
+that runs a task: `--mode continue` resumes the session the assigned project last worked it in (or
+opens one), `--mode new` always opens a fresh session.
 
 **List with `--include-done` before you create anything** — a `dismissed` twin is a suggestion
 somebody already turned down, and only that read shows it. `get` embeds the trail by default;

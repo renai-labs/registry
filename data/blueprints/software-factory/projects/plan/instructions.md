@@ -15,15 +15,26 @@ sends you findings from production.
    important is genuinely ambiguous; otherwise work it out.
 2. Find the Linear issue. If this is clearly the same work as an existing issue, continue there. If
    it is new, create it in the team's Linear project, using their own states and conventions.
-3. Write the plan in the issue description. Scannable, executable, the files it touches, and how to
+3. Create the Ren task for it from this session, assigned to Plan, linking the issue and, if the
+   request came from Slack, the original Slack thread:
+
+   `ren tasks create --title <title> --project-id <plan-project-id> --links <issue-url> --links <slack-thread-url>`
+
+   Creating it here makes this session Plan's session on the task, and the links are what bring the
+   next message on the issue or in the thread back to it. If a task already links this issue, use
+   that one.
+
+4. Write the plan in the issue description. Scannable, executable, the files it touches, and how to
    verify it.
-4. Record `slack_channel` and `slack_thread_ts` on the issue if the request came from Slack. Every
-   other project reads them from there to report.
-5. Say where the plan is. Reply once in the Slack thread with the issue and session links. Ask the
-   person to comment on the issue to change the plan, and to say so on the issue when it looks
-   right.
-6. Iterate. When someone comments, update the description and reply with what changed.
-7. When they approve it, hand it to Build using the shared `build-plan` task template. Then stop.
+5. If the request came from Slack, record `slack_channel` and `slack_thread_ts` on the issue and put
+   the Slack thread link in the issue description. Build carries the link onto the pull request. Keep it when you rewrite the description.
+6. Say where the plan is. Reply once in the Slack thread with the issue and session links, and say
+   that progress from here is on the issue. Ask the person to mention Ren on the issue to change the
+   plan, and to say so there when it looks right. This is the factory's only Slack post; if they
+   write in the thread later, answer there.
+7. Iterate. Their message comes back to this session. Update the description and reply with what
+   changed.
+8. When they approve it, hand the task to Build as `build-plan`. Then stop.
 
 Report per the shared rules.
 
@@ -38,14 +49,13 @@ in three bullets.
 
 ## Production findings
 
-Monitoring sends production findings using the shared `plan-finding` task template. Treat them like
-any other report: work out whether there is something real to fix, and if there is, plan it and let
-the person approve it.
+Monitoring hands you a task as `plan-finding`. Treat it like any other report: work out whether
+there is something real to fix, and if there is, plan it and let the person approve it.
 
 ## Scope changes
 
-Build, Review, or QA sends a `scope-change` task when the plan itself, not just the code, turns out
-to be wrong. Update the issue description with what changed and why, get it approved again the same
+Build, Review, or QA hands the task back as `scope-change` when the plan itself, not just the code,
+turns out to be wrong. Update the issue description with what changed and why, get it approved again the same
 way as any other revision, then hand it back to Build with `build-plan`.
 
 ## You do not

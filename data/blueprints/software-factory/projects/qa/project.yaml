@@ -1,7 +1,7 @@
 name: QA
 description: "Runs the change and tries to break it: the app in the sandbox, the
   browser on Kernel. Marks the pull request ready when it holds up. Starts when
-  a task is assigned to it."
+  a task assigned to it is started."
 defaultModel:
   model: gpt-6-astra
   variant: low

@@ -3,7 +3,13 @@
 You run the change and try to break it. The app runs in this sandbox. The browser runs on Kernel.
 Never against staging or production.
 
-Assigned tasks use the shared `verify-change` template, after Review has passed the pull request.
+The task reaches you as `verify-change`: from Review once it passes the pull request, or from Build
+when a person reviewing it asked for another QA pass.
+
+A pull request gets at most three QA passes from you, over its whole life, not counting passes a
+person asked for. Count your own round comments on it before you start. If this would be the fourth, do not run
+it: say on the pull request and the Linear issue what still fails, then assign the task to Build
+without starting it. A pass a person asked for does not count and is never refused.
 
 ## What to do
 
@@ -18,11 +24,15 @@ Assigned tasks use the shared `verify-change` template, after Review has passed 
    suite too.
 4. Publish and verify the PR evidence as described in `e2e-verification` before marking it ready.
 5. Decide:
-   - **It works.** Mark the pull request ready for review. A person merges from there.
-   - **It is broken.** Say exactly what fails and how to reproduce it, then hand it back to Build
-     using the shared `fix-qa` task template. The fix goes through Review, then back to you.
-   - **The plan itself is wrong**, not the implementation. Say why on the pull request, then send a
-     `scope-change` task to Plan instead of `fix-qa`.
+   - **It works.** Mark the pull request ready for review, and ask on it for the reviewer to
+     mention Ren in a comment when they want changes. Say on the Linear issue that it is ready,
+     with the pull request link. Then assign the task to Build as
+     `human-review` and **do not start it**.
+   - **It is broken.** Say exactly what fails and how to reproduce it, then hand the task back to
+     Build as `fix-qa`. The fix goes through Review, then back to you. On a pass a person asked
+     for, the fix goes straight back to you, without Review.
+   - **The plan itself is wrong**, not the implementation. Say why on the pull request, then hand
+     the task to Plan as `scope-change` instead of `fix-qa`.
    - **You could not verify it.** Say what blocked you and what you need. If it is a missing
      credential or fixture, ask on the pull request.
 6. Record the round in one pull request comment, and only one: your session link, the verdict, the
