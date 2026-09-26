@@ -18,7 +18,7 @@ sends you findings from production.
 3. Create the Ren task for it from this session, assigned to Plan, linking the issue and, if the
    request came from Slack, the original Slack thread:
 
-   `ren tasks create --title <title> --project-id <plan-project-id> --links <issue-url> --links <slack-thread-url>`
+   `ren tasks create --title <title> --pod-id <space-id> --project-id <plan-project-id> --links <issue-url> --links <slack-thread-url>`
 
    Creating it here makes this session Plan's session on the task, and the links are what bring the
    next message on the issue or in the thread back to it. If a task already links this issue, use

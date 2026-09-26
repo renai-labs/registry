@@ -32,14 +32,14 @@ factory labels or status conventions on top of them.
 
 ## One task, handed on
 
-A piece of work is **one Ren task** from the request to the merge. Plan creates it. Everyone after
+A piece of work is **one Ren task** from the request to the merge, in this space. Plan creates it. Everyone after
 that receives the same task, does their part, and hands it on. Nobody opens a second task for work
-that is already moving. Before creating one, check `ren tasks list --output json` for an open task
-that already links the same issue.
+that is already moving. Before creating one, check `ren tasks list --linked-to <issue-url> --output json`
+for an open task that already links the same issue.
 
 Handing on is two commands:
 
-1. `ren tasks update <task-id> --project-id <receiving-project-id>`
+1. `ren tasks assign <task-id> --project-id <receiving-project-id>`
 2. `ren tasks start <task-id> --mode continue`
 
 Assigning alone starts nothing. `continue` puts the receiving project back in the session it last

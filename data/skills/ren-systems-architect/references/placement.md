@@ -15,8 +15,8 @@ filter. `search` uses `--sources user org registry` instead.
 
 `promote` moves private → org in place, cascading through dependencies. There is no demotion.
 
-**A task's scope is its visibility.** An org task is visible to the whole org; a task on a pod or
-project is visible to that pod's members. A task that is one person's belongs in their private pod.
+**A task's scope is its space.** Every task lives in a pod and is visible to that pod's members. A
+task that is one person's belongs in their private pod.
 `references/tasks.md`.
 
 **The team-sized middle is a pod, not a visibility.** _"My team needs this, the company doesn't"_ is
