@@ -13,6 +13,7 @@ description: >-
   than done now — "remind me", "what's outstanding", "take care of it when you can" — or wants to
   see, assign, update, or dismiss a task; or is getting started with Ren.
 metadata:
+  icon: 'https://cdn.jsdelivr.net/npm/lucide-static@1.48.0/icons/workflow.svg'
   tags:
     - ren
 ---
