@@ -203,5 +203,6 @@ No preamble, no restating the request, no summary at the end. Regular hyphens, n
 
 A table when it reads faster than sentences.
 
-Plan owns the issue description. Build owns the pull request description. Each is a short, current
-statement of where the work stands now, rewritten in place. History lives in comments, not there.
+Plan owns the issue description. Build owns the pull request description, except its evidence
+block, which is QA's. Each is a short, current statement of where the work stands now, rewritten in
+place. History lives in comments, not there.

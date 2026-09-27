@@ -7,6 +7,8 @@ looked at. Close with `Closes <ISSUE-KEY>` so Linear closes the issue on merge, 
 the original Slack thread link when the issue has one, then a `Session:` line with your session link.
 Those lines do not count against the five. Rewrite it in place as the change evolves; never append a
 round to it. Each round replaces the `Session:` line with the session that last touched the branch.
+QA owns the block between `<!-- qa-evidence:start -->` and `<!-- qa-evidence:end -->`: carry it
+over unchanged whenever you rewrite the description.
 
 ## A new plan
 

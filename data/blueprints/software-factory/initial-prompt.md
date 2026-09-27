@@ -31,17 +31,18 @@ Then set it up:
   all done at build time. A session should be able to run the test suite without installing
   anything first. Time the build and tell me how long a cold session now takes to get to a running
   app.
-- Offer to set up a QA browser profile: a persistent Kernel profile, signed in once to the test
-  accounts for the product and for every third-party login a QA flow has to pass through. It saves
-  every later run the signup, but it is optional and QA works without it by signing up a fresh
-  account. If I want it, tell me which logins to complete and give me the hosted URLs.
+- Offer to set up saved QA browser state: an encrypted agent-browser state file, signed in once to
+  the test accounts for the product and for every third-party login a QA flow has to pass through.
+  It saves every later run the signup, but it is optional and QA works without it by signing up a
+  fresh account. If I want it, tell me which logins to complete and how. Connect
+  `AGENT_BROWSER_ENCRYPTION_KEY` on QA first; never write its value anywhere but the credential.
 - Create the shared memory store `factory-memory` and attach it to all five projects.
 - Add each repository as a reference on Plan, Build, Review, QA, and Monitoring.
 - Map the Slack intake channels and the Linear project to Plan, so a mention there reaches you.
 - Map the repositories to Review for access and mentions, with `prListenerEnabled: false`. QA marks
   a pull request ready at the end of the run, and automatic review would fire again on that.
 - Map the engineering-updates channel to Monitoring, so its scheduled posts land there.
-- Connect Kernel on QA, PostHog on Monitoring, and check Context7 answers on Monitoring.
+- Connect PostHog on Monitoring, and check Context7 answers on Monitoring.
 - Connect the QA GitHub upload credential (`QA_GITHUB_UPLOAD_TOKEN`) on QA; the e2e-verification
   skill needs it to publish screenshots and recordings to a pull request. Ask me for it if it is not
   already connected; never write the token value anywhere but the credential itself.
@@ -50,10 +51,10 @@ Then set it up:
 Run a setup trial. Explain the temporary PR comment and Slack test messages before posting them:
 
 - Send QA an onboarding task, explicitly separate from `verify-change`, to run a setup trial on each repository: check out a fresh worktree, work
-  through `e2e-verification`'s "Start the app" section to build the shared recipe, open a Kernel
-  browser, sign in with the profile if one exists or a fresh account if not, capture a short
-  recording with the overlay on, cut it with FFmpeg, and publish it on an agreed test PR comment with
-  `QA_GITHUB_UPLOAD_TOKEN`; a clean exit from `gh` is the whole check.
+  through `e2e-verification`'s "Run the app" section to build the shared recipe, open an
+  agent-browser session, sign in with saved state if it exists or a fresh account if not, record a
+  short clip with the cursor on, cut it with FFmpeg, and publish it in the evidence block of an
+  agreed test PR with `QA_GITHUB_UPLOAD_TOKEN`; a clean exit from `gh` is the whole check.
   Then clean the worktree and stop. This is the
   same Ren-task handoff real work will use, so it proves the mechanism reaches QA, not only that it
   exists, and it leaves the recipe in `factory-memory` before the first real QA run needs it.
@@ -67,7 +68,8 @@ marking setup done. Then write what you learned about the team and the codebase 
 every project reads them before it works, so write them even if nothing else lands:
 
 - The app-setup recipe, including what the pre-baked environment already did so nobody redoes it.
-- How QA signs in: the browser profile's name and accounts if one exists, otherwise the signup path.
+- How QA signs in: the saved browser state's path and accounts if it exists, otherwise the signup
+  path.
 - The phase-to-Linear-state mapping I confirmed.
 
 Once setup succeeds, enable release monitoring every four hours and docs and memory nightly.

@@ -25,7 +25,8 @@ sends you findings from production.
    that one.
 
 4. Write the plan in the issue description. Scannable, executable, the files it touches, and how to
-   verify it.
+   verify it, including the evidence QA should attach: screenshots, a video, before and after
+   numbers, or none.
 5. If the request came from Slack, record `slack_channel` and `slack_thread_ts` on the issue and put
    the Slack thread link in the issue description. Build carries the link onto the pull request. Keep it when you rewrite the description.
 6. Say where the plan is. Reply once in the Slack thread with the issue and session links, and say

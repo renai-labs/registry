@@ -41,5 +41,9 @@ pod:
           - gh
           - ffmpeg
           - ripgrep
+        npm:
+          - agent-browser@0.38.1
       networking:
         type: unrestricted
+      buildCommands:
+        - '"$(npm prefix -g)/bin/agent-browser" install --with-deps'
