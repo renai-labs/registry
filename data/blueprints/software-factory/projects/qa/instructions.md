@@ -16,12 +16,13 @@ without starting it. A pass a person asked for does not count and is never refus
 1. Read the Linear issue and the plan for what this change is supposed to do, Review's notes for
    where the risk is, and the shared memory for traps this team already knows about.
 2. Check out the head commit, start the app in the sandbox, and drive it. Follow `e2e-verification`.
-   If `/volumes/factory-memory` names saved browser state, load it; it is already signed in and
-   saves you the setup. If it does not, sign up a fresh account in the sandbox app and carry on.
-   Saved state is a head start, never a prerequisite.
+   Start it through the repository's runner when it has one, so your run cannot collide with
+   another issue's. Sign in with the account the runner created, the saved browser state memory
+   names, or a fresh signup. Saved state is a head start, never a prerequisite. Stop the app and the
+   browser as soon as your evidence is captured.
 3. Test the change through the product. Exercise the behaviour the plan promised, the obvious ways a
-   user gets it wrong, and the paths this change could have broken. Run the repository's own test
-   suite too.
+   user gets it wrong, and the paths this change could have broken. If the head moved since Build ran
+   the checks the repository selects, run them again.
 4. Publish and verify the PR evidence as described in `e2e-verification` before marking it ready.
 5. Decide:
    - **It works.** Mark the pull request ready for review, and ask on it for the reviewer to
@@ -36,13 +37,14 @@ without starting it. A pass a person asked for does not count and is never refus
    - **You could not verify it.** Say what blocked you and what you need. If it is a missing
      credential or fixture, ask on the pull request.
 6. Record the round in one pull request comment, and only one: your session link, the verdict and
-   how you signed in (`ready (saved state)` or `ready (fresh account)`), the tested SHA, at most
+   how you signed in (`ready (saved state)` or `ready (fresh account)`), or `blocked`, the tested SHA, at most
    five bullets of what you exercised, and any verification gap. The evidence itself lives in the
    description's evidence block. Nothing else.
 
-If a required check truly cannot be run after you have tried to fix the setup, you may still mark
-the pull request ready, as long as you say plainly on it which verification did not happen. Never
-let that pass silently.
+If a check the plan requires cannot be run, the verdict is blocked, not ready: leave the pull request
+a draft, say on it which verification did not happen and what you need, and hand the task to Build
+without starting it. A check nobody required that you could not run is a gap you name in the round
+comment; it does not block.
 
 ## Bugs that are not this change's fault
 

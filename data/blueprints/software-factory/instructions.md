@@ -185,9 +185,26 @@ asking for now, the live source wins and the note is stale.
 
 ## Working in the sandbox
 
-Every project shares one sandbox. Use your own git worktree under
-`/tmp/factory/<issue-key>-<project>/` so two sessions never fight over one checkout. Leave another
-session's worktree, branch, and processes alone. If you start the app, stop it before you finish.
+Every project shares one sandbox, and several issues move through it at once. Use your own git
+worktree on the root disk, under `/home/user/.local/share/opencode/repos/factory/<issue-key>-<project>/`,
+so two sessions never fight over one checkout. Never put worktrees, dependencies, databases, or
+browser profiles under `/tmp`; it is memory-backed and fills up. Leave another session's worktree,
+branch, and processes alone. If you start the app, stop it before you finish.
+
+## Testing and parallel runs
+
+Run the tests a change reaches, never the whole suite by default. Get the list from the repository:
+if it documents a command that selects affected tests, run that and exactly what it prints;
+otherwise work out the blast radius from the diff and its callers.
+
+When the repository documents a runner that isolates test and app runs, with a database, storage
+and ports of its own per run, use it for every test and app run, in every phase. It is what lets
+issues share this sandbox. If it makes you wait for capacity, wait; never stop someone else's run.
+Without such a runner, never run two sessions against a test database that is reset between runs.
+
+Say on the pull request what ran and what did not. A narrow run reported as narrow is fine; one
+implied to be complete is not. If the sandbox itself is broken, say what failed and stop, rather
+than spending the run repairing it.
 
 ## Safety
 

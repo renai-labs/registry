@@ -41,9 +41,12 @@ pod:
           - gh
           - ffmpeg
           - ripgrep
+          - docker.io
+          - docker-compose
         npm:
           - agent-browser@0.38.1
       networking:
         type: unrestricted
       buildCommands:
+        - sudo usermod -aG docker user
         - '"$(npm prefix -g)/bin/agent-browser" install --with-deps'

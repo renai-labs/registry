@@ -23,13 +23,18 @@ Find out:
 - Whether QA needs its own test accounts, staging-safe credentials, or fixtures to run the product,
   and where they already live if so.
 - Our timezone.
+- How each repository runs only the tests a change affects, and whether it has a runner that gives
+  every test and app run its own database, storage, and ports, so several issues can share one
+  sandbox. If it has none, tell me and propose adding one. Until then the factory must not run two
+  sessions against one test database that is reset between runs.
 
 Then set it up:
 
 - Build a pre-baked environment for these repositories and attach it to this pod: the system
-  packages the repositories need, the checkout, the dependency install, and any code generation,
-  all done at build time. A session should be able to run the test suite without installing
-  anything first. Time the build and tell me how long a cold session now takes to get to a running
+  packages the repositories need (Docker and Compose when tests or the app use containers), the
+  dependency cache warmed from the default branch, the container images the tests need already
+  pulled, and any code generation, all done at build time. A session should be able to run the
+  affected tests without installing anything first. Time the build and tell me how long a cold session now takes to get to a running
   app.
 - Offer to set up saved QA browser state: an encrypted agent-browser state file, signed in once to
   the test accounts for the product and for every third-party login a QA flow has to pass through.
@@ -58,7 +63,9 @@ Run a setup trial. Explain the temporary PR comment and Slack test messages befo
   Then clean the worktree and stop. This is the
   same Ren-task handoff real work will use, so it proves the mechanism reaches QA, not only that it
   exists, and it leaves the recipe in `factory-memory` before the first real QA run needs it.
-- Confirm the trial used its own worktree, environment files, ports, and processes, and cleaned up only its own resources.
+- Run two of those trials at the same time. Confirm each used its own worktree, database, storage,
+  ports, browser session, and processes, that neither disturbed the other, and that each cleaned up
+  only its own resources. That is what proves several issues can share the sandbox.
 - Post one short line in the intake channel and one in engineering-updates to confirm Plan and
   Monitoring can actually post where they were mapped.
 
@@ -67,7 +74,9 @@ marking setup done. Then write what you learned about the team and the codebase 
 `factory-memory` so the other projects start with it. Three of those entries are load-bearing and
 every project reads them before it works, so write them even if nothing else lands:
 
-- The app-setup recipe, including what the pre-baked environment already did so nobody redoes it.
+- The test and app recipe: the repository's affected-test and isolated-runner commands if it has
+  them, otherwise the manual recipe, and what the pre-baked environment already did so nobody redoes
+  it.
 - How QA signs in: the saved browser state's path and accounts if it exists, otherwise the signup
   path.
 - The phase-to-Linear-state mapping I confirmed.
