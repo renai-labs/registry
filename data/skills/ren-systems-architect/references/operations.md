@@ -198,7 +198,8 @@ ren tasks archive <tsk_…>
 `update` changes content — title, description, status, priority, labels, links, space. `assign`
 changes who holds it: `--project-id` (what works it) and `--assigned-to-user-id` (who owns it) are
 independent; an omitted field is unchanged and an explicit `null` clears one. Add or drop links with
-`addLinks` / `removeLinks` rather than replacing `links`. `--pod-id` (the space) is required on
+`--add-links` / `--remove-links`; `update` rejects `links` and any assignment field with an error
+naming the right command, rather than ignoring them. `--pod-id` (the space) is required on
 create; every member of the space sees the task. `start` is the only thing that runs a task:
 `--mode continue` resumes the session the assigned project last worked it in (or opens one),
 `--mode new` always opens a fresh session.
