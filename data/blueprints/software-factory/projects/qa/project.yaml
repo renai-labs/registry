@@ -3,8 +3,8 @@ description: "Runs the change and tries to break it: the app and a local
   browser, both in the sandbox. Marks the pull request ready when it holds up.
   Starts when a task assigned to it is started."
 defaultModel:
-  model: gpt-6-astra
-  variant: low
+  model: claude-opus-5-5
+  variant: medium
 permission:
   bash:
     "*": allow

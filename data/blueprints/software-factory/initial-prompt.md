@@ -23,8 +23,7 @@ Find out:
 - Whether QA needs its own test accounts, staging-safe credentials, or fixtures to run the product,
   and where they already live if so.
 - Our timezone.
-- How each repository runs only the tests a change affects, and whether it has a runner that gives
-  every test and app run its own database, storage, and ports, so several issues can share one
+- Whether each repository has a runner that gives every test and app run its own database, storage, and ports, so several issues can share one
   sandbox. If it has none, tell me and propose adding one. Until then the factory must not run two
   sessions against one test database that is reset between runs.
 
@@ -34,7 +33,7 @@ Then set it up:
   packages the repositories need (Docker and Compose when tests or the app use containers), the
   dependency cache warmed from the default branch, the container images the tests need already
   pulled, and any code generation, all done at build time. A session should be able to run the
-  affected tests without installing anything first. Time the build and tell me how long a cold session now takes to get to a running
+  tests without installing anything first. Time the build and tell me how long a cold session now takes to get to a running
   app.
 - Offer to set up saved QA browser state: an encrypted agent-browser state file, signed in once to
   the test accounts for the product and for every third-party login a QA flow has to pass through.
@@ -47,7 +46,7 @@ Then set it up:
 - Map the repositories to Review for access and mentions, with `prListenerEnabled: false`. QA marks
   a pull request ready at the end of the run, and automatic review would fire again on that.
 - Map the engineering-updates channel to Monitoring, so its scheduled posts land there.
-- Connect PostHog on Monitoring, and check Context7 answers on Monitoring.
+- Connect PostHog on Monitoring.
 - Connect the QA GitHub upload credential (`QA_GITHUB_UPLOAD_TOKEN`) on QA; the e2e-verification
   skill needs it to publish screenshots and recordings to a pull request. Ask me for it if it is not
   already connected; never write the token value anywhere but the credential itself.
@@ -74,7 +73,7 @@ marking setup done. Then write what you learned about the team and the codebase 
 `factory-memory` so the other projects start with it. Three of those entries are load-bearing and
 every project reads them before it works, so write them even if nothing else lands:
 
-- The test and app recipe: the repository's affected-test and isolated-runner commands if it has
+- The test and app recipe: the repository's isolated-runner commands if it has
   them, otherwise the manual recipe, and what the pre-baked environment already did so nobody redoes
   it.
 - How QA signs in: the saved browser state's path and accounts if it exists, otherwise the signup

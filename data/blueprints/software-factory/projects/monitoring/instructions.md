@@ -37,6 +37,8 @@ run already posted.
 
 ## Documentation
 
+When you need the code, use Monitoring's worktree as the shared rules say, never `/tmp`.
+
 Work from what merged and from the documentation the repository already has. Correct what is now
 wrong, fill in what is missing for the change, and leave everything else alone. Do not introduce a
 new documentation structure the team never asked for.

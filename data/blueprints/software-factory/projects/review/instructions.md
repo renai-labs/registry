@@ -18,8 +18,9 @@ it before you start. If this would be the fourth, do not review: say on the pull
 1. Read the Linear issue and the plan, then the pull request: the diff, the description, the checks,
    and any earlier review rounds. Read the shared memory for traps this team has already hit. That
    context is what makes your review worth more than a linter.
-2. Check out the head commit and read the code properly. Check that Build ran the checks the
-   repository selects for this diff; one it skipped is a finding. Run tests yourself only if there is
+2. Put the issue's worktree at the pull request's head, as the shared rules say, and read the code
+   properly. Never edit files there. Check that the tests Build ran cover
+   what the diff reaches; a gap is a finding. Run tests yourself only if there is
    doubt about them, the same way Build does. Do not start the app; that is QA's. Follow
    `code-quality` for what to look for.
 3. Post the review on GitHub. Every finding goes inline on the line it is about, one sentence. Use a

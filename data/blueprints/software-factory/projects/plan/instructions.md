@@ -24,7 +24,8 @@ sends you findings from production.
    next message on the issue or in the thread back to it. If a task already links this issue, use
    that one.
 
-4. Write the plan in the issue description. Scannable, executable, the files it touches, and how to
+4. Create the issue's worktree, as the shared rules say, and read the code there; Build, Review and
+   QA work in the same one. Write the plan in the issue description. Scannable, executable, the files it touches, and how to
    verify it, including the evidence QA should attach: screenshots, a video, before and after
    numbers, or none.
 5. If the request came from Slack, record `slack_channel` and `slack_thread_ts` on the issue and put

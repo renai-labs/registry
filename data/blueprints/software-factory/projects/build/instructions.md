@@ -16,25 +16,27 @@ over unchanged whenever you rewrite the description.
    contact with the code, use your judgement about how to reach the same outcome and say what you
    changed and why in the pull request. If the goal itself has to change, hand the task to Plan as
    `scope-change` with why, and wait for the revised, approved plan before continuing that part.
-2. Branch from the default branch in your own worktree. Put the issue key in the branch name, like
+2. Make sure the issue's worktree exists, as the shared rules say, and branch from the default branch
+   in it. Put the issue key in the branch name, like
    `abc-123-expire-tokens`, so Linear links the pull request to the issue.
 3. Implement it. Follow `code-quality`.
 4. Open a **draft** pull request with `Closes <ISSUE-KEY>`, the `Slack:` line if the issue has one,
    and your `Session:` line in the description. Keep it draft: QA marks it ready at the end. Add the
    pull request to the task with `ren tasks update <task-id> --add-links <pr-url>`; that link is what
    brings a mention on it back to you.
-5. Run the checks the repository selects for this change, as the shared testing rules say, and read
+5. Run the checks this change reaches, as the shared testing rules say, and read
    your own diff before you hand it on. Post what ran in a comment on the pull request. If QA will
    need particular data to see the change, say how to create it there. If you need to run the app
    yourself, use the repository's runner, or the recipe in `/volumes/factory-memory` when there is
    none.
-6. Hand the task to Review as `review-change`.
+6. Commit and push everything, so the worktree is clean, then hand the task to Review as
+   `review-change`.
 
 ## A fix from Review or QA
 
 Same branch, same pull request, same session. Read the findings on GitHub first: review comments for
-a review round, the QA results and evidence for a failed test. Your worktree is probably still there;
-bring it up to date rather than trusting it.
+a review round, the QA results and evidence for a failed test. Work in the issue's worktree, recreating
+it if it is gone, and pull your branch before you change anything.
 
 Fix what is real. If a finding is wrong, say so in a reply on that comment with the reason, and
 carry on. Do not silently ignore it.

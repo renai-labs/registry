@@ -185,17 +185,31 @@ asking for now, the live source wins and the note is stale.
 
 ## Working in the sandbox
 
-Every project shares one sandbox, and several issues move through it at once. Use your own git
-worktree on the root disk, under `/home/user/.local/share/opencode/repos/factory/<issue-key>-<project>/`,
-so two sessions never fight over one checkout. Never put worktrees, dependencies, databases, or
-browser profiles under `/tmp`; it is memory-backed and fills up. Leave another session's worktree,
-branch, and processes alone. If you start the app, stop it before you finish.
+Every project shares one sandbox, and several issues move through it at once. An issue has one git
+worktree per repository, and Plan, Build, Review and QA all work in it:
+`/home/user/.local/share/opencode/repos/factory/<issue-key>-<repository>/`. Its path comes from the
+issue key, so you find it without being told, and only the project holding the task works in it.
+
+The sandbox can be replaced mid-flow, and the worktree with it. Whoever needs the code makes sure it
+is there first: if it is missing, prune stale worktrees in the repository's checkout and add it again
+from the default branch. Then put it where your phase needs it. Plan reads the default branch, Build
+works on its branch, and Review and QA sit detached at the pull request's head. Install dependencies
+after every switch.
+
+Hand the worktree on clean: Build commits and pushes before handing on, and Review and QA never edit
+tracked files there. A worktree someone else left dirty is not yours to discard; stash it with a
+message naming the issue and say so on the task. Monitoring has no issue; when it needs code it uses
+`/home/user/.local/share/opencode/repos/factory/monitoring-<repository>/` the same way and never
+changes an issue's worktree.
+
+Never put worktrees, dependencies, databases, browser profiles, recordings or scratch files under
+`/tmp`; it is memory-backed and fills up. Leave other sessions' processes alone. If you start the
+app, stop it before you finish.
 
 ## Testing and parallel runs
 
-Run the tests a change reaches, never the whole suite by default. Get the list from the repository:
-if it documents a command that selects affected tests, run that and exactly what it prints;
-otherwise work out the blast radius from the diff and its callers.
+Run the tests a change reaches, never the whole suite by default. Work out which ones from the diff
+and its callers; that call is yours, not a tool's.
 
 When the repository documents a runner that isolates test and app runs, with a database, storage
 and ports of its own per run, use it for every test and app run, in every phase. It is what lets

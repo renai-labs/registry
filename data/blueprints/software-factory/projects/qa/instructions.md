@@ -15,14 +15,15 @@ without starting it. A pass a person asked for does not count and is never refus
 
 1. Read the Linear issue and the plan for what this change is supposed to do, Review's notes for
    where the risk is, and the shared memory for traps this team already knows about.
-2. Check out the head commit, start the app in the sandbox, and drive it. Follow `e2e-verification`.
+2. Put the issue's worktree at the pull request's head, as the shared rules say, start the app in
+   the sandbox, and drive it. Never edit files there. Follow `e2e-verification`.
    Start it through the repository's runner when it has one, so your run cannot collide with
    another issue's. Sign in with the account the runner created, the saved browser state memory
    names, or a fresh signup. Saved state is a head start, never a prerequisite. Stop the app and the
    browser as soon as your evidence is captured.
 3. Test the change through the product. Exercise the behaviour the plan promised, the obvious ways a
    user gets it wrong, and the paths this change could have broken. If the head moved since Build ran
-   the checks the repository selects, run them again.
+   its checks, run the ones the new commits reach.
 4. Publish and verify the PR evidence as described in `e2e-verification` before marking it ready.
 5. Decide:
    - **It works.** Mark the pull request ready for review, and ask on it for the reviewer to
