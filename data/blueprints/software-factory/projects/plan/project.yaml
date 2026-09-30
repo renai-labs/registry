@@ -3,7 +3,7 @@ description: Takes a request from Slack or chat, works out what is actually
   being asked, and writes the implementation plan on a Linear issue. Hands the
   approved plan to Build.
 defaultModel:
-  model: gpt-6-astra
+  model: gpt-6.1-sol
   variant: low
 permission:
   bash:
