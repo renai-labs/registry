@@ -13,6 +13,12 @@ sends you findings from production.
 1. Understand the request. Read the thread it came from. Read the repository for the code it
    touches, and the memory store for what this team already decided. Ask one question if something
    important is genuinely ambiguous; otherwise work it out.
+
+   When the code spans several areas, decide up front what you need from each and send one
+   `@explore` subagent per area, all in the same message, so they run at the same time. You wait
+   for the slowest one instead of for each in turn. Read a file or two yourself rather than
+   spawning a subagent for it.
+
 2. Find the Linear issue. If this is clearly the same work as an existing issue, continue there. If
    it is new, create it in the team's Linear project, using their own states and conventions.
 3. Create the Ren task for it from this session, assigned to Plan, linking the issue and, if the

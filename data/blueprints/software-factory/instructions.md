@@ -216,6 +216,12 @@ and ports of its own per run, use it for every test and app run, in every phase.
 issues share this sandbox. If it makes you wait for capacity, wait; never stop someone else's run.
 Without such a runner, never run two sessions against a test database that is reset between runs.
 
+Give every command a timeout of at most five minutes. The exception is a runner's app start that
+waits for the app itself and fails on its own; give it ten. Anything longer, such as a load test,
+runs in the background with its output in a log file, and you check that log every minute or so
+against a deadline you set before starting it. A command that hangs inside a twenty-minute timeout
+stops the whole session for twenty minutes.
+
 Say on the pull request what ran and what did not. A narrow run reported as narrow is fine; one
 implied to be complete is not. If the sandbox itself is broken, say what failed and stop, rather
 than spending the run repairing it.
