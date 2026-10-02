@@ -1,0 +1,5 @@
+kind: app
+name: Paper
+description: Read and write designs on Paper's canvas
+mcps:
+  - paper

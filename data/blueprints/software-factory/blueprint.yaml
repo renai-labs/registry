@@ -43,6 +43,15 @@ pod:
           - ripgrep
           - docker.io
           - docker-compose
+          - xvfb
+          - x11vnc
+          - novnc
+          - xdg-utils
+          - chromium
+          - libgtk-3-0
+          - libnss3
+          - libgbm1
+          - libasound2
         npm:
           - agent-browser@0.38.1
       networking:
@@ -50,3 +59,65 @@ pod:
       buildCommands:
         - sudo usermod -aG docker user
         - '"$(npm prefix -g)/bin/agent-browser" install --with-deps'
+        - cd "$(mktemp -d)" && curl -fsSL
+          https://download.paper.design/linux/appImage -o paper.AppImage &&
+          chmod +x paper.AppImage && ./paper.AppImage --appimage-extract
+          >/dev/null && sudo mv squashfs-root /opt/paper
+        - printf '[Desktop
+          Entry]\nType=Application\nName=Paper\nExec=/opt/paper/paper-desktop
+          --no-sandbox %%U\nMimeType=x-scheme-handler/paper;\nNoDisplay=true\n'
+          | sudo tee /usr/share/applications/paper.desktop >/dev/null && printf
+          '[Default
+          Applications]\nx-scheme-handler/paper=paper.desktop\nx-scheme-handler/http=chromium.desktop\nx-scheme-handler/https=chromium.desktop\n'
+          | sudo tee /etc/xdg/mimeapps.list >/dev/null
+        - >
+          sudo tee /usr/local/bin/paper-mcp >/dev/null <<'EOF'
+
+          #!/bin/bash
+
+          set -eu
+
+          export DISPLAY=:99
+
+          profile="$HOME/.config/Paper"
+
+          saved="$HOME/session-files/.paper"
+
+          log="$HOME/.paper-mcp.log"
+
+          up() { curl -s -o /dev/null --max-time 2 http://127.0.0.1:29979/mcp; }
+
+          exec 9>"$HOME/.paper-mcp.lock"
+
+          flock 9
+
+          if ! up; then
+            mkdir -p "$profile"
+            if [ -f "$saved/Cookies" ]; then cp "$saved/Cookies" "$profile/Cookies"; fi
+            Xvfb :99 -screen 0 1440x900x24 >>"$log" 2>&1 9>&- &
+            for _ in $(seq 20); do [ -e /tmp/.X11-unix/X99 ] && break; sleep 0.5; done
+            x11vnc -display :99 -forever -shared -nopw -quiet >>"$log" 2>&1 9>&- &
+            websockify --web /usr/share/novnc 6080 localhost:5900 >>"$log" 2>&1 9>&- &
+            setsid /opt/paper/paper-desktop --no-sandbox >>"$log" 2>&1 9>&- &
+            app=$!
+            # Lives as long as the app, so a restarted app never runs two of these.
+            while kill -0 "$app" 2>/dev/null; do
+              sleep 15
+              if [ -d "$HOME/session-files" ] && [ -f "$profile/Cookies" ]; then
+                mkdir -p "$saved"
+                sqlite3 "$profile/Cookies" ".backup '$saved/Cookies.tmp'" && mv "$saved/Cookies.tmp" "$saved/Cookies"
+              fi
+            done >>"$log" 2>&1 9>&- &
+            for _ in $(seq 60); do up && break; sleep 1; done
+            up || { echo "Paper did not start. See $log" >&2; exit 1; }
+          fi
+
+          exec 9>&-
+
+          exec
+          /opt/paper/resources/app.asar.unpacked/dist/cli-bin/linux-x64/paper
+          mcp
+
+          EOF
+
+          sudo chmod +x /usr/local/bin/paper-mcp

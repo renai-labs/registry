@@ -12,10 +12,13 @@ permission:
     gh pr merge*: deny
     gh pr review*: deny
   webfetch: allow
+skills:
+  - paper-design
 mcps:
   - slack
   - linear
   - linear-ren
+  - paper
 channels:
   - kind: slack
     slug: issue-intake

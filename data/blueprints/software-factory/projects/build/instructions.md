@@ -54,6 +54,7 @@ mentions Ren on the pull request, the issue, or the Slack thread. Their message 
   task to QA as `verify-change` with what they asked it to check. Otherwise keep the task.
 - **A question.** Answer it on the pull request and keep the task.
 - **A different outcome from the one approved.** Hand the task to Plan as `scope-change`.
+- **Promote the design.** After the merge, follow `paper-design`.
 
 Keep the pull request ready for review while you work on it. A person merges it and marks the task
 done.

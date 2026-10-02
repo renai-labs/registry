@@ -19,7 +19,9 @@ permission:
   webfetch: allow
 skills:
   - code-quality
+  - paper-design
 mcps:
   - linear
   - slack
+  - paper
 buildOrder: 2

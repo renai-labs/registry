@@ -25,6 +25,8 @@ without starting it. A pass a person asked for does not count and is never refus
    user gets it wrong, and the paths this change could have broken. If the head moved since Build ran
    its checks, run the ones the new commits reach.
 4. Publish and verify the PR evidence as described in `e2e-verification` before marking it ready.
+   When the pull request has Paper design screenshots, put the app's matching screenshots beside
+   them and report any mismatch.
 5. Decide:
    - **It works.** Mark the pull request ready for review, and ask on it for the reviewer to
      mention Ren in a comment when they want changes. Say on the Linear issue that it is ready,

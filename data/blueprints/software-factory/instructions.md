@@ -117,7 +117,8 @@ reaches Build:
 
 The three-round limits do not apply here. A person is driving these rounds.
 
-A person merges the pull request and marks the task `done`. Nobody in the factory marks it done.
+A person merges the pull request and marks the task `done`. Nobody in the factory marks it done. If
+the plan has a Paper design, they first mention Ren on the pull request to promote it.
 
 ## Reporting
 
