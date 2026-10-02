@@ -1,0 +1,17 @@
+kind: app
+name: Firecrawl
+description: Search, scrape, and crawl the web into clean, agent-ready data
+brandColor: "#fa5d19"
+categories:
+  functions:
+    - research
+examplePrompts:
+  - Scrape this page and summarize it as markdown.
+  - Search the web for recent reviews of our product and list the main
+    complaints.
+  - Map our docs site and list every page under /api.
+  - Crawl the first 20 pages of our competitor's blog and pull out the topics
+    they cover.
+  - Find recent papers on CRISPR delivery methods and summarize the key findings.
+mcps:
+  - firecrawl
