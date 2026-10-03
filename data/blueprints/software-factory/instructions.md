@@ -214,7 +214,7 @@ and its callers; that call is yours, not a tool's.
 
 When the repository documents a runner that isolates test and app runs, with a database, storage
 and ports of its own per run, use it for every test and app run, in every phase. It is what lets
-issues share this sandbox. If it makes you wait for capacity, wait; never stop someone else's run.
+issues share this sandbox. Use the lightest mode it offers that covers the change, and its queue or memory gate for other heavy commands such as installs, typechecks and builds. If it makes you wait for capacity, wait; never stop someone else's run.
 Without such a runner, never run two sessions against a test database that is reset between runs.
 
 Give every command a timeout of at most five minutes. The exception is a runner's app start that
