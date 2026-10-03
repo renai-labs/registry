@@ -185,10 +185,11 @@ paused sandbox wakes on demand; a `failed` one blocks the fire.
 ## Tasks
 
 ```bash
-ren tasks list                                   # open + in_progress, newest first
+ren tasks list                                   # open + in_progress + in_review, newest first
 ren tasks list --include-done                    # the whole history, dismissed included
 ren tasks create --title "Migrate CI to pnpm" --pod-id <pod_…> --project-id <prj_…> --priority high
 ren tasks get <tsk_…>                            # the task plus its activity trail and comments
+ren tasks events list <tsk_…> --limit 50 --offset 50   # page further back than get embeds
 ren tasks assign <tsk_…> --project-id <prj_…>    # hand off to another project; starts nothing
 ren tasks start <tsk_…> --mode continue          # run it: resume that project's last session, or open one
 ren tasks update <tsk_…> --status in_progress
@@ -205,8 +206,8 @@ create; every member of the space sees the task. `start` is the only thing that 
 `--mode new` always opens a fresh session.
 
 **List with `--include-done` before you create anything** — a `dismissed` twin is a suggestion
-somebody already turned down, and only that read shows it. `get` embeds the trail by default;
-`--include-events=false` drops it. When to reach for a task is `references/tasks.md`.
+somebody already turned down, and only that read shows it. `get` embeds the trail by default (the
+latest 50 entries); `--include-events=false` drops it, and `ren tasks events list` pages the rest. When to reach for a task is `references/tasks.md`.
 
 ## Artifacts
 

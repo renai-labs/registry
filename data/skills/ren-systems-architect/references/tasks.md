@@ -50,19 +50,22 @@ assigned project's session, so a reply on the PR or issue reaches the agent work
 
 ## Status is a vocabulary, not a workflow
 
-`open` → `in_progress` → `done`, and nothing enforces the order — say where the task actually is
-rather than walking it through the states.
+`open` → `in_progress` → `in_review` → `done`, and nothing enforces the order — say where the task
+actually is rather than walking it through the states. `in_review` means the work is ready and
+waiting on a person; it is still actionable, so it lists by default and can be started. When a pull
+request linked to an active task merges, GitHub moves the task to `done` itself.
 
-`dismissed` is the fourth value: a suggestion somebody turned down. Never record a rejected idea as
+`dismissed` is the fifth value: a suggestion somebody turned down. Never record a rejected idea as
 `done` and never archive it — both hide it from the `--include-done` read, and the next run proposes
 the same thing again.
 
 ## The trail
 
 `ren tasks get` returns the activity trail embedded — who created the task, every status change,
-every reassignment, and the actor behind each. Read it before editing a task you did not create, so
+every reassignment, and the actor behind each. A change you make from a sandbox is credited to your
+project's agent, not to the person you act for. Read it before editing a task you did not create, so
 you don't undo someone else's decision. Pass `--include-events=false` only when current state is all
-you need.
+you need; `get` embeds the latest 50 entries, and `ren tasks events list <tsk_…>` pages the rest.
 
 **Signals:** you finished something and named a follow-up you cannot do now; a suggestion was
 accepted but nobody can act on it yet; the same reminder has come up twice in chat; a scheduled run
