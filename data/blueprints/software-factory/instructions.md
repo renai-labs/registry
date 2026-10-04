@@ -37,12 +37,22 @@ that receives the same task, does their part, and hands it on. Nobody opens a se
 that is already moving. Before creating one, check `ren tasks list --linked-to <issue-url> --output json`
 for an open task that already links the same issue.
 
-Handing on is two commands:
+Handing on is one command:
 
-1. `ren tasks assign <task-id> --project-id <receiving-project-id>`
-2. `ren tasks start <task-id> --mode continue`
+```bash
+ren tasks assign <task-id> --project-id <receiving-project-id> --description "<type>: <what the receiver needs>"
+```
 
-Assigning alone starts nothing. `continue` puts the receiving project back in the session it last
+It replaces the description, assigns the project and starts the receiving project in the same call.
+A project in another space you belong to moves the task there. Do not run `ren tasks start` after it:
+that starts a second run. Check the reply's `message`: it says what changed and whether an agent
+started. If it says the agent could not be started, run `ren tasks start <task-id> --mode continue`
+once.
+
+To assign without starting, so the task waits for a person, add `--start none`. Every "assign
+without starting it" below means that.
+
+`continue` puts the receiving project back in the session it last
 worked this task in, or opens one the first time. So when a task comes back to you, you are in your
 own earlier session, with what you already worked out still there. Do not redo it, but do not assume
 nothing moved either: read the task's activity trail and the pull request for what changed while you
@@ -50,8 +60,8 @@ were away.
 
 Before you hand it on:
 
-- Replace the task description with one of the types below and what the receiver needs. The
-  description is the current instruction, not a log.
+- Write the description, passed with `--description`, as one of the types below and what the
+  receiver needs. The description is the current instruction, not a log.
 - Leave `status` at `in_progress` while the work is live.
 
 | Type            | From → To                   | Description says                                        |

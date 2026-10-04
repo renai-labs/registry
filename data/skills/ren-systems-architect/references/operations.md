@@ -190,18 +190,23 @@ ren tasks list --include-done                    # the whole history, dismissed 
 ren tasks create --title "Migrate CI to pnpm" --pod-id <pod_…> --project-id <prj_…> --priority high
 ren tasks get <tsk_…>                            # the task plus its activity trail and comments
 ren tasks events list <tsk_…> --limit 50 --offset 50   # page further back than get embeds
-ren tasks assign <tsk_…> --project-id <prj_…>    # hand off to another project; starts nothing
-ren tasks start <tsk_…> --mode continue          # run it: resume that project's last session, or open one
+ren tasks assign <tsk_…> --project-id <prj_…> --description "…"   # hand off and start that project (continue)
+ren tasks assign <tsk_…> --project-id <prj_…> --start none        # hand off without starting
+ren tasks start <tsk_…> --mode continue          # run the assigned project: resume its last session, or open one
 ren tasks update <tsk_…> --status in_progress
 ren tasks archive <tsk_…>
 ```
 
 `update` changes content — title, description, status, priority, labels, links, space. `assign`
 changes who holds it: `--project-id` (what works it) and `--assigned-to-user-id` (who owns it) are
-independent; an omitted field is unchanged and an explicit `null` clears one. Add or drop links with
+independent; an omitted field is unchanged and an explicit `null` clears one. `--description`
+replaces the receiver's instruction in the same call. A project in another space you belong to moves
+the task there. When the project changes, `assign` starts it with `continue` unless you pass
+`--start none` (or `--start new` for a fresh session); its reply's `message` says what changed and
+what started. Add or drop links with
 `--add-links` / `--remove-links`; `update` rejects `links` and any assignment field with an error
 naming the right command, rather than ignoring them. `--pod-id` (the space) is required on
-create; every member of the space sees the task. `start` is the only thing that runs a task:
+create; every member of the space sees the task. Besides a handoff, `start` runs a task:
 `--mode continue` resumes the session the assigned project last worked it in (or opens one),
 `--mode new` always opens a fresh session.
 

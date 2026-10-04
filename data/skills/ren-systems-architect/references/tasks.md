@@ -33,17 +33,26 @@ you:
 ## Scope
 
 Every task lives in a space: `--pod-id` is required, and every member of that space sees it. A task
-that is one person's belongs in their private space.
+that is one person's belongs in their private space. `ren tasks list` covers every space the person
+you act for belongs to, not only this one; pass `--pod-id` to narrow it.
 
 ## Owner, project and start
 
 `--assigned-to-user-id` is who **owes** the task; `--project-id` is the project whose Ren agent
 **works** it. Either, both, or neither. A human assignee must be a member of the task's space.
 
-Assigning never runs anything. `ren tasks start <tsk_…> --mode continue` runs the assigned project's
-agent, resuming the session that agent last worked the task in (a task you create from a chat counts
-as worked in that chat), or opening a new one; `--mode new` always opens a new one. To hand work to
-another project: `ren tasks assign <tsk_…> --project-id <prj_…>`, then `ren tasks start`.
+Handing work to another project is one command:
+`ren tasks assign <tsk_…> --project-id <prj_…> --description "<what the receiver needs>"`. When the
+project changes, it starts that project's agent with `continue`: resuming the session that agent last
+worked the task in (a task you create from a chat counts as worked in that chat), or opening a new
+one. Pass `--start new` for a fresh session, or `--start none` to park the task without running
+anything. Do not follow it with `ren tasks start`; that starts a second run. Read the reply's
+`message`: it says what changed and whether an agent started, and if the start failed the assignment
+still stands and `ren tasks start <tsk_…> --mode continue` retries it.
+
+The project can be in another space you belong to; the task moves there, and an assignee who is not a
+member of that space is unassigned. `ren tasks start` on its own runs the already-assigned project's
+agent (`--mode continue` or `--mode new`).
 
 A GitHub pull request, Linear issue or Slack thread in the task's links routes messages there to the
 assigned project's session, so a reply on the PR or issue reaches the agent working the task.
