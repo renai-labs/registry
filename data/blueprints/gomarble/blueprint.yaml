@@ -1,0 +1,24 @@
+kind: app
+name: GoMarble
+description: Report on, analyse, and manage your paid media across ad platforms
+brandColor: "#01dcd2"
+categories:
+  roles:
+    - marketer
+  usecases:
+    - reporting
+    - competitive-research
+  functions:
+    - analytics
+    - research
+examplePrompts:
+  - Compare last week's Meta and Google Ads spend, ROAS, and CPA by campaign.
+  - Which of our Meta ad creatives are showing fatigue, and what do the winners
+    have in common?
+  - Pull the ads our top three competitors are running and summarise their hooks
+    and offers.
+  - Build a weekly paid-media report across Meta, Google Ads, and GA4 for our
+    main account.
+  - Find Google Ads search terms that spent money last month without converting.
+mcps:
+  - gomarble
