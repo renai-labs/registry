@@ -44,8 +44,6 @@ pod:
           - docker.io
           - docker-compose
           - xvfb
-          - x11vnc
-          - novnc
           - xdg-utils
           - chromium
           - libgtk-3-0
@@ -63,25 +61,41 @@ pod:
           https://download.paper.design/linux/appImage -o paper.AppImage &&
           chmod +x paper.AppImage && ./paper.AppImage --appimage-extract
           >/dev/null && sudo mv squashfs-root /opt/paper
-        - printf '[Desktop
+        - cd "$(mktemp -d)" && curl -fsSL -o cua.tgz
+          https://github.com/trycua/cua/releases/download/cua-driver-rs-v0.32.0/cua-driver-rs-0.32.0-linux-x86_64-binary.tar.gz
+          && echo
+          'bb006010864e9a93b9f67035e345c3a076f0908d42fbe493bb21ede5f82f39a6  cua.tgz'
+          | sha256sum -c - && sudo mkdir -p /opt/cua-driver && sudo tar xzf
+          cua.tgz -C /opt/cua-driver cua-driver libcua_driver_sdk.so && sudo ln
+          -sf /opt/cua-driver/cua-driver /usr/local/bin/cua-driver && cua-driver
+          telemetry disable
+        - printf '#!/bin/sh\nexec chromium --no-sandbox --disable-dev-shm-usage
+          --no-first-run --no-default-browser-check --password-store=basic
+          --user-data-dir=/tmp/paper-signin-browser --remote-debugging-port=0
+          "$@"\n' | sudo tee /usr/local/bin/paper-signin-browser >/dev/null &&
+          sudo chmod +x /usr/local/bin/paper-signin-browser && printf '[Desktop
+          Entry]\nType=Application\nName=Paper sign-in
+          browser\nExec=/usr/local/bin/paper-signin-browser
+          %%U\nMimeType=x-scheme-handler/http;x-scheme-handler/https;\nNoDisplay=true\n'
+          | sudo tee /usr/share/applications/paper-signin-browser.desktop
+          >/dev/null && printf '[Desktop
           Entry]\nType=Application\nName=Paper\nExec=/opt/paper/paper-desktop
           --no-sandbox %%U\nMimeType=x-scheme-handler/paper;\nNoDisplay=true\n'
           | sudo tee /usr/share/applications/paper.desktop >/dev/null && printf
           '[Default
-          Applications]\nx-scheme-handler/paper=paper.desktop\nx-scheme-handler/http=chromium.desktop\nx-scheme-handler/https=chromium.desktop\n'
-          | sudo tee /etc/xdg/mimeapps.list >/dev/null
+          Applications]\nx-scheme-handler/paper=paper.desktop\nx-scheme-handler/http=paper-signin-browser.desktop\nx-scheme-handler/https=paper-signin-browser.desktop\n'
+          | sudo tee /etc/xdg/mimeapps.list >/dev/null && sudo mkdir -p
+          /etc/chromium/policies/managed && echo
+          '{"AutoLaunchProtocolsFromOrigins":[{"protocol":"paper","allowed_origins":["https://workers.paper.design"]}]}'
+          | sudo tee /etc/chromium/policies/managed/paper.json >/dev/null
         - >
-          sudo tee /usr/local/bin/paper-mcp >/dev/null <<'EOF'
+          sudo tee /usr/local/bin/paper-start >/dev/null <<'EOF'
 
           #!/bin/bash
 
           set -eu
 
           export DISPLAY=:99
-
-          profile="$HOME/.config/Paper"
-
-          saved="$HOME/session-files/.paper"
 
           log="$HOME/.paper-mcp.log"
 
@@ -92,32 +106,19 @@ pod:
           flock 9
 
           if ! up; then
-            mkdir -p "$profile"
-            if [ -f "$saved/Cookies" ]; then cp "$saved/Cookies" "$profile/Cookies"; fi
-            Xvfb :99 -screen 0 1440x900x24 >>"$log" 2>&1 9>&- &
+            if [ ! -e /tmp/.X11-unix/X99 ]; then Xvfb :99 -screen 0 1440x900x24 >>"$log" 2>&1 9>&- & fi
             for _ in $(seq 20); do [ -e /tmp/.X11-unix/X99 ] && break; sleep 0.5; done
-            x11vnc -display :99 -forever -shared -nopw -quiet >>"$log" 2>&1 9>&- &
-            websockify --web /usr/share/novnc 6080 localhost:5900 >>"$log" 2>&1 9>&- &
-            setsid /opt/paper/paper-desktop --no-sandbox >>"$log" 2>&1 9>&- &
-            app=$!
-            # Lives as long as the app, so a restarted app never runs two of these.
-            while kill -0 "$app" 2>/dev/null; do
-              sleep 15
-              if [ -d "$HOME/session-files" ] && [ -f "$profile/Cookies" ]; then
-                mkdir -p "$saved"
-                sqlite3 "$profile/Cookies" ".backup '$saved/Cookies.tmp'" && mv "$saved/Cookies.tmp" "$saved/Cookies"
-              fi
-            done >>"$log" 2>&1 9>&- &
+            if ! pgrep -f '^/opt/paper/paper-desktop --no-sandbox$' >/dev/null; then
+              setsid /opt/paper/paper-desktop --no-sandbox >>"$log" 2>&1 9>&- &
+            fi
             for _ in $(seq 60); do up && break; sleep 1; done
             up || { echo "Paper did not start. See $log" >&2; exit 1; }
           fi
 
-          exec 9>&-
-
-          exec
-          /opt/paper/resources/app.asar.unpacked/dist/cli-bin/linux-x64/paper
-          mcp
-
           EOF
 
-          sudo chmod +x /usr/local/bin/paper-mcp
+          printf '#!/bin/sh\npaper-start || exit 1\nexec
+          /opt/paper/resources/app.asar.unpacked/dist/cli-bin/linux-x64/paper
+          mcp\n' | sudo tee /usr/local/bin/paper-mcp >/dev/null
+
+          sudo chmod +x /usr/local/bin/paper-start /usr/local/bin/paper-mcp

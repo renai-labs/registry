@@ -50,7 +50,8 @@ Then set it up:
 - Connect the QA GitHub upload credential (`QA_GITHUB_UPLOAD_TOKEN`) on QA; the e2e-verification
   skill needs it to publish screenshots and recordings to a pull request. Ask me for it if it is not
   already connected; never write the token value anywhere but the credential itself.
-- Set the timezone on the three Monitoring schedules. Keep them paused until setup succeeds.
+- Set the timezone on the three Monitoring schedules and Build's `paper-sync`. Keep them paused
+  until setup succeeds.
 
 Run a setup trial. Explain the temporary PR comment and Slack test messages before posting them:
 

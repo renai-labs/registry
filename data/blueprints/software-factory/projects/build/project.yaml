@@ -24,4 +24,9 @@ mcps:
   - linear
   - slack
   - paper
+triggers:
+  - slug: paper-sync
+    schedule: "*/15 * * * *"
+    inputMessage: Promote merged Paper designs. Follow paper-design's Promote
+      section. If nothing is ready, finish without posting.
 buildOrder: 2
