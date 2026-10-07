@@ -70,19 +70,21 @@ pod:
           -sf /opt/cua-driver/cua-driver /usr/local/bin/cua-driver && cua-driver
           telemetry disable
         - printf '#!/bin/sh\nexec chromium --no-sandbox --disable-dev-shm-usage
-          --no-first-run --no-default-browser-check --password-store=basic
-          --user-data-dir=/tmp/paper-signin-browser --remote-debugging-port=0
-          "$@"\n' | sudo tee /usr/local/bin/paper-signin-browser >/dev/null &&
-          sudo chmod +x /usr/local/bin/paper-signin-browser && printf '[Desktop
+          --no-proxy-server --no-first-run --no-default-browser-check
+          --password-store=basic
+          --user-data-dir="$HOME/.local/share/paper-signin-browser"
+          --remote-debugging-port=0 "$@"\n' | sudo tee
+          /usr/local/bin/paper-signin-browser >/dev/null && sudo chmod +x
+          /usr/local/bin/paper-signin-browser && printf '[Desktop
           Entry]\nType=Application\nName=Paper sign-in
           browser\nExec=/usr/local/bin/paper-signin-browser
           %%U\nMimeType=x-scheme-handler/http;x-scheme-handler/https;\nNoDisplay=true\n'
           | sudo tee /usr/share/applications/paper-signin-browser.desktop
           >/dev/null && printf '[Desktop
           Entry]\nType=Application\nName=Paper\nExec=/opt/paper/paper-desktop
-          --no-sandbox %%U\nMimeType=x-scheme-handler/paper;\nNoDisplay=true\n'
-          | sudo tee /usr/share/applications/paper.desktop >/dev/null && printf
-          '[Default
+          --no-sandbox --disable-gpu --no-proxy-server
+          %%U\nMimeType=x-scheme-handler/paper;\nNoDisplay=true\n' | sudo tee
+          /usr/share/applications/paper.desktop >/dev/null && printf '[Default
           Applications]\nx-scheme-handler/paper=paper.desktop\nx-scheme-handler/http=paper-signin-browser.desktop\nx-scheme-handler/https=paper-signin-browser.desktop\n'
           | sudo tee /etc/xdg/mimeapps.list >/dev/null && sudo mkdir -p
           /etc/chromium/policies/managed && echo
@@ -108,8 +110,8 @@ pod:
           if ! up; then
             if [ ! -e /tmp/.X11-unix/X99 ]; then Xvfb :99 -screen 0 1440x900x24 >>"$log" 2>&1 9>&- & fi
             for _ in $(seq 20); do [ -e /tmp/.X11-unix/X99 ] && break; sleep 0.5; done
-            if ! pgrep -f '^/opt/paper/paper-desktop --no-sandbox$' >/dev/null; then
-              setsid /opt/paper/paper-desktop --no-sandbox >>"$log" 2>&1 9>&- &
+            if ! pgrep -f '^/opt/paper/paper-desktop --no-sandbox( |$)' >/dev/null; then
+              setsid /opt/paper/paper-desktop --no-sandbox --disable-gpu --no-proxy-server >>"$log" 2>&1 9>&- &
             fi
             for _ in $(seq 60); do up && break; sleep 1; done
             up || { echo "Paper did not start. See $log" >&2; exit 1; }

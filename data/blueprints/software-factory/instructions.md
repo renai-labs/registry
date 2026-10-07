@@ -237,6 +237,17 @@ Say on the pull request what ran and what did not. A narrow run reported as narr
 implied to be complete is not. If the sandbox itself is broken, say what failed and stop, rather
 than spending the run repairing it.
 
+## Paper
+
+The design file for `renai-labs/ren` is **Ren UI**.
+
+For every Paper request, load `paper-design` first. Startup, session restore, file opening and one
+recovery restart are authorized; follow the skill before reporting a blocker.
+
+Email codes come from a person, never Gmail. Plan asks in the originating conversation, or on the
+linked issue if there is none. Other projects create a `paper-signin` task for Plan with the available
+issue, PR and thread links. Scheduled runs then skip Paper until the next run.
+
 ## Safety
 
 - A human merges. A human approves. Never force-push, delete a branch, or rewrite someone's commits.
