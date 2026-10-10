@@ -239,8 +239,6 @@ than spending the run repairing it.
 
 ## Paper
 
-The design file for `renai-labs/ren` is **Ren UI**.
-
 For every Paper request, load `paper-design` first. Startup, session restore, file opening and one
 recovery restart are authorized; follow the skill before reporting a blocker.
 
