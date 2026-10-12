@@ -1,0 +1,24 @@
+kind: app
+name: Figma
+description: Read, create, and edit native Figma designs, FigJam boards, and
+  Slides with AI agents
+brandColor: "#1abcfe"
+examplePrompts:
+  - Build this screen in Figma using the existing design system
+  - Inspect this Figma design and implement it in code
+  - Update this Figma component and verify the result
+skills:
+  - figma-code-connect
+  - figma-create-new-file
+  - figma-design-to-code
+  - figma-generate-design
+  - figma-generate-diagram
+  - figma-generate-library
+  - figma-implement-motion
+  - figma-swiftui
+  - figma-use
+  - figma-use-figjam
+  - figma-use-motion
+  - figma-use-slides
+mcps:
+  - figma

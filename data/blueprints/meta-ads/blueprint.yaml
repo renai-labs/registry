@@ -1,0 +1,10 @@
+kind: app
+name: Meta Ads
+description: Create, manage, and analyze Meta ads through Meta's official ads MCP server
+brandColor: "#0866ff"
+examplePrompts:
+  - Show me how my Meta campaigns performed over the last 7 days.
+  - Which ad sets are spending the most with the weakest results?
+  - Draft a new paused campaign for my spring sale.
+mcps:
+  - meta-ads

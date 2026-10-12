@@ -1,0 +1,32 @@
+kind: app
+name: Shopify
+description: Build and manage your Shopify store — products, inventory, orders,
+  customers, discounts, and analytics
+brandColor: "#008060"
+examplePrompts:
+  - Upload and add this product to my store.
+  - Show me the products I have in my store.
+  - Show me my store's sales for the past three weeks.
+skills:
+  - shopify-admin
+  - shopify-app-store-review
+  - shopify-custom-data
+  - shopify-customer
+  - shopify-dev
+  - shopify-functions
+  - shopify-hydrogen
+  - shopify-liquid
+  - shopify-onboarding-dev
+  - shopify-onboarding-merchant
+  - shopify-partner
+  - shopify-payments-apps
+  - shopify-polaris-admin-extensions
+  - shopify-polaris-app-home
+  - shopify-polaris-checkout-extensions
+  - shopify-polaris-customer-account-extensions
+  - shopify-pos-ui
+  - shopify-storefront-graphql
+  - shopify-use-shopify-cli
+  - ucp
+mcps:
+  - shopify-store
