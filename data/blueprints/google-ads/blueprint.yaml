@@ -1,0 +1,15 @@
+kind: app
+name: Google Ads
+description: Google Ads runs search, display, video, and Performance Max
+  campaigns, so marketers can see what spend returns and manage campaigns,
+  budgets, and audiences
+brandColor: "#4285f4"
+examplePrompts:
+  - Spend, clicks, conversions, and cost per conversion by campaign for the last
+    30 days
+  - List the Google Ads accounts I can access, including the client accounts
+    under my manager account
+  - Pause every campaign in account 123-456-7890 whose cost per conversion
+    doubled week over week
+mcps:
+  - google-ads
