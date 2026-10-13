@@ -1,0 +1,23 @@
+kind: app
+name: Dodo Payments
+description: Query payments, subscriptions, customers, and refunds and report on
+  your Dodo Payments account
+brandColor: "#c6fe1e"
+categories:
+  roles:
+    - finance
+    - founder
+  usecases:
+    - reporting
+  functions:
+    - analytics
+examplePrompts:
+  - Summarize last month's successful payments by currency.
+  - Count our active subscriptions by product.
+  - Summarize refunds issued this quarter, with totals and the most common
+    reasons.
+  - List our top 10 customers by total payments this year.
+  - Compare this month's revenue with last month's and explain the biggest
+    changes.
+mcps:
+  - dodo-payments
