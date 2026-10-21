@@ -5,8 +5,9 @@ served at a share URL. The project survives sandbox recycles, so a later session
 the same page.
 
 **How to build one is in the `ren-artifact` skill** — scaffolding, the data contract, theming,
-components, troubleshooting. It is a system skill Ren already carries; load it when you build. This
-file covers the rest: when to reach for a page, who builds it, how
+components, troubleshooting. Its visual design comes from the `design-taste-frontend` skill (Taste).
+Both are system skills Ren already carries; load both whenever you build or edit one. This file
+covers the rest: when to reach for a page, who builds it, how
 it stays fresh, and what to tell the user when you hand over the link.
 
 ## When it's the right answer
@@ -30,7 +31,7 @@ so and offer the page. One offer, after you have delivered, and drop it if they 
 Follow the data:
 
 - **You hold the data** — it's in a pod database, a store, or something you can query — build it
-  yourself. Load `ren-artifact` and scaffold.
+  yourself. Load `ren-artifact` and `design-taste-frontend`, then scaffold.
 
 Artifacts belong to the **pod**, not a project — the same rung as the pod databases they read.
 `ren artifacts list` from inside the sandbox shows what the pod already has.
