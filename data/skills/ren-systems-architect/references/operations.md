@@ -107,7 +107,8 @@ ren sessions create-status <job-id>
 ren sessions list --project-id <prj_…>
 ren sessions messages list <ses_…>
 ren sessions url <ses_…>        # raw OpenCode sandbox URL + basic-auth password
-ren sessions traces list <ses_…> --output json --fields core,io,observations,metrics,scores
+ren sessions traces list <ses_…> --output json --fields core,observations,metrics,scores
+ren sessions traces get <ses_…> <trace-id> --output json   # one trace with its input and output
 ren replays share --body '{"sessionId":"<ses_…>"}'   # public scrub link to a run
 ```
 
